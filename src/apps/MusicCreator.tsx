@@ -6078,12 +6078,17 @@ export default function MusicCreator() {
         setGalleryError('Real file library unavailable — generated songs will not be shared across browsers until the tray endpoint is back.');
       }
 
-      // One-time backfill: old prototype rows lived only in this browser's
-      // OPFS SQLite. When this browser opens, push every generated row to the
-      // tray so future browsers read the same real files from ~/Music/JULI3TA.
+      // One-time bidirectional backfill:
+      //   1. old prototype rows lived only in browser OPFS SQLite -> push
+      //      generated rows to the tray so other browsers see ~/Music/JULI3TA.
+      //   2. standalone extraction may open on a fresh app_juli3ta_* schema ->
+      //      cache real-file rows into its own SQLite tables so the extracted
+      //      app remains useful if the tray endpoint is briefly unavailable.
       const hostIds = new Set(hostTracks.map((track) => track.id));
+      const loadedIds = new Set(loadedTracks.map((track) => track.id));
       const rowsToBackfill = loadedTracks.filter((track) => !hostIds.has(track.id) && canMirrorToHostLibrary(track));
-      if (rowsToBackfill.length > 0) {
+      const rowsToCache = hostTracks.filter((track) => !loadedIds.has(track.id));
+      if (rowsToBackfill.length > 0 || rowsToCache.length > 0) {
         void (async () => {
           const saved: SavedTrack[] = [];
           for (const track of rowsToBackfill) {
@@ -6094,8 +6099,15 @@ export default function MusicCreator() {
               console.warn('[Juli3ta] host file backfill failed:', track.id, e);
             }
           }
-          if (!cancelled && saved.length > 0) {
-            setGallery((current) => mergeTrackLists(saved, current));
+          for (const track of rowsToCache) {
+            try {
+              await insertTrackRow({ ...track, source: 'juli3ta' });
+            } catch (e) {
+              console.warn('[Juli3ta] standalone cache backfill failed:', track.id, e);
+            }
+          }
+          if (!cancelled && (saved.length > 0 || rowsToCache.length > 0)) {
+            setGallery((current) => mergeTrackLists(saved, rowsToCache, current));
             void listGeneratedTracksFromFiles().then((res) => setHostLibraryRoot(res.rootPath)).catch(() => {});
           }
         })();
