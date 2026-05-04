@@ -2,10 +2,10 @@
   "$schema": "https://tytus.traylinx.com/schema/app/v1.json",
   "id": "juli3ta",
   "name": "JULI3TA",
-  "version": "0.2.1-dev",
+  "version": "0.2.1",
   "icon": "juli3ta:mark",
   "category": "Creative",
-  "description": "JULI3TA full extraction development build. Not for public catalog until parity gates pass.",
+  "description": "JULI3TA — full AI-native music creator for Tytus OS. Create songs, lyrics, covers, and manage your local music workbench.",
   "window": {
     "defaultSize": {
       "width": 1100,
@@ -50,6 +50,6 @@
     ]
   },
   "entry": {
-    "url": "https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@full-extract-0.2.1-dev/dist/index.js"
+    "url": "https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@juli3ta-0.2.1/dist/index.js"
   }
 }
