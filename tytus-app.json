@@ -29,10 +29,22 @@
     "tables": [
       {
         "name": "tracks",
-        "schema": "migrations/0001_tracks.sql"
+        "schema": "migrations/0002_legacy_compat_tables.sql"
       },
       {
-        "name": "music_creator_tracks",
+        "name": "settings",
+        "schema": "migrations/0002_legacy_compat_tables.sql"
+      },
+      {
+        "name": "voice-recordings",
+        "schema": "migrations/0002_legacy_compat_tables.sql"
+      },
+      {
+        "name": "music-library",
+        "schema": "migrations/0002_legacy_compat_tables.sql"
+      },
+      {
+        "name": "music-playlists",
         "schema": "migrations/0002_legacy_compat_tables.sql"
       }
     ]
