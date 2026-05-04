@@ -9,13 +9,25 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "noEmit": true,
-    "lib": ["es2022", "dom", "dom.iterable"],
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
     "baseUrl": ".",
     "paths": {
       "@tytus/host-api": [
         "../../makakoo/api/ProjectWannolot/services/tytus-os/packages/host-api/src/index.ts"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@tytus/contracts": [
+        "../../makakoo/api/ProjectWannolot/services/tytus-os/packages/contracts/src/index.ts"
       ]
     }
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ]
 }

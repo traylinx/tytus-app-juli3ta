@@ -1,27 +1,26 @@
-/**
- * tytus-app-juli3ta — v0.1 standalone bootApp.
- *
- * The public app now owns the creator UI: library gallery, player,
- * prompt/lyrics creator panel, pod model picker, shell menu, app-local
- * SQLite, and daemon file-library mirroring when the host exposes it.
- */
+// Real JULI3TA extraction entrypoint. This mounts the copied full
+// MusicCreator through a HostEnvProvider so the compatibility hooks can
+// progressively replace shell-private imports without touching the
+// 9,923 LOC component body.
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore — host-api types resolved via tsconfig paths in dev.
-import type { AppBootEnv, AppDb } from '@tytus/host-api';
-import Juli3taApp from './Juli3taApp';
+import type { AppBootEnv } from '@tytus/host-api';
+import { HostEnvProvider } from './compat';
+import MusicCreator from './apps/MusicCreator';
+import { bindHostAppDb } from './lib/db';
 
 export default function bootApp(env: AppBootEnv) {
-  const db = env.host.storage.current() as AppDb;
-  const migrationDone = db.migrate?.('migrations/') ?? Promise.resolve();
-
-  return function Juli3taStandalone() {
+  // Run declared migrations once. G1 keeps this non-blocking; G2/G3 add
+  // visible migration/readiness states after parity harness lands.
+  const db = env.host.storage.current();
+  bindHostAppDb(db);
+  void db.migrate?.('migrations/');
+  return function Juli3taFullApp() {
     return (
-      <Juli3taApp
-        host={env.host}
-        db={db}
-        migrationReady={migrationDone}
-      />
+      <HostEnvProvider value={env}>
+        <MusicCreator />
+      </HostEnvProvider>
     );
   };
 }

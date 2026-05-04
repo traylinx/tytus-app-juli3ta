@@ -1,20 +1,27 @@
-import { jsxs as d, jsx as n, Fragment as ve } from "react/jsx-runtime";
-import { forwardRef as ue, createElement as G, useState as u, useRef as ie, useCallback as P, useEffect as A, useMemo as xe } from "react";
+import { jsx as t, jsxs as s, Fragment as pe } from "react/jsx-runtime";
+import { createContext as Uo, useContext as $o, forwardRef as Bo, createElement as yr, useState as _, useEffect as ee, useMemo as ce, useRef as Z, useCallback as I, Fragment as Ln } from "react";
+import { createPortal as Tr } from "react-dom";
+const Fo = Uo(null), jn = Fo.Provider;
+function Pt() {
+  const e = $o(Fo);
+  if (!e) throw new Error("JULI3TA HostEnvProvider missing");
+  return e;
+}
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Se = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), _e = (e) => e.replace(
+const Pn = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), Rn = (e) => e.replace(
   /^([A-Z])|[\s-_]+(\w)/g,
-  (t, r, a) => a ? a.toUpperCase() : r.toLowerCase()
-), ne = (e) => {
-  const t = _e(e);
-  return t.charAt(0).toUpperCase() + t.slice(1);
-}, pe = (...e) => e.filter((t, r, a) => !!t && t.trim() !== "" && a.indexOf(t) === r).join(" ").trim(), we = (e) => {
-  for (const t in e)
-    if (t.startsWith("aria-") || t === "role" || t === "title")
+  (a, r, o) => o ? o.toUpperCase() : r.toLowerCase()
+), wo = (e) => {
+  const a = Rn(e);
+  return a.charAt(0).toUpperCase() + a.slice(1);
+}, Wo = (...e) => e.filter((a, r, o) => !!a && a.trim() !== "" && o.indexOf(a) === r).join(" ").trim(), Dn = (e) => {
+  for (const a in e)
+    if (a.startsWith("aria-") || a === "role" || a === "title")
       return !0;
 };
 /**
@@ -23,7 +30,7 @@ const Se = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), _e = (
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-var Ce = {
+var Hn = {
   xmlns: "http://www.w3.org/2000/svg",
   width: 24,
   height: 24,
@@ -40,32 +47,32 @@ var Ce = {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ie = ue(
+const On = Bo(
   ({
     color: e = "currentColor",
-    size: t = 24,
+    size: a = 24,
     strokeWidth: r = 2,
-    absoluteStrokeWidth: a,
-    className: s = "",
-    children: o,
-    iconNode: g,
-    ...w
-  }, F) => G(
+    absoluteStrokeWidth: o,
+    className: n = "",
+    children: l,
+    iconNode: d,
+    ...b
+  }, p) => yr(
     "svg",
     {
-      ref: F,
-      ...Ce,
-      width: t,
-      height: t,
+      ref: p,
+      ...Hn,
+      width: a,
+      height: a,
       stroke: e,
-      strokeWidth: a ? Number(r) * 24 / Number(t) : r,
-      className: pe("lucide", s),
-      ...!o && !we(w) && { "aria-hidden": "true" },
-      ...w
+      strokeWidth: o ? Number(r) * 24 / Number(a) : r,
+      className: Wo("lucide", n),
+      ...!l && !Dn(b) && { "aria-hidden": "true" },
+      ...b
     },
     [
-      ...g.map(([L, N]) => G(L, N)),
-      ...Array.isArray(o) ? o : [o]
+      ...d.map(([m, w]) => yr(m, w)),
+      ...Array.isArray(l) ? l : [l]
     ]
   )
 );
@@ -75,20 +82,20 @@ const Ie = ue(
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const f = (e, t) => {
-  const r = ue(
-    ({ className: a, ...s }, o) => G(Ie, {
-      ref: o,
-      iconNode: t,
-      className: pe(
-        `lucide-${Se(ne(e))}`,
+const D = (e, a) => {
+  const r = Bo(
+    ({ className: o, ...n }, l) => yr(On, {
+      ref: l,
+      iconNode: a,
+      className: Wo(
+        `lucide-${Pn(wo(e))}`,
         `lucide-${e}`,
-        a
+        o
       ),
-      ...s
+      ...n
     })
   );
-  return r.displayName = ne(e), r;
+  return r.displayName = wo(e), r;
 };
 /**
  * @license lucide-react v0.562.0 - ISC
@@ -96,19 +103,140 @@ const f = (e, t) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Me = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M6 12c0-1.7.7-3.2 1.8-4.2", key: "oqkarx" }],
-  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
-  ["path", { d: "M18 12c0 1.7-.7 3.2-1.8 4.2", key: "1eah9h" }]
-], Te = f("disc-3", Me);
+const Un = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["polyline", { points: "11 3 11 11 14 8 17 11 17 3", key: "1wcwz3" }]
+], $n = D("album", Un);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ae = [
+const Bn = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]], aa = D("check", Bn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Fn = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]], qo = D("chevron-down", Fn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Wn = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]], qn = D("chevron-right", Wn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Jn = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]], Gn = D("chevron-up", Jn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Vn = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+], ra = D("circle-alert", Vn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Yn = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
+], Kn = D("circle-question-mark", Yn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Qn = [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+], Xn = D("copy", Qn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Zn = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M6 12c0-1.7.7-3.2 1.8-4.2", key: "oqkarx" }],
+  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
+  ["path", { d: "M18 12c0 1.7-.7 3.2-1.8 4.2", key: "1eah9h" }]
+], ut = D("disc-3", Zn);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const es = [
+  ["path", { d: "M12 15V3", key: "m9g1x1" }],
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
+  ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
+], ts = D("download", es);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const as = [
+  ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }],
+  ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
+  ["circle", { cx: "12", cy: "19", r: "1", key: "lyex9k" }]
+], Jo = D("ellipsis-vertical", as);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const rs = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+], os = D("external-link", rs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const is = [
+  [
+    "path",
+    {
+      d: "M11.65 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v10.35",
+      key: "5ad7z2"
+    }
+  ],
+  ["path", { d: "M14 2v5a1 1 0 0 0 1 1h5", key: "wfsgrz" }],
+  ["path", { d: "M8 20v-7l3 1.474", key: "1ggyb9" }],
+  ["circle", { cx: "6", cy: "20", r: "2", key: "j7wjp0" }]
+], pt = D("file-music", is);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const ns = [
   [
     "path",
     {
@@ -116,14 +244,14 @@ const Ae = [
       key: "usdka0"
     }
   ]
-], Ee = f("folder-open", Ae);
+], ss = D("folder-open", ns);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Le = [
+const ls = [
   [
     "path",
     {
@@ -131,54 +259,161 @@ const Le = [
       key: "mvr1a0"
     }
   ]
-], Ne = f("heart", Le);
+], cs = D("heart", ls);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const ze = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]], re = f("loader-circle", ze);
+const ds = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
+  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+], oa = D("image", ds);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const $e = [
+const us = [
   [
     "path",
     {
-      d: "m11 7.601-5.994 8.19a1 1 0 0 0 .1 1.298l.817.818a1 1 0 0 0 1.314.087L15.09 12",
-      key: "80a601"
+      d: "M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z",
+      key: "zw3jo"
     }
   ],
   [
     "path",
     {
-      d: "M16.5 21.174C15.5 20.5 14.372 20 13 20c-2.058 0-3.928 2.356-6 2-2.072-.356-2.775-3.369-1.5-4.5",
-      key: "j0ngtp"
+      d: "M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12",
+      key: "1wduqc"
     }
   ],
-  ["circle", { cx: "16", cy: "7", r: "5", key: "d08jfb" }]
-], Pe = f("mic-vocal", $e);
+  [
+    "path",
+    {
+      d: "M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17",
+      key: "kqbvx6"
+    }
+  ]
+], br = D("layers", us);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const je = [
+const ps = [
+  ["path", { d: "M16 5H3", key: "m91uny" }],
+  ["path", { d: "M11 12H3", key: "51ecnj" }],
+  ["path", { d: "M11 19H3", key: "zflm78" }],
+  ["path", { d: "M21 16V5", key: "yxg4q8" }],
+  ["circle", { cx: "18", cy: "16", r: "3", key: "1hluhg" }]
+], ms = D("list-music", ps);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const hs = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]], X = D("loader-circle", hs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const gs = [
+  ["path", { d: "M12 19v3", key: "npa21l" }],
+  ["path", { d: "M19 10v2a7 7 0 0 1-14 0v-2", key: "1vc78b" }],
+  ["rect", { x: "9", y: "2", width: "6", height: "13", rx: "3", key: "s6n7sd" }]
+], Re = D("mic", gs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const ys = [
+  ["path", { d: "M5.5 20H8", key: "1k40s5" }],
+  ["path", { d: "M17 9h.01", key: "1j24nn" }],
+  ["rect", { width: "10", height: "16", x: "12", y: "4", rx: "2", key: "ixliua" }],
+  ["path", { d: "M8 6H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4", key: "1mp6e1" }],
+  ["circle", { cx: "17", cy: "15", r: "1", key: "tqvash" }]
+], fr = D("monitor-speaker", ys);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const bs = [
+  ["rect", { width: "20", height: "14", x: "2", y: "3", rx: "2", key: "48i651" }],
+  ["line", { x1: "8", x2: "16", y1: "21", y2: "21", key: "1svkeh" }],
+  ["line", { x1: "12", x2: "12", y1: "17", y2: "21", key: "vw1qmm" }]
+], ko = D("monitor", bs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const fs = [
+  ["circle", { cx: "8", cy: "18", r: "4", key: "1fc0mg" }],
+  ["path", { d: "M12 18V2l7 4", key: "g04rme" }]
+], ja = D("music-2", fs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const vs = [
+  ["path", { d: "M2 6h4", key: "aawbzj" }],
+  ["path", { d: "M2 10h4", key: "l0bgd4" }],
+  ["path", { d: "M2 14h4", key: "1gsvsf" }],
+  ["path", { d: "M2 18h4", key: "1bu2t1" }],
+  ["rect", { width: "16", height: "20", x: "4", y: "2", rx: "2", key: "1nb95v" }],
+  ["path", { d: "M9.5 8h5", key: "11mslq" }],
+  ["path", { d: "M9.5 12H16", key: "ktog6x" }],
+  ["path", { d: "M9.5 16H14", key: "p1seyn" }]
+], Ia = D("notebook-text", vs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const xs = [
   ["rect", { x: "14", y: "3", width: "5", height: "18", rx: "1", key: "kaeet6" }],
   ["rect", { x: "5", y: "3", width: "5", height: "18", rx: "1", key: "1wsw3u" }]
-], Fe = f("pause", je);
+], Et = D("pause", xs);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Re = [
+const ws = [
+  [
+    "path",
+    {
+      d: "M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z",
+      key: "1a8usu"
+    }
+  ],
+  ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
+], Go = D("pencil", ws);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const ks = [
   [
     "path",
     {
@@ -186,59 +421,84 @@ const Re = [
       key: "10ikf1"
     }
   ]
-], Ue = f("play", Re);
+], fe = D("play", ks);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const De = [
-  ["path", { d: "M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "14sxne" }],
-  ["path", { d: "M3 3v5h5", key: "1xhq8a" }],
-  ["path", { d: "M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16", key: "1hlbsb" }],
-  ["path", { d: "M16 16h5v5", key: "ccwih5" }]
-], We = f("refresh-ccw", De);
+const Ss = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
+], vr = D("plus", Ss);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Oe = [
-  [
-    "path",
-    {
-      d: "M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z",
-      key: "1c8476"
-    }
-  ],
-  ["path", { d: "M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7", key: "1ydtos" }],
-  ["path", { d: "M7 3v4a1 1 0 0 0 1 1h7", key: "t51u73" }]
-], Ge = f("save", Oe);
+const _s = [
+  ["path", { d: "M16.247 7.761a6 6 0 0 1 0 8.478", key: "1fwjs5" }],
+  ["path", { d: "M19.075 4.933a10 10 0 0 1 0 14.134", key: "ehdyv1" }],
+  ["path", { d: "M4.925 19.067a10 10 0 0 1 0-14.134", key: "1q22gi" }],
+  ["path", { d: "M7.753 16.239a6 6 0 0 1 0-8.478", key: "r2q7qm" }],
+  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }]
+], Ts = D("radio", _s);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const He = [
-  [
-    "path",
-    {
-      d: "M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915",
-      key: "1i5ecw"
-    }
-  ],
-  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
-], Je = f("settings", He);
+const Cs = [
+  ["path", { d: "M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8", key: "v9h5vc" }],
+  ["path", { d: "M21 3v5h-5", key: "1q7to0" }],
+  ["path", { d: "M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16", key: "3uifl3" }],
+  ["path", { d: "M8 16H3v5", key: "1cv678" }]
+], Ns = D("refresh-cw", Cs);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Be = [
+const As = [
+  ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
+  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
+], It = D("search", As);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const zs = [
+  ["path", { d: "M14 17H5", key: "gfn3mx" }],
+  ["path", { d: "M19 7h-9", key: "6i9tg" }],
+  ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
+  ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
+], Vo = D("settings-2", zs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Is = [
+  ["path", { d: "m18 14 4 4-4 4", key: "10pe0f" }],
+  ["path", { d: "m18 2 4 4-4 4", key: "pucp1d" }],
+  ["path", { d: "M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22", key: "1ailkh" }],
+  ["path", { d: "M2 6h1.972a4 4 0 0 1 3.6 2.2", key: "km57vx" }],
+  ["path", { d: "M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45", key: "os18l9" }]
+], Ms = D("shuffle", Is);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Es = [
   [
     "path",
     {
@@ -249,27 +509,57 @@ const Be = [
   ["path", { d: "M20 2v4", key: "1rf3ol" }],
   ["path", { d: "M22 4h-4", key: "gwowj6" }],
   ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
-], ae = f("sparkles", Be);
+], De = D("sparkles", Es);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ve = [
+const Ls = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }]
+], js = D("square", Ls);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Ps = [
   ["path", { d: "M10 11v6", key: "nco0om" }],
   ["path", { d: "M14 11v6", key: "outv1u" }],
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
-], qe = f("trash-2", Ve);
+], ia = D("trash-2", Ps);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ke = [
+const Rs = [
+  ["path", { d: "M12 3v12", key: "1x0j5s" }],
+  ["path", { d: "m17 8-5-5-5 5", key: "7q97r8" }],
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }]
+], Cr = D("upload", Rs);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Ds = [
+  ["circle", { cx: "12", cy: "8", r: "5", key: "1hypcn" }],
+  ["path", { d: "M20 21a8 8 0 0 0-16 0", key: "rfgkzh" }]
+], Hs = D("user-round", Ds);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Os = [
   [
     "path",
     {
@@ -284,483 +574,9830 @@ const Ke = [
   ["path", { d: "M7 8H3", key: "zfb6yr" }],
   ["path", { d: "M21 16h-4", key: "1cnmox" }],
   ["path", { d: "M11 3H9", key: "1obp7u" }]
-], Ze = f("wand-sparkles", Ke), fe = "id, title, prompt, lyrics, created_at, updated_at, audio_file_node_id, cover_file_node_id, model_id, bpm, key, duration_seconds, favourited";
-function ge(e) {
+], Lt = D("wand-sparkles", Os);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Us = [
+  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
+  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+], de = D("x", Us), $s = {
+  "appLauncher.aria": "Application launcher",
+  "appLauncher.searchPlaceholder": "Type to search applications...",
+  "appLauncher.frequentlyUsed": "Frequently Used",
+  "appLauncher.noAppsFound": "No applications found",
+  "appLauncher.scrollUp": "Scroll up",
+  "appLauncher.scrollDown": "Scroll down",
+  "commandPalette.aria": "Command palette",
+  "commandPalette.placeholder": "Type a command…",
+  "commandPalette.noMatch": "No commands match.",
+  "command.section.apps": "Apps",
+  "command.section.pods": "Pods",
+  "command.section.system": "System",
+  "command.openSettings": "Open Settings",
+  "command.openPodInspector": "Open Pod Inspector",
+  "command.openHelp": "Open Help",
+  "command.openChat": "Open Chat",
+  "command.openFiles": "Open Files",
+  "command.openChannels": "Open Channels",
+  "command.openPod": "Open Pod {podId} ({agentType})",
+  "command.refreshDaemon": "Refresh daemon state",
+  "command.signOut": "Sign out",
+  "category.Favorites": "Favorites",
+  "category.All": "All",
+  "category.System": "System",
+  "category.Internet": "Internet",
+  "category.Productivity": "Productivity",
+  "category.Media": "Media",
+  "category.DevTools": "DevTools",
+  "category.Creative": "Creative",
+  "category.Games": "Games",
+  "settings.section.tytus": "TYTUS",
+  "settings.section.system": "SYSTEM",
+  "settings.searchPlaceholder": "Search settings...",
+  "settings.category.account": "Account",
+  "settings.category.plan": "Plan & Units",
+  "settings.category.pods": "Pods",
+  "settings.category.agents": "Agents",
+  "settings.category.daemon": "Daemon",
+  "settings.category.sharing": "Sharing",
+  "settings.category.background": "Background",
+  "settings.category.appearance": "Appearance",
+  "settings.category.language": "Languages",
+  "settings.category.notifications": "Notifications",
+  "settings.category.privacy": "Privacy",
+  "settings.category.about": "About",
+  "settings.background.title": "Background",
+  "settings.background.section.presets": "Tytus presets",
+  "settings.background.section.custom": "Personalize",
+  "settings.background.custom.label": "Custom image",
+  "settings.background.custom.uploadCta": "Upload image",
+  "settings.background.custom.uploadHint": "JPEG, PNG, or WebP",
+  "settings.background.custom.previewAlt": "Custom background preview",
+  "settings.background.custom.remove": "Remove",
+  "settings.background.custom.footer": "Your image stays on this machine — never uploaded. Max {maxMb} MB.",
+  "settings.background.color.label": "Solid color",
+  "settings.background.color.cta": "Pick a color",
+  "settings.languages.title": "Languages",
+  "settings.languages.defaultTitle": "Default language",
+  "settings.languages.defaultDescription": "Pick the system display language. Community packs can add more languages without an app rebuild.",
+  "settings.appearance.language.title": "Language",
+  "settings.appearance.language.description": "Choose the display language for Tytus OS.",
+  "settings.appearance.language.system": "System language",
+  "settings.appearance.language.current": "Current language",
+  "settings.appearance.language.bundled": "Bundled",
+  "settings.appearance.language.community": "Community",
+  "settings.appearance.language.import": "Import language pack",
+  "settings.appearance.language.importHint": "Import a community JSON pack. Missing keys fall back to English.",
+  "settings.appearance.language.importSuccess": "Installed {name}.",
+  "settings.appearance.language.importError": "Could not import language pack: {message}",
+  "settings.appearance.language.remove": "Remove",
+  "settings.appearance.language.format": "Language pack format",
+  "settings.appearance.language.downloadRoadmap": "Downloadable packs are local JSON first; signed catalog download can plug into this later without changing app strings.",
+  // ── Phase 1.1 Custom accent ──
+  "settings.appearance.accent.title": "Accent color",
+  "settings.appearance.accent.description": "Picks the primary highlight color used across the OS shell and supported apps.",
+  "settings.appearance.accent.custom": "Custom",
+  "settings.appearance.accent.customHint": "Pick any hex color. Buttons, focus rings, and selection states follow.",
+  // ── Phase 1.3 Font scale ──
+  "settings.appearance.fontScale.title": "Text size",
+  "settings.appearance.fontScale.description": "Scales every text element across Tytus OS. 100% is the default.",
+  "settings.appearance.fontScale.reset": "Reset to 100%",
+  // ── Phase 1.4 Mode schedule ──
+  "settings.appearance.schedule.title": "Light/dark schedule",
+  "settings.appearance.schedule.description": "Choose how Tytus OS picks light or dark mode.",
+  "settings.appearance.schedule.manual": "Manual (use the toggle above)",
+  "settings.appearance.schedule.alwaysLight": "Always light",
+  "settings.appearance.schedule.alwaysDark": "Always dark",
+  "settings.appearance.schedule.auto": "Auto (light 06:00–18:00 local)",
+  // ── Phase 1.5 Lock-screen wallpaper ──
+  "settings.background.lockMatch.title": "Match lock screen to desktop",
+  "settings.background.lockMatch.description": "When on, the lock and login screens show your desktop wallpaper. Off uses the bundled Tytus default.",
+  // ── Phase 1.2 Dock customization ──
+  "settings.category.dock": "Dock",
+  "settings.dock.title": "Dock",
+  "settings.dock.position.title": "Position",
+  "settings.dock.position.bottom": "Bottom",
+  "settings.dock.position.left": "Left",
+  "settings.dock.position.right": "Right",
+  "settings.dock.size.title": "Size",
+  "settings.dock.size.small": "Small",
+  "settings.dock.size.medium": "Medium",
+  "settings.dock.size.large": "Large",
+  "settings.dock.autoHide.title": "Auto-hide",
+  "settings.dock.autoHide.description": "Hide the Dock until you point at the screen edge.",
+  "settings.dock.order.reset": "Reset Dock order",
+  "settings.dock.order.resetHint": "Restores the default app order. The Trash icon stays last.",
+  // ── Sprint B Phase 7 system sounds ──
+  "settings.sounds.title": "System sounds",
+  "settings.sounds.description": "Play a short chime for notifications, errors, and trash actions.",
+  // ── Sprint B Phase 6.4 reduce motion ──
+  "settings.appearance.reduceMotion.title": "Reduce motion",
+  "settings.appearance.reduceMotion.description": "Disable open/close, minimize, and snap animations. Tytus OS still respects your system reduced-motion preference.",
+  // ── Sprint B Phase 5.4 host clipboard ──
+  "clipboard.permission.deniedToast": "Clipboard access denied — enable it in {browser} settings.",
+  "clipboard.permission.deniedToast.help": "Help",
+  "clipboard.paste.success.image": "Pasted image to {target}",
+  "clipboard.paste.success.text": "Pasted text to {target}",
+  "clipboard.paste.success.files": "Pasted {count} file(s) to {target}",
+  "clipboard.paste.empty": "Nothing to paste from clipboard",
+  "settings.privacy.clipboard.title": "Clipboard permission",
+  "settings.privacy.clipboard.description": "Tytus asks once per session before reading from the host clipboard. Reset to ask again.",
+  "settings.privacy.clipboard.reset": "Reset clipboard permission",
+  "settings.privacy.clipboard.statusGranted": "Granted",
+  "settings.privacy.clipboard.statusDenied": "Denied",
+  "settings.privacy.clipboard.statusPrompt": "Will ask",
+  // ── Sprint B Phase 6 window management ──
+  "menu.window.maximize": "Maximize",
+  "menu.window.unmaximize": "Restore",
+  "menu.window.snapLeft": "Snap left",
+  "menu.window.snapRight": "Snap right",
+  "shell.Window": "Window",
+  "shell.Minimize Window": "Minimize Window",
+  "shell.Close Window": "Close Window",
+  "shell.Help": "Help",
+  "shell.Tytus Help": "Tytus Help",
+  "shell.Apps": "Apps",
+  "shell.Open App Launcher": "Open App Launcher",
+  "shell.Pods": "Pods",
+  "shell.Open Pod Inspector": "Open Pod Inspector",
+  "shell.Install Agent…": "Install Agent…",
+  "shell.Channels": "Channels",
+  "shell.Open Channels": "Open Channels",
+  "shell.Files": "Files",
+  "shell.Open Files": "Open Files",
+  "shell.Settings": "Settings",
+  "shell.System Settings…": "System Settings…",
+  "shell.Daemon Settings": "Daemon Settings",
+  "shell.Account": "Account",
+  "shell.Plan & Units": "Plan & Units",
+  "shell.Tytus": "Tytus",
+  "shell.Agents": "Agents",
+  "shell.Daemon": "Daemon",
+  "shell.View": "View",
+  "shell.Background": "Background",
+  "shell.Appearance": "Appearance",
+  "shell.Notifications": "Notifications",
+  "shell.Privacy": "Privacy",
+  "shell.About": "About",
+  "shell.Pod": "Pod",
+  "shell.Refresh Daemon State": "Refresh Daemon State",
+  "shell.Pods Settings": "Pods Settings",
+  "shell.Install Channel Agent…": "Install Channel Agent…",
+  "shell.File": "File",
+  "shell.New Files Window": "New Files Window",
+  "shell.Shell": "Shell",
+  "shell.New Terminal Window": "New Terminal Window",
+  "shell.Chat": "Chat",
+  "shell.Song": "Song",
+  "shell.New Song": "New Song",
+  "shell.Surprise me…": "Surprise me…",
+  "shell.Cover Mode": "Cover Mode",
+  "shell.Lyrics Only Mode": "Lyrics Only Mode",
+  "shell.How it works…": "How it works…",
+  "shell.Music Creator Settings…": "JULI3TA Settings…",
+  "shell.JULI3TA Settings…": "JULI3TA Settings…",
+  "shell.JULI3TA Help…": "JULI3TA Help…",
+  "app.app-store.name": "App Store",
+  "app.app-store.description": "Browse and discover recommended apps. Check install status on your machine.",
+  "app.pod-inspector.name": "Pod Inspector",
+  "app.pod-inspector.description": "Inspect, restart, uninstall, revoke pods. Live job logs.",
+  "app.channels.name": "Channels",
+  "app.channels.description": "Telegram, Slack, iMessage, Matrix bindings per pod.",
+  "app.help.name": "Help",
+  "app.help.description": "Doctor, daemon lifecycle, log tail, troubleshooting.",
+  "app.settings.name": "System Settings",
+  "app.settings.description": "Account, plan, pods, agents, daemon, appearance, notifications, privacy.",
+  "app.filemanager.name": "Files",
+  "app.filemanager.description": "Browse local, pod inbox, downloads, garage shared folders.",
+  "app.terminal.name": "Terminal",
+  "app.terminal.description": "Local shell + tytus exec into pod containers.",
+  "app.systemmonitor.name": "System Monitor",
+  "app.systemmonitor.description": "CPU, memory, disk, network — host + pods.",
+  "app.archivemanager.name": "Archive Manager",
+  "app.archivemanager.description": "Create and extract ZIP, TAR, 7Z archives.",
+  "app.chat.name": "Chat",
+  "app.chat.description": "Talk to your pod AI.",
+  "app.browser.name": "Browser",
+  "app.browser.description": "Open Tytus pod URLs, agent docs, GitHub.",
+  "app.weather.name": "Weather",
+  "app.weather.description": "Weather forecast with locations.",
+  "app.rssreader.name": "RSS Reader",
+  "app.rssreader.description": "Feed reader for news subscriptions.",
+  "app.notes.name": "Notes",
+  "app.notes.description": "Quick notes with folders.",
+  "app.todo.name": "Todo",
+  "app.todo.description": "Task list with priorities and projects.",
+  "app.reminders.name": "Reminders",
+  "app.reminders.description": "Time-based reminders.",
+  "app.calendar.name": "Calendar",
+  "app.calendar.description": "Monthly view with events.",
+  "app.calculator.name": "Calculator",
+  "app.calculator.description": "Standard calculator with history.",
+  "app.clock.name": "Clock",
+  "app.clock.description": "World clock, alarms, timer, stopwatch.",
+  "app.spreadsheet.name": "Spreadsheet",
+  "app.spreadsheet.description": "Basic spreadsheet with formulas.",
+  "app.texteditor.name": "Text Editor",
+  "app.texteditor.description": "Edit plain text files.",
+  "app.documentviewer.name": "Document Viewer",
+  "app.documentviewer.description": "PDF and document viewer.",
+  "app.markdownpreview.name": "Markdown Preview",
+  "app.markdownpreview.description": "Live markdown with GitHub styling.",
+  "app.imageviewer.name": "Image Viewer",
+  "app.imageviewer.description": "View images with zoom and slideshow.",
+  "app.imagegallery.name": "Image Gallery",
+  "app.imagegallery.description": "Browse and organize image collections.",
+  "app.photoeditor.name": "Photo Editor",
+  "app.photoeditor.description": "Basic photo editing with filters.",
+  "app.musicplayer.name": "Music Player",
+  "app.musicplayer.description": "Audio player with playlist.",
+  "app.musiccreator.name": "JULI3TA",
+  "app.musiccreator.description": "Generate full songs with AI lyrics + music. Powered by your pod.",
+  "app.videoplayer.name": "Video Player",
+  "app.videoplayer.description": "Video player with controls.",
+  "app.voicerecorder.name": "Voice Recorder",
+  "app.voicerecorder.description": "Record audio from your microphone.",
+  "app.screenrecorder.name": "Screen Recorder",
+  "app.screenrecorder.description": "Capture and record your screen.",
+  "app.mediaconverter.name": "Media Converter",
+  "app.mediaconverter.description": "Convert between media formats.",
+  "app.codeeditor.name": "Code Editor",
+  "app.codeeditor.description": "Syntax-highlighted code editor with tabs.",
+  "app.apitester.name": "API Tester",
+  "app.apitester.description": "Postman-style HTTP request builder. Real fetch.",
+  "app.jsonformatter.name": "JSON Formatter",
+  "app.jsonformatter.description": "Format, validate, and beautify JSON.",
+  "app.regextester.name": "Regex Tester",
+  "app.regextester.description": "Test and debug regular expressions.",
+  "app.base64tool.name": "Base64 Tool",
+  "app.base64tool.description": "Encode/decode Base64 and URL strings.",
+  "app.colorpalette.name": "Color Palette",
+  "app.colorpalette.description": "Color schemes and palette generation.",
+  "app.drawing.name": "Drawing",
+  "app.drawing.description": "Canvas-based drawing with brushes.",
+  "app.whiteboard.name": "Whiteboard",
+  "app.whiteboard.description": "Infinite canvas for sketches.",
+  "app.colorpicker.name": "Color Picker",
+  "app.colorpicker.description": "Pick colors, generate palettes.",
+  "app.asciiart.name": "ASCII Art",
+  "app.asciiart.description": "Create ASCII text art and diagrams.",
+  "app.matrixrain.name": "Matrix Rain",
+  "app.matrixrain.description": "Animated falling characters.",
+  "app.minesweeper.name": "Minesweeper",
+  "app.minesweeper.description": "Classic minesweeper with 3 difficulty levels.",
+  "app.snake.name": "Snake",
+  "app.snake.description": "Classic snake game with increasing speed.",
+  "app.tetris.name": "Tetris",
+  "app.tetris.description": "Block-stacking puzzle game.",
+  "app.tictactoe.name": "Tic-Tac-Toe",
+  "app.tictactoe.description": "2-player and AI tic-tac-toe.",
+  "app.game2048.name": "2048",
+  "app.game2048.description": "Number sliding puzzle.",
+  "app.sudoku.name": "Sudoku",
+  "app.sudoku.description": "9×9 number puzzle with 4 difficulties.",
+  "app.chess.name": "Chess",
+  "app.chess.description": "Chess with AI opponent.",
+  "app.memory.name": "Memory Game",
+  "app.memory.description": "Card matching memory game.",
+  "app.pong.name": "Pong",
+  "app.pong.description": "Classic paddle ball game.",
+  "app.solitaire.name": "Solitaire",
+  "app.solitaire.description": "Classic card solitaire.",
+  "app.flappybird.name": "Flappy Bird",
+  "app.flappybird.description": "Side-scrolling arcade game.",
+  "shell.Languages": "Languages",
+  "top.aboutTytusOS": "About Tytus OS",
+  "top.systemSettings": "System Settings…",
+  "top.openApps": "Open Apps",
+  "top.lockScreen": "Lock Screen",
+  "top.signingOut": "Signing out…",
+  "top.logOutUser": "Log Out {user}…",
+  "top.confirmLogoutTitle": "Log out of Tytus?",
+  "top.confirmLogoutBody": "This revokes live pods and clears local credentials. Lock Screen is safer if you only want to hide the desktop.",
+  "top.cancel": "Cancel",
+  "top.logOut": "Log out",
+  "desktop.podLabel": "Pod {podId}",
+  "desktop.unpin": "Unpin",
+  "desktop.notify.dropTitle": "Added to Desktop",
+  "desktop.notify.dropBody": "{name}",
+  "context.open": "Open",
+  "context.cut": "Cut",
+  "context.copy": "Copy",
+  "context.rename": "Rename",
+  "context.moveToTrash": "Move to Trash",
+  "dock.trash": "Trash",
+  "dock.aria": "Application dock",
+  "dock.showApplications": "Show applications",
+  "status.Checking": "Checking",
+  "status.Offline": "Offline",
+  "status.No state": "No state",
+  "status.Stopped": "Stopped",
+  "status.Degraded": "Degraded",
+  "status.Connected": "Connected",
+  "status.Session expired": "Session expired",
+  "status.daemonTitle": "Daemon {label}: {detail}",
+  "plan.unitsFootnote": "Units are consumed by allocated agents (OpenClaw = 1 unit, Hermes = 2 units). Included AIL pods don't count against your unit budget.",
+  "status.unitsUsed": "{used}/{limit} units",
+  "status.unitsUnknown": "units unknown",
+  "status.podSingular": "{count} pod",
+  "status.podPlural": "{count} pods",
+  "status.noPodsYet": "No agent pods yet — click to allocate. (AIL is always included for free.)",
+  "status.podsDetail": "{count} allocated · {jobs} active jobs · {units}",
+  "settings.languages.officialTitle": "Add from official Tytus OS GitHub",
+  "settings.languages.officialHint": "Only packs listed in the official Tytus OS GitHub catalog can be downloaded here. Arbitrary URLs are blocked.",
+  "settings.languages.officialRefresh": "Check official packs",
+  "settings.languages.officialLoadError": "Could not load official language catalog: {message}",
+  "settings.languages.officialInstallError": "Could not install official language pack: {message}",
+  "settings.languages.officialPackMeta": "{locale} · v{version} · GitHub official",
+  "settings.languages.installed": "installed",
+  "settings.languages.catalogLink": "Official language catalog",
+  "settings.languages.spanishRepoLink": "Spanish pack repo",
+  "settings.languages.helpFooter": "Tytus speaks English and Spanish now. Help teach the little OS more languages before it starts inventing Klingon error messages.",
+  "settings.languages.contributeTitle": "Want to manage a new language?",
+  "settings.languages.contributeBody": "Open the catalog repo, copy the Spanish pack structure, and send a PR. Tytus needs humans for nuance, jokes, and not sounding like a toaster with Google Translate.",
+  "settings.languages.createPackLink": "Create a new language pack",
+  // Agents panel (Settings → Agents)
+  "agents.panel.title": "Agents",
+  "agents.panel.subtitle": "Install an agent into a pod. Each install consumes the agent's unit cost.",
+  "agents.panel.loading": "Loading catalog…",
+  "agents.panel.loadError": "Couldn't load catalog: {message}",
+  "agents.panel.retry": "Retry",
+  "agents.panel.install": "Install",
+  "agents.panel.website": "Website",
+  "agents.panel.github": "GitHub",
+  "agents.panel.unitSingular": "unit",
+  "agents.panel.unitPlural": "units",
+  "agents.panel.runningOnSingular": "{count} running on pod {pods}",
+  "agents.panel.runningOnPlural": "{count} running on pods {pods}",
+  "agents.panel.reasonPlan": "Requires {plan} plan or higher",
+  "agents.panel.reasonUnits": "Needs {needed} {unit}, only {available} available",
+  // Agent display copy (shared by Settings → Agents and Chat → per-pod landing)
+  "agents.openclaw.name": "OpenClaw",
+  "agents.openclaw.tagline": "Your personal AI on every channel you already use",
+  "agents.openclaw.description": "Chat with your assistant from Telegram, WhatsApp, Signal, Discord, Slack, iMessage, Matrix and 20+ more — all from one always-on brain. Voice in, voice out. Live Canvas you can point at and steer.",
+  "agents.openclaw.highlight.0": "25+ messaging channels — one assistant, every app",
+  "agents.openclaw.highlight.1": "Voice + Canvas — speak, listen, and watch it draw",
+  "agents.openclaw.highlight.2": "Hardened by an NVIDIA secure-agent sandbox for extra safety",
+  "agents.openclaw.highlight.3": "Always-on — ready whenever you need it",
+  "agents.hermes.name": "Hermes",
+  "agents.hermes.tagline": "The self-improving AI agent that gets smarter as you use it",
+  "agents.hermes.description": "Learns from every task. Creates its own skills, remembers every past conversation, runs scheduled jobs, and splits complex work across parallel subagents. Talk to it from your terminal, Telegram, Discord, or Slack.",
+  "agents.hermes.highlight.0": "Self-improving skills — sharper every time you use them",
+  "agents.hermes.highlight.1": "Total recall — searches every past conversation",
+  "agents.hermes.highlight.2": "Scheduled automations — daily reports, nightly audits",
+  "agents.hermes.highlight.3": "Parallel subagents — splits big jobs into concurrent work",
+  // Chat app
+  "chat.sidebar.podsHeader": "Pods",
+  "chat.sidebar.includedHeader": "Included",
+  "chat.sidebar.podLabel": "Pod {podId}",
+  "chat.sidebar.empty": "No pods allocated.",
+  "chat.sidebar.loading": "Loading…",
+  "chat.empty.title": "No pods to chat with",
+  "chat.empty.body": "Allocate a pod first — once it's running, you'll be able to open it right here.",
+  "chat.empty.cta": "Allocate a pod →",
+  "chat.picker.hint": "Select a pod from the left to start chatting.",
+  "chat.agent.podLabel": "Pod {podId}",
+  "chat.agent.openInBrowser": "Open Pod {podId} in browser →",
+  "chat.agent.openError": "Couldn't open pod {podId} in your browser. Check tunnel. ({message})",
+  "chat.agent.dismissError": "Dismiss",
+  "chat.agent.docs": "Docs",
+  "chat.agent.connectedApps": "Connected apps",
+  "chat.agent.manageChannels": "Manage channels",
+  "chat.agent.loadingChannels": "Checking connected apps…",
+  "chat.agent.channelsError": "Couldn't load channels: {message}",
+  "chat.agent.noChannels": "No connected apps yet — open Channels to wire up Telegram, Discord, Slack, and more.",
+  "chat.ail.tooltip": "AIL — one endpoint, every model. Free with your Tytus account.",
+  "chat.ail.title": "AIL",
+  "chat.ail.tagline": "One endpoint. Every AI provider.",
+  "chat.ail.body": "AIL is your private LLM gateway: a single endpoint that routes across MiniMax, Kimi, DeepSeek, Qwen, OpenAI, Anthropic, Gemini and your local CLI tools — with automatic failover when a provider goes down. It speaks both OpenAI and Anthropic protocols, so anything you already use just works.",
+  "chat.ail.feature.0": "Speaks OpenAI and Anthropic — paste into Cursor, Claude Code, OpenCode, the Anthropic SDK",
+  "chat.ail.feature.1": "Routes across multiple frontier providers with automatic failover",
+  "chat.ail.feature.2": "Use your own subscriptions (Gemini CLI, Claude Code, Codex) without extra keys",
+  "chat.ail.feature.3": "Included free with every Tytus account — no unit cost, no rate-limit surprise",
+  "chat.ail.cta.docs": "Open the docs",
+  "chat.ail.cta.podInspector": "Copy URL & key",
+  // Music Creator ─────────────────────────────────────────
+  "musiccreator.empty.title": "No pod connected",
+  "musiccreator.empty.body": "JULI3TA routes through your Tytus pod's AI gateway. Allocate a pod from Pod Inspector to start composing.",
+  "musiccreator.header.title": "Music Creation",
+  "musiccreator.header.subtitle": "Pod {podId} · ail-music",
+  "musiccreator.header.surprise": "Surprise",
+  "musiccreator.header.surpriseTitle": "Random theme",
+  "musiccreator.theme.label": "Theme",
+  "musiccreator.theme.placeholder": "Describe the song: vibe, mood, story, era…",
+  "musiccreator.theme.hint": "We'll write structured lyrics from this. Or paste your own below.",
+  "musiccreator.lyrics.label": "Lyrics (optional)",
+  "musiccreator.lyrics.placeholder": `[Verse]
+Add your own lyrics…
+[Chorus]
+…`,
+  "musiccreator.lyrics.instrumental": "Instrumental",
+  "musiccreator.lyrics.template": "Template {n}",
+  "musiccreator.lyrics.templateTitle": "Insert structure template",
+  "musiccreator.style.label": "Style",
+  "musiccreator.style.placeholder": "Genre, mood, tempo, instruments, vocal type…",
+  "musiccreator.songName.label": "Song name (optional)",
+  "musiccreator.songName.placeholder": "Auto-generated from theme if empty",
+  "musiccreator.button.create": "Create Song",
+  "musiccreator.button.cancel": "Cancel",
+  "musiccreator.phase.lyrics": "Writing lyrics…",
+  "musiccreator.phase.song": "Generating music… (~30–90 s)",
+  "musiccreator.error.noPod": "No Tytus pod available. Allocate one via Pod Inspector.",
+  "musiccreator.error.noInput": "Add a theme/prompt or paste your own lyrics.",
+  "musiccreator.error.lyricsTooLong": "Lyrics too long: {count} > {max} chars.",
+  "musiccreator.gallery.title": "My Work",
+  "musiccreator.gallery.count.one": "{n} track",
+  "musiccreator.gallery.count.other": "{n} tracks",
+  "musiccreator.error.dismiss": "Dismiss",
+  "musiccreator.gallery.searchPlaceholder": "Search My Work…",
+  "musiccreator.gallery.searchEmpty": "No tracks match “{q}”.",
+  "musiccreator.gallery.empty.title": "Nothing here yet",
+  "musiccreator.gallery.empty.body": "Describe a song on the left and hit Create Song. Your tracks will land here with playback and download.",
+  "musiccreator.gallery.empty.footer": "100 songs/day · ail-music · MiniMax 2.6",
+  "musiccreator.track.untitled": "Untitled",
+  "musiccreator.track.download": "Download MP3",
+  "musiccreator.track.delete": "Delete",
+  "musiccreator.track.lyricsOnly": "Lyrics only",
+  "musiccreator.track.openInEditor": "Open lyrics",
+  "musiccreator.track.saveToDesktop": "Save to Desktop",
+  "musiccreator.track.saveSongToDesktop": "Save song to Desktop",
+  "musiccreator.track.saveLyricsToDesktop": "Save lyrics to Desktop",
+  "musiccreator.track.playInPlayer": "Play in Music Player",
+  "musiccreator.track.loadIntoForm": "Load into form",
+  "musiccreator.track.section.song": "Song",
+  "musiccreator.track.section.lyrics": "Lyrics",
+  "musiccreator.notify.savedToDesktopTitle": "Saved to Desktop",
+  "musiccreator.notify.savedToDesktopBody": "{name} is on your Desktop.",
+  "musiccreator.notify.songReadyTitle": "Song ready",
+  "musiccreator.notify.songReadyBody": '"{title}" is in My Work and Music folder.',
+  "musiccreator.notify.noLyricsTitle": "No lyrics to open",
+  "musiccreator.notify.noLyricsBody": "This track has no lyrics yet — generate or paste some first.",
+  // View tabs (Creator / Player) and Player view ──────────────
+  "musiccreator.view.creator": "Creator",
+  "musiccreator.view.player": "Player",
+  "musiccreator.view.creator.tip": "Compose new songs and edit drafts",
+  "musiccreator.view.player.tip": "Listen to saved tracks with full metadata",
+  "musiccreator.player.eyebrow.track": "JULI3TA Track",
+  "musiccreator.player.eyebrow.lyricSheet": "JULI3TA Lyric Sheet",
+  "musiccreator.player.empty.title": "Nothing playing yet",
+  "musiccreator.player.empty.body": "Pick a track from the sidebar to open it here, or switch to the Creator tab to compose a new one.",
+  "musiccreator.player.empty.openCreator": "Open Creator",
+  "musiccreator.player.play": "Play",
+  "musiccreator.player.pause": "Pause",
+  "musiccreator.player.remixInRestyle": "Remix in Restyle",
+  "musiccreator.player.remixInRestyle.tip": "Open this track in Restyle so you can remix it with new style + lyrics",
+  "musiccreator.player.lyrics": "Lyrics",
+  "musiccreator.player.lyrics.empty": "No lyrics saved with this track.",
+  "musiccreator.player.theme": "Theme",
+  "musiccreator.player.lyricsDirection": "Lyrics Direction",
+  "musiccreator.player.about": "About this track",
+  "musiccreator.player.about.created": "Created",
+  "musiccreator.player.about.duration": "Duration",
+  "musiccreator.player.about.bitrate": "Bitrate",
+  "musiccreator.player.about.sampleRate": "Sample rate",
+  "musiccreator.player.about.size": "Size",
+  "musiccreator.player.about.style": "Style",
+  "musiccreator.player.about.format": "Format",
+  "musiccreator.player.about.format.mp3": "MP3 audio",
+  "musiccreator.player.about.format.lyricSheet": "Lyric sheet",
+  // Restyle reference-audio pickers ───────────────────────────
+  "musiccreator.restyle.songsPicker.title": "Pick a song from your library",
+  "musiccreator.restyle.songsPicker.empty.title": "No songs in your library yet",
+  "musiccreator.restyle.songsPicker.empty.body": "Switch to the Song tab and create a track first — it’ll show up here for restyling.",
+  "musiccreator.restyle.songsPicker.tooShort": "too short for cover (need ≥6 s)",
+  "musiccreator.restyle.button.mySongs": "My songs",
+  "musiccreator.restyle.button.mySongs.count": "{count} in library",
+  "musiccreator.restyle.button.voiceClips": "Voice clips",
+  "musiccreator.restyle.button.voiceClips.count": "{count} saved",
+  // JULI3TA in-app help ─────────────────────────────────────
+  "julietaHelp.title": "JULI3TA — How it works",
+  "julietaHelp.subtitle": "Music creator manual",
+  "julietaHelp.tab.start": "Start",
+  "julietaHelp.tab.recipes": "Recipes",
+  "julietaHelp.tab.help": "Help",
+  // Start tab
+  "julietaHelp.start.workflow.title": "Make your first song",
+  "julietaHelp.start.s1.title": "Describe the vibe",
+  "julietaHelp.start.s1.body": "Type a theme — what the song is about, the mood, the era. One or two sentences is plenty. Hit “Surprise” for a random one.",
+  "julietaHelp.start.s2.title": "Pick a style (optional)",
+  "julietaHelp.start.s2.body": "Add genre, instruments, tempo, vocal type. Or just tap chips like Lo-fi, Jazz, Synthwave to build it up.",
+  "julietaHelp.start.s3.title": "Tap Create Song",
+  "julietaHelp.start.s3.body": "JULI3TA writes the lyrics first (~3 s), then renders the music (~30–90 s). A real MP3 lands in My Work on the right.",
+  "julietaHelp.start.s4.title": "Listen, download, share",
+  "julietaHelp.start.s4.body": "Press play to listen inline, the download icon for the MP3, or open Music Player to enjoy the whole library together.",
+  "julietaHelp.start.modes.title": "Three modes",
+  "julietaHelp.start.mode.song.name": "Song — full track",
+  "julietaHelp.start.mode.song.body": "Theme → AI lyrics → music. The default. Best for fresh original songs.",
+  "julietaHelp.start.mode.cover.name": "Cover — restyle audio",
+  "julietaHelp.start.mode.cover.body": "Drop in a reference clip (a recording, an MP3) and JULI3TA restyles it to match your prompt. The vibe of the source carries over; the genre changes.",
+  "julietaHelp.start.mode.lyrics.name": "Lyrics — words only",
+  "julietaHelp.start.mode.lyrics.body": "Generate just the lyric sheet without rendering audio. Fast and free of the music quota.",
+  "julietaHelp.start.recorder.title": "Voice Recorder integration",
+  "julietaHelp.start.recorder.body": 'Open the Voice Recorder app, capture audio (humming, music in the room, an instrument), then come back to JULI3TA → Cover → "From recordings". JULI3TA auto-picks the best 30 s of a long recording, so you can record several minutes and let it find the magic.',
+  "julietaHelp.start.tip.title": "✨ Pro tip",
+  "julietaHelp.start.tip.body": "For covers, longer recordings often work better — JULI3TA has more material to find a strong 30-second window. Aim for 1–3 minutes of clean audio (avoid lots of silence at the start or end).",
+  // Recipes tab
+  "julietaHelp.recipes.intro": "Tap “Use” to drop a recipe straight into the form, or “Copy” to paste it elsewhere. These are starting points — change anything before hitting Create Song.",
+  "julietaHelp.recipe.use": "Use",
+  "julietaHelp.recipe.copy": "Copy",
+  // Help tab
+  "julietaHelp.help.connection.title": "Connection",
+  "julietaHelp.help.usage.title": "Usage",
+  "julietaHelp.help.troubleshoot.title": "Troubleshooting",
+  "julietaHelp.help.q.failed.title": 'Why am I seeing "Failed to fetch"?',
+  "julietaHelp.help.q.failed.body": 'JULI3TA tries three places in order: your Tytus pod (cloud), local switchAILocal, and the upsell screen. "Failed to fetch" means the first two are unreachable. Hit "Try again" — JULI3TA will re-probe each candidate. If your pod went to sleep, restart it from Pod Inspector.',
+  "julietaHelp.help.q.nopod.title": "I don't have a Tytus pod",
+  "julietaHelp.help.q.nopod.body": "No problem — JULI3TA also works with switchAILocal running on this machine (free, local). If neither is available, the upsell screen has a link to Tytus where you can claim a free Explorer pod.",
+  "julietaHelp.help.q.local.title": "How does the local fallback work?",
+  "julietaHelp.help.q.local.body": "If the Tytus pod is unreachable, JULI3TA tries http://localhost:18080/v1 with the dev key sk-test-123. That's where switchAILocal binds by default. The amber dot in the header means JULI3TA is using local AIL.",
+  "julietaHelp.help.q.howlong.title": "How long does a song take?",
+  "julietaHelp.help.q.howlong.body": `Lyrics: 2–5 seconds. Music: 30–90 seconds for a 1–2 minute song. The progress bar curves toward 95% so you'll never see a fake "100%" before the audio actually lands.`,
+  "julietaHelp.help.q.quota.title": "How many songs can I make?",
+  "julietaHelp.help.q.quota.body": "On the MiniMax Plus plan: 100 songs/day for music, 100/day for covers, 100/day for lyrics. Each bucket counts independently. The dashboard shows live usage.",
+  "julietaHelp.help.q.length.title": "How long are the songs?",
+  "julietaHelp.help.q.length.body": "JULI3TA picks the duration from the shape of your lyrics — more verses and choruses → longer song. Typical range is 1–3 minutes. There's no manual length control yet.",
+  "julietaHelp.help.q.coverlen.title": "What audio works for covers?",
+  "julietaHelp.help.q.coverlen.body": "mp3, wav, or flac. 6 seconds minimum, 6 minutes maximum, 50 MB max file size. If your clip is longer than 30 s, JULI3TA automatically picks the loudest sustained section to use as the reference.",
+  "julietaHelp.help.q.silentmic.title": "My recording came out silent",
+  "julietaHelp.help.q.silentmic.body": "Check the live waveform while recording — if the bars don't dance, the mic input is empty. Try: 1) Approve mic permission in the browser. 2) Pick the right input device in macOS System Settings → Sound. 3) Move closer to the mic.",
+  "julietaHelp.help.q.shortrec.title": '"Recording too short" when picking it for cover',
+  "julietaHelp.help.q.shortrec.body": "Cover mode needs at least 6 seconds of audio. Record a longer clip and try again — sustained playback (music, an instrument, humming for a verse) works much better than short bursts.",
+  "julietaHelp.help.q.privacy.title": "Where does my audio go?",
+  "julietaHelp.help.q.privacy.body": "Recordings live in your browser's localStorage — they never leave your machine until you choose to use one for a cover. When you do, JULI3TA auto-extracts a 30 s slice and sends only that slice to your Tytus pod (or local AIL). Original recordings stay local."
+}, Bs = {
+  "appLauncher.aria": "Lanzador de aplicaciones",
+  "appLauncher.searchPlaceholder": "Escribe para buscar aplicaciones...",
+  "appLauncher.frequentlyUsed": "Usadas con frecuencia",
+  "appLauncher.noAppsFound": "No se encontraron aplicaciones",
+  "appLauncher.scrollUp": "Desplazar hacia arriba",
+  "appLauncher.scrollDown": "Desplazar hacia abajo",
+  "commandPalette.aria": "Paleta de comandos",
+  "commandPalette.placeholder": "Escribe un comando…",
+  "commandPalette.noMatch": "Ningún comando coincide.",
+  "command.section.apps": "Aplicaciones",
+  "command.section.pods": "Pods",
+  "command.section.system": "Sistema",
+  "command.openSettings": "Abrir Configuración",
+  "command.openPodInspector": "Abrir Inspector de pods",
+  "command.openHelp": "Abrir Ayuda",
+  "command.openChat": "Abrir Chat",
+  "command.openFiles": "Abrir Archivos",
+  "command.openChannels": "Abrir Canales",
+  "command.openPod": "Abrir pod {podId} ({agentType})",
+  "command.refreshDaemon": "Actualizar estado del daemon",
+  "command.signOut": "Cerrar sesión",
+  "category.Favorites": "Favoritos",
+  "category.All": "Todo",
+  "category.System": "Sistema",
+  "category.Internet": "Internet",
+  "category.Productivity": "Productividad",
+  "category.Media": "Medios",
+  "category.DevTools": "Herramientas dev",
+  "category.Creative": "Creatividad",
+  "category.Games": "Juegos",
+  "settings.section.tytus": "TYTUS",
+  "settings.section.system": "SISTEMA",
+  "settings.searchPlaceholder": "Buscar ajustes...",
+  "settings.category.account": "Cuenta",
+  "settings.category.plan": "Plan y unidades",
+  "settings.category.pods": "Pods",
+  "settings.category.agents": "Agentes",
+  "settings.category.daemon": "Daemon",
+  "settings.category.sharing": "Compartir",
+  "settings.category.background": "Fondo",
+  "settings.category.appearance": "Apariencia",
+  "settings.category.language": "Idiomas",
+  "settings.category.notifications": "Notificaciones",
+  "settings.category.privacy": "Privacidad",
+  "settings.category.about": "Acerca de",
+  "settings.background.title": "Fondo",
+  "settings.background.section.presets": "Predeterminados de Tytus",
+  "settings.background.section.custom": "Personaliza",
+  "settings.background.custom.label": "Imagen propia",
+  "settings.background.custom.uploadCta": "Subir imagen",
+  "settings.background.custom.uploadHint": "JPEG, PNG o WebP",
+  "settings.background.custom.previewAlt": "Vista previa del fondo personalizado",
+  "settings.background.custom.remove": "Quitar",
+  "settings.background.custom.footer": "Tu imagen se queda en esta máquina — nunca se sube a ningún servidor. Máx. {maxMb} MB.",
+  "settings.background.color.label": "Color sólido",
+  "settings.background.color.cta": "Elige un color",
+  "settings.languages.title": "Idiomas",
+  "settings.languages.defaultTitle": "Idioma predeterminado",
+  "settings.languages.defaultDescription": "Elige el idioma de visualización del sistema. Los paquetes comunitarios pueden añadir más idiomas sin reconstruir la app.",
+  "settings.appearance.language.title": "Idioma",
+  "settings.appearance.language.description": "Elige el idioma de visualización de Tytus OS.",
+  "settings.appearance.language.system": "Idioma del sistema",
+  "settings.appearance.language.current": "Idioma actual",
+  "settings.appearance.language.bundled": "Incluido",
+  "settings.appearance.language.community": "Comunidad",
+  "settings.appearance.language.import": "Importar paquete de idioma",
+  "settings.appearance.language.importHint": "Importa un paquete JSON de la comunidad. Las claves faltantes usan inglés.",
+  "settings.appearance.language.importSuccess": "{name} instalado.",
+  "settings.appearance.language.importError": "No se pudo importar el paquete de idioma: {message}",
+  "settings.appearance.language.remove": "Eliminar",
+  "settings.appearance.language.format": "Formato del paquete de idioma",
+  "settings.appearance.language.downloadRoadmap": "Los paquetes descargables empiezan como JSON local; luego se puede conectar un catálogo firmado sin cambiar los textos de la app.",
+  // ── Phase 1.1 Custom accent ──
+  "settings.appearance.accent.title": "Color de acento",
+  "settings.appearance.accent.description": "Define el color de resalte principal del shell del SO y las apps compatibles.",
+  "settings.appearance.accent.custom": "Personalizado",
+  "settings.appearance.accent.customHint": "Elige cualquier color hex. Botones, anillos de foco y selecciones lo siguen.",
+  // ── Phase 1.3 Font scale ──
+  "settings.appearance.fontScale.title": "Tamaño de texto",
+  "settings.appearance.fontScale.description": "Escala todos los textos de Tytus OS. 100% es el valor por defecto.",
+  "settings.appearance.fontScale.reset": "Restablecer al 100%",
+  // ── Phase 1.4 Mode schedule ──
+  "settings.appearance.schedule.title": "Programación claro/oscuro",
+  "settings.appearance.schedule.description": "Elige cómo Tytus OS decide el modo claro u oscuro.",
+  "settings.appearance.schedule.manual": "Manual (usa el interruptor arriba)",
+  "settings.appearance.schedule.alwaysLight": "Siempre claro",
+  "settings.appearance.schedule.alwaysDark": "Siempre oscuro",
+  "settings.appearance.schedule.auto": "Auto (claro 06:00–18:00 local)",
+  // ── Phase 1.5 Lock-screen wallpaper ──
+  "settings.background.lockMatch.title": "Sincronizar pantalla de bloqueo con el escritorio",
+  "settings.background.lockMatch.description": "Si está activo, las pantallas de bloqueo y de inicio muestran tu fondo. Si no, usa el fondo Tytus por defecto.",
+  // ── Phase 1.2 Dock customization ──
+  "settings.category.dock": "Dock",
+  "settings.dock.title": "Dock",
+  "settings.dock.position.title": "Posición",
+  "settings.dock.position.bottom": "Abajo",
+  "settings.dock.position.left": "Izquierda",
+  "settings.dock.position.right": "Derecha",
+  "settings.dock.size.title": "Tamaño",
+  "settings.dock.size.small": "Pequeño",
+  "settings.dock.size.medium": "Mediano",
+  "settings.dock.size.large": "Grande",
+  "settings.dock.autoHide.title": "Ocultar automáticamente",
+  "settings.dock.autoHide.description": "Oculta el Dock hasta que apuntes al borde de la pantalla.",
+  "settings.dock.order.reset": "Restablecer orden del Dock",
+  "settings.dock.order.resetHint": "Restaura el orden por defecto. La Papelera siempre queda al final.",
+  // ── Sprint B Fase 7 sonidos del sistema ──
+  "settings.sounds.title": "Sonidos del sistema",
+  "settings.sounds.description": "Reproduce un breve sonido para notificaciones, errores y acciones de papelera.",
+  // ── Sprint B Fase 6.4 reducir movimiento ──
+  "settings.appearance.reduceMotion.title": "Reducir movimiento",
+  "settings.appearance.reduceMotion.description": "Desactiva las animaciones de abrir/cerrar, minimizar y ajustar. Tytus OS sigue respetando la preferencia del sistema.",
+  // ── Sprint B Fase 5.4 portapapeles del navegador ──
+  "clipboard.permission.deniedToast": "Acceso al portapapeles denegado — actívalo en la configuración de {browser}.",
+  "clipboard.permission.deniedToast.help": "Ayuda",
+  "clipboard.paste.success.image": "Imagen pegada en {target}",
+  "clipboard.paste.success.text": "Texto pegado en {target}",
+  "clipboard.paste.success.files": "{count} archivo(s) pegado(s) en {target}",
+  "clipboard.paste.empty": "No hay nada que pegar desde el portapapeles",
+  "settings.privacy.clipboard.title": "Permiso del portapapeles",
+  "settings.privacy.clipboard.description": "Tytus pregunta una vez por sesión antes de leer del portapapeles del navegador. Restablece para volver a preguntar.",
+  "settings.privacy.clipboard.reset": "Restablecer permiso del portapapeles",
+  "settings.privacy.clipboard.statusGranted": "Concedido",
+  "settings.privacy.clipboard.statusDenied": "Denegado",
+  "settings.privacy.clipboard.statusPrompt": "Se preguntará",
+  // ── Sprint B Fase 6 gestión de ventanas ──
+  "menu.window.maximize": "Maximizar",
+  "menu.window.unmaximize": "Restaurar",
+  "menu.window.snapLeft": "Ajustar a la izquierda",
+  "menu.window.snapRight": "Ajustar a la derecha",
+  "shell.Window": "Ventana",
+  "shell.Minimize Window": "Minimizar ventana",
+  "shell.Close Window": "Cerrar ventana",
+  "shell.Help": "Ayuda",
+  "shell.Tytus Help": "Ayuda de Tytus",
+  "shell.Apps": "Aplicaciones",
+  "shell.Open App Launcher": "Abrir lanzador de aplicaciones",
+  "shell.Pods": "Pods",
+  "shell.Open Pod Inspector": "Abrir Inspector de pods",
+  "shell.Install Agent…": "Instalar agente…",
+  "shell.Channels": "Canales",
+  "shell.Open Channels": "Abrir Canales",
+  "shell.Files": "Archivos",
+  "shell.Open Files": "Abrir Archivos",
+  "shell.Settings": "Configuración",
+  "shell.System Settings…": "Configuración del sistema…",
+  "shell.Daemon Settings": "Ajustes del daemon",
+  "shell.Account": "Cuenta",
+  "shell.Plan & Units": "Plan y unidades",
+  "shell.Tytus": "Tytus",
+  "shell.Agents": "Agentes",
+  "shell.Daemon": "Daemon",
+  "shell.View": "Vista",
+  "shell.Background": "Fondo",
+  "shell.Appearance": "Apariencia",
+  "shell.Notifications": "Notificaciones",
+  "shell.Privacy": "Privacidad",
+  "shell.About": "Acerca de",
+  "shell.Pod": "Pod",
+  "shell.Refresh Daemon State": "Actualizar estado del daemon",
+  "shell.Pods Settings": "Ajustes de pods",
+  "shell.Install Channel Agent…": "Instalar agente de canal…",
+  "shell.File": "Archivo",
+  "shell.New Files Window": "Nueva ventana de Archivos",
+  "shell.Shell": "Shell",
+  "shell.New Terminal Window": "Nueva ventana de Terminal",
+  "shell.Chat": "Chat",
+  "shell.Song": "Canción",
+  "shell.New Song": "Nueva canción",
+  "shell.Surprise me…": "Sorpréndeme…",
+  "shell.Cover Mode": "Modo cover",
+  "shell.Lyrics Only Mode": "Solo letra",
+  "shell.How it works…": "Cómo funciona…",
+  "shell.Music Creator Settings…": "Ajustes de JULI3TA…",
+  "shell.JULI3TA Settings…": "Ajustes de JULI3TA…",
+  "shell.JULI3TA Help…": "Ayuda de JULI3TA…",
+  "app.app-store.name": "Tienda de aplicaciones",
+  "app.app-store.description": "Explora y descubre apps recomendadas. Consulta el estado de instalación en tu máquina.",
+  "app.pod-inspector.name": "Inspector de pods",
+  "app.pod-inspector.description": "Inspecciona, reinicia, desinstala y revoca pods. Registros de trabajos en vivo.",
+  "app.channels.name": "Canales",
+  "app.channels.description": "Conexiones de Telegram, Slack, iMessage y Matrix por pod.",
+  "app.help.name": "Ayuda",
+  "app.help.description": "Doctor, ciclo de vida del daemon, cola de logs y solución de problemas.",
+  "app.settings.name": "Configuración del sistema",
+  "app.settings.description": "Cuenta, plan, pods, agentes, daemon, apariencia, notificaciones y privacidad.",
+  "app.filemanager.name": "Archivos",
+  "app.filemanager.description": "Explora archivos locales, bandeja del pod, descargas y carpetas compartidas de Garage.",
+  "app.terminal.name": "Terminal",
+  "app.terminal.description": "Shell local y tytus exec dentro de contenedores de pods.",
+  "app.systemmonitor.name": "Monitor del sistema",
+  "app.systemmonitor.description": "CPU, memoria, disco y red — host + pods.",
+  "app.archivemanager.name": "Gestor de archivos comprimidos",
+  "app.archivemanager.description": "Crea y extrae archivos ZIP, TAR y 7Z.",
+  "app.chat.name": "Chat",
+  "app.chat.description": "Habla con la IA de tu pod.",
+  "app.browser.name": "Navegador",
+  "app.browser.description": "Abre URLs de pods Tytus, documentación de agentes y GitHub.",
+  "app.weather.name": "Clima",
+  "app.weather.description": "Pronóstico del tiempo por ubicación.",
+  "app.rssreader.name": "Lector RSS",
+  "app.rssreader.description": "Lector de feeds para suscripciones de noticias.",
+  "app.notes.name": "Notas",
+  "app.notes.description": "Notas rápidas con carpetas.",
+  "app.todo.name": "Tareas",
+  "app.todo.description": "Lista de tareas con prioridades y proyectos.",
+  "app.reminders.name": "Recordatorios",
+  "app.reminders.description": "Recordatorios basados en hora.",
+  "app.calendar.name": "Calendario",
+  "app.calendar.description": "Vista mensual con eventos.",
+  "app.calculator.name": "Calculadora",
+  "app.calculator.description": "Calculadora estándar con historial.",
+  "app.clock.name": "Reloj",
+  "app.clock.description": "Reloj mundial, alarmas, temporizador y cronómetro.",
+  "app.spreadsheet.name": "Hoja de cálculo",
+  "app.spreadsheet.description": "Hoja de cálculo básica con fórmulas.",
+  "app.texteditor.name": "Editor de texto",
+  "app.texteditor.description": "Edita archivos de texto plano.",
+  "app.documentviewer.name": "Visor de documentos",
+  "app.documentviewer.description": "Visor de PDF y documentos.",
+  "app.markdownpreview.name": "Vista previa Markdown",
+  "app.markdownpreview.description": "Markdown en vivo con estilo de GitHub.",
+  "app.imageviewer.name": "Visor de imágenes",
+  "app.imageviewer.description": "Visualiza imágenes con zoom y presentación.",
+  "app.imagegallery.name": "Galería de imágenes",
+  "app.imagegallery.description": "Explora y organiza colecciones de imágenes.",
+  "app.photoeditor.name": "Editor de fotos",
+  "app.photoeditor.description": "Edición básica de fotos con filtros.",
+  "app.musicplayer.name": "Reproductor de música",
+  "app.musicplayer.description": "Reproductor de audio con lista de reproducción.",
+  "app.musiccreator.name": "JULI3TA",
+  "app.musiccreator.description": "Genera canciones completas con letras y música por IA. Funciona con tu pod.",
+  "app.videoplayer.name": "Reproductor de vídeo",
+  "app.videoplayer.description": "Reproductor de vídeo con controles.",
+  "app.voicerecorder.name": "Grabadora de voz",
+  "app.voicerecorder.description": "Graba audio desde tu micrófono.",
+  "app.screenrecorder.name": "Grabador de pantalla",
+  "app.screenrecorder.description": "Captura y graba tu pantalla.",
+  "app.mediaconverter.name": "Conversor multimedia",
+  "app.mediaconverter.description": "Convierte entre formatos multimedia.",
+  "app.codeeditor.name": "Editor de código",
+  "app.codeeditor.description": "Editor de código con resaltado de sintaxis y pestañas.",
+  "app.apitester.name": "Probador de API",
+  "app.apitester.description": "Constructor de solicitudes HTTP estilo Postman. Fetch real.",
+  "app.jsonformatter.name": "Formateador JSON",
+  "app.jsonformatter.description": "Formatea, valida y embellece JSON.",
+  "app.regextester.name": "Probador Regex",
+  "app.regextester.description": "Prueba y depura expresiones regulares.",
+  "app.base64tool.name": "Herramienta Base64",
+  "app.base64tool.description": "Codifica/decodifica Base64 y cadenas URL.",
+  "app.colorpalette.name": "Paleta de colores",
+  "app.colorpalette.description": "Esquemas de color y generación de paletas.",
+  "app.drawing.name": "Dibujo",
+  "app.drawing.description": "Dibujo en lienzo con pinceles.",
+  "app.whiteboard.name": "Pizarra",
+  "app.whiteboard.description": "Lienzo infinito para bocetos.",
+  "app.colorpicker.name": "Selector de color",
+  "app.colorpicker.description": "Elige colores y genera paletas.",
+  "app.asciiart.name": "Arte ASCII",
+  "app.asciiart.description": "Crea arte de texto ASCII y diagramas.",
+  "app.matrixrain.name": "Lluvia Matrix",
+  "app.matrixrain.description": "Caracteres animados en caída.",
+  "app.minesweeper.name": "Buscaminas",
+  "app.minesweeper.description": "Buscaminas clásico con 3 niveles de dificultad.",
+  "app.snake.name": "Snake",
+  "app.snake.description": "Juego clásico de serpiente con velocidad creciente.",
+  "app.tetris.name": "Tetris",
+  "app.tetris.description": "Juego de rompecabezas de bloques apilables.",
+  "app.tictactoe.name": "Tres en raya",
+  "app.tictactoe.description": "Tres en raya para 2 jugadores y contra IA.",
+  "app.game2048.name": "2048",
+  "app.game2048.description": "Rompecabezas de números deslizantes.",
+  "app.sudoku.name": "Sudoku",
+  "app.sudoku.description": "Rompecabezas numérico 9×9 con 4 dificultades.",
+  "app.chess.name": "Ajedrez",
+  "app.chess.description": "Ajedrez con oponente de IA.",
+  "app.memory.name": "Juego de memoria",
+  "app.memory.description": "Juego de memoria para emparejar cartas.",
+  "app.pong.name": "Pong",
+  "app.pong.description": "Juego clásico de paletas y pelota.",
+  "app.solitaire.name": "Solitario",
+  "app.solitaire.description": "Solitario clásico de cartas.",
+  "app.flappybird.name": "Flappy Bird",
+  "app.flappybird.description": "Juego arcade de desplazamiento lateral.",
+  "shell.Languages": "Idiomas",
+  "top.aboutTytusOS": "Acerca de Tytus OS",
+  "top.systemSettings": "Configuración del sistema…",
+  "top.openApps": "Abrir aplicaciones",
+  "top.lockScreen": "Bloquear pantalla",
+  "top.signingOut": "Cerrando sesión…",
+  "top.logOutUser": "Cerrar sesión de {user}…",
+  "top.confirmLogoutTitle": "¿Cerrar sesión en Tytus?",
+  "top.confirmLogoutBody": "Esto revoca los pods activos y borra las credenciales locales. Bloquear pantalla es más seguro si solo quieres ocultar el escritorio.",
+  "top.cancel": "Cancelar",
+  "top.logOut": "Cerrar sesión",
+  "desktop.podLabel": "Pod {podId}",
+  "desktop.unpin": "Desanclar",
+  "desktop.notify.dropTitle": "Añadido al escritorio",
+  "desktop.notify.dropBody": "{name}",
+  "context.open": "Abrir",
+  "context.cut": "Cortar",
+  "context.copy": "Copiar",
+  "context.rename": "Renombrar",
+  "context.moveToTrash": "Mover a la papelera",
+  "dock.trash": "Papelera",
+  "dock.aria": "Dock de aplicaciones",
+  "dock.showApplications": "Mostrar aplicaciones",
+  "status.Checking": "Comprobando",
+  "status.Offline": "Sin conexión",
+  "status.No state": "Sin estado",
+  "status.Stopped": "Detenido",
+  "status.Degraded": "Degradado",
+  "status.Connected": "Conectado",
+  "status.Session expired": "Sesión caducada",
+  "status.daemonTitle": "Daemon {label}: {detail}",
+  "plan.unitsFootnote": "Los agentes asignados consumen unidades (OpenClaw = 1 unidad, Hermes = 2 unidades). Los pods de AIL incluidos no cuentan en tu presupuesto.",
+  "status.unitsUsed": "{used}/{limit} unidades",
+  "status.unitsUnknown": "unidades desconocidas",
+  "status.podSingular": "{count} pod",
+  "status.podPlural": "{count} pods",
+  "status.noPodsYet": "Aún no hay pods de agente — haz clic para asignar. (AIL siempre está incluido gratis.)",
+  "status.podsDetail": "{count} asignados · {jobs} trabajos activos · {units}",
+  "settings.languages.officialTitle": "Añadir desde GitHub oficial de Tytus OS",
+  "settings.languages.officialHint": "Aquí solo se pueden descargar paquetes listados en el catálogo oficial de GitHub de Tytus OS. Las URL arbitrarias están bloqueadas.",
+  "settings.languages.officialRefresh": "Buscar paquetes oficiales",
+  "settings.languages.officialLoadError": "No se pudo cargar el catálogo oficial de idiomas: {message}",
+  "settings.languages.officialInstallError": "No se pudo instalar el paquete oficial de idioma: {message}",
+  "settings.languages.officialPackMeta": "{locale} · v{version} · GitHub oficial",
+  "settings.languages.installed": "instalado",
+  "settings.languages.catalogLink": "Catálogo oficial de idiomas",
+  "settings.languages.spanishRepoLink": "Repo del paquete español",
+  "settings.languages.helpFooter": "Tytus ya habla inglés y español. Ayúdanos a enseñarle más idiomas antes de que empiece a inventar mensajes de error en klingon.",
+  "settings.languages.contributeTitle": "¿Quieres mantener un nuevo idioma?",
+  "settings.languages.contributeBody": "Abre el catálogo, copia la estructura del paquete español y envía un PR. Tytus necesita humanos para los matices, los chistes y para no sonar como una tostadora con Google Translate.",
+  "settings.languages.createPackLink": "Crear un nuevo paquete de idioma",
+  // Panel de agentes (Configuración → Agentes)
+  "agents.panel.title": "Agentes",
+  "agents.panel.subtitle": "Instala un agente en un pod. Cada instalación consume las unidades del agente.",
+  "agents.panel.loading": "Cargando catálogo…",
+  "agents.panel.loadError": "No se pudo cargar el catálogo: {message}",
+  "agents.panel.retry": "Reintentar",
+  "agents.panel.install": "Instalar",
+  "agents.panel.website": "Sitio web",
+  "agents.panel.github": "GitHub",
+  "agents.panel.unitSingular": "unidad",
+  "agents.panel.unitPlural": "unidades",
+  "agents.panel.runningOnSingular": "{count} en ejecución en el pod {pods}",
+  "agents.panel.runningOnPlural": "{count} en ejecución en los pods {pods}",
+  "agents.panel.reasonPlan": "Requiere el plan {plan} o superior",
+  "agents.panel.reasonUnits": "Necesita {needed} {unit}, solo hay {available} disponibles",
+  // Textos de presentación de cada agente (Configuración + Chat)
+  "agents.openclaw.name": "OpenClaw",
+  "agents.openclaw.tagline": "Tu IA personal en cada canal que ya usas",
+  "agents.openclaw.description": "Habla con tu asistente desde Telegram, WhatsApp, Signal, Discord, Slack, iMessage, Matrix y más de 20 canales — todo desde un único cerebro siempre activo. Voz de entrada y de salida. Canvas en vivo al que puedes señalar y dirigir.",
+  "agents.openclaw.highlight.0": "Más de 25 canales de mensajería — un asistente, todas las apps",
+  "agents.openclaw.highlight.1": "Voz + Canvas — habla, escucha y míralo dibujar",
+  "agents.openclaw.highlight.2": "Reforzado con un sandbox seguro de agentes de NVIDIA para mayor protección",
+  "agents.openclaw.highlight.3": "Siempre activo — listo cuando lo necesites",
+  "agents.hermes.name": "Hermes",
+  "agents.hermes.tagline": "El agente IA que se mejora a sí mismo cuanto más lo usas",
+  "agents.hermes.description": "Aprende de cada tarea. Crea sus propias habilidades, recuerda cada conversación pasada, ejecuta tareas programadas y reparte trabajos complejos en subagentes paralelos. Háblale desde tu terminal, Telegram, Discord o Slack.",
+  "agents.hermes.highlight.0": "Habilidades que se autoperfeccionan — más afiladas con cada uso",
+  "agents.hermes.highlight.1": "Memoria total — busca en cada conversación pasada",
+  "agents.hermes.highlight.2": "Automatizaciones programadas — informes diarios, auditorías nocturnas",
+  "agents.hermes.highlight.3": "Subagentes en paralelo — divide trabajos grandes en tareas concurrentes",
+  // App Chat
+  "chat.sidebar.podsHeader": "Pods",
+  "chat.sidebar.includedHeader": "Incluido",
+  "chat.sidebar.podLabel": "Pod {podId}",
+  "chat.sidebar.empty": "No hay pods asignados.",
+  "chat.sidebar.loading": "Cargando…",
+  "chat.empty.title": "No hay pods con los que chatear",
+  "chat.empty.body": "Asigna primero un pod — en cuanto esté en marcha, podrás abrirlo aquí mismo.",
+  "chat.empty.cta": "Asignar un pod →",
+  "chat.picker.hint": "Selecciona un pod a la izquierda para empezar.",
+  "chat.agent.podLabel": "Pod {podId}",
+  "chat.agent.openInBrowser": "Abrir el pod {podId} en el navegador →",
+  "chat.agent.openError": "No se pudo abrir el pod {podId} en tu navegador. Revisa el túnel. ({message})",
+  "chat.agent.dismissError": "Descartar",
+  "chat.agent.docs": "Documentación",
+  "chat.agent.connectedApps": "Apps conectadas",
+  "chat.agent.manageChannels": "Gestionar canales",
+  "chat.agent.loadingChannels": "Comprobando apps conectadas…",
+  "chat.agent.channelsError": "No se pudieron cargar los canales: {message}",
+  "chat.agent.noChannels": "Aún no hay apps conectadas — abre Canales para conectar Telegram, Discord, Slack y más.",
+  "chat.ail.tooltip": "AIL — un endpoint, todos los modelos. Gratis con tu cuenta Tytus.",
+  "chat.ail.title": "AIL",
+  "chat.ail.tagline": "Un endpoint. Todos los proveedores de IA.",
+  "chat.ail.body": "AIL es tu pasarela LLM privada: un único endpoint que enruta sobre MiniMax, Kimi, DeepSeek, Qwen, OpenAI, Anthropic, Gemini y tus herramientas CLI locales — con failover automático cuando un proveedor falla. Habla los protocolos OpenAI y Anthropic, así que lo que ya usas funciona directamente.",
+  "chat.ail.feature.0": "Habla OpenAI y Anthropic — funciona en Cursor, Claude Code, OpenCode, el SDK de Anthropic",
+  "chat.ail.feature.1": "Enruta entre varios proveedores de frontera con failover automático",
+  "chat.ail.feature.2": "Reutiliza tus suscripciones (Gemini CLI, Claude Code, Codex) sin claves extra",
+  "chat.ail.feature.3": "Incluido gratis con cada cuenta Tytus — sin coste de unidades ni sorpresas de límite",
+  "chat.ail.cta.docs": "Abrir la documentación",
+  "chat.ail.cta.podInspector": "Copiar URL y clave",
+  // Music Creator ─────────────────────────────────────────
+  "musiccreator.empty.title": "No hay pod conectado",
+  "musiccreator.empty.body": "Creador de música usa la pasarela de IA de tu pod Tytus. Asigna un pod desde Pod Inspector para empezar a componer.",
+  "musiccreator.header.title": "Creación de música",
+  "musiccreator.header.subtitle": "Pod {podId} · ail-music",
+  "musiccreator.header.surprise": "Sorpréndeme",
+  "musiccreator.header.surpriseTitle": "Tema aleatorio",
+  "musiccreator.theme.label": "Tema",
+  "musiccreator.theme.placeholder": "Describe la canción: vibra, mood, historia, época…",
+  "musiccreator.theme.hint": "Escribiremos letras estructuradas a partir de esto. O pega las tuyas abajo.",
+  "musiccreator.lyrics.label": "Letra (opcional)",
+  "musiccreator.lyrics.placeholder": `[Verso]
+Añade tu propia letra…
+[Estribillo]
+…`,
+  "musiccreator.lyrics.instrumental": "Instrumental",
+  "musiccreator.lyrics.template": "Plantilla {n}",
+  "musiccreator.lyrics.templateTitle": "Insertar plantilla de estructura",
+  "musiccreator.style.label": "Estilo",
+  "musiccreator.style.placeholder": "Género, mood, tempo, instrumentos, tipo de voz…",
+  "musiccreator.songName.label": "Nombre de la canción (opcional)",
+  "musiccreator.songName.placeholder": "Se generará desde el tema si lo dejas vacío",
+  "musiccreator.button.create": "Crear canción",
+  "musiccreator.button.cancel": "Cancelar",
+  "musiccreator.phase.lyrics": "Escribiendo la letra…",
+  "musiccreator.phase.song": "Generando música… (~30–90 s)",
+  "musiccreator.error.noPod": "No hay un pod Tytus disponible. Asigna uno desde Pod Inspector.",
+  "musiccreator.error.noInput": "Añade un tema/prompt o pega tu propia letra.",
+  "musiccreator.error.lyricsTooLong": "Letra demasiado larga: {count} > {max} caracteres.",
+  "musiccreator.gallery.title": "Mis creaciones",
+  "musiccreator.gallery.count.one": "{n} canción",
+  "musiccreator.gallery.count.other": "{n} canciones",
+  "musiccreator.error.dismiss": "Descartar",
+  "musiccreator.gallery.searchPlaceholder": "Buscar en Mi obra…",
+  "musiccreator.gallery.searchEmpty": "Ningún tema coincide con “{q}”.",
+  "musiccreator.gallery.empty.title": "Aún no hay nada",
+  "musiccreator.gallery.empty.body": "Describe una canción a la izquierda y pulsa Crear canción. Tus pistas aparecerán aquí con reproducción y descarga.",
+  "musiccreator.gallery.empty.footer": "100 canciones/día · ail-music · MiniMax 2.6",
+  "musiccreator.track.untitled": "Sin título",
+  "musiccreator.track.download": "Descargar MP3",
+  "musiccreator.track.delete": "Eliminar",
+  "musiccreator.track.lyricsOnly": "Solo letras",
+  "musiccreator.track.openInEditor": "Abrir letra",
+  "musiccreator.track.saveToDesktop": "Guardar en Escritorio",
+  "musiccreator.track.saveSongToDesktop": "Guardar canción en Escritorio",
+  "musiccreator.track.saveLyricsToDesktop": "Guardar letra en Escritorio",
+  "musiccreator.track.playInPlayer": "Reproducir en Music Player",
+  "musiccreator.track.loadIntoForm": "Cargar en el formulario",
+  "musiccreator.track.section.song": "Canción",
+  "musiccreator.track.section.lyrics": "Letra",
+  "musiccreator.notify.savedToDesktopTitle": "Guardado en Escritorio",
+  "musiccreator.notify.savedToDesktopBody": "{name} está en tu Escritorio.",
+  "musiccreator.notify.songReadyTitle": "Canción lista",
+  "musiccreator.notify.songReadyBody": '"{title}" está en Mi obra y en la carpeta Música.',
+  "musiccreator.notify.noLyricsTitle": "No hay letra para abrir",
+  "musiccreator.notify.noLyricsBody": "Este tema aún no tiene letra — genera o pega una primero.",
+  // View tabs (Creator / Player) and Player view ──────────────
+  "musiccreator.view.creator": "Creador",
+  "musiccreator.view.player": "Reproductor",
+  "musiccreator.view.creator.tip": "Compón canciones nuevas y edita borradores",
+  "musiccreator.view.player.tip": "Escucha tus pistas guardadas con todos sus metadatos",
+  "musiccreator.player.eyebrow.track": "Pista de JULI3TA",
+  "musiccreator.player.eyebrow.lyricSheet": "Letra de JULI3TA",
+  "musiccreator.player.empty.title": "No hay nada sonando",
+  "musiccreator.player.empty.body": "Elige una pista de la barra lateral para abrirla aquí, o cambia a la pestaña Creador para componer una nueva.",
+  "musiccreator.player.empty.openCreator": "Abrir Creador",
+  "musiccreator.player.play": "Reproducir",
+  "musiccreator.player.pause": "Pausa",
+  "musiccreator.player.remixInRestyle": "Remezclar en Restyle",
+  "musiccreator.player.remixInRestyle.tip": "Abre esta pista en Restyle para remezclarla con un nuevo estilo y letra",
+  "musiccreator.player.lyrics": "Letra",
+  "musiccreator.player.lyrics.empty": "Esta pista no tiene letra guardada.",
+  "musiccreator.player.theme": "Tema",
+  "musiccreator.player.lyricsDirection": "Dirección de la letra",
+  "musiccreator.player.about": "Sobre esta pista",
+  "musiccreator.player.about.created": "Creada",
+  "musiccreator.player.about.duration": "Duración",
+  "musiccreator.player.about.bitrate": "Bitrate",
+  "musiccreator.player.about.sampleRate": "Frecuencia",
+  "musiccreator.player.about.size": "Tamaño",
+  "musiccreator.player.about.style": "Estilo",
+  "musiccreator.player.about.format": "Formato",
+  "musiccreator.player.about.format.mp3": "Audio MP3",
+  "musiccreator.player.about.format.lyricSheet": "Hoja de letra",
+  // Restyle reference-audio pickers ───────────────────────────
+  "musiccreator.restyle.songsPicker.title": "Elige una canción de tu biblioteca",
+  "musiccreator.restyle.songsPicker.empty.title": "Aún no hay canciones en tu biblioteca",
+  "musiccreator.restyle.songsPicker.empty.body": "Cambia a la pestaña Canción y crea una pista primero — aparecerá aquí para remezclarla.",
+  "musiccreator.restyle.songsPicker.tooShort": "demasiado corta para una versión (mín. 6 s)",
+  "musiccreator.restyle.button.mySongs": "Mis canciones",
+  "musiccreator.restyle.button.mySongs.count": "{count} en biblioteca",
+  "musiccreator.restyle.button.voiceClips": "Notas de voz",
+  "musiccreator.restyle.button.voiceClips.count": "{count} guardadas",
+  // JULI3TA in-app help ─────────────────────────────────────
+  "julietaHelp.title": "JULI3TA — Cómo funciona",
+  "julietaHelp.subtitle": "Manual del creador de música",
+  "julietaHelp.tab.start": "Empezar",
+  "julietaHelp.tab.recipes": "Recetas",
+  "julietaHelp.tab.help": "Ayuda",
+  // Start tab
+  "julietaHelp.start.workflow.title": "Crea tu primera canción",
+  "julietaHelp.start.s1.title": "Describe la vibra",
+  "julietaHelp.start.s1.body": 'Escribe un tema — de qué va la canción, el mood, la época. Una o dos frases bastan. Pulsa "Sorpréndeme" para una al azar.',
+  "julietaHelp.start.s2.title": "Elige un estilo (opcional)",
+  "julietaHelp.start.s2.body": "Añade género, instrumentos, tempo, tipo de voz. O simplemente toca chips como Lo-fi, Jazz, Synthwave para construirlo.",
+  "julietaHelp.start.s3.title": "Pulsa Crear canción",
+  "julietaHelp.start.s3.body": "JULI3TA escribe la letra primero (~3 s) y luego renderiza la música (~30–90 s). Un MP3 real aparece en Mis creaciones a la derecha.",
+  "julietaHelp.start.s4.title": "Escucha, descarga, comparte",
+  "julietaHelp.start.s4.body": "Pulsa play para escuchar inline, el icono de descarga para el MP3, o abre Reproductor de música para disfrutar toda la biblioteca junta.",
+  "julietaHelp.start.modes.title": "Tres modos",
+  "julietaHelp.start.mode.song.name": "Canción — pista completa",
+  "julietaHelp.start.mode.song.body": "Tema → letra IA → música. Por defecto. Lo mejor para canciones originales nuevas.",
+  "julietaHelp.start.mode.cover.name": "Cover — reestilizar audio",
+  "julietaHelp.start.mode.cover.body": "Suelta un clip de referencia (una grabación, un MP3) y JULI3TA lo reestiliza según tu prompt. La vibra de la fuente se mantiene; el género cambia.",
+  "julietaHelp.start.mode.lyrics.name": "Letra — solo palabras",
+  "julietaHelp.start.mode.lyrics.body": "Genera solo la letra sin renderizar audio. Rápido y sin gastar la cuota de música.",
+  "julietaHelp.start.recorder.title": "Integración con Grabadora",
+  "julietaHelp.start.recorder.body": 'Abre Grabadora de voz, captura audio (tarareo, música en la habitación, un instrumento), luego vuelve a JULI3TA → Cover → "Desde grabaciones". JULI3TA auto-elige los mejores 30 s de una grabación larga, así que puedes grabar varios minutos y dejar que encuentre la magia.',
+  "julietaHelp.start.tip.title": "✨ Truco pro",
+  "julietaHelp.start.tip.body": "Para covers, las grabaciones largas suelen funcionar mejor — JULI3TA tiene más material para encontrar una buena ventana de 30 segundos. Apunta a 1–3 minutos de audio limpio (evita silencios largos al principio o al final).",
+  // Recipes tab
+  "julietaHelp.recipes.intro": 'Pulsa "Usar" para meter una receta directo en el formulario, o "Copiar" para pegarla en otro sitio. Son puntos de partida — cambia lo que quieras antes de Crear canción.',
+  "julietaHelp.recipe.use": "Usar",
+  "julietaHelp.recipe.copy": "Copiar",
+  // Help tab
+  "julietaHelp.help.connection.title": "Conexión",
+  "julietaHelp.help.usage.title": "Uso",
+  "julietaHelp.help.troubleshoot.title": "Solución de problemas",
+  "julietaHelp.help.q.failed.title": '¿Por qué veo "Failed to fetch"?',
+  "julietaHelp.help.q.failed.body": 'JULI3TA intenta tres lugares en orden: tu pod Tytus (cloud), switchAILocal local, y la pantalla de suscripción. "Failed to fetch" significa que los dos primeros no están alcanzables. Pulsa "Try again" — JULI3TA volverá a probar cada candidato. Si tu pod se durmió, reinícialo desde Pod Inspector.',
+  "julietaHelp.help.q.nopod.title": "No tengo un pod Tytus",
+  "julietaHelp.help.q.nopod.body": "No hay problema — JULI3TA también funciona con switchAILocal corriendo en esta máquina (gratis, local). Si ninguno está disponible, la pantalla de suscripción tiene un enlace a Tytus donde puedes reclamar un pod Explorer gratis.",
+  "julietaHelp.help.q.local.title": "¿Cómo funciona el fallback local?",
+  "julietaHelp.help.q.local.body": "Si el pod Tytus no está alcanzable, JULI3TA prueba http://localhost:18080/v1 con la clave de dev sk-test-123. Ahí es donde switchAILocal escucha por defecto. El punto ámbar en el header significa que JULI3TA está usando AIL local.",
+  "julietaHelp.help.q.howlong.title": "¿Cuánto tarda una canción?",
+  "julietaHelp.help.q.howlong.body": 'Letra: 2–5 segundos. Música: 30–90 segundos para una canción de 1–2 minutos. La barra de progreso curva hacia 95% para que nunca veas un "100%" falso antes de que el audio aparezca.',
+  "julietaHelp.help.q.quota.title": "¿Cuántas canciones puedo hacer?",
+  "julietaHelp.help.q.quota.body": "En el plan Plus de MiniMax: 100 canciones/día para música, 100/día para covers, 100/día para letras. Cada bucket cuenta de forma independiente. El dashboard muestra el uso en vivo.",
+  "julietaHelp.help.q.length.title": "¿Qué longitud tienen las canciones?",
+  "julietaHelp.help.q.length.body": "JULI3TA elige la duración según la forma de tu letra — más versos y estribillos → canción más larga. Rango típico: 1–3 minutos. Aún no hay control manual de longitud.",
+  "julietaHelp.help.q.coverlen.title": "¿Qué audio sirve para covers?",
+  "julietaHelp.help.q.coverlen.body": "mp3, wav o flac. Mínimo 6 segundos, máximo 6 minutos, 50 MB de tamaño máx. Si tu clip dura más de 30 s, JULI3TA elige automáticamente la sección sostenida más fuerte como referencia.",
+  "julietaHelp.help.q.silentmic.title": "Mi grabación salió en silencio",
+  "julietaHelp.help.q.silentmic.body": "Mira la onda en vivo mientras grabas — si las barras no bailan, la entrada del micro está vacía. Prueba: 1) Aprueba el permiso de micrófono en el navegador. 2) Elige la entrada correcta en Ajustes del Sistema → Sonido. 3) Acércate al micro.",
+  "julietaHelp.help.q.shortrec.title": '"Grabación demasiado corta" al elegirla para cover',
+  "julietaHelp.help.q.shortrec.body": "El modo Cover necesita al menos 6 segundos de audio. Graba un clip más largo e inténtalo de nuevo — la reproducción sostenida (música, un instrumento, tarareando un verso) funciona mucho mejor que ráfagas cortas.",
+  "julietaHelp.help.q.privacy.title": "¿Dónde va mi audio?",
+  "julietaHelp.help.q.privacy.body": "Las grabaciones viven en el localStorage del navegador — nunca salen de tu máquina hasta que decides usar una para un cover. Cuando lo haces, JULI3TA auto-extrae un trozo de 30 s y solo envía ese trozo a tu pod Tytus (o al AIL local). Las grabaciones originales se quedan locales."
+}, So = { en: $s, es: Bs }, xa = (e) => (e || "en").trim().toLowerCase().replace("_", "-").split("-")[0] || "en", Fs = (e, a) => a ? e.replace(/\{(\w+)\}/g, (r, o) => String(a[o] ?? `{${o}}`)) : e;
+function ht() {
+  const { host: e } = Pt(), [a, r] = _(() => xa(e.i18n?.locale));
+  ee(() => e.i18n?.onLocaleChange?.((n) => r(xa(n))), [e]);
+  const o = ce(() => (n, l) => {
+    const d = e.i18n?.t?.(n, l);
+    if (d && d !== n) return d;
+    const b = xa(a), p = So[b]?.[n] ?? So.en[n] ?? n;
+    return Fs(p, l);
+  }, [e, a]);
   return {
-    id: e.id,
-    title: e.title,
-    prompt: e.prompt,
-    lyrics: e.lyrics,
-    createdAt: e.created_at,
-    updatedAt: e.updated_at,
-    audioFileNodeId: e.audio_file_node_id,
-    coverFileNodeId: e.cover_file_node_id,
-    modelId: e.model_id,
-    bpm: e.bpm,
-    key: e.key,
-    durationSeconds: e.duration_seconds,
-    favourited: !!e.favourited
-  };
-}
-const Qe = (e = "trk") => `${e}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 9)}`;
-async function Ye(e) {
-  return (await e.query(
-    `SELECT ${fe} FROM tracks ORDER BY favourited DESC, created_at DESC`
-  )).map(ge);
-}
-async function oe(e, t) {
-  const r = await e.query(
-    `SELECT ${fe} FROM tracks WHERE id = ?`,
-    [t]
-  );
-  return r[0] ? ge(r[0]) : null;
-}
-async function le(e, t) {
-  const r = (/* @__PURE__ */ new Date()).toISOString(), a = t.id ?? Qe(), s = await oe(e, a);
-  s ? await e.run(
-    `UPDATE tracks
-       SET title = ?, prompt = ?, lyrics = ?, updated_at = ?, audio_file_node_id = ?, cover_file_node_id = ?, model_id = ?, bpm = ?, key = ?, duration_seconds = ?, favourited = ?
-       WHERE id = ?`,
-    [
-      t.title,
-      t.prompt,
-      t.lyrics ?? "",
-      r,
-      t.audioFileNodeId ?? s.audioFileNodeId,
-      t.coverFileNodeId ?? s.coverFileNodeId,
-      t.modelId ?? s.modelId,
-      t.bpm ?? s.bpm,
-      t.key ?? s.key,
-      t.durationSeconds ?? s.durationSeconds,
-      t.favourited ?? s.favourited ? 1 : 0,
-      a
-    ]
-  ) : await e.run(
-    `INSERT INTO tracks (id, title, prompt, lyrics, created_at, updated_at, audio_file_node_id, cover_file_node_id, model_id, bpm, key, duration_seconds, favourited)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      a,
-      t.title,
-      t.prompt,
-      t.lyrics ?? "",
-      r,
-      r,
-      t.audioFileNodeId ?? null,
-      t.coverFileNodeId ?? null,
-      t.modelId ?? null,
-      t.bpm ?? null,
-      t.key ?? null,
-      t.durationSeconds ?? null,
-      t.favourited ? 1 : 0
-    ]
-  );
-  const o = await oe(e, a);
-  if (!o) throw new Error("upsertTrack: write succeeded but row missing");
-  return o;
-}
-async function Xe(e, t) {
-  await e.run("DELETE FROM tracks WHERE id = ?", [t]);
-}
-async function et(e, t, r) {
-  const a = (/* @__PURE__ */ new Date()).toISOString();
-  await e.run(
-    "UPDATE tracks SET favourited = ?, updated_at = ? WHERE id = ?",
-    [r ? 1 : 0, a, t]
-  );
-}
-function tt(e) {
-  return (e.daemon?.state?.included ?? []).filter((r) => {
-    const a = String(r.status ?? "").toLowerCase();
-    return ["running", "ready", "idle", "connected"].some((s) => a.includes(s)) || !!r.publicUrl;
-  });
-}
-async function it(e, t, r) {
-  const a = await e.daemon.callPodEndpoint(t, "/v1/models", { method: "GET", signal: r });
-  if (!a.ok) throw new Error(`Models HTTP ${a.status}: ${(await a.text()).slice(0, 240)}`);
-  return ((await a.json()).data ?? []).map((o) => o.id).filter((o) => typeof o == "string" && o.length > 0).map((o) => ({ id: o }));
-}
-function nt(e) {
-  return e.startsWith("data:") ? e : `data:audio/mpeg;base64,${e}`;
-}
-function rt(e) {
-  const t = e;
-  if (!t || typeof t != "object") return null;
-  const r = t.data;
-  if (r && !Array.isArray(r) && typeof r == "object") {
-    const s = r.audio ?? r.audio_base64 ?? r.b64_json ?? r.url;
-    if (typeof s == "string" && s.length > 0) return s;
-  }
-  if (Array.isArray(r))
-    for (const s of r) {
-      const o = s, g = o.audio ?? o.audio_base64 ?? o.b64_json ?? o.url;
-      if (typeof g == "string" && g.length > 0) return g;
+    language: a,
+    availableLanguages: [
+      { locale: "en", name: "English", nativeName: "English", bundled: !0 },
+      { locale: "es", name: "Spanish", nativeName: "Español", bundled: !0 }
+    ],
+    t: o,
+    setLanguage: (n) => r(xa(n)),
+    installLanguagePack: (n) => {
+      throw new Error("Language packs are managed by Tytus OS host.");
+    },
+    removeLanguagePack: (n) => {
     }
-  const a = t.audio ?? t.audio_base64 ?? t.b64_json ?? t.url;
-  return typeof a == "string" && a.length > 0 ? a : null;
-}
-function at(e) {
-  const t = e, r = t?.data, a = r?.duration_seconds ?? r?.durationSeconds ?? t?.duration_seconds ?? t?.durationSeconds;
-  return typeof a == "number" && Number.isFinite(a) ? a : null;
-}
-async function ot(e, t) {
-  const r = {
-    model: t.model,
-    lyrics: t.lyrics || `[Intro]
-[Instrumental]
-[Outro]`,
-    prompt: t.prompt
   };
-  t.instrumental && (r.instrumental = !0);
-  const a = await e.daemon.callPodEndpoint(t.podId, "/v1/music/generations", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(r),
-    signal: t.signal
-  }), s = await a.text();
-  let o = s;
+}
+const Ws = [
+  {
+    id: "birthday",
+    emoji: "🎂",
+    title: "Birthday song for someone special",
+    theme: "Happy birthday song for Julieta — celebrating her sparkle, her laugh, and another year of adventures. Warm, joyful, family-album feel.",
+    style: "pop, upbeat, acoustic guitar, hand claps, joyful, family-friendly"
+  },
+  {
+    id: "lullaby",
+    emoji: "🌙",
+    title: "Lullaby to fall asleep",
+    theme: "A gentle lullaby about stars watching over a sleepy child, soft dreams floating on a quiet night.",
+    style: "lullaby, soft piano, music box, slow tempo, calm, dreamy"
+  },
+  {
+    id: "roadtrip",
+    emoji: "🚗",
+    title: "Road-trip anthem",
+    theme: "An anthem about driving down the coast with the windows open, friends in the back, sun setting over the ocean.",
+    style: "indie pop, driving rhythm, electric guitar, summer, optimistic"
+  },
+  {
+    id: "study",
+    emoji: "📚",
+    title: "Study / focus background",
+    theme: "Calm music for focusing on homework. No distractions, just a steady warm vibe.",
+    style: "lo-fi, instrumental, soft piano, light beat, ambient, relaxed"
+  },
+  {
+    id: "silly",
+    emoji: "🤪",
+    title: "Silly song about pets",
+    theme: "A funny song about a cat who thinks he's the boss of the house, knocks things off tables, and demands snacks at 3am.",
+    style: "comedic, ukulele, jaunty, kids-friendly, lighthearted"
+  },
+  {
+    id: "cumbia",
+    emoji: "💃",
+    title: "Cumbia para bailar",
+    theme: "Una cumbia alegre sobre una fiesta familiar al atardecer, primos bailando en el patio, risas que no paran.",
+    style: "cumbia, accordion, percussion, festive, danceable, latin"
+  }
+], qs = [
+  {
+    id: "birthday",
+    emoji: "🎂",
+    title: "Canción de cumpleaños",
+    theme: "Canción de cumpleaños para Julieta — celebrando su brillo, su risa y un nuevo año de aventuras. Cálida, alegre, ambiente familiar.",
+    style: "pop, alegre, guitarra acústica, palmas, ambiente familiar"
+  },
+  {
+    id: "lullaby",
+    emoji: "🌙",
+    title: "Canción de cuna",
+    theme: "Una canción de cuna suave sobre estrellas que cuidan a una niña dormida, sueños que flotan en una noche tranquila.",
+    style: "canción de cuna, piano suave, caja musical, tempo lento, calma"
+  },
+  {
+    id: "roadtrip",
+    emoji: "🚗",
+    title: "Himno de viaje en coche",
+    theme: "Un himno sobre un viaje por la costa con las ventanas abiertas, amigos atrás, atardecer sobre el océano.",
+    style: "indie pop, ritmo conductor, guitarra eléctrica, verano, optimista"
+  },
+  {
+    id: "study",
+    emoji: "📚",
+    title: "Música para estudiar",
+    theme: "Música calmada para concentrarse en los deberes. Sin distracciones, solo una vibra cálida y constante.",
+    style: "lo-fi, instrumental, piano suave, ritmo ligero, ambiente"
+  },
+  {
+    id: "silly",
+    emoji: "🤪",
+    title: "Canción graciosa de mascotas",
+    theme: "Una canción divertida sobre un gato que cree ser el jefe de la casa, tira cosas de la mesa y pide premios a las 3 AM.",
+    style: "cómica, ukelele, alegre, infantil, ligera"
+  },
+  {
+    id: "cumbia",
+    emoji: "💃",
+    title: "Cumbia para bailar",
+    theme: "Una cumbia alegre sobre una fiesta familiar al atardecer, primos bailando en el patio, risas que no paran.",
+    style: "cumbia, acordeón, percusión, festiva, bailable, latina"
+  }
+];
+function Js({ recipe: e, onUse: a }) {
+  const { t: r } = ht(), [o, n] = _(!1), l = async () => {
+    try {
+      await navigator.clipboard.writeText(`${e.theme}
+
+Style: ${e.style}`), n(!0), setTimeout(() => n(!1), 1500);
+    } catch {
+    }
+  };
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      className: "rounded-lg p-3 transition-all",
+      style: {
+        background: "var(--bg-titlebar)",
+        border: "1px solid var(--border-subtle)"
+      },
+      children: [
+        /* @__PURE__ */ s("div", { className: "flex items-start gap-2 mb-2", children: [
+          /* @__PURE__ */ t("span", { style: { fontSize: 22 }, children: e.emoji }),
+          /* @__PURE__ */ s("div", { className: "flex-1", children: [
+            /* @__PURE__ */ t("div", { style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }, children: e.title }),
+            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2, lineHeight: 1.45 }, children: e.theme }),
+            /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 4, fontStyle: "italic" }, children: e.style })
+          ] })
+        ] }),
+        /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ s(
+            "button",
+            {
+              onClick: () => a(e),
+              className: "flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md transition-all hover:scale-[1.02]",
+              style: {
+                fontSize: 11,
+                fontWeight: 600,
+                color: "white",
+                background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
+              },
+              children: [
+                /* @__PURE__ */ t(Lt, { size: 12 }),
+                r("julietaHelp.recipe.use")
+              ]
+            }
+          ),
+          /* @__PURE__ */ t(
+            "button",
+            {
+              onClick: l,
+              className: "flex items-center justify-center gap-1 px-2 py-1.5 rounded-md transition-all hover:bg-[var(--bg-hover)]",
+              style: {
+                fontSize: 11,
+                color: "var(--text-secondary)",
+                border: "1px solid var(--border-subtle)"
+              },
+              title: r("julietaHelp.recipe.copy"),
+              children: o ? /* @__PURE__ */ t(aa, { size: 12, style: { color: "#4ade80" } }) : /* @__PURE__ */ t(Xn, { size: 12 })
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+function Gs({ open: e, onClose: a, onUseRecipe: r }) {
+  const { t: o, language: n } = ht(), [l, d] = _("start");
+  if (!e) return null;
+  const b = n === "es" ? qs : Ws;
+  return /* @__PURE__ */ t(
+    "div",
+    {
+      className: "absolute inset-0 z-40 flex",
+      style: { background: "rgba(0,0,0,0.5)" },
+      onClick: a,
+      children: /* @__PURE__ */ s(
+        "div",
+        {
+          className: "ml-auto h-full flex flex-col",
+          onClick: (p) => p.stopPropagation(),
+          style: {
+            width: 420,
+            maxWidth: "95%",
+            background: "var(--bg-window)",
+            borderLeft: "1px solid var(--border-subtle)",
+            boxShadow: "-4px 0 24px rgba(0,0,0,0.4)"
+          },
+          children: [
+            /* @__PURE__ */ s(
+              "div",
+              {
+                className: "flex items-center justify-between px-5 py-4 flex-shrink-0",
+                style: { borderBottom: "1px solid var(--border-subtle)" },
+                children: [
+                  /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+                    /* @__PURE__ */ t(
+                      "div",
+                      {
+                        className: "flex items-center justify-center rounded-lg flex-shrink-0",
+                        style: {
+                          width: 32,
+                          height: 32,
+                          background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
+                        },
+                        children: /* @__PURE__ */ t(ut, { size: 18, style: { color: "white" } })
+                      }
+                    ),
+                    /* @__PURE__ */ s("div", { children: [
+                      /* @__PURE__ */ t("div", { style: { fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }, children: o("julietaHelp.title") }),
+                      /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: o("julietaHelp.subtitle") })
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ t(
+                    "button",
+                    {
+                      onClick: a,
+                      className: "p-1.5 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+                      style: { color: "var(--text-secondary)" },
+                      children: /* @__PURE__ */ t(de, { size: 16 })
+                    }
+                  )
+                ]
+              }
+            ),
+            /* @__PURE__ */ t("div", { className: "flex items-center gap-1 px-5 pt-3 flex-shrink-0", children: ["start", "recipes", "help"].map((p) => {
+              const m = l === p;
+              return /* @__PURE__ */ t(
+                "button",
+                {
+                  onClick: () => d(p),
+                  className: "px-3 py-1.5 rounded-lg transition-all",
+                  style: {
+                    fontSize: 11,
+                    fontWeight: m ? 600 : 500,
+                    color: m ? "var(--text-primary)" : "var(--text-secondary)",
+                    background: m ? "var(--bg-titlebar)" : "transparent",
+                    border: m ? "1px solid var(--border-subtle)" : "1px solid transparent"
+                  },
+                  children: o(`julietaHelp.tab.${p}`)
+                },
+                p
+              );
+            }) }),
+            /* @__PURE__ */ s("div", { className: "flex-1 overflow-y-auto invisible-scrollbar px-5 py-4", style: { paddingBottom: 96 }, children: [
+              l === "start" && /* @__PURE__ */ s("div", { className: "space-y-4", children: [
+                /* @__PURE__ */ t(_t, { icon: /* @__PURE__ */ t(De, { size: 14 }), text: o("julietaHelp.start.workflow.title") }),
+                /* @__PURE__ */ t(wa, { n: 1, title: o("julietaHelp.start.s1.title"), body: o("julietaHelp.start.s1.body") }),
+                /* @__PURE__ */ t(wa, { n: 2, title: o("julietaHelp.start.s2.title"), body: o("julietaHelp.start.s2.body") }),
+                /* @__PURE__ */ t(wa, { n: 3, title: o("julietaHelp.start.s3.title"), body: o("julietaHelp.start.s3.body") }),
+                /* @__PURE__ */ t(wa, { n: 4, title: o("julietaHelp.start.s4.title"), body: o("julietaHelp.start.s4.body") }),
+                /* @__PURE__ */ t(_t, { icon: /* @__PURE__ */ t(Lt, { size: 14 }), text: o("julietaHelp.start.modes.title") }),
+                /* @__PURE__ */ s("div", { className: "space-y-2", children: [
+                  /* @__PURE__ */ t(ir, { emoji: "🎵", name: o("julietaHelp.start.mode.song.name"), body: o("julietaHelp.start.mode.song.body") }),
+                  /* @__PURE__ */ t(ir, { emoji: "🎨", name: o("julietaHelp.start.mode.cover.name"), body: o("julietaHelp.start.mode.cover.body") }),
+                  /* @__PURE__ */ t(ir, { emoji: "✍️", name: o("julietaHelp.start.mode.lyrics.name"), body: o("julietaHelp.start.mode.lyrics.body") })
+                ] }),
+                /* @__PURE__ */ t(_t, { icon: /* @__PURE__ */ t(Re, { size: 14 }), text: o("julietaHelp.start.recorder.title") }),
+                /* @__PURE__ */ t(Vs, { body: o("julietaHelp.start.recorder.body") }),
+                /* @__PURE__ */ s(
+                  "div",
+                  {
+                    className: "p-3 rounded-lg",
+                    style: {
+                      background: "linear-gradient(135deg, rgba(124,77,255,0.1), rgba(255,152,0,0.1))",
+                      border: "1px solid var(--border-subtle)"
+                    },
+                    children: [
+                      /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)", marginBottom: 6 }, children: o("julietaHelp.start.tip.title") }),
+                      /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: o("julietaHelp.start.tip.body") })
+                    ]
+                  }
+                )
+              ] }),
+              l === "recipes" && /* @__PURE__ */ s("div", { className: "space-y-3", children: [
+                /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: o("julietaHelp.recipes.intro") }),
+                b.map((p) => /* @__PURE__ */ t(
+                  Js,
+                  {
+                    recipe: p,
+                    onUse: (m) => {
+                      r(m.theme, m.style), a();
+                    }
+                  },
+                  p.id
+                ))
+              ] }),
+              l === "help" && /* @__PURE__ */ s("div", { className: "space-y-4", children: [
+                /* @__PURE__ */ t(_t, { icon: /* @__PURE__ */ t(ra, { size: 14 }), text: o("julietaHelp.help.connection.title") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.failed.title"), a: o("julietaHelp.help.q.failed.body") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.nopod.title"), a: o("julietaHelp.help.q.nopod.body") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.local.title"), a: o("julietaHelp.help.q.local.body") }),
+                /* @__PURE__ */ t(_t, { icon: /* @__PURE__ */ t(Lt, { size: 14 }), text: o("julietaHelp.help.usage.title") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.howlong.title"), a: o("julietaHelp.help.q.howlong.body") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.quota.title"), a: o("julietaHelp.help.q.quota.body") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.length.title"), a: o("julietaHelp.help.q.length.body") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.coverlen.title"), a: o("julietaHelp.help.q.coverlen.body") }),
+                /* @__PURE__ */ t(_t, { icon: /* @__PURE__ */ t(Re, { size: 14 }), text: o("julietaHelp.help.troubleshoot.title") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.silentmic.title"), a: o("julietaHelp.help.q.silentmic.body") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.shortrec.title"), a: o("julietaHelp.help.q.shortrec.body") }),
+                /* @__PURE__ */ t(Pe, { q: o("julietaHelp.help.q.privacy.title"), a: o("julietaHelp.help.q.privacy.body") })
+              ] })
+            ] })
+          ]
+        }
+      )
+    }
+  );
+}
+function _t({ icon: e, text: a }) {
+  return /* @__PURE__ */ s("div", { className: "flex items-center gap-2", style: { marginTop: 4 }, children: [
+    /* @__PURE__ */ t("span", { style: { color: "var(--accent-primary)" }, children: e }),
+    /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 700, color: "var(--text-primary)", textTransform: "uppercase", letterSpacing: 0.6 }, children: a })
+  ] });
+}
+function wa({ n: e, title: a, body: r }) {
+  return /* @__PURE__ */ s("div", { className: "flex gap-3", children: [
+    /* @__PURE__ */ t(
+      "div",
+      {
+        className: "flex items-center justify-center rounded-full flex-shrink-0",
+        style: {
+          width: 22,
+          height: 22,
+          background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+          color: "white",
+          fontSize: 11,
+          fontWeight: 700
+        },
+        children: e
+      }
+    ),
+    /* @__PURE__ */ s("div", { children: [
+      /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }, children: a }),
+      /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2, lineHeight: 1.5 }, children: r })
+    ] })
+  ] });
+}
+function ir({ emoji: e, name: a, body: r }) {
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      className: "flex gap-3 p-3 rounded-lg",
+      style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+      children: [
+        /* @__PURE__ */ t("span", { style: { fontSize: 22, lineHeight: 1 }, children: e }),
+        /* @__PURE__ */ s("div", { children: [
+          /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }, children: a }),
+          /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2, lineHeight: 1.5 }, children: r })
+        ] })
+      ]
+    }
+  );
+}
+function Vs({ body: e }) {
+  return /* @__PURE__ */ t(
+    "div",
+    {
+      className: "px-3 py-2 rounded-lg",
+      style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+      children: /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: e })
+    }
+  );
+}
+function Pe({ q: e, a }) {
+  const [r, o] = _(!1);
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      className: "rounded-lg overflow-hidden",
+      style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+      children: [
+        /* @__PURE__ */ s(
+          "button",
+          {
+            onClick: () => o((n) => !n),
+            className: "w-full flex items-center gap-2 px-3 py-2 text-left transition-all hover:bg-[var(--bg-hover)]",
+            children: [
+              /* @__PURE__ */ t(
+                qn,
+                {
+                  size: 12,
+                  style: {
+                    color: "var(--text-secondary)",
+                    transform: r ? "rotate(90deg)" : "rotate(0deg)",
+                    transition: "transform 0.15s"
+                  }
+                }
+              ),
+              /* @__PURE__ */ t("span", { style: { fontSize: 12, fontWeight: 500, color: "var(--text-primary)", flex: 1 }, children: e })
+            ]
+          }
+        ),
+        r && /* @__PURE__ */ t("div", { className: "px-3 pb-3", style: { paddingLeft: 28 }, children: /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.55, whiteSpace: "pre-line" }, children: a }) })
+      ]
+    }
+  );
+}
+const nr = (e) => {
+  const a = e ?? {};
+  return {
+    logged_in: !0,
+    email: null,
+    agents: Array.isArray(a.agents) ? a.agents : [],
+    included: Array.isArray(a.included) ? a.included : [],
+    tiers: [],
+    ...a
+  };
+}, Ys = () => {
+  const { host: e } = Pt(), [a, r] = _(0), [o, n] = _(() => nr(e.daemon?.state));
+  return ee(() => (n(nr(e.daemon?.state)), e.daemon?.onStateChange?.((l) => n(nr(l)))), [e, a]), ce(() => ({
+    state: o,
+    error: null,
+    status: o ? "online" : "loading",
+    failureCount: 0,
+    bannerVisible: !1,
+    version: null,
+    daemonVersionStatus: "supported",
+    refresh: () => r((l) => l + 1)
+  }), [o]);
+}, Ks = (e, a) => {
+  const { host: r } = Pt();
+  ee(() => {
+    if (!(!a || !r.shellMenu?.register))
+      return r.shellMenu.register({
+        appId: r.appId,
+        groups: a.groups.map((o) => ({
+          label: o.label,
+          items: o.items.map((n) => ({
+            id: n.id,
+            label: n.label,
+            disabled: n.disabled,
+            onClick: n.onSelect
+          }))
+        }))
+      });
+  }, [r, a]);
+};
+function Qs() {
+  return Pt().host.windows.current;
+}
+const Yo = "juli3ta_standalone_vfs_v1", Ko = () => Math.random().toString(36).slice(2) + Date.now().toString(36), ct = (e, a) => ({
+  id: Ko(),
+  name: e,
+  type: "folder",
+  parentId: a,
+  createdAt: Date.now(),
+  modifiedAt: Date.now()
+}), Xs = () => {
+  const e = ct("/", null), a = ct("home", e.id), r = ct("user", a.id), o = ct("Desktop", r.id), n = ct("Music", r.id), l = ct("Documents", r.id);
+  return { nodes: Object.fromEntries([e, a, r, o, n, l].map((d) => [d.id, d])) };
+}, ka = () => {
   try {
-    o = s ? JSON.parse(s) : {};
+    const a = localStorage.getItem(Yo);
+    if (a) return JSON.parse(a);
   } catch {
   }
-  if (!a.ok) throw new Error(`Music HTTP ${a.status}: ${typeof o == "string" ? o.slice(0, 300) : JSON.stringify(o).slice(0, 300)}`);
-  const g = rt(o);
-  if (!g) throw new Error("Music generation returned no audio payload");
+  const e = Xs();
+  return Na(e), e;
+}, Na = (e) => {
+  try {
+    localStorage.setItem(Yo, JSON.stringify(e));
+  } catch {
+  }
+}, Zs = (e) => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase(), el = (e) => {
+  const a = e.toLowerCase();
+  return a.endsWith(".lyrics.txt") ? "NotebookText" : a.endsWith(".mp3") || a.endsWith(".wav") || a.endsWith(".m4a") ? "FileAudio" : a.endsWith(".json") ? "FileJson" : a.endsWith(".txt") || a.endsWith(".md") ? "FileText" : "File";
+};
+function tl() {
   return {
-    audioDataUrl: nt(g),
-    modelId: t.model,
-    durationSeconds: at(o),
-    raw: o
+    ensureUserFolder(a) {
+      const r = ka(), o = Zs(a);
+      let n = Object.values(r.nodes).find((l) => l.type === "folder" && l.name === o);
+      if (!n) {
+        const l = Object.values(r.nodes).find((d) => d.type === "folder" && d.name === "user");
+        n = ct(o, l?.id ?? null), r.nodes[n.id] = n, Na(r);
+      }
+      return n.id;
+    },
+    findChildByName(a, r) {
+      const o = ka();
+      return Object.values(o.nodes).find((n) => n.parentId === a && n.name === r);
+    },
+    createFile(a, r, o = "", n = {}) {
+      const l = ka(), d = { id: Ko(), name: r, type: "file", parentId: a, content: o, mimeType: n.mimeType, refTrackId: n.refTrackId, createdAt: Date.now(), modifiedAt: Date.now() };
+      return l.nodes[d.id] = d, Na(l), d.id;
+    },
+    writeFile(a, r) {
+      const o = ka();
+      o.nodes[a] && (o.nodes[a].content = r, o.nodes[a].modifiedAt = Date.now(), Na(o));
+    }
   };
 }
-const lt = `[Verse 1]
-City lights are blinking like a signal in the rain
-I hear the future humming through the wire again
+const al = { theme: { mode: "dark" } }, rl = Uo(null);
+function Qo() {
+  const e = $o(rl), { host: a } = Pt();
+  return ce(() => e || {
+    state: al,
+    dispatch: (r) => {
+      if (r.type === "OPEN_OR_FOCUS_WINDOW" && typeof r.appId == "string" && a.windows.openOrFocus(r.appId, r.args), r.type === "ADD_DESKTOP_ICON") {
+        const o = r.icon;
+        a.windows.addDesktopIcon?.({
+          label: o.name,
+          iconUrl: o.icon,
+          onClick: () => {
+          }
+        });
+      }
+    }
+  }, [e, a]);
+}
+function ol() {
+  const { host: e } = Pt();
+  return {
+    addNotification: (a) => e.notifications.notify({
+      appId: a.appId,
+      title: a.title,
+      body: a.message,
+      level: "info",
+      unread: a.isRead !== !1
+    })
+  };
+}
+const il = {
+  // The mark PNGs ship with ~30% transparent padding on each side
+  // (the rendered silhouette fills only ~70% of its bounding box).
+  // Scaling 2.0 makes the silhouette match Lucide outline weight at
+  // the same caller-passed `size`. Layout box stays at `size` — only
+  // the rendered pixels grow via CSS transform — so neighbouring
+  // chrome doesn't shift.
+  "mark-cream": { src: "/brand/juli3ta/mark-cream-256.png", scale: 2 },
+  "mark-ink": { src: "/brand/juli3ta/mark-ink-256.png", scale: 2 },
+  "mark-white": { src: "/brand/juli3ta/mark-white-256.png", scale: 2 },
+  // App-icon tile — the rounded gradient square. Reserved for big-logo
+  // surfaces (loading splash, large empty states). NEVER used in dock /
+  // launcher / titlebar — those use the bare silhouette so the brand
+  // doesn't fight the chrome. No scale: the tile is already padded
+  // to the corner radius the brand kit specifies (22%).
+  icon: { src: "/brand/juli3ta/icon-gradient-256.png" }
+}, nl = {
+  juli3ta: il
+};
+function Xo({ name: e, size: a = 24, className: r, style: o, alt: n, scale: l }) {
+  const [d, b = "mark"] = e.split(":"), p = nl[d], { state: m } = Qo();
+  let w;
+  if (b === "mark" ? w = m.theme.mode === "light" ? p?.["mark-ink"] : p?.["mark-white"] : w = p?.[b], !w) return null;
+  const u = n ?? d.charAt(0).toUpperCase() + d.slice(1), y = l ?? w.scale ?? 1;
+  return /* @__PURE__ */ t(
+    "img",
+    {
+      src: w.src,
+      alt: u,
+      width: a,
+      height: a,
+      style: {
+        width: a,
+        height: a,
+        objectFit: "contain",
+        display: "inline-block",
+        verticalAlign: "middle",
+        userSelect: "none",
+        pointerEvents: "none",
+        ...y !== 1 ? { transform: `scale(${y})`, transformOrigin: "center" } : null,
+        ...w.filter ? { filter: w.filter } : null,
+        ...o
+      },
+      className: r,
+      draggable: !1
+    }
+  );
+}
+let Zo = null;
+const sr = (e) => e.replace(/\bmusic_creator_tracks\b/g, "app_juli3ta_music_creator_tracks").replace(/\bmusic_creator_settings\b/g, "app_juli3ta_music_creator_settings").replace(/\bmusic_library_tracks\b/g, "app_juli3ta_music_library_tracks").replace(/\bmusic_library_artists\b/g, "app_juli3ta_music_library_artists").replace(/\bmusic_library_albums\b/g, "app_juli3ta_music_library_albums").replace(/\bmusic_playlists\b/g, "app_juli3ta_music_playlists").replace(/\bmusic_playlist_items\b/g, "app_juli3ta_music_playlist_items").replace(/\bmusic_favorites\b/g, "app_juli3ta_music_favorites").replace(/\bvoice_recordings\b/g, "app_juli3ta_voice_recordings");
+function sl(e) {
+  Zo = {
+    exec: async (a) => {
+      for (const r of sr(a).split(";").map((o) => o.trim()).filter(Boolean))
+        await e.run(r);
+    },
+    query: (a, r = []) => e.query(sr(a), r),
+    run: async (a, r = []) => {
+      await e.run(sr(a), r);
+    },
+    tx: async (a) => a()
+  };
+}
+const V = () => Zo, Ma = (e) => ({
+  id: e.id,
+  title: e.title,
+  styleTags: e.style_tags,
+  lyricsPreview: e.lyrics_preview,
+  durationMs: e.duration_ms,
+  bitrate: e.bitrate,
+  sampleRate: e.sample_rate,
+  sizeBytes: e.size_bytes,
+  createdAt: e.created_at,
+  audioDataUrl: e.audio_data_url,
+  specsJson: e.specs_json ?? "",
+  coverDataUrl: e.cover_data_url ?? "",
+  theme: e.theme ?? "",
+  source: e.source || "juli3ta",
+  audioKind: e.audio_kind || (e.audio_data_url ? "data_url" : "lyrics_only"),
+  externalId: e.external_id ?? "",
+  externalUrl: e.external_url ?? "",
+  thumbnailUrl: e.thumbnail_url ?? "",
+  artist: e.artist ?? "",
+  album: e.album ?? ""
+}), B = (e, a) => new RegExp(`no such column:\\s*${a}`, "i").test(String(e)), Nr = (e) => B(e, "specs_json") || B(e, "cover_data_url") || B(e, "theme") || B(e, "source") || B(e, "audio_kind") || B(e, "external_id") || B(e, "external_url") || B(e, "thumbnail_url") || B(e, "artist") || B(e, "album"), _o = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+              sample_rate, size_bytes, created_at, audio_data_url, specs_json, cover_data_url`, To = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+              sample_rate, size_bytes, created_at, audio_data_url, specs_json`, lr = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+              sample_rate, size_bytes, created_at, audio_data_url`, lt = (e) => ({
+  ...e,
+  source: "juli3ta",
+  audio_kind: e.audio_data_url ? "data_url" : "lyrics_only",
+  external_id: "",
+  external_url: "",
+  thumbnail_url: "",
+  artist: "",
+  album: ""
+}), ei = async (e, a, r, o) => {
+  if (B(o, "source") || B(o, "audio_kind") || B(o, "external_id") || B(o, "external_url") || B(o, "thumbnail_url") || B(o, "artist") || B(o, "album"))
+    try {
+      return (await e.query(
+        `SELECT ${_o}, theme FROM music_creator_tracks ${a}`,
+        r
+      )).map(lt);
+    } catch (n) {
+      o = n;
+    }
+  if (B(o, "theme"))
+    try {
+      return (await e.query(
+        `SELECT ${_o} FROM music_creator_tracks ${a}`,
+        r
+      )).map((l) => lt({ ...l, theme: "" }));
+    } catch (n) {
+      if (!B(n, "cover_data_url")) throw n;
+      try {
+        return (await e.query(
+          `SELECT ${To} FROM music_creator_tracks ${a}`,
+          r
+        )).map((d) => lt({ ...d, cover_data_url: "", theme: "" }));
+      } catch (l) {
+        if (!B(l, "specs_json")) throw l;
+        return (await e.query(
+          `SELECT ${lr} FROM music_creator_tracks ${a}`,
+          r
+        )).map((b) => lt({ ...b, specs_json: "", cover_data_url: "", theme: "" }));
+      }
+    }
+  if (B(o, "cover_data_url"))
+    try {
+      return (await e.query(
+        `SELECT ${To} FROM music_creator_tracks ${a}`,
+        r
+      )).map((l) => lt({ ...l, cover_data_url: "", theme: "" }));
+    } catch (n) {
+      if (!B(n, "specs_json")) throw n;
+      return (await e.query(
+        `SELECT ${lr} FROM music_creator_tracks ${a}`,
+        r
+      )).map((d) => lt({ ...d, specs_json: "", cover_data_url: "", theme: "" }));
+    }
+  if (B(o, "specs_json"))
+    return (await e.query(
+      `SELECT ${lr} FROM music_creator_tracks ${a}`,
+      r
+    )).map((l) => lt({ ...l, specs_json: "", cover_data_url: "", theme: "" }));
+  throw o;
+}, ti = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+              sample_rate, size_bytes, created_at, audio_data_url, specs_json, cover_data_url, theme,
+              source, audio_kind, external_id, external_url, thumbnail_url, artist, album`, ll = async () => {
+  const e = V();
+  if (!e) return [];
+  try {
+    return (await e.query(
+      `SELECT ${ti} FROM music_creator_tracks ORDER BY created_at DESC`
+    )).map(Ma);
+  } catch (a) {
+    if (!Nr(a)) throw a;
+    return (await ei(e, "ORDER BY created_at DESC", [], a)).map(Ma);
+  }
+}, cl = async (e) => {
+  const a = V();
+  if (!a) return null;
+  try {
+    const r = await a.query(
+      `SELECT ${ti} FROM music_creator_tracks WHERE id = ? LIMIT 1`,
+      [e]
+    );
+    return r.length === 0 ? null : Ma(r[0]);
+  } catch (r) {
+    if (!Nr(r)) throw r;
+    const o = await ei(a, "WHERE id = ? LIMIT 1", [e], r);
+    return o.length === 0 ? null : Ma(o[0]);
+  }
+}, xr = async (e) => {
+  const a = V();
+  if (!a) throw new Error("Database not ready");
+  const r = [
+    e.id,
+    e.title,
+    e.styleTags,
+    e.lyricsPreview,
+    e.durationMs,
+    e.bitrate,
+    e.sampleRate,
+    e.sizeBytes,
+    e.createdAt,
+    e.audioDataUrl
+  ];
+  try {
+    await a.run(
+      `INSERT OR REPLACE INTO music_creator_tracks
+         (id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+          sample_rate, size_bytes, created_at, audio_data_url, specs_json, cover_data_url, theme,
+          source, audio_kind, external_id, external_url, thumbnail_url, artist, album)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        ...r,
+        e.specsJson,
+        e.coverDataUrl,
+        e.theme,
+        e.source ?? "juli3ta",
+        e.audioKind ?? (e.audioDataUrl ? "data_url" : "lyrics_only"),
+        e.externalId ?? "",
+        e.externalUrl ?? "",
+        e.thumbnailUrl ?? "",
+        e.artist ?? "",
+        e.album ?? ""
+      ]
+    );
+  } catch (o) {
+    if (!Nr(o)) throw o;
+    if (B(o, "source") || B(o, "audio_kind") || B(o, "external_id") || B(o, "external_url") || B(o, "thumbnail_url") || B(o, "artist") || B(o, "album"))
+      try {
+        await a.run(
+          `INSERT OR REPLACE INTO music_creator_tracks
+             (id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+              sample_rate, size_bytes, created_at, audio_data_url, specs_json, cover_data_url, theme)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [...r, e.specsJson, e.coverDataUrl, e.theme]
+        );
+        return;
+      } catch (n) {
+        o = n;
+      }
+    if (B(o, "theme"))
+      try {
+        await a.run(
+          `INSERT OR REPLACE INTO music_creator_tracks
+             (id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+              sample_rate, size_bytes, created_at, audio_data_url, specs_json, cover_data_url)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [...r, e.specsJson, e.coverDataUrl]
+        );
+        return;
+      } catch (n) {
+        if (!B(n, "cover_data_url")) throw n;
+      }
+    if (B(o, "cover_data_url"))
+      try {
+        await a.run(
+          `INSERT OR REPLACE INTO music_creator_tracks
+             (id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+              sample_rate, size_bytes, created_at, audio_data_url, specs_json)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [...r, e.specsJson]
+        );
+        return;
+      } catch (n) {
+        if (!B(n, "specs_json")) throw n;
+      }
+    await a.run(
+      `INSERT OR REPLACE INTO music_creator_tracks
+         (id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+          sample_rate, size_bytes, created_at, audio_data_url)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      r
+    );
+  }
+}, dl = async (e) => {
+  const a = V();
+  a && await a.run("DELETE FROM music_creator_tracks WHERE id = ?", [e]);
+}, ul = async (e, a) => {
+  const r = V();
+  if (!r) throw new Error("Database not ready");
+  const o = a.trim().slice(0, 200) || "Untitled";
+  return await r.run("UPDATE music_creator_tracks SET title = ? WHERE id = ?", [o, e]), o;
+}, pl = async (e, a) => {
+  const r = V();
+  if (!r) throw new Error("Database not ready");
+  try {
+    await r.run("UPDATE music_creator_tracks SET cover_data_url = ? WHERE id = ?", [a, e]);
+  } catch (o) {
+    if (!new RegExp("no such column:\\s*cover_data_url", "i").test(String(o))) throw o;
+    console.warn("[musicCreator] updateTrackCover skipped — pre-V6 schema");
+  }
+}, ml = async (e, a) => {
+  const r = V();
+  if (!r) throw new Error("Database not ready");
+  await r.run("UPDATE music_creator_tracks SET style_tags = ? WHERE id = ?", [a, e]);
+}, hl = async (e, a) => {
+  const r = V();
+  if (!r) throw new Error("Database not ready");
+  await r.run("UPDATE music_creator_tracks SET lyrics_preview = ? WHERE id = ?", [a, e]);
+}, gl = async (e, a) => {
+  const r = V();
+  if (!r) throw new Error("Database not ready");
+  try {
+    await r.run("UPDATE music_creator_tracks SET specs_json = ? WHERE id = ?", [a, e]);
+  } catch (o) {
+    if (!new RegExp("no such column:\\s*specs_json", "i").test(String(o))) throw o;
+    console.warn("[musicCreator] updateTrackSpecs skipped — pre-V5 schema");
+  }
+}, yl = async (e, a) => {
+  const r = V();
+  if (!r) throw new Error("Database not ready");
+  try {
+    await r.run("UPDATE music_creator_tracks SET theme = ? WHERE id = ?", [a, e]);
+  } catch (o) {
+    if (!new RegExp("no such column:\\s*theme", "i").test(String(o))) throw o;
+    console.warn("[musicCreator] updateTrackTheme skipped — pre-V7 schema");
+  }
+}, bl = async (e, a) => {
+  const r = V();
+  if (!r) return a;
+  const o = await r.query(
+    "SELECT value FROM music_creator_settings WHERE key = ? LIMIT 1",
+    [e]
+  );
+  if (o.length === 0) return a;
+  try {
+    return JSON.parse(o[0].value);
+  } catch {
+    return a;
+  }
+}, fl = async (e, a) => {
+  const r = V();
+  r && await r.run(
+    `INSERT INTO music_creator_settings (key, value) VALUES (?, ?)
+     ON CONFLICT(key) DO UPDATE SET value = excluded.value`,
+    [e, JSON.stringify(a)]
+  );
+}, ai = {
+  preferredPodId: null,
+  overridesByEndpoint: {}
+}, ri = "music_creator_settings", vl = () => bl(ri, ai), xl = (e) => fl(ri, e), mt = () => Date.now(), oi = (e) => ({
+  id: e.id,
+  title: e.title,
+  styleTags: e.provider === "youtube" ? "YouTube" : e.provider,
+  lyricsPreview: "",
+  durationMs: e.duration_ms ?? 0,
+  bitrate: 0,
+  sampleRate: 0,
+  sizeBytes: 0,
+  createdAt: e.added_at ?? mt(),
+  audioDataUrl: "",
+  specsJson: "",
+  coverDataUrl: "",
+  theme: "",
+  source: e.provider === "juli3ta" ? "juli3ta" : "youtube",
+  audioKind: "remote_stream",
+  externalId: e.external_id ?? "",
+  externalUrl: e.external_url ?? "",
+  thumbnailUrl: e.thumbnail_url ?? "",
+  artist: e.artist ?? "",
+  album: e.album ?? ""
+}), wl = (e) => ({
+  id: e.id,
+  provider: e.source || "youtube",
+  external_id: e.externalId || e.id.replace(/^.+?:/, ""),
+  title: e.title || "Untitled",
+  artist: e.artist || "",
+  album: e.album || "",
+  duration_ms: e.durationMs || 0,
+  thumbnail_url: e.thumbnailUrl || "",
+  external_url: e.externalUrl || "",
+  added_at: e.createdAt || mt(),
+  last_played_at: 0
+}), ii = [
+  "id",
+  "provider",
+  "external_id",
+  "title",
+  "artist",
+  "album",
+  "duration_ms",
+  "thumbnail_url",
+  "external_url",
+  "added_at",
+  "last_played_at"
+], kl = ii.join(", "), Sl = ii.map((e) => `t.${e}`).join(", "), _l = async () => {
+  const e = V();
+  return e ? (await e.query(
+    `SELECT ${kl} FROM music_library_tracks ORDER BY added_at DESC`
+  )).map(oi) : [];
+}, ni = async (e) => {
+  const a = V();
+  if (!a) throw new Error("Database not ready");
+  const r = wl(e);
+  await a.run(
+    `INSERT INTO music_library_tracks
+       (id, provider, external_id, title, artist, album, duration_ms, thumbnail_url, external_url, added_at, last_played_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+     ON CONFLICT(id) DO UPDATE SET
+       title = excluded.title,
+       artist = excluded.artist,
+       album = excluded.album,
+       duration_ms = excluded.duration_ms,
+       thumbnail_url = excluded.thumbnail_url,
+       external_url = excluded.external_url`,
+    [r.id, r.provider, r.external_id, r.title, r.artist, r.album, r.duration_ms, r.thumbnail_url, r.external_url, r.added_at, r.last_played_at]
+  );
+}, Tl = async (e) => {
+  const a = V();
+  a && await a.tx(async () => {
+    await a.run("DELETE FROM music_playlist_items WHERE track_id = ?", [e]), await a.run("DELETE FROM music_favorites WHERE kind = ? AND entity_id = ?", ["track", e]), await a.run("DELETE FROM music_library_tracks WHERE id = ?", [e]);
+  });
+}, Cl = async () => {
+  const e = V();
+  if (!e) return 0;
+  const a = await e.query(
+    `SELECT id, title, duration_ms, created_at, external_id, external_url, thumbnail_url, artist, album
+       FROM music_creator_tracks
+      WHERE source = 'youtube' AND external_id <> ''`
+  );
+  for (const r of a)
+    await e.run(
+      `INSERT OR IGNORE INTO music_library_tracks
+         (id, provider, external_id, title, artist, album, duration_ms, thumbnail_url, external_url, added_at, last_played_at)
+       VALUES (?, 'youtube', ?, ?, ?, ?, ?, ?, ?, ?, 0)`,
+      [r.id, r.external_id, r.title, r.artist, r.album, r.duration_ms, r.thumbnail_url, r.external_url, r.created_at]
+    );
+  return a.length;
+}, Nl = async (e) => {
+  const a = V();
+  return a ? (await a.query(
+    "SELECT kind, entity_id, provider, title, created_at FROM music_favorites WHERE kind = ? ORDER BY created_at DESC",
+    [e]
+  )).map((n) => ({
+    kind: n.kind,
+    entityId: n.entity_id,
+    provider: n.provider,
+    title: n.title,
+    createdAt: n.created_at
+  })) : [];
+}, Al = async (e) => {
+  const a = V();
+  if (!a) throw new Error("Database not ready");
+  const r = await a.query(
+    "SELECT COUNT(*) as n FROM music_favorites WHERE kind = ? AND entity_id = ?",
+    [e.kind, e.entityId]
+  );
+  return Number(r[0]?.n ?? 0) > 0 ? (await a.run("DELETE FROM music_favorites WHERE kind = ? AND entity_id = ?", [e.kind, e.entityId]), !1) : (await a.run(
+    `INSERT INTO music_favorites (kind, entity_id, provider, title, created_at)
+     VALUES (?, ?, ?, ?, ?)`,
+    [e.kind, e.entityId, e.provider, e.title ?? "", mt()]
+  ), !0);
+}, Qt = async () => {
+  const e = V();
+  if (!e) return [];
+  const a = await e.query(
+    "SELECT id, name, created_at, updated_at FROM music_playlists ORDER BY updated_at DESC"
+  ), r = await e.query(
+    `SELECT pi.playlist_id, pi.pos, ${Sl}
+       FROM music_playlist_items pi
+       JOIN music_library_tracks t ON t.id = pi.track_id
+      ORDER BY pi.playlist_id, pi.pos ASC`
+  ), o = /* @__PURE__ */ new Map();
+  return r.forEach((n) => {
+    o.set(n.playlist_id, [...o.get(n.playlist_id) ?? [], oi(n)]);
+  }), a.map((n) => ({
+    id: n.id,
+    name: n.name,
+    createdAt: n.created_at,
+    updatedAt: n.updated_at,
+    items: o.get(n.id) ?? []
+  }));
+}, zl = async (e) => {
+  const a = V();
+  if (!a) throw new Error("Database not ready");
+  const r = e.trim().slice(0, 80) || "New Playlist", o = mt(), n = { id: `playlist:${o}:${Math.random().toString(36).slice(2, 8)}`, name: r, createdAt: o, updatedAt: o, items: [] };
+  return await a.run(
+    "INSERT INTO music_playlists (id, name, created_at, updated_at) VALUES (?, ?, ?, ?)",
+    [n.id, n.name, n.createdAt, n.updatedAt]
+  ), n;
+}, Il = async (e) => {
+  const a = V();
+  a && await a.tx(async () => {
+    await a.run("DELETE FROM music_playlist_items WHERE playlist_id = ?", [e]), await a.run("DELETE FROM music_favorites WHERE kind = ? AND entity_id = ?", ["playlist", e]), await a.run("DELETE FROM music_playlists WHERE id = ?", [e]);
+  });
+}, Ml = async (e, a) => {
+  const r = V();
+  if (!r) throw new Error("Database not ready");
+  await r.tx(async () => {
+    await ni(a);
+    const o = await r.query(
+      "SELECT COALESCE(MAX(pos), -1) + 1 as n FROM music_playlist_items WHERE playlist_id = ?",
+      [e]
+    ), n = Number(o[0]?.n ?? 0);
+    await r.run(
+      `INSERT OR IGNORE INTO music_playlist_items (playlist_id, track_id, pos, added_at)
+       VALUES (?, ?, ?, ?)`,
+      [e, a.id, n, mt()]
+    ), await r.run("UPDATE music_playlists SET updated_at = ? WHERE id = ?", [mt(), e]);
+  });
+}, El = async (e, a) => {
+  const r = V();
+  r && (await r.run("DELETE FROM music_playlist_items WHERE playlist_id = ? AND track_id = ?", [e, a]), await r.run("UPDATE music_playlists SET updated_at = ? WHERE id = ?", [mt(), e]));
+}, Ll = (e) => ({
+  id: e.id,
+  name: e.name,
+  durationMs: e.duration_ms,
+  createdAt: e.created_at,
+  mimeType: e.mime_type,
+  audioDataUrl: e.audio_data_url
+}), Co = async () => {
+  const e = V();
+  return e ? (await e.query(
+    `SELECT id, name, duration_ms, created_at, mime_type, audio_data_url
+       FROM voice_recordings
+      ORDER BY created_at DESC`
+  )).map(Ll) : [];
+}, si = async (e) => {
+  const a = V();
+  if (!a) throw new Error("Database not ready");
+  await a.run(
+    `INSERT OR REPLACE INTO voice_recordings
+       (id, name, duration_ms, created_at, mime_type, audio_data_url)
+     VALUES (?, ?, ?, ?, ?, ?)`,
+    [e.id, e.name, e.durationMs, e.createdAt, e.mimeType, e.audioDataUrl]
+  );
+}, cr = "tytus.voice-recorder.recordings", jl = async () => {
+  try {
+    const e = localStorage.getItem(cr);
+    if (!e) return;
+    const a = JSON.parse(e);
+    if (!Array.isArray(a)) {
+      localStorage.removeItem(cr);
+      return;
+    }
+    for (const r of a)
+      if (!(!r?.id || typeof r.audioDataUrl != "string"))
+        try {
+          await si({
+            id: r.id,
+            name: r.name ?? "Untitled recording",
+            durationMs: r.durationMs ?? 0,
+            createdAt: r.createdAt ?? Date.now(),
+            mimeType: r.mimeType ?? "audio/webm",
+            audioDataUrl: r.audioDataUrl
+          });
+        } catch {
+        }
+    localStorage.removeItem(cr);
+  } catch (e) {
+    console.warn("Voice recordings legacy migration failed:", e);
+  }
+}, Pl = (e, a) => e._value, Ar = 100, Rl = 30, Aa = 6, Dl = 360, No = 12, Hl = 3, Ol = 0.4, li = async (e) => {
+  const a = window.AudioContext || window.webkitAudioContext, r = new a();
+  try {
+    const o = await e.arrayBuffer();
+    return await r.decodeAudioData(o.slice(0));
+  } finally {
+    r.close().catch(() => {
+    });
+  }
+}, ci = async (e) => (await fetch(e)).blob(), wr = (e) => new Promise((a, r) => {
+  const o = new FileReader();
+  o.onload = () => {
+    const n = typeof o.result == "string" ? o.result : "", l = n.indexOf("base64,");
+    a(l >= 0 ? n.slice(l + 7) : "");
+  }, o.onerror = () => r(o.error), o.readAsDataURL(e);
+}), Ul = (e) => {
+  const a = e.sampleRate, r = Math.max(1, Math.floor(a * Ar / 1e3)), o = Math.floor(e.length / r), n = new Float32Array(o), l = [];
+  for (let d = 0; d < e.numberOfChannels; d++) l.push(e.getChannelData(d));
+  for (let d = 0; d < o; d++) {
+    const b = d * r;
+    let p = 0;
+    for (let m = 0; m < r; m++) {
+      let w = 0;
+      for (let u = 0; u < l.length; u++) w += l[u][b + m];
+      w /= l.length, p += w * w;
+    }
+    n[d] = Math.sqrt(p / r);
+  }
+  return n;
+}, $l = (e) => {
+  const a = e.sampleRate, r = Math.max(1, Math.floor(a * Ar / 1e3)), o = Math.floor(e.length / r), n = new Float32Array(o), l = [];
+  for (let d = 0; d < e.numberOfChannels; d++) l.push(e.getChannelData(d));
+  for (let d = 0; d < o; d++) {
+    const b = d * r;
+    let p = 0, m = 0;
+    for (let w = 0; w < l.length; w++) m += l[w][b];
+    m /= l.length;
+    for (let w = 1; w < r; w++) {
+      let u = 0;
+      for (let y = 0; y < l.length; y++) u += l[y][b + w];
+      u /= l.length, (m > 1e-3 && u < -1e-3 || m < -1e-3 && u > 1e-3) && p++, m = u;
+    }
+    n[d] = p / (r / 2);
+  }
+  return n;
+}, di = (e) => {
+  const a = Ul(e), r = $l(e);
+  return { rms: a, centroid: r, framesPerSec: 1e3 / Ar };
+}, Bl = (e, a = 4) => {
+  let r = 0;
+  for (let p = 0; p < e.length; p++) r += e[p];
+  const o = r / e.length;
+  let n = 0;
+  for (let p = 0; p < e.length; p++) n += (e[p] - o) ** 2;
+  const l = Math.sqrt(n / e.length) || 1, d = Math.floor(e.length / a), b = new Float32Array(d);
+  for (let p = 0; p < d; p++) {
+    let m = 0;
+    for (let w = 0; w < a; w++) m += e[p * a + w];
+    b[p] = (m / a - o) / l;
+  }
+  return b;
+}, Fl = (e, a, r) => {
+  if (a + r >= e.length) return 0;
+  const o = Math.max(1, Math.floor(r / 4));
+  let n = -1 / 0, l = 0;
+  for (let p = 0; p + r < e.length; p += o) {
+    if (Math.abs(p - a) < r) continue;
+    let m = 0;
+    for (let w = 0; w < r; w++)
+      m += e[a + w] * e[p + w];
+    m /= r, m > n && (n = m), m > 0.5 && l++;
+  }
+  const d = Math.max(0, Math.min(1, (n + 1) / 2)), b = Math.min(1, l / 6);
+  return 0.6 * d + 0.4 * b;
+}, ui = (e, a) => {
+  const r = Math.max(1, Math.floor(a * e.framesPerSec));
+  if (e.rms.length <= r) return [];
+  const o = Bl(e.rms, 4), n = e.rms.length / o.length, l = Math.max(1, Math.floor(r / n));
+  let d = 0, b = 0, p = 0;
+  for (let y = 0; y < r; y++)
+    d += e.rms[y], b += e.rms[y] * e.rms[y], p += e.centroid[y];
+  const m = [], w = Math.max(1, Math.floor(e.framesPerSec)), u = (y) => {
+    const x = d / r, N = Math.max(0, b / r - x * x), f = Math.sqrt(N), v = p / r, A = Math.floor(y / n), C = Fl(o, A, l), T = 0.45 * Math.min(1, x * 4) + 0.2 * v + 0.25 * C - 0.1 * Math.min(1, f * 6);
+    m.push({
+      startFrame: y,
+      lenFrames: r,
+      score: T,
+      meanRms: x,
+      stdRms: f,
+      meanBright: v,
+      selfSim: C
+    });
+  };
+  u(0);
+  for (let y = r; y < e.rms.length; y += w) {
+    for (let x = 0; x < w && y - w + x < e.rms.length; x++) {
+      const N = y - r - w + x + 1, f = y - w + x + 1;
+      if (f >= e.rms.length) break;
+      N >= 0 && (d -= e.rms[N], b -= e.rms[N] * e.rms[N], p -= e.centroid[N]), d += e.rms[f], b += e.rms[f] * e.rms[f], p += e.centroid[f];
+    }
+    u(y - r + w);
+  }
+  return m;
+}, kr = (e, a, r) => {
+  const o = new Float32Array(r), n = [];
+  for (let l = 0; l < e.numberOfChannels; l++) n.push(e.getChannelData(l));
+  for (let l = 0; l < r; l++) {
+    let d = 0;
+    for (let b = 0; b < n.length; b++) d += n[b][a + l] || 0;
+    o[l] = d / n.length;
+  }
+  return o;
+}, Sr = (e, a) => {
+  const n = a * 1 * 2, l = 1 * (16 / 8), d = e.length * 2, b = new ArrayBuffer(44 + d), p = new DataView(b);
+  let m = 0;
+  const w = (x) => {
+    for (let N = 0; N < x.length; N++) p.setUint8(m++, x.charCodeAt(N));
+  }, u = (x) => {
+    p.setUint32(m, x, !0), m += 4;
+  }, y = (x) => {
+    p.setUint16(m, x, !0), m += 2;
+  };
+  w("RIFF"), u(36 + d), w("WAVE"), w("fmt "), u(16), y(1), y(1), u(a), u(n), y(l), y(16), w("data"), u(d);
+  for (let x = 0; x < e.length; x++) {
+    const N = Math.max(-1, Math.min(1, e[x]));
+    p.setInt16(m, N < 0 ? N * 32768 : N * 32767, !0), m += 2;
+  }
+  return new Blob([b], { type: "audio/wav" });
+}, pi = async (e, a = Rl) => {
+  const r = typeof e == "string" ? await ci(e) : e, o = await li(r), n = o.length / o.sampleRate;
+  if (n < Aa)
+    throw new Error(`Source is too short (${n.toFixed(1)} s). Need at least ${Aa} s.`);
+  const l = Math.min(Dl, Math.max(Aa, a));
+  if (n <= l) {
+    const N = kr(o, 0, o.length), f = Sr(N, o.sampleRate);
+    return { base64: await wr(f), durationSec: n, startSec: 0, sourceDurationSec: n, score: 1 };
+  }
+  const d = di(o), b = ui(d, l);
+  if (b.length === 0)
+    throw new Error("Could not analyze the audio (track too short).");
+  b.sort((N, f) => f.score - N.score);
+  const p = b[0], m = Math.floor(p.startFrame / d.framesPerSec * o.sampleRate), w = Math.floor(p.lenFrames / d.framesPerSec * o.sampleRate), u = kr(o, m, w), y = Sr(u, o.sampleRate);
+  return {
+    base64: await wr(y),
+    durationSec: w / o.sampleRate,
+    startSec: m / o.sampleRate,
+    sourceDurationSec: n,
+    score: Math.max(0, Math.min(1, p.score))
+  };
+}, Wl = (e, a, r) => {
+  if (e.length === 0) return new Float32Array(0);
+  if (e.length === 1) return e[0];
+  const o = Math.floor(r * a);
+  let n = 0;
+  for (const b of e) n += b.length;
+  n -= o * (e.length - 1);
+  const l = new Float32Array(n);
+  let d = 0;
+  l.set(e[0], 0), d = e[0].length - o;
+  for (let b = 1; b < e.length; b++) {
+    const p = e[b];
+    for (let m = 0; m < o; m++) {
+      const w = m / o;
+      l[d + m] = l[d + m] * (1 - w) + p[m] * w;
+    }
+    for (let m = o; m < p.length; m++)
+      l[d + m] = p[m];
+    d += p.length - o;
+  }
+  return l;
+}, ql = (e, a, r) => {
+  const o = [...e].sort((l, d) => d.score - l.score), n = [];
+  for (const l of o)
+    if (n.some(
+      (b) => Math.abs(b.startFrame - l.startFrame) < Math.max(b.lenFrames, l.lenFrames) + r
+    ) || n.push(l), n.length >= a) break;
+  return n.sort((l, d) => l.startFrame - d.startFrame), n;
+}, Jl = async (e) => {
+  const a = typeof e == "string" ? await ci(e) : e, r = await li(a), o = r.length / r.sampleRate;
+  if (o < Aa * 2) {
+    const x = await pi(a);
+    return {
+      base64: x.base64,
+      durationSec: x.durationSec,
+      segments: [{ startSec: x.startSec, endSec: x.startSec + x.durationSec, score: x.score }],
+      sourceDurationSec: o
+    };
+  }
+  const n = di(r), l = ui(n, No);
+  if (l.length === 0)
+    throw new Error("Could not analyze the audio.");
+  const d = Math.max(
+    Math.floor(No * n.framesPerSec * 0.5),
+    Math.floor(n.rms.length / 4)
+  ), b = ql(l, Hl, d), p = b.map((x) => {
+    const N = Math.floor(x.startFrame / n.framesPerSec * r.sampleRate), f = Math.floor(x.lenFrames / n.framesPerSec * r.sampleRate);
+    return kr(r, N, f);
+  }), m = Wl(p, r.sampleRate, Ol), w = Sr(m, r.sampleRate), u = await wr(w), y = b.map((x) => ({
+    startSec: x.startFrame / n.framesPerSec,
+    endSec: (x.startFrame + x.lenFrames) / n.framesPerSec,
+    score: Math.max(0, Math.min(1, x.score))
+  }));
+  return {
+    base64: u,
+    durationSec: m.length / r.sampleRate,
+    segments: y,
+    sourceDurationSec: o
+  };
+};
+class mi extends Error {
+  status;
+  code;
+  constructor(a, r, o) {
+    super(o), this.name = "MusicDaemonError", this.status = a, this.code = r;
+  }
+}
+const Rt = async (e, a) => {
+  const r = await fetch(e, {
+    method: "GET",
+    headers: { Accept: "application/json" },
+    credentials: "same-origin",
+    signal: a
+  });
+  let o = null;
+  try {
+    o = await r.json();
+  } catch {
+    o = null;
+  }
+  if (!r.ok) {
+    const n = o, l = typeof n?.error == "string" ? n.error : `http_${r.status}`;
+    throw new mi(r.status, l, l === "music_unavailable" ? "Music search is still starting up." : l);
+  }
+  return o;
+}, hi = async (e, a, r) => {
+  const o = await fetch(e, {
+    method: "POST",
+    headers: { Accept: "application/json", "Content-Type": "application/json", "Sec-Fetch-Site": "same-origin" },
+    credentials: "same-origin",
+    body: JSON.stringify(a),
+    signal: r
+  });
+  let n = null;
+  try {
+    n = await o.json();
+  } catch {
+    n = null;
+  }
+  if (!o.ok) {
+    const l = n, d = typeof l?.error == "string" ? l.error : `http_${o.status}`;
+    throw new mi(o.status, d, d);
+  }
+  return n;
+}, Gl = (e) => Rt("/api/music/status", e), Ao = async (e) => (await Rt("/api/music/providers", e)).providers ?? [], zo = async (e) => (await Rt("/api/music/connectors", e)).connectors ?? [], Vl = (e, a, r) => hi("/api/music/connectors/configure", { provider: e, credentials: a }, r), Yl = (e, a) => hi("/api/music/connectors/disconnect", { provider: e }, a), Kl = async (e, a = 20, r) => {
+  const o = new URLSearchParams({ q: e, limit: String(a) });
+  return (await Rt(`/api/music/search?${o.toString()}`, r)).results ?? [];
+}, Ql = (e, a = "tracks,albums,artists,playlists", r = 20, o) => {
+  const n = new URLSearchParams({ q: e, types: a, provider: "auto", limit: String(r) });
+  return Rt(`/api/music/search2?${n.toString()}`, o);
+}, dr = (e, a) => {
+  const r = new URLSearchParams({ videoId: e });
+  return Rt(`/api/music/stream?${r.toString()}`, a);
+}, Pa = async (e, a) => {
+  const r = await fetch(e, {
+    ...a,
+    headers: {
+      ...a?.body ? { "Content-Type": "application/json" } : {},
+      ...a?.headers ?? {}
+    }
+  }), o = await r.text();
+  let n = null;
+  try {
+    n = o ? JSON.parse(o) : null;
+  } catch {
+    n = o;
+  }
+  if (!r.ok) {
+    const l = typeof n == "object" && n && "error" in n ? String(n.error) : o || r.statusText;
+    throw new Error(l);
+  }
+  return n;
+}, ur = async () => Pa("/api/juli3ta/library/tracks"), Io = async (e) => (await Pa(
+  "/api/juli3ta/library/tracks",
+  {
+    method: "POST",
+    headers: { "Idempotency-Key": `juli3ta-save-${e.id}-${e.createdAt}` },
+    body: JSON.stringify({
+      ...e,
+      source: e.source ?? "juli3ta",
+      audioKind: e.audioKind ?? (e.audioDataUrl ? "data_url" : "lyrics_only")
+    })
+  }
+)).track, Xl = async (e) => {
+  await Pa("/api/juli3ta/library/delete", {
+    method: "POST",
+    headers: { "Idempotency-Key": `juli3ta-delete-${e}` },
+    body: JSON.stringify({ id: e })
+  });
+}, Zl = async () => (await Pa("/api/juli3ta/library/open-folder", {
+  method: "POST",
+  headers: { "Idempotency-Key": `juli3ta-open-folder-${Date.now()}` },
+  body: "{}"
+})).path, ta = "application/x-juli3ta-track", Sa = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", gi = (e) => e.source !== "youtube", Xt = (...e) => {
+  const a = /* @__PURE__ */ new Map();
+  for (const r of e)
+    for (const o of r)
+      a.has(o.id) || a.set(o.id, o);
+  return Array.from(a.values()).sort((r, o) => o.createdAt - r.createdAt);
+}, ec = (e) => gi(e) && (e.audioDataUrl.startsWith("data:") || !!e.lyricsPreview.trim() || !!e.coverDataUrl.startsWith("data:")), tc = "http://localhost:18080/v1", ac = "sk-test-123", dt = [
+  {
+    label: "Pop & Mainstream",
+    chips: [
+      "Pop",
+      "Dance pop",
+      "Electropop",
+      "Synth-pop",
+      "Teen pop",
+      "K-pop",
+      "J-pop",
+      "Indie pop",
+      "Hyperpop",
+      "Adult contemporary"
+    ]
+  },
+  {
+    label: "Rock & Alternative",
+    chips: [
+      "Rock",
+      "Classic rock",
+      "Hard rock",
+      "Alternative rock",
+      "Indie rock",
+      "Garage rock",
+      "Psychedelic rock",
+      "Progressive rock",
+      "Post-rock",
+      "Grunge",
+      "Britpop",
+      "Shoegaze"
+    ]
+  },
+  {
+    label: "Metal",
+    chips: [
+      "Heavy metal",
+      "Hard rock / Metal",
+      "Thrash metal",
+      "Power metal",
+      "Progressive metal",
+      "Death metal",
+      "Black metal",
+      "Metalcore",
+      "Nu metal",
+      "Symphonic metal"
+    ]
+  },
+  {
+    label: "Punk & Hardcore",
+    chips: [
+      "Punk",
+      "Pop punk",
+      "Hardcore punk",
+      "Post-punk",
+      "Emo / emocore",
+      "Skate punk",
+      "Crust punk",
+      "Post-hardcore"
+    ]
+  },
+  {
+    label: "Indie, Lo-Fi & Singer-Songwriter",
+    chips: [
+      "Indie",
+      "Lo-fi",
+      "Lo-fi hip-hop",
+      "Bedroom pop",
+      "Singer-songwriter",
+      "Acoustic",
+      "Folk rock",
+      "Dream pop"
+    ]
+  },
+  {
+    label: "Hip-Hop & Rap",
+    chips: [
+      "Hip-hop / Rap",
+      "Boom bap",
+      "Trap",
+      "Drill",
+      "Gangsta rap",
+      "Conscious rap",
+      "Cloud rap",
+      "Emo rap",
+      "Latin trap",
+      "Old-school hip-hop",
+      "Alternative hip-hop",
+      "Underground hip-hop"
+    ]
+  },
+  {
+    label: "R&B, Soul & Funk",
+    chips: [
+      "R&B",
+      "Contemporary R&B",
+      "Soul",
+      "Neo-soul",
+      "Motown / Classic soul",
+      "Funk",
+      "Disco",
+      "Quiet storm",
+      "New jack swing",
+      "Urban contemporary"
+    ]
+  },
+  {
+    label: "Electronic & Dance",
+    chips: [
+      "Electronic",
+      "EDM",
+      "House",
+      "Deep house",
+      "Tech house",
+      "Progressive house",
+      "Electro house",
+      "Techno",
+      "Minimal techno",
+      "Trance",
+      "Progressive trance",
+      "Psytrance",
+      "Drum and bass",
+      "Jungle",
+      "Breakbeat",
+      "UK garage",
+      "Future bass",
+      "Dubstep",
+      "Brostep",
+      "Chillout",
+      "Ambient",
+      "Downtempo",
+      "Synthwave / Retrowave"
+    ]
+  },
+  {
+    label: "Latin & Caribbean",
+    chips: [
+      "Latin",
+      "Latin pop",
+      "Reggaeton",
+      "Latin trap",
+      "Regional Mexican",
+      "Corridos tumbados",
+      "Banda",
+      "Salsa",
+      "Bachata",
+      "Merengue",
+      "Cumbia",
+      "Latin rock"
+    ]
+  },
+  {
+    label: "Flamenco",
+    chips: [
+      "Flamenco",
+      "Bulerías",
+      "Soleá",
+      "Alegrías",
+      "Seguiriyas",
+      "Tangos (flamenco)",
+      "Tientos",
+      "Fandangos (flamenco)",
+      "Sevillanas",
+      "Tarantas",
+      "Malagueñas",
+      "Granaínas"
+    ]
+  },
+  {
+    label: "Reggae, Dub & Dancehall",
+    chips: [
+      "Reggae",
+      "Roots reggae",
+      "Dancehall",
+      "Dub",
+      "Reggae fusion"
+    ]
+  },
+  {
+    label: "African & Global Fusion",
+    chips: [
+      "Afrobeats",
+      "Afrobeat",
+      "Amapiano",
+      "Afro-house",
+      "Highlife",
+      "Afro-pop",
+      "World / Global fusion",
+      "Afro-Latin fusion"
+    ]
+  },
+  {
+    label: "Country, Folk & Americana",
+    chips: [
+      "Country",
+      "Classic country",
+      "Contemporary country",
+      "Country pop",
+      "Outlaw country",
+      "Americana",
+      "Bluegrass",
+      "Folk",
+      "Contemporary folk",
+      "Celtic folk",
+      "Country rock"
+    ]
+  },
+  {
+    label: "Jazz",
+    chips: [
+      "Jazz",
+      "Smooth jazz",
+      "Swing / Big band",
+      "Bebop",
+      "Cool jazz",
+      "Latin jazz",
+      "Jazz fusion",
+      "Acid jazz",
+      "Nu jazz",
+      "Lounge / Jazz lounge"
+    ]
+  },
+  {
+    label: "Blues & Roots",
+    chips: [
+      "Blues",
+      "Electric blues",
+      "Delta blues",
+      "Blues rock",
+      "Roots rock"
+    ]
+  },
+  {
+    label: "Reggaeton-Adjacent Urban Latin",
+    chips: [
+      "Urbano Latino",
+      "Dembow",
+      "Perreo",
+      "Moombahton",
+      "Latin drill"
+    ]
+  },
+  {
+    label: "Classical & Cinematic",
+    chips: [
+      "Classical",
+      "Orchestral",
+      "Chamber music",
+      "Symphonic",
+      "Solo piano",
+      "Film score / Soundtrack",
+      "Trailer music / Epic orchestral",
+      "Contemporary classical / Minimalism"
+    ]
+  },
+  {
+    label: "Religious & Inspirational",
+    chips: [
+      "Gospel",
+      "Contemporary Christian",
+      "Worship",
+      "Christian rock",
+      "Inspirational"
+    ]
+  },
+  {
+    label: "Experimental & Avant-Garde",
+    chips: [
+      "Experimental",
+      "Avant-garde",
+      "Musique concrète",
+      "Electroacoustic music",
+      "Minimalism",
+      "Drone music",
+      "Noise music",
+      "Harsh noise",
+      "Free improvisation",
+      "Free jazz",
+      "Industrial",
+      "Power electronics",
+      "IDM (Intelligent dance music)",
+      "Math rock",
+      "No wave",
+      "Experimental rock",
+      "Avant-pop",
+      "Experimental pop",
+      "Vaporwave",
+      "Deconstructed club",
+      "Glitch",
+      "Sound art",
+      "Tape music",
+      "Soundscape composition"
+    ]
+  },
+  {
+    label: "Mood & Vibe",
+    chips: [
+      "Driving",
+      "Sentimental",
+      "Energetic",
+      "Dreamy",
+      "Dark",
+      "Uplifting",
+      "Melancholic",
+      "Heroic",
+      "Romantic",
+      "Epic",
+      "Chill",
+      "Aggressive",
+      "Nostalgic",
+      "Mysterious",
+      "Playful"
+    ]
+  },
+  {
+    label: "Kids & Holiday",
+    chips: [
+      "Lullaby",
+      "Children's",
+      "Birthday",
+      "Christmas",
+      "Carnival",
+      "Marching band"
+    ]
+  }
+], rc = dt.flatMap((e) => e.chips), oc = ["very_slow", "slow", "medium", "fast", "very_fast"], ic = ["3/4", "4/4", "6/8", "7/8", "5/4", "other"], nc = ["straight", "swing", "shuffled", "syncopated", "polyrhythmic", "free"], sc = ["four_on_the_floor", "halftime", "doubletime", "broken_beat", "backbeat", "free"], lc = ["verse_chorus", "aaba", "drop_based", "loop_based", "through_composed", "strophic"], cc = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], dc = ["major", "minor", "dorian", "mixolydian", "phrygian", "lydian", "locrian"], uc = ["narrow", "medium", "wide"], pc = ["none", "gradual", "sudden"], mc = ["low", "medium", "high"], hc = ["60s", "70s", "80s", "90s", "2000s", "2010s", "2020s", "timeless"], gc = ["global", "us_uk", "latin", "afrobeats_scene", "kpop_scene", "jpop_scene", "caribbean", "middle_east", "asia_other", "europe_other"], yc = ["male", "female", "mixed", "other", "none"], bc = [
+  "drums_acoustic",
+  "drum_machine",
+  "percussion",
+  "bass_electric",
+  "bass_synth",
+  "bass_upright",
+  "electric_guitar",
+  "acoustic_guitar",
+  "piano",
+  "keys_synth",
+  "organ",
+  "strings",
+  "brass",
+  "woodwinds",
+  "synth_pad",
+  "synth_lead",
+  "pluck_synth",
+  "fx",
+  "lead_vocal",
+  "choir"
+], fc = ["sung", "rap", "spoken_word", "chant", "choir", "vocoder"], vc = [
+  "dry",
+  "reverb",
+  "delay",
+  "autotune_light",
+  "autotune_heavy",
+  "distortion",
+  "chorus",
+  "double_tracked"
+], xc = [
+  "happy",
+  "uplifting",
+  "dark",
+  "melancholic",
+  "dreamy",
+  "chill",
+  "epic",
+  "romantic",
+  "energetic",
+  "aggressive"
+], wc = [
+  "party",
+  "club",
+  "study",
+  "sleep",
+  "workout",
+  "background",
+  "focus",
+  "film_trailer",
+  "game",
+  "kids",
+  "holiday_christmas"
+], kc = [
+  "background",
+  "featured_listen",
+  "sync_film",
+  "sync_ad",
+  "game",
+  "live_show_intro"
+], G = (e) => e.replace(/_/g, " "), Sc = (e, a, r) => {
+  const o = (l) => l.trim().replace(/^[-••\d.)(]+\s*/, "").trim(), n = (l, d) => o(l).split(/\s+/).slice(0, d).join(" ");
+  if (e) {
+    const l = e.split(`
+`).map((d) => d.trim()).find((d) => d && !d.startsWith("[") && !d.startsWith("(") && d.split(/\s+/).length >= 3);
+    if (l) {
+      const d = n(l, 6).replace(/[,.!?;:—-]+$/, "").trim();
+      if (d.length >= 3) return d;
+    }
+  }
+  if (a.trim()) {
+    const l = n(a, 6).replace(/[,.!?;:—-]+$/, "").trim();
+    if (l.length >= 3) return l;
+  }
+  if (r.trim()) {
+    const l = n(r, 4).replace(/[,.!?;:—-]+$/, "").trim();
+    if (l.length >= 3) return l;
+  }
+  return "Untitled";
+}, zr = (e) => {
+  const a = [], r = [];
+  if (e.structure?.tempo_bpm ? r.push(`${e.structure.tempo_bpm} BPM`) : e.structure?.tempo_class && r.push(`${G(e.structure.tempo_class)} tempo`), e.structure?.time_signature && e.structure.time_signature !== "other" && r.push(`${e.structure.time_signature} time`), e.structure?.rhythm_feel && r.push(`${e.structure.rhythm_feel} feel`), e.structure?.groove_pattern && r.push(`${G(e.structure.groove_pattern)} groove`), e.structure?.song_form && r.push(`${G(e.structure.song_form)} form`), e.structure?.length_seconds && r.push(`~${e.structure.length_seconds}s`), r.length && a.push(r.join(", ")), e.tonal?.key) {
+    const l = e.tonal.mode ? `${e.tonal.key} ${e.tonal.mode}` : e.tonal.key;
+    a.push(`Key: ${l}`);
+  }
+  if (e.instrumentation?.primary_instruments?.length && a.push(`Instruments: ${e.instrumentation.primary_instruments.map(G).join(", ")}`), e.instrumentation?.has_vocals === !1)
+    a.push("Instrumental, no vocals");
+  else if (e.instrumentation?.has_vocals || e.instrumentation?.vocal_style?.length || e.instrumentation?.vocal_gender || e.instrumentation?.vocal_processing?.length) {
+    const l = [];
+    e.instrumentation.vocal_gender && e.instrumentation.vocal_gender !== "none" && l.push(e.instrumentation.vocal_gender), e.instrumentation.vocal_style?.length ? l.push(e.instrumentation.vocal_style.map(G).join("/")) : l.length === 0 && l.push("vocals");
+    let d = l.join(" ");
+    e.instrumentation.vocal_processing?.length && (d += ` with ${e.instrumentation.vocal_processing.map(G).join(" + ")}`), a.push(d);
+  }
+  e.instrumentation?.language_iso639_1 && a.push(`Language: ${e.instrumentation.language_iso639_1}`);
+  const o = [];
+  e.dynamics?.overall_dynamic_range && o.push(`${e.dynamics.overall_dynamic_range} dynamics`), e.dynamics?.crescendo_shape && e.dynamics.crescendo_shape !== "none" && o.push(`${e.dynamics.crescendo_shape} crescendo`), e.dynamics?.has_big_drops && o.push("big drops"), o.length && a.push(o.join(", ")), e.mood?.primary_moods?.length && a.push(`Mood: ${e.mood.primary_moods.join(", ")}`), e.mood?.emotional_intensity && a.push(`${e.mood.emotional_intensity} intensity`), e.mood?.occasion_tags?.length && a.push(`For: ${e.mood.occasion_tags.map(G).join(", ")}`);
+  const n = [];
+  return e.context?.era_reference && n.push(`${e.context.era_reference} era`), e.context?.cultural_region && e.context.cultural_region !== "global" && n.push(`${G(e.context.cultural_region)} scene`), e.context?.intended_use?.length && n.push(`use: ${e.context.intended_use.map(G).join("/")}`), e.context?.explicit_lyrics && n.push("explicit lyrics"), n.length && a.push(n.join(", ")), a.join(". ");
+}, _c = [
+  {
+    id: "verse_chorus",
+    label: "Verse-Chorus",
+    description: "Pop / rock standard — radio-friendly, repeating chorus.",
+    skeleton: `[Verse 1]
+
 
 [Chorus]
-We build a little thunder, we teach the dark to sing
-JULI3TA, wake the machine`, E = {
-  width: "100%",
-  boxSizing: "border-box",
-  border: "1px solid rgba(255,255,255,0.14)",
-  borderRadius: 12,
-  background: "rgba(255,255,255,0.06)",
-  color: "#fff",
-  padding: "12px 14px",
-  outline: "none",
-  font: "inherit"
-}, j = {
-  background: "rgba(255,255,255,0.06)",
-  border: "1px solid rgba(255,255,255,0.10)",
-  borderRadius: 20,
-  boxShadow: "0 24px 80px rgba(0,0,0,0.25)"
-}, k = {
-  border: 0,
-  borderRadius: 12,
-  color: "#fff",
-  padding: "10px 14px",
-  fontWeight: 800,
-  cursor: "pointer",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 8
-};
-function de(e) {
-  return e.replace(/[&<>]/g, (t) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[t] ?? t);
-}
-function se(e, t) {
-  const r = Math.abs([...e].reduce((g, w) => g + w.charCodeAt(0), 0)) % 360, a = de(e || "JULI3TA"), s = de((t || "AI music").slice(0, 72)), o = `<svg xmlns="http://www.w3.org/2000/svg" width="768" height="768" viewBox="0 0 768 768"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="hsl(${r},88%,62%)"/><stop offset="0.52" stop-color="hsl(${(r + 62) % 360},86%,44%)"/><stop offset="1" stop-color="#140622"/></linearGradient><filter id="blur"><feGaussianBlur stdDeviation="26"/></filter></defs><rect width="768" height="768" fill="url(#g)"/><circle cx="196" cy="188" r="142" fill="rgba(255,255,255,.22)" filter="url(#blur)"/><circle cx="584" cy="536" r="190" fill="rgba(0,0,0,.30)" filter="url(#blur)"/><path d="M162 515c96-144 202-144 318 0 35 44 76 62 124 54" stroke="rgba(255,255,255,.55)" stroke-width="28" fill="none" stroke-linecap="round"/><text x="64" y="650" fill="white" font-family="Inter,Arial" font-size="54" font-weight="900">${a}</text><text x="66" y="696" fill="rgba(255,255,255,.76)" font-family="Inter,Arial" font-size="24">${s}</text></svg>`;
-  return `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(o)))}`;
-}
-function ce(e, t) {
-  return t.find((a) => a.id === e.id)?.audioDataUrl ?? "";
-}
-function dt(e, t, r) {
-  return {
-    id: e.id,
-    title: e.title,
-    styleTags: e.prompt,
-    lyricsPreview: e.lyrics,
-    durationMs: Math.round((e.durationSeconds ?? 0) * 1e3),
-    bitrate: 32e4,
-    sampleRate: 44100,
-    sizeBytes: t.length,
-    createdAt: new Date(e.createdAt).getTime(),
-    audioDataUrl: t,
-    specsJson: JSON.stringify({ modelId: e.modelId, prompt: e.prompt }),
-    coverDataUrl: r,
-    theme: e.prompt,
-    source: "juli3ta",
-    audioKind: t ? "data_url" : "lyrics_only"
-  };
-}
-function st(e) {
-  return e.find((t) => /music/i.test(t) && !/cover/i.test(t)) ?? e[0] ?? "";
-}
-function ct({ host: e, db: t, migrationReady: r }) {
-  const [a, s] = u([]), [o, g] = u([]), [w, F] = u(""), [L, N] = u(!0), [v, H] = u(!1), [J, R] = u(null), [z, m] = u(null), [B, M] = u(null), [T, ye] = u(() => tt(e)), [p, U] = u(""), [V, q] = u([]), [y, D] = u(""), [me, W] = u(!1), [h, K] = u("Neon Ghosts"), [x, Z] = u("cinematic synthwave, 124 bpm, melancholic but powerful, female vocal"), [S, Q] = u(lt), [$, he] = u(!1), I = ie(null), Y = ie(null), b = P(async () => {
-    N(!0);
-    try {
-      await r;
-      const [i, l] = await Promise.allSettled([
-        Ye(t),
-        e.daemon.juli3taLibrary?.listGeneratedTracks?.()
-      ]);
-      i.status === "fulfilled" && s(i.value), l.status === "fulfilled" && l.value && (F(l.value.rootPath), g(l.value.tracks ?? []));
-    } catch (i) {
-      m(i instanceof Error ? i.message : String(i));
-    } finally {
-      N(!1);
+
+
+[Verse 2]
+
+
+[Chorus]
+
+
+[Bridge]
+
+
+[Chorus]
+
+
+[Outro]
+`,
+    prompt: "Use the standard verse-chorus form: [Verse 1] (4 lines, set up the story), [Chorus] (4 lines, the hook with the song title or central image, repeated identically each time), [Verse 2] (4 lines, deepen or twist the story), [Chorus] (same as before), [Bridge] (2-4 lines, contrast — new perspective or emotional turn), [Chorus] (final repeat), [Outro] (1-2 lines, resolution)."
+  },
+  {
+    id: "aaba",
+    label: "AABA Ballad",
+    description: "Storytelling / jazz — three matching verses with a contrasting bridge.",
+    skeleton: `[Verse A]
+
+
+[Verse A2]
+
+
+[Bridge B]
+
+
+[Verse A3]
+`,
+    prompt: "Use the AABA form (Tin Pan Alley / classic ballad): [Verse A] 8 lines establishing scene + mood, [Verse A2] 8 lines same melody-shape, advances the story, [Bridge B] 8 lines contrasting key/melody/perspective — the emotional climb, [Verse A3] 8 lines returning to the original feel for resolution. Maintain consistent rhyme scheme across the A sections (typically AABB or ABAB)."
+  },
+  {
+    id: "drop",
+    label: "Drop / EDM",
+    description: "Build-up → drop → repeat — for dance, EDM, pop dance.",
+    skeleton: `[Intro]
+
+
+[Verse]
+
+
+[Pre-Chorus / Build]
+
+
+[Drop / Hook]
+
+
+[Verse 2]
+
+
+[Pre-Chorus / Build]
+
+
+[Drop / Hook]
+
+
+[Outro]
+`,
+    prompt: "Use the drop-based EDM form: [Intro] 1-2 atmospheric lines, [Verse] 4 lines low energy, [Pre-Chorus / Build] 2-4 lines ramping up tension with shorter phrases, [Drop / Hook] 2-4 short repeating lines (the chant — designed to be screamed at a festival), [Verse 2] same shape as Verse 1 with story progression, [Pre-Chorus / Build] same, [Drop / Hook] (identical repeat), [Outro] 1-2 lines fading. Keep the Drop simple, percussive, easy to repeat."
+  },
+  {
+    id: "narrative",
+    label: "Narrative",
+    description: "Story-first — folk, country, rap, story-rap, country.",
+    skeleton: `[Verse 1 — setup]
+
+
+[Verse 2 — rising action]
+
+
+[Hook / Refrain]
+
+
+[Verse 3 — climax]
+
+
+[Hook / Refrain]
+
+
+[Verse 4 — resolution]
+
+
+[Final Hook]
+`,
+    prompt: "Use a narrative arc form: each verse advances the story (setup → rising action → climax → resolution). [Verse 1 — setup] 4-6 lines introducing characters and stakes, [Verse 2 — rising action] 4-6 lines escalating, [Hook / Refrain] 2-4 lines stating the song's core truth or feeling, [Verse 3 — climax] 4-6 lines at maximum tension, [Hook / Refrain] (repeat), [Verse 4 — resolution] 4-6 lines after the climax — what changed, what was learned, [Final Hook]. The hook should feel different in meaning each time it returns even though the words repeat."
+  },
+  {
+    id: "hook_loop",
+    label: "Hook-Loop",
+    description: "Trap / hip-hop / rap — short hook, two verses, post-hook.",
+    skeleton: `[Hook]
+
+
+[Verse 1]
+
+
+[Hook]
+
+
+[Verse 2]
+
+
+[Hook]
+
+
+[Post-Hook / Outro]
+`,
+    prompt: "Use the hook-loop trap form: [Hook] 4 short, repeatable lines (this is the heart — written FIRST, designed to loop), [Verse 1] 12-16 lines with internal rhyme and triplet flow, [Hook] (identical repeat), [Verse 2] 12-16 lines escalating energy or content, [Hook] (identical repeat), [Post-Hook / Outro] 2-4 lines — sometimes ad-libs or a tag. Verses should rhyme densely (multisyllabic, internal). Keep the Hook 4 lines max — repetition is the engine."
+  }
+], Mo = "tytus.music-creator.gallery", Eo = "tytus.music-creator", pr = "gallery", Tt = 3500, Tc = 2e3, He = (e) => {
+  const a = Math.floor(e / 1e3), r = Math.floor(a / 60), o = a % 60;
+  return `${r}:${o.toString().padStart(2, "0")}`;
+}, yi = (e) => e.source === "youtube" && !!e.externalId, ve = (e) => !!e.audioDataUrl || yi(e), Ir = (e) => e.coverDataUrl || e.thumbnailUrl || (e.externalId ? Ea(e.externalId) : ""), Ea = (e) => e ? `https://i.ytimg.com/vi/${encodeURIComponent(e)}/hqdefault.jpg` : "", bi = (e, a) => {
+  const r = (e || "").replace(/\s*\[(official|hd|hq|lyrics?|audio|video|music video)[^\]]*\]\s*/ig, " ").replace(/\s+/g, " ").trim(), o = r.match(/^(.{2,80}?)\s+[-–—]\s+(.{2,160})$/);
+  return o ? { artist: o[1].trim(), song: o[2].trim() } : { artist: (a || "").trim(), song: r || "Untitled" };
+}, _a = (e) => `youtube:${e}`, Cc = async () => {
+  const e = (a) => ({
+    id: a.id ?? `t_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    title: a.title ?? "Untitled",
+    styleTags: a.styleTags ?? "",
+    lyricsPreview: a.lyricsPreview ?? "",
+    durationMs: a.durationMs ?? 0,
+    bitrate: a.bitrate ?? 0,
+    sampleRate: a.sampleRate ?? 0,
+    sizeBytes: a.sizeBytes ?? 0,
+    createdAt: a.createdAt ?? Date.now(),
+    audioDataUrl: a.audioDataUrl ?? "",
+    specsJson: a.specsJson ?? "",
+    coverDataUrl: a.coverDataUrl ?? "",
+    theme: a.theme ?? "",
+    source: a.source ?? "juli3ta",
+    audioKind: a.audioKind ?? (a.audioDataUrl ? "data_url" : "lyrics_only"),
+    externalId: a.externalId ?? "",
+    externalUrl: a.externalUrl ?? "",
+    thumbnailUrl: a.thumbnailUrl ?? "",
+    artist: a.artist ?? "",
+    album: a.album ?? ""
+  });
+  try {
+    const a = localStorage.getItem(Mo);
+    if (a) {
+      const r = JSON.parse(a);
+      if (Array.isArray(r))
+        for (const o of r)
+          try {
+            await xr(e(o));
+          } catch {
+          }
+      localStorage.removeItem(Mo);
     }
-  }, [t, e, r]);
-  A(() => {
-    b();
-  }, [b]), A(() => e.daemon.onStateChange?.((l) => {
-    const c = (l.included ?? []).filter((_) => !!_.publicUrl || /running|ready|idle|connected/i.test(String(_.status)));
-    ye(c), !p && c[0] && U(c[0].id);
-  }), [e, p]), A(() => {
-    if (!p) {
-      const i = T[0]?.id;
-      i && U(i);
-    }
-  }, [T, p]), A(() => {
-    if (!p) return;
-    const i = new AbortController();
-    return it(e, p, i.signal).then((l) => {
-      const c = l.map((_) => _.id);
-      q(c), D((_) => _ || st(c));
-    }).catch((l) => {
-      console.warn("[juli3ta] model discovery failed", l), q([]);
-    }), () => i.abort();
-  }, [e, p]), A(() => e.shellMenu?.register?.({
-    appId: "juli3ta",
-    groups: [
-      { label: "File", items: [
-        { id: "new-track", label: "New track", shortcut: "⌘N", onClick: () => {
-          K(""), Z(""), Q("");
-        } },
-        { id: "save-draft", label: "Save draft", shortcut: "⌘S", onClick: () => void X() },
-        { id: "open-folder", label: "Open JULI3TA folder", onClick: () => void te() }
-      ] },
-      { label: "Track", items: [
-        { id: "generate", label: "Generate", shortcut: "⌘↩", disabled: v, onClick: () => void ee() }
-      ] }
-    ]
-  }), [e, v, h, x, S, p, y]);
-  const X = P(async () => {
-    if (!h.trim()) return;
-    const i = await le(t, {
-      title: h.trim(),
-      prompt: x.trim(),
-      lyrics: S.trim(),
-      modelId: y || null
+  } catch (a) {
+    console.warn("Legacy localStorage gallery migration failed:", a);
+  }
+  try {
+    const a = await new Promise((r) => {
+      const o = indexedDB.open(Eo);
+      o.onsuccess = () => {
+        const n = o.result;
+        if (!n.objectStoreNames.contains(pr)) {
+          n.close(), r([]);
+          return;
+        }
+        const d = n.transaction(pr, "readonly").objectStore(pr).getAll();
+        d.onsuccess = () => {
+          n.close(), r(d.result ?? []);
+        }, d.onerror = () => {
+          n.close(), r([]);
+        };
+      }, o.onerror = () => r([]);
     });
-    M(`Draft saved: ${i.title}`), e.notifications.notify({ title: "JULI3TA draft saved", body: i.title, level: "success", unread: !1 }), await b();
-  }, [t, e, S, y, x, b, h]), ee = P(async () => {
-    if (!h.trim()) {
-      m("Track title required.");
-      return;
-    }
-    if (!x.trim()) {
-      m("Prompt/style required.");
-      return;
-    }
-    if (!$ && !S.trim()) {
-      m("Lyrics required unless instrumental is enabled.");
-      return;
-    }
-    if (!p || !y) {
-      m("No runnable music pod/model available. Save a draft or start a pod.");
-      return;
-    }
-    Y.current?.abort();
-    const i = new AbortController();
-    Y.current = i, H(!0), m(null), M("Generating audio…");
-    try {
-      const l = await ot(e, {
-        podId: p,
-        model: y,
-        title: h.trim(),
-        prompt: x.trim(),
-        lyrics: S.trim(),
-        instrumental: $,
-        signal: i.signal
-      }), c = await le(t, {
-        title: h.trim(),
-        prompt: x.trim(),
-        lyrics: S.trim(),
-        modelId: l.modelId,
-        durationSeconds: l.durationSeconds
-      }), _ = se(c.title, c.prompt);
+    for (const r of a)
       try {
-        const C = await e.daemon.juli3taLibrary.saveGeneratedTrack(dt(c, l.audioDataUrl, _));
-        M(C.audioPath ? `Generated + mirrored: ${C.audioPath}` : `Generated: ${c.title}`);
-      } catch (C) {
-        console.warn("[juli3ta] daemon file mirror failed", C), M(`Generated locally. File mirror pending: ${C instanceof Error ? C.message : String(C)}`);
+        await xr(e(r));
+      } catch {
       }
-      e.notifications.notify({ title: "JULI3TA track generated", body: c.title, level: "success", unread: !0 }), await b();
-    } catch (l) {
-      l.name !== "AbortError" && (m(l instanceof Error ? l.message : String(l)), e.notifications.notify({ title: "JULI3TA generation failed", body: l instanceof Error ? l.message : String(l), level: "error" }));
-    } finally {
-      H(!1);
+    a.length > 0 && indexedDB.deleteDatabase(Eo);
+  } catch (a) {
+    console.warn("Legacy IDB gallery migration failed:", a);
+  }
+}, At = {
+  music: null,
+  cover: null,
+  lyrics: null,
+  lyricsBackup: null,
+  image: null,
+  allIds: []
+}, Nc = (e, a) => {
+  const r = [];
+  for (const o of a)
+    o.endpoint && o.user_key && r.push({
+      url: `${o.endpoint.replace(/\/$/, "")}/v1`,
+      apiKey: Pl(o.user_key),
+      podId: o.pod_id,
+      source: "included",
+      label: `AIL gateway ${o.pod_id}`,
+      models: At
+    });
+  return r.push({
+    url: tc,
+    apiKey: ac,
+    podId: "local",
+    source: "local",
+    label: "Local AIL",
+    models: At
+  }), r;
+}, Ac = (e) => {
+  const a = (u, y) => {
+    const x = u.map((N) => N.toLowerCase());
+    for (const N of y) {
+      const f = x.findIndex((v) => N.test(v));
+      if (f >= 0) return u[f];
     }
-  }, [t, e, $, S, y, p, x, b, h]), te = P(async () => {
+    return null;
+  }, r = a(e, [
+    /(^|[/:])minimax:music-cover$/,
+    /(^|[/:])ail-music-cover$/,
+    /music[-_:]cover/,
+    /cover.*music/
+  ]), o = a(e, [
+    /(^|[/:])minimax:music-lyrics$/,
+    /(^|[/:])ail-music-lyrics$/,
+    /music[-_:]lyrics/,
+    /lyrics[-_:]?generat/,
+    // minimax lyrics_generation alias if exposed
+    /lyrics.*music/,
+    /(^|[/:])lyrics$/,
+    /lyric/i
+    // last-resort: anything containing "lyric"
+  ]), n = new Set([r, o].filter((u) => !!u)), l = e.filter((u) => !n.has(u)), d = a(l, [
+    /(^|[/:])minimax:music-2\.6$/,
+    /(^|[/:])ail-music$/,
+    /(^|[/:])music-2\.6$/,
+    /music/
+    // last-resort: any remaining music-tagged id
+  ]), b = (u) => /music|cover|tts|stt|transcribe|whisper|embed|image/i.test(u), p = e.filter((u) => !b(u)), m = a(p, [
+    /(^|[/:])ail-compound$/,
+    /(^|[/:])ail-fast$/,
+    /(^|[/:])ail-search$/,
+    /(^|[/:])ail-kimi$/,
+    /(^|[/:])minimax:m2\.7$/,
+    /(^|[/:])gpt-/i,
+    /(^|[/:])claude/i,
+    /chat/i,
+    /./
+    // last-resort: any non-music id at all
+  ]), w = a(e, [
+    /(^|[/:])minimax:image-01$/,
+    // local switchAILocal canonical
+    /(^|[/:])image-01$/,
+    // bare alias (no provider prefix)
+    /(^|[/:])minimax:image$/,
+    /(^|[/:])minimax:cover-art$/,
+    /(^|[/:])ail-image$/,
+    // remote AIL pod alias
+    /(^|[/:])dall-?e/i,
+    /(^|[/:])flux/i,
+    /(^|[/:])sdxl/i,
+    /image[-_:]?(gen|01)/i,
+    /image/i,
+    /diffusion/i
+  ]);
+  return { music: d, cover: r, lyrics: o, lyricsBackup: m, image: w, allIds: e };
+}, zc = 6e4, mr = /* @__PURE__ */ new Map(), Ic = async (e, a) => {
+  const r = mr.get(e.url);
+  if (r !== void 0) {
+    if (Date.now() < r)
+      return { ok: !1, models: At };
+    mr.delete(e.url);
+  }
+  const o = jt(a, Ec);
+  try {
+    const n = await fetch(`${e.url}/models`, {
+      method: "GET",
+      signal: o.signal,
+      headers: { Authorization: `Bearer ${e.apiKey}` }
+    });
+    if (n.status >= 500) return { ok: !1, models: At };
+    if (!n.ok) return { ok: !0, models: At };
+    const d = ((await n.json()).data ?? []).map((b) => b?.id).filter((b) => typeof b == "string" && b.length > 0);
+    return { ok: !0, models: Ac(d) };
+  } catch (n) {
+    return (n?.name ?? "") === "TypeError" && mr.set(e.url, Date.now() + zc), { ok: !1, models: At };
+  } finally {
+    o.dispose();
+  }
+}, Mc = async (e, a) => (await Promise.all(
+  e.map(async (o) => {
+    if (a.aborted) return null;
+    const { ok: n, models: l } = await Ic(o, a);
+    return n ? { ...o, models: l } : null;
+  })
+)).filter((o) => o !== null), Ta = 6e4, Lo = 3e5, Ec = 8e3, jt = (e, a) => {
+  const r = AbortSignal.any, o = AbortSignal.timeout;
+  if (r && o) {
+    const d = o(a);
+    return { signal: e ? r([e, d]) : d, dispose: () => {
+    } };
+  }
+  const n = new AbortController(), l = setTimeout(() => {
+    n.signal.aborted || n.abort(new DOMException("Timeout", "TimeoutError"));
+  }, a);
+  return e && (e.aborted ? n.abort(e.reason) : e.addEventListener("abort", () => n.abort(e.reason), { once: !0 })), { signal: n.signal, dispose: () => clearTimeout(l) };
+}, Lc = /* @__PURE__ */ new Set([402, 408, 425, 429, 500, 502, 503, 504]);
+class ye extends Error {
+  status;
+  body;
+  constructor(a, r, o) {
+    super(o ?? `HTTP ${a}: ${r.slice(0, 200)}`), this.name = "GatewayError", this.status = a, this.body = r;
+  }
+}
+function fi(e) {
+  const a = e.indexOf("{");
+  if (a === -1) return null;
+  let r = 0, o = !1, n = !1;
+  for (let l = a; l < e.length; l++) {
+    const d = e[l];
+    if (o) {
+      if (n) {
+        n = !1;
+        continue;
+      }
+      if (d === "\\") {
+        n = !0;
+        continue;
+      }
+      d === '"' && (o = !1);
+      continue;
+    }
+    if (d === '"') {
+      o = !0;
+      continue;
+    }
+    if (d === "{") r++;
+    else if (d === "}" && (r--, r === 0))
+      return e.slice(a, l + 1);
+  }
+  return null;
+}
+const Ra = async (e, a, r) => {
+  if (e.length === 0)
+    throw new Error(`No ${r}-capable models available on this endpoint.`);
+  let o = null;
+  for (const l of e)
     try {
-      const i = await e.daemon.juli3taLibrary.openGeneratedTracksFolder();
-      M(`Opened ${i}`);
-    } catch (i) {
-      m(`Could not open JULI3TA folder: ${i instanceof Error ? i.message : String(i)}`);
+      return await a(l);
+    } catch (d) {
+      if (d.name === "AbortError" || d.name === "TimeoutError")
+        throw d;
+      if (d instanceof TypeError) {
+        o = d;
+        continue;
+      }
+      if (d instanceof ye && Lc.has(d.status)) {
+        o = d;
+        continue;
+      }
+      throw d;
     }
-  }, [e]), O = xe(() => a, [a]), be = T.find((i) => i.id === p), ke = (i) => {
-    const l = ce(i, o);
-    if (l) {
-      if (I.current || (I.current = new Audio()), J === i.id) {
-        I.current.pause(), R(null);
+  const n = o?.message ?? "unknown";
+  throw new Error(`All ${r} models exhausted. Last error: ${n}. Wait for the rate limit to reset, or pick a different endpoint in Settings.`);
+}, jc = /* @__PURE__ */ new Set([408, 425, 429, 500, 502, 503, 504]), Pc = async (e, a, r) => {
+  let o = 0, n = "";
+  const l = jt(r, Ta);
+  try {
+    const y = { prompt: a, mode: "write_full_song" };
+    e.models.lyrics && (y.model = e.models.lyrics);
+    const x = await fetch(`${e.url}/music/lyrics`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${e.apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(y),
+      signal: l.signal
+    });
+    if (x.ok) {
+      const N = await x.json();
+      if (!N || typeof N.lyrics != "string" || N.lyrics.trim().length === 0)
+        throw new Error("Lyrics endpoint returned 200 but no lyrics text.");
+      return { ...N, usedFallback: !1 };
+    }
+    o = x.status, n = await x.text().catch(() => "");
+  } catch (y) {
+    const x = y.name;
+    if (x === "AbortError" && r?.aborted) throw y;
+    if (x === "TimeoutError")
+      throw new Error(`Lyrics request timed out after ${Ta / 1e3}s. Check your pod / pick another endpoint in Settings.`);
+    console.warn("Lyrics primary threw (network), falling back to chat:", y);
+  } finally {
+    l.dispose();
+  }
+  if (o !== 0 && !jc.has(o)) {
+    const y = n.length > 300 ? `${n.slice(0, 300)}…` : n;
+    throw new Error(`Lyrics HTTP ${o}: ${y || "no body"}`);
+  }
+  o !== 0 && console.warn(`Lyrics primary HTTP ${o} (retryable), falling back to chat:`, n);
+  const d = (y) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(y), b = /* @__PURE__ */ new Set(), p = [], m = (y) => {
+    y && !b.has(y) && (b.add(y), p.push(y));
+  };
+  if (m(e.models.lyricsBackup), e.models.allIds.filter(d).forEach(m), p.length === 0)
+    throw new Error(
+      `Lyrics endpoint failed and no chat backup model is available for ${e.label}. Pick one in JULI3TA Settings.`
+    );
+  const w = `You are a songwriter. Given a theme, write a complete singable song.
+Respond with VALID JSON ONLY in exactly this shape, nothing else:
+{
+  "song_title": "Short catchy title",
+  "style_tags": "comma, separated, style, hints",
+  "lyrics": "[Verse]\\nFour lines\\n\\n[Chorus]\\nFour lines\\n\\n[Verse]\\nFour lines\\n\\n[Chorus]\\nFour lines\\n\\n[Bridge]\\nTwo lines\\n\\n[Outro]\\nTwo lines"
+}`, u = await Ra(p, async (y) => {
+    const x = {
+      model: y,
+      messages: [
+        { role: "system", content: w },
+        { role: "user", content: `Theme: ${a}` }
+      ],
+      temperature: 0.85
+    }, N = async (f) => {
+      const v = jt(r, Ta);
+      let A;
+      try {
+        A = await fetch(`${e.url}/chat/completions`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${e.apiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(
+            f ? { ...x, response_format: { type: "json_object" } } : x
+          ),
+          signal: v.signal
+        });
+      } catch (E) {
+        throw E.name === "TimeoutError" ? new Error(`Lyrics backup model timed out after ${Ta / 1e3}s.`) : E;
+      } finally {
+        v.dispose();
+      }
+      if (!A.ok) {
+        const E = await A.text().catch(() => "");
+        throw new ye(A.status, E, `Lyrics fallback HTTP ${A.status}: ${E.slice(0, 300)}`);
+      }
+      const T = (await A.json()).choices?.[0]?.message?.content?.trim() ?? "";
+      if (!T)
+        throw new ye(502, "", "Lyrics fallback returned empty content");
+      const P = T.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, ""), O = fi(P) ?? P;
+      let L;
+      try {
+        L = JSON.parse(O);
+      } catch {
+        throw console.warn("[callLyrics] non-JSON fallback content:", T.slice(0, 400)), new ye(502, T.slice(0, 200), `Lyrics fallback returned non-JSON content: ${T.slice(0, 200)}`);
+      }
+      if (!L.lyrics)
+        throw new ye(502, "", 'Lyrics fallback JSON missing "lyrics" field');
+      return L;
+    };
+    try {
+      return await N(!0);
+    } catch (f) {
+      if (f instanceof ye && f.status === 400 && /response_format|json_object/i.test(f.body))
+        return console.warn("[callLyrics] model rejected json_object, retrying without:", y), await N(!1);
+      throw f;
+    }
+  }, "chat-lyrics");
+  return {
+    song_title: u.song_title || "Untitled",
+    style_tags: u.style_tags || "",
+    lyrics: u.lyrics,
+    usedFallback: !0
+  };
+}, Rc = async (e, a, r) => {
+  const o = !!a.refAudioBase64, n = (m) => /music/i.test(m) && !/cover/i.test(m), l = (m) => /cover/i.test(m), d = /* @__PURE__ */ new Set(), b = (m, w) => {
+    w && !d.has(w) && (d.add(w), m.push(w));
+  }, p = [];
+  if (o ? (b(p, e.models.cover), e.models.allIds.filter(l).forEach((m) => b(p, m)), b(p, e.models.music)) : (b(p, e.models.music), e.models.allIds.filter(n).forEach((m) => b(p, m))), p.length === 0)
+    throw new Error(
+      o ? `This endpoint (${e.label}) doesn't expose a music-cover model. Try a different connection.` : `This endpoint (${e.label}) doesn't expose a music model. Try a different connection.`
+    );
+  return Ra(p, async (m) => {
+    const w = {
+      model: m,
+      lyrics: a.lyrics
+    };
+    a.prompt && (w.prompt = a.prompt), a.instrumental && (w.instrumental = !0), o && (w.audio_base64 = a.refAudioBase64);
+    const u = jt(r, Lo);
+    let y;
+    try {
+      y = await fetch(`${e.url}/music/generations`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${e.apiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(w),
+        signal: u.signal
+      });
+    } catch (N) {
+      throw N.name === "TimeoutError" ? new Error(`Music generation timed out after ${Lo / 1e3}s. Try a shorter lyric or a different endpoint.`) : N;
+    } finally {
+      u.dispose();
+    }
+    if (!y.ok) {
+      const N = await y.text().catch(() => "");
+      throw new ye(y.status, N, `Music HTTP ${y.status}: ${N.slice(0, 300)}`);
+    }
+    const x = await y.json();
+    if (!x?.data?.audio || typeof x.data.audio != "string" || x.data.audio.length < 100)
+      throw new ye(502, "", "Music gen returned no audio data — gateway accepted the call but upstream returned nothing.");
+    return x;
+  }, o ? "music-cover" : "music");
+}, jo = 6e4, za = (e, a, r) => {
+  const o = e.trim().replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "a song", n = r.trim().split(/[,;\n]/).slice(0, 3).join(", ").trim(), l = a.trim().split(/[.!?\n]/)[0]?.slice(0, 140).trim() ?? "", d = [
+    `Square album cover art for a song titled "${o}".`
+  ];
+  return n && d.push(`Genre: ${n}.`), l && d.push(`Mood: ${l}.`), d.push("Editorial, expressive, vivid colors, no text, no words, no logos, no lyrics overlay."), d.join(" ");
+}, _r = async (e, a, r) => {
+  const o = (b) => /image|diffusion|dall-?e|flux|sdxl/i.test(b), n = /* @__PURE__ */ new Set(), l = [], d = (b) => {
+    b && !n.has(b) && (n.add(b), l.push(b));
+  };
+  if (d(e.models.image), e.models.allIds.filter(o).forEach(d), l.length === 0)
+    throw new Error(`This endpoint (${e.label}) doesn't expose an image-generation model. Pick one in JULI3TA Settings → Cover art, or upload your own image.`);
+  return Ra(l, async (b) => {
+    const p = jt(r, jo), w = /minimax|ail-image|image-01/i.test(b) ? {
+      model: b,
+      prompt: a,
+      aspect_ratio: "1:1",
+      response_format: "base64"
+    } : {
+      model: b,
+      prompt: a,
+      size: "1024x1024",
+      n: 1,
+      response_format: "b64_json"
+    };
+    let u;
+    try {
+      u = await fetch(`${e.url}/images/generations`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${e.apiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(w),
+        signal: p.signal
+      });
+    } catch (T) {
+      throw T.name === "TimeoutError" ? new Error(`Cover-art request timed out after ${jo / 1e3}s.`) : T;
+    } finally {
+      p.dispose();
+    }
+    if (!u.ok) {
+      const T = await u.text().catch(() => "");
+      throw new ye(u.status, T, `Cover-art HTTP ${u.status}: ${T.slice(0, 200)}`);
+    }
+    const y = await u.json(), x = y.base_resp;
+    if (x && typeof x.status_code == "number" && x.status_code !== 0)
+      throw new ye(502, x.status_msg ?? "", `Cover-art ${b} rejected: ${x.status_msg ?? "status_code=" + x.status_code}`);
+    const N = (T) => typeof T != "string" || !T.length ? null : T.startsWith("data:") ? T : `data:image/png;base64,${T}`, f = (T) => typeof T == "string" && /^https?:\/\//i.test(T) ? T : null, v = y.data;
+    if (v && typeof v == "object" && !Array.isArray(v)) {
+      const T = v, P = T.image_base64;
+      if (Array.isArray(P) && P[0]) {
+        const E = N(P[0]);
+        if (E) return E;
+      }
+      const O = N(T.image) ?? N(T.b64_json) ?? f(T.url);
+      if (O) return O;
+      const L = T.image_url ?? T.image_urls;
+      if (Array.isArray(L) && L[0]) {
+        const E = f(L[0]);
+        if (E) return E;
+      }
+    }
+    if (Array.isArray(v) && v[0]) {
+      const T = v[0], P = N(T.b64_json) ?? N(T.image_base64) ?? f(T.url);
+      if (P) return P;
+      throw new ye(502, "", "Cover-art response missing b64_json/url in data[0]");
+    }
+    const A = N(y.image) ?? N(y.b64_json);
+    if (A) return A;
+    const C = y.images;
+    if (Array.isArray(C) && C[0]) {
+      const T = C[0], P = N(T.b64_json) ?? N(T.image) ?? f(T.url);
+      if (P) return P;
+    }
+    throw new ye(502, "", `Cover-art response shape not recognised: ${JSON.stringify(y).slice(0, 200)}`);
+  }, "image");
+}, Po = [
+  "✍️  Putting pen to paper…",
+  "🎀  Looking for the perfect rhyme…",
+  "📝  Stitching the chorus together…",
+  "🎤  Polishing the bridge…"
+], Ro = [
+  "🎹  Warming up the keys…",
+  "🥁  Calling in the drums…",
+  "🎻  Strings rolling in…",
+  "🎚️  Mixing the perfect sauce…",
+  "✨  Sprinkling some magic…",
+  "🎧  Almost there — last touches…"
+];
+function Dc(e, a, r) {
+  const [o, n] = _({
+    trackId: null,
+    playing: !1,
+    loadingTrackId: null,
+    positionMs: 0,
+    durationMs: 0,
+    volume: 1
+  }), l = Z(null), d = I((f) => {
+    (async () => {
+      n((C) => ({
+        ...C,
+        trackId: f.id,
+        playing: !1,
+        loadingTrackId: ve(f) ? f.id : null,
+        positionMs: 0,
+        durationMs: f.durationMs || 0
+      }));
+      const v = f.audioDataUrl || await r?.(f);
+      if (!v) {
+        n((C) => ({ ...C, loadingTrackId: null }));
         return;
       }
-      I.current.src = l, I.current.play().then(() => R(i.id)).catch((c) => m(String(c))), I.current.onended = () => R(null);
+      const A = a.current;
+      if (!A) {
+        n((C) => ({ ...C, loadingTrackId: null }));
+        return;
+      }
+      o.trackId !== f.id || A.src !== v ? (A.src = v, A.preload = "auto", A.load(), A.pause(), n((C) => ({
+        ...C,
+        trackId: f.id,
+        playing: !1,
+        loadingTrackId: null,
+        positionMs: 0,
+        durationMs: f.durationMs || 0
+      }))) : n((C) => ({ ...C, loadingTrackId: null }));
+    })();
+  }, [o.trackId, a, r]), b = I((f) => {
+    (async () => {
+      l.current = null, n((C) => ({
+        ...C,
+        trackId: f.id,
+        loadingTrackId: f.id,
+        durationMs: f.durationMs || C.durationMs
+      }));
+      const v = f.audioDataUrl || await r?.(f);
+      if (!v) {
+        n((C) => ({ ...C, loadingTrackId: null, playing: !1 }));
+        return;
+      }
+      const A = a.current;
+      if (!A) {
+        n((C) => ({ ...C, loadingTrackId: null, playing: !1 }));
+        return;
+      }
+      (o.trackId !== f.id || A.src !== v) && (A.src = v, A.preload = "auto", n((C) => ({ ...C, trackId: f.id, positionMs: 0, durationMs: f.durationMs || 0 }))), A.play().then(() => n((C) => ({ ...C, loadingTrackId: null, playing: !0 }))).catch(() => n((C) => ({ ...C, loadingTrackId: null, playing: !1 })));
+    })();
+  }, [o.trackId, a, r]), p = I(() => {
+    a.current?.pause(), n((f) => ({ ...f, playing: !1, loadingTrackId: null }));
+  }, [a]), m = I((f) => {
+    if (o.loadingTrackId) return;
+    if (f) {
+      o.trackId === f.id && o.playing ? p() : b(f);
+      return;
+    }
+    if (o.playing) {
+      p();
+      return;
+    }
+    const v = o.trackId ? e.find((A) => A.id === o.trackId) : null;
+    v ? b(v) : a.current?.src && a.current.play().catch(() => {
+    });
+  }, [o.trackId, o.playing, o.loadingTrackId, e, b, p, a]), w = I((f) => {
+    const v = a.current;
+    v && (v.currentTime = Math.max(0, f / 1e3));
+  }, [a]), u = I((f) => {
+    const v = Math.max(0, Math.min(1, f));
+    a.current && (a.current.volume = v), n((A) => ({ ...A, volume: v }));
+  }, [a]), y = ce(() => e.filter(ve), [e]), x = I(() => {
+    if (!o.trackId || y.length === 0) return;
+    const f = y.findIndex((A) => A.id === o.trackId);
+    if (f < 0) return;
+    const v = y[(f + 1) % y.length];
+    v && b(v);
+  }, [o.trackId, y, b]), N = I(() => {
+    if (!o.trackId || y.length === 0) return;
+    const f = y.findIndex((A) => A.id === o.trackId);
+    if (f < 0) return;
+    const v = y[(f - 1 + y.length) % y.length];
+    v && b(v);
+  }, [o.trackId, y, b]);
+  return ee(() => {
+    const f = a.current;
+    if (!f) return;
+    const v = () => n((E) => ({ ...E, positionMs: f.currentTime * 1e3 })), A = () => n((E) => ({
+      ...E,
+      durationMs: Number.isFinite(f.duration) ? f.duration * 1e3 : E.durationMs
+    })), C = () => n((E) => ({ ...E, playing: !0, loadingTrackId: null })), T = () => n((E) => ({ ...E, playing: !1, loadingTrackId: null })), P = () => n((E) => ({ ...E, loadingTrackId: null })), O = () => {
+      const E = o.trackId ? y.find((U) => U.id === o.trackId) : null;
+      if (!E || E.audioDataUrl || !r || l.current === E.id) {
+        n((U) => ({ ...U, playing: !1, loadingTrackId: null }));
+        return;
+      }
+      l.current = E.id, n((U) => ({ ...U, loadingTrackId: E.id, playing: !1 })), r(E, { force: !0 }).then((U) => {
+        if (!U) throw new Error("No refreshed stream URL");
+        return f.src = U, f.preload = "auto", f.play();
+      }).then(() => n((U) => ({ ...U, playing: !0, loadingTrackId: null }))).catch(() => n((U) => ({ ...U, playing: !1, loadingTrackId: null })));
+    }, L = () => {
+      if (y.length >= 2) {
+        const E = y.findIndex((U) => U.id === o.trackId);
+        if (E >= 0 && E + 1 < y.length) {
+          b(y[E + 1]);
+          return;
+        }
+      }
+      n((E) => ({ ...E, playing: !1, positionMs: 0 }));
+    };
+    return f.addEventListener("timeupdate", v), f.addEventListener("loadedmetadata", A), f.addEventListener("play", C), f.addEventListener("pause", T), f.addEventListener("canplay", P), f.addEventListener("error", O), f.addEventListener("ended", L), () => {
+      f.removeEventListener("timeupdate", v), f.removeEventListener("loadedmetadata", A), f.removeEventListener("play", C), f.removeEventListener("pause", T), f.removeEventListener("canplay", P), f.removeEventListener("error", O), f.removeEventListener("ended", L);
+    };
+  }, [y, o.trackId, b, a, r]), { state: o, queue: e, play: b, pause: p, toggle: m, select: d, seek: w, setVolume: u, next: x, prev: N };
+}
+function Do({
+  checked: e,
+  onChange: a,
+  disabled: r,
+  id: o
+}) {
+  return /* @__PURE__ */ t(
+    "button",
+    {
+      id: o,
+      type: "button",
+      role: "switch",
+      "aria-checked": e,
+      onClick: () => !r && a(!e),
+      disabled: r,
+      className: "relative shrink-0 rounded-full transition-all disabled:opacity-40",
+      style: {
+        width: 30,
+        height: 16,
+        background: e ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-hover)",
+        border: "1px solid var(--border-subtle)",
+        cursor: r ? "not-allowed" : "pointer"
+      },
+      children: /* @__PURE__ */ t(
+        "span",
+        {
+          className: "absolute rounded-full transition-transform",
+          style: {
+            top: 1,
+            left: 1,
+            width: 12,
+            height: 12,
+            background: "white",
+            transform: e ? "translateX(14px)" : "translateX(0)",
+            boxShadow: "0 1px 2px rgba(0,0,0,0.4)"
+          }
+        }
+      )
+    }
+  );
+}
+function hr({
+  label: e,
+  tooltip: a,
+  onClick: r,
+  busy: o,
+  disabled: n
+}) {
+  return /* @__PURE__ */ s(
+    "button",
+    {
+      type: "button",
+      onClick: r,
+      disabled: n,
+      className: "flex items-center gap-1 px-2 py-0.5 rounded-md transition-all hover:scale-105 disabled:opacity-40 disabled:hover:scale-100",
+      style: {
+        fontSize: 10,
+        fontWeight: 600,
+        color: "white",
+        background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+        border: "1px solid transparent"
+      },
+      title: a,
+      children: [
+        o ? /* @__PURE__ */ t(X, { size: 10, className: "animate-spin" }) : /* @__PURE__ */ t(De, { size: 10 }),
+        o ? "…" : e
+      ]
+    }
+  );
+}
+function Mt({
+  track: e,
+  size: a,
+  iconSize: r,
+  radius: o
+}) {
+  const n = Ir(e);
+  return n ? /* @__PURE__ */ t(
+    "img",
+    {
+      src: n,
+      alt: "",
+      className: "flex-shrink-0",
+      style: {
+        width: a,
+        height: a,
+        borderRadius: o <= 6 ? "var(--radius-md)" : "var(--radius-xl)",
+        objectFit: "cover"
+      }
+    }
+  ) : /* @__PURE__ */ t(
+    "div",
+    {
+      className: "flex items-center justify-center flex-shrink-0 overflow-hidden",
+      style: {
+        width: a,
+        height: a,
+        borderRadius: o <= 6 ? "var(--radius-md)" : "var(--radius-xl)",
+        background: "linear-gradient(135deg, #7B43C9 0%, #C8377E 55%, #F08A4B 100%)"
+      },
+      children: /* @__PURE__ */ t(
+        "img",
+        {
+          src: "/brand/juli3ta/mark-cream-128.png",
+          alt: "",
+          width: r,
+          height: r,
+          draggable: !1,
+          style: {
+            width: r,
+            height: r,
+            opacity: 0.92,
+            userSelect: "none",
+            pointerEvents: "none"
+          }
+        }
+      )
+    }
+  );
+}
+function Hc({ player: e, allTracks: a }) {
+  const { state: r, toggle: o, next: n, prev: l, seek: d, setVolume: b, queue: p } = e, m = p.find((f) => f.id === r.trackId) ?? a.find((f) => f.id === r.trackId) ?? null;
+  if (!m) return null;
+  const w = r.durationMs > 0 ? r.durationMs : m.durationMs, u = Math.min(r.positionMs, w || 0), y = w > 0 ? u / w * 100 : 0, x = r.loadingTrackId === m.id, N = (f) => {
+    if (!w) return;
+    const v = f.currentTarget.getBoundingClientRect(), A = (f.clientX - v.left) / v.width;
+    d(Math.max(0, Math.min(1, A)) * w);
+  };
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      className: "flex-shrink-0 flex items-center gap-3 px-4",
+      style: {
+        height: 64,
+        borderTop: "1px solid var(--border-subtle)",
+        background: "var(--bg-titlebar)"
+      },
+      children: [
+        /* @__PURE__ */ t(Mt, { track: m, size: 40, iconSize: 18, radius: 6 }),
+        /* @__PURE__ */ s("div", { className: "flex flex-col min-w-0", style: { width: 180 }, children: [
+          /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }, children: m.title }),
+          /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)" }, children: m.styleTags && m.styleTags !== "—" ? m.styleTags : "—" })
+        ] }),
+        /* @__PURE__ */ s("div", { className: "flex items-center gap-1 flex-shrink-0", children: [
+          /* @__PURE__ */ t(
+            "button",
+            {
+              onClick: l,
+              className: "flex items-center justify-center rounded-md transition-all hover:bg-[var(--bg-hover)]",
+              style: { width: 28, height: 28, color: "var(--text-secondary)" },
+              title: "Previous",
+              children: /* @__PURE__ */ t(fe, { size: 12, style: { transform: "rotate(180deg)" } })
+            }
+          ),
+          /* @__PURE__ */ t(
+            "button",
+            {
+              onClick: () => o(),
+              className: "flex items-center justify-center rounded-full transition-transform hover:scale-105",
+              style: {
+                width: 32,
+                height: 32,
+                background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
+              },
+              title: r.playing ? "Pause" : "Play",
+              children: x ? /* @__PURE__ */ t(X, { size: 13, className: "animate-spin", style: { color: "white" } }) : r.playing ? /* @__PURE__ */ t(Et, { size: 13, style: { color: "white" } }) : /* @__PURE__ */ t(fe, { size: 13, style: { color: "white", marginLeft: 1 } })
+            }
+          ),
+          /* @__PURE__ */ t(
+            "button",
+            {
+              onClick: n,
+              className: "flex items-center justify-center rounded-md transition-all hover:bg-[var(--bg-hover)]",
+              style: { width: 28, height: 28, color: "var(--text-secondary)" },
+              title: "Next",
+              children: /* @__PURE__ */ t(fe, { size: 12 })
+            }
+          )
+        ] }),
+        /* @__PURE__ */ t(
+          "span",
+          {
+            className: "flex-shrink-0 tabular-nums",
+            style: { fontSize: 10, color: "var(--text-disabled)", minWidth: 36, textAlign: "right" },
+            children: He(u)
+          }
+        ),
+        /* @__PURE__ */ t(
+          "div",
+          {
+            onClick: N,
+            className: "flex-1 rounded-full overflow-hidden cursor-pointer",
+            style: { height: 4, background: "var(--bg-hover)" },
+            children: /* @__PURE__ */ t(
+              "div",
+              {
+                style: {
+                  width: `${y}%`,
+                  height: "100%",
+                  background: "linear-gradient(to right, var(--accent-primary), var(--accent-secondary))",
+                  transition: "width 0.15s linear"
+                }
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ t(
+          "span",
+          {
+            className: "flex-shrink-0 tabular-nums",
+            style: { fontSize: 10, color: "var(--text-disabled)", minWidth: 36 },
+            children: He(w)
+          }
+        ),
+        /* @__PURE__ */ s("div", { className: "flex items-center gap-1.5 flex-shrink-0", style: { width: 100 }, children: [
+          /* @__PURE__ */ t(fr, { size: 12, style: { color: "var(--text-disabled)", flexShrink: 0 } }),
+          /* @__PURE__ */ t(
+            "input",
+            {
+              type: "range",
+              min: 0,
+              max: 1,
+              step: 0.01,
+              value: r.volume,
+              onChange: (f) => b(Number(f.target.value)),
+              style: { width: "100%", accentColor: "var(--accent-primary)" }
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+function Oc({ retrying: e, onRetry: a }) {
+  const { t: r } = ht();
+  return /* @__PURE__ */ s("div", { className: "flex flex-col items-center justify-center h-full px-8 text-center", style: { background: "var(--bg-window)" }, children: [
+    /* @__PURE__ */ t(
+      "img",
+      {
+        src: "/brand/juli3ta/icon-gradient-512.png",
+        alt: "JULI3TA",
+        width: 96,
+        height: 96,
+        draggable: !1,
+        style: {
+          width: 96,
+          height: 96,
+          borderRadius: "var(--radius-2xl)",
+          marginBottom: 20,
+          boxShadow: "0 8px 32px rgba(200, 55, 126, 0.4)",
+          animation: "pulse 2s infinite",
+          userSelect: "none",
+          pointerEvents: "none"
+        }
+      }
+    ),
+    /* @__PURE__ */ t(
+      "div",
+      {
+        style: {
+          fontSize: 28,
+          fontWeight: 800,
+          letterSpacing: "-0.02em",
+          background: "linear-gradient(135deg, #7B43C9 0%, #C8377E 55%, #F08A4B 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text"
+        },
+        children: "JULI3TA needs a stage"
+      }
+    ),
+    /* @__PURE__ */ t("p", { style: { fontSize: 13, color: "var(--text-secondary)", marginTop: 12, maxWidth: 380, lineHeight: 1.5 }, children: r("musiccreator.empty.body") }),
+    /* @__PURE__ */ s("div", { className: "flex items-center gap-2 mt-6", children: [
+      /* @__PURE__ */ s(
+        "button",
+        {
+          onClick: a,
+          disabled: e,
+          className: "flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-[1.02] disabled:opacity-60",
+          style: {
+            background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+            color: "white",
+            fontSize: 13,
+            fontWeight: 600,
+            boxShadow: "0 4px 16px rgba(124, 77, 255, 0.3)"
+          },
+          children: [
+            e ? /* @__PURE__ */ t(X, { size: 14, className: "animate-spin" }) : /* @__PURE__ */ t(De, { size: 14 }),
+            e ? "Looking for a stage…" : "Try again"
+          ]
+        }
+      ),
+      /* @__PURE__ */ t(
+        "a",
+        {
+          href: "https://tytus.traylinx.com",
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: "flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+          style: {
+            fontSize: 13,
+            color: "var(--text-secondary)",
+            border: "1px solid var(--border-subtle)"
+          },
+          children: "Get Tytus →"
+        }
+      )
+    ] }),
+    /* @__PURE__ */ s(
+      "div",
+      {
+        className: "mt-6 px-3 py-2 rounded-lg text-left",
+        style: {
+          fontSize: 11,
+          color: "var(--text-disabled)",
+          background: "var(--bg-titlebar)",
+          border: "1px solid var(--border-subtle)",
+          maxWidth: 380
+        },
+        children: [
+          /* @__PURE__ */ t("div", { style: { fontWeight: 600, color: "var(--text-secondary)", marginBottom: 4 }, children: "JULI3TA tries, in order:" }),
+          /* @__PURE__ */ t("div", { children: "1. Your remote Tytus pod (best — runs in the cloud)" }),
+          /* @__PURE__ */ s("div", { children: [
+            "2. Local ",
+            /* @__PURE__ */ t("code", { children: "switchAILocal" }),
+            " on this machine"
+          ] }),
+          /* @__PURE__ */ t("div", { children: "3. This screen — when neither is reachable" })
+        ]
+      }
+    )
+  ] });
+}
+function Zt({ label: e, hint: a, counter: r, counterDanger: o, className: n, headerExtra: l, children: d }) {
+  return /* @__PURE__ */ s("div", { className: n, children: [
+    /* @__PURE__ */ s("div", { className: "flex items-center justify-between mb-2", children: [
+      /* @__PURE__ */ t(
+        "label",
+        {
+          style: {
+            fontSize: 10,
+            fontWeight: 600,
+            color: "var(--text-disabled)",
+            textTransform: "uppercase",
+            letterSpacing: 0.5
+          },
+          children: e
+        }
+      ),
+      (l || r) && /* @__PURE__ */ s("div", { className: "flex items-center gap-3", children: [
+        l,
+        r && /* @__PURE__ */ t(
+          "span",
+          {
+            style: {
+              fontSize: 10,
+              color: o ? "#ff5252" : "var(--text-disabled)",
+              fontVariantNumeric: "tabular-nums"
+            },
+            children: r
+          }
+        )
+      ] })
+    ] }),
+    d,
+    a && /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 8 }, children: a })
+  ] });
+}
+function Uc({ onPick: e, disabled: a }) {
+  const [r, o] = _(!1), [n, l] = _(dt[0].label), [d, b] = _(""), p = d.trim().toLowerCase(), m = p.length > 0, w = ce(() => {
+    if (!m) return [];
+    const u = [];
+    for (const y of dt)
+      for (const x of y.chips)
+        x.toLowerCase().includes(p) && u.push({ family: y.label, chip: x });
+    return u;
+  }, [m, p]);
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      className: "rounded-xl p-3 mb-4",
+      style: {
+        background: "var(--bg-titlebar)",
+        border: "1px solid var(--border-subtle)"
+      },
+      children: [
+        /* @__PURE__ */ s("div", { className: "flex items-center justify-between gap-2 mb-3 flex-wrap", children: [
+          /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ t(
+              "label",
+              {
+                style: {
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: "var(--text-secondary)",
+                  textTransform: "uppercase",
+                  letterSpacing: 0.5
+                },
+                children: "Genre palette"
+              }
+            ),
+            /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: m ? `${w.length} match${w.length === 1 ? "" : "es"}` : `${rc.length} chips · click to add` })
+          ] }),
+          /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ s(
+              "div",
+              {
+                className: "flex items-center gap-1 px-2 rounded-md",
+                style: {
+                  height: 24,
+                  background: "var(--bg-window)",
+                  border: `1px solid ${m ? "var(--accent-primary)" : "var(--border-subtle)"}`
+                },
+                children: [
+                  /* @__PURE__ */ t(It, { size: 11, style: { color: "var(--text-disabled)" } }),
+                  /* @__PURE__ */ t(
+                    "input",
+                    {
+                      value: d,
+                      onChange: (u) => b(u.target.value),
+                      placeholder: "Search genres…",
+                      className: "rounded-input bg-transparent outline-none",
+                      style: { fontSize: 11, color: "var(--text-primary)", width: 140 }
+                    }
+                  ),
+                  d && /* @__PURE__ */ t(
+                    "button",
+                    {
+                      onClick: () => b(""),
+                      className: "opacity-60 hover:opacity-100",
+                      title: "Clear search",
+                      children: /* @__PURE__ */ t(de, { size: 11 })
+                    }
+                  )
+                ]
+              }
+            ),
+            /* @__PURE__ */ t(
+              "button",
+              {
+                onClick: () => o((u) => !u),
+                className: "px-2 rounded-md transition-all hover:bg-[var(--bg-hover)]",
+                style: {
+                  height: 24,
+                  fontSize: 10,
+                  color: "var(--text-secondary)",
+                  background: "var(--bg-window)",
+                  border: "1px solid var(--border-subtle)"
+                },
+                children: r ? "Collapse" : "Browse all"
+              }
+            )
+          ] })
+        ] }),
+        m ? w.length === 0 ? /* @__PURE__ */ s("div", { style: { fontSize: 11, color: "var(--text-disabled)", padding: "8px 4px" }, children: [
+          "No genres match “",
+          d,
+          "”. Try a shorter word."
+        ] }) : /* @__PURE__ */ t("div", { className: "flex items-center gap-1 flex-wrap", children: w.map(({ family: u, chip: y }) => /* @__PURE__ */ t(
+          gr,
+          {
+            chip: y,
+            family: u,
+            onPick: e,
+            disabled: a
+          },
+          `${u}::${y}`
+        )) }) : /* @__PURE__ */ s(pe, { children: [
+          !r && /* @__PURE__ */ t("div", { className: "flex items-center gap-1 flex-wrap mb-2", children: dt.map((u) => /* @__PURE__ */ t(
+            "button",
+            {
+              onClick: () => l(u.label),
+              className: "px-2 rounded-md transition-all hover:bg-[var(--bg-hover)]",
+              style: {
+                height: 24,
+                fontSize: 10,
+                fontWeight: n === u.label ? 600 : 500,
+                color: n === u.label ? "var(--text-primary)" : "var(--text-secondary)",
+                background: n === u.label ? "var(--bg-selected)" : "var(--bg-window)",
+                border: `1px solid ${n === u.label ? "var(--accent-primary)" : "var(--border-subtle)"}`
+              },
+              children: u.label
+            },
+            u.label
+          )) }),
+          r ? /* @__PURE__ */ t(
+            "div",
+            {
+              className: "grid gap-3",
+              style: { gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" },
+              children: dt.map((u) => /* @__PURE__ */ s("div", { children: [
+                /* @__PURE__ */ t(
+                  "div",
+                  {
+                    style: {
+                      fontSize: 9,
+                      fontWeight: 600,
+                      letterSpacing: 0.5,
+                      color: "var(--text-disabled)",
+                      textTransform: "uppercase",
+                      marginBottom: 4
+                    },
+                    children: u.label
+                  }
+                ),
+                /* @__PURE__ */ t("div", { className: "flex items-center gap-1 flex-wrap", children: u.chips.map((y) => /* @__PURE__ */ t(gr, { chip: y, onPick: e, disabled: a }, y)) })
+              ] }, u.label))
+            }
+          ) : /* @__PURE__ */ t("div", { className: "flex items-center gap-1 flex-wrap", children: (dt.find((u) => u.label === n) ?? dt[0]).chips.map((u) => /* @__PURE__ */ t(gr, { chip: u, onPick: e, disabled: a }, u)) })
+        ] })
+      ]
+    }
+  );
+}
+function gr({
+  chip: e,
+  family: a,
+  onPick: r,
+  disabled: o
+}) {
+  return /* @__PURE__ */ s(
+    "button",
+    {
+      onClick: () => r(e),
+      disabled: o,
+      className: "flex items-center gap-1 px-2 py-1 rounded-full transition-all hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] disabled:opacity-40",
+      style: {
+        fontSize: 10,
+        color: "var(--text-secondary)",
+        background: "var(--bg-window)",
+        border: "1px solid var(--border-subtle)"
+      },
+      title: a,
+      children: [
+        /* @__PURE__ */ t(vr, { size: 10 }),
+        e,
+        a && /* @__PURE__ */ s("span", { style: { fontSize: 9, color: "var(--text-disabled)", marginLeft: 2 }, children: [
+          "· ",
+          a
+        ] })
+      ]
+    }
+  );
+}
+function $c({ specs: e, onChange: a, disabled: r, onOptimize: o, optimizing: n }) {
+  const [l, d] = _(!1), b = ce(() => zr(e), [e]), p = b.length > 0, m = I(
+    (u, y) => {
+      const x = { ...e };
+      y === null ? delete x[u] : x[u] = y, a(x);
+    },
+    [e, a]
+  ), w = () => a({});
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      className: "rounded-xl",
+      style: {
+        background: "var(--bg-titlebar)",
+        border: "1px solid var(--border-subtle)"
+      },
+      children: [
+        /* @__PURE__ */ s("div", { className: "flex items-center justify-between p-3", children: [
+          /* @__PURE__ */ s(
+            "button",
+            {
+              type: "button",
+              onClick: () => d((u) => !u),
+              className: "flex items-center gap-2 flex-1 hover:opacity-90 text-left",
+              style: { background: "transparent", border: "none", cursor: "pointer" },
+              children: [
+                /* @__PURE__ */ t(br, { size: 14, style: { color: "var(--text-secondary)" } }),
+                /* @__PURE__ */ t(
+                  "span",
+                  {
+                    style: {
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: "var(--text-secondary)",
+                      textTransform: "uppercase",
+                      letterSpacing: 0.5
+                    },
+                    children: "Track Specs"
+                  }
+                ),
+                /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: p ? "compiled into Style on generate" : "optional structured controls" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+            o && /* @__PURE__ */ s(
+              "button",
+              {
+                type: "button",
+                onClick: (u) => {
+                  u.stopPropagation(), o(), l || d(!0);
+                },
+                disabled: r || n,
+                className: "flex items-center gap-1 px-2 py-1 rounded-md transition-all disabled:opacity-40 hover:scale-105",
+                style: {
+                  fontSize: 10,
+                  fontWeight: 600,
+                  color: "white",
+                  background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                  border: "1px solid transparent"
+                },
+                title: "Use AI to fill optimal specs from your theme + style + lyrics",
+                children: [
+                  n ? /* @__PURE__ */ t(X, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(De, { size: 11 }),
+                  n ? "Optimizing…" : "AI Optimize"
+                ]
+              }
+            ),
+            p && !l && /* @__PURE__ */ s(
+              "span",
+              {
+                className: "px-2 py-0.5 rounded-full",
+                style: {
+                  fontSize: 9,
+                  background: "var(--accent-primary)",
+                  color: "white",
+                  fontWeight: 600
+                },
+                children: [
+                  zt(e),
+                  " set"
+                ]
+              }
+            ),
+            /* @__PURE__ */ t(
+              "button",
+              {
+                type: "button",
+                onClick: () => d((u) => !u),
+                className: "flex items-center justify-center",
+                style: { background: "transparent", border: "none", cursor: "pointer", width: 18, height: 18 },
+                children: /* @__PURE__ */ t(
+                  qo,
+                  {
+                    size: 14,
+                    style: {
+                      color: "var(--text-secondary)",
+                      transform: l ? "rotate(180deg)" : "none",
+                      transition: "transform 0.15s"
+                    }
+                  }
+                )
+              }
+            )
+          ] })
+        ] }),
+        l && /* @__PURE__ */ s(
+          "div",
+          {
+            className: "px-3 pb-3 pt-0",
+            style: { borderTop: "1px solid var(--border-subtle)" },
+            children: [
+              p && /* @__PURE__ */ s(
+                "div",
+                {
+                  className: "rounded-lg p-2 mt-3 mb-3",
+                  style: {
+                    background: "var(--bg-window)",
+                    border: "1px dashed var(--border-subtle)",
+                    fontSize: 10,
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.5
+                  },
+                  children: [
+                    /* @__PURE__ */ t("span", { style: { color: "var(--text-disabled)", fontWeight: 600 }, children: "preview · " }),
+                    b
+                  ]
+                }
+              ),
+              /* @__PURE__ */ s("div", { className: "grid gap-3", style: { gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }, children: [
+                /* @__PURE__ */ s(ea, { label: "Structure", children: [
+                  /* @__PURE__ */ t(ae, { label: "Tempo (BPM)", children: /* @__PURE__ */ t(
+                    Ho,
+                    {
+                      value: e.structure?.tempo_bpm,
+                      onChange: (u) => m("structure", { ...e.structure, tempo_bpm: u }),
+                      min: 40,
+                      max: 260,
+                      placeholder: "120",
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Tempo class", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.structure?.tempo_class,
+                      options: oc,
+                      onChange: (u) => m("structure", { ...e.structure, tempo_class: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Time signature", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.structure?.time_signature,
+                      options: ic,
+                      onChange: (u) => m("structure", { ...e.structure, time_signature: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Rhythm feel", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.structure?.rhythm_feel,
+                      options: nc,
+                      onChange: (u) => m("structure", { ...e.structure, rhythm_feel: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Groove", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.structure?.groove_pattern,
+                      options: sc,
+                      onChange: (u) => m("structure", { ...e.structure, groove_pattern: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Form", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.structure?.song_form,
+                      options: lc,
+                      onChange: (u) => m("structure", { ...e.structure, song_form: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Length (s)", children: /* @__PURE__ */ t(
+                    Ho,
+                    {
+                      value: e.structure?.length_seconds,
+                      onChange: (u) => m("structure", { ...e.structure, length_seconds: u }),
+                      min: 10,
+                      max: 600,
+                      placeholder: "180",
+                      disabled: r
+                    }
+                  ) })
+                ] }),
+                /* @__PURE__ */ s(ea, { label: "Key", children: [
+                  /* @__PURE__ */ t(ae, { label: "Pitch", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.tonal?.key,
+                      options: cc,
+                      onChange: (u) => m("tonal", { ...e.tonal, key: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Mode", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.tonal?.mode,
+                      options: dc,
+                      onChange: (u) => m("tonal", { ...e.tonal, mode: u }),
+                      disabled: r
+                    }
+                  ) })
+                ] }),
+                /* @__PURE__ */ s(ea, { label: "Dynamics", children: [
+                  /* @__PURE__ */ t(ae, { label: "Range", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.dynamics?.overall_dynamic_range,
+                      options: uc,
+                      onChange: (u) => m("dynamics", { ...e.dynamics, overall_dynamic_range: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Crescendo", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.dynamics?.crescendo_shape,
+                      options: pc,
+                      onChange: (u) => m("dynamics", { ...e.dynamics, crescendo_shape: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Big drops", children: /* @__PURE__ */ t(
+                    Oo,
+                    {
+                      value: e.dynamics?.has_big_drops,
+                      onChange: (u) => m("dynamics", { ...e.dynamics, has_big_drops: u }),
+                      disabled: r
+                    }
+                  ) })
+                ] }),
+                /* @__PURE__ */ s(ea, { label: "Context", children: [
+                  /* @__PURE__ */ t(ae, { label: "Era", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.context?.era_reference,
+                      options: hc,
+                      onChange: (u) => m("context", { ...e.context, era_reference: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Region", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.context?.cultural_region,
+                      options: gc,
+                      onChange: (u) => m("context", { ...e.context, cultural_region: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Intensity", children: /* @__PURE__ */ t(
+                    be,
+                    {
+                      value: e.mood?.emotional_intensity,
+                      options: mc,
+                      onChange: (u) => m("mood", { ...e.mood, emotional_intensity: u }),
+                      disabled: r
+                    }
+                  ) }),
+                  /* @__PURE__ */ t(ae, { label: "Explicit lyrics", children: /* @__PURE__ */ t(
+                    Oo,
+                    {
+                      value: e.context?.explicit_lyrics,
+                      onChange: (u) => m("context", { ...e.context, explicit_lyrics: u }),
+                      disabled: r
+                    }
+                  ) })
+                ] })
+              ] }),
+              /* @__PURE__ */ s("div", { className: "mt-4 flex flex-col gap-3", children: [
+                /* @__PURE__ */ t(
+                  Ct,
+                  {
+                    label: "Primary instruments",
+                    options: bc,
+                    selected: e.instrumentation?.primary_instruments ?? [],
+                    onChange: (u) => m("instrumentation", { ...e.instrumentation, primary_instruments: u.length ? u : void 0 }),
+                    disabled: r
+                  }
+                ),
+                /* @__PURE__ */ s("div", { className: "grid gap-3", style: { gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }, children: [
+                  /* @__PURE__ */ s(ea, { label: "Vocals", children: [
+                    /* @__PURE__ */ t(ae, { label: "Has vocals", children: /* @__PURE__ */ t(
+                      Fc,
+                      {
+                        value: e.instrumentation?.has_vocals,
+                        onChange: (u) => m("instrumentation", { ...e.instrumentation, has_vocals: u }),
+                        disabled: r
+                      }
+                    ) }),
+                    /* @__PURE__ */ t(ae, { label: "Gender", children: /* @__PURE__ */ t(
+                      be,
+                      {
+                        value: e.instrumentation?.vocal_gender,
+                        options: yc,
+                        onChange: (u) => m("instrumentation", { ...e.instrumentation, vocal_gender: u }),
+                        disabled: r
+                      }
+                    ) }),
+                    /* @__PURE__ */ t(ae, { label: "Language (ISO)", children: /* @__PURE__ */ t(
+                      Bc,
+                      {
+                        value: e.instrumentation?.language_iso639_1 ?? "",
+                        onChange: (u) => m("instrumentation", { ...e.instrumentation, language_iso639_1: u.trim() || void 0 }),
+                        placeholder: "en, es, ja…",
+                        maxLength: 5,
+                        disabled: r
+                      }
+                    ) })
+                  ] }),
+                  /* @__PURE__ */ t(
+                    Ct,
+                    {
+                      label: "Vocal style",
+                      options: fc,
+                      selected: e.instrumentation?.vocal_style ?? [],
+                      onChange: (u) => m("instrumentation", { ...e.instrumentation, vocal_style: u.length ? u : void 0 }),
+                      disabled: r
+                    }
+                  ),
+                  /* @__PURE__ */ t(
+                    Ct,
+                    {
+                      label: "Vocal processing",
+                      options: vc,
+                      selected: e.instrumentation?.vocal_processing ?? [],
+                      onChange: (u) => m("instrumentation", { ...e.instrumentation, vocal_processing: u.length ? u : void 0 }),
+                      disabled: r
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ t(
+                  Ct,
+                  {
+                    label: "Primary moods",
+                    options: xc,
+                    selected: e.mood?.primary_moods ?? [],
+                    onChange: (u) => m("mood", { ...e.mood, primary_moods: u.length ? u : void 0 }),
+                    disabled: r
+                  }
+                ),
+                /* @__PURE__ */ t(
+                  Ct,
+                  {
+                    label: "Occasion tags",
+                    options: wc,
+                    selected: e.mood?.occasion_tags ?? [],
+                    onChange: (u) => m("mood", { ...e.mood, occasion_tags: u.length ? u : void 0 }),
+                    disabled: r
+                  }
+                ),
+                /* @__PURE__ */ t(
+                  Ct,
+                  {
+                    label: "Intended use",
+                    options: kc,
+                    selected: e.context?.intended_use ?? [],
+                    onChange: (u) => m("context", { ...e.context, intended_use: u.length ? u : void 0 }),
+                    disabled: r
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ t("div", { className: "flex justify-end mt-3", children: /* @__PURE__ */ t(
+                "button",
+                {
+                  type: "button",
+                  onClick: w,
+                  disabled: r || !p,
+                  className: "px-2 py-1 rounded-md transition-all hover:bg-[var(--bg-hover)] disabled:opacity-30",
+                  style: { fontSize: 10, color: "var(--text-disabled)", background: "transparent", border: "none" },
+                  children: "Clear all specs"
+                }
+              ) })
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
+function ea({ label: e, children: a }) {
+  return /* @__PURE__ */ s("div", { className: "flex flex-col gap-1.5", children: [
+    /* @__PURE__ */ t(
+      "div",
+      {
+        style: {
+          fontSize: 9,
+          fontWeight: 600,
+          color: "var(--text-disabled)",
+          textTransform: "uppercase",
+          letterSpacing: 0.5
+        },
+        children: e
+      }
+    ),
+    a
+  ] });
+}
+function ae({ label: e, children: a }) {
+  return /* @__PURE__ */ s("div", { className: "flex items-center justify-between gap-2", children: [
+    /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-secondary)", flexShrink: 0, minWidth: 90 }, children: e }),
+    /* @__PURE__ */ t("div", { style: { flex: 1, minWidth: 0 }, children: a })
+  ] });
+}
+function be({
+  value: e,
+  options: a,
+  onChange: r,
+  disabled: o
+}) {
+  return /* @__PURE__ */ s(
+    "select",
+    {
+      value: e ?? "",
+      onChange: (n) => r(n.target.value === "" ? void 0 : n.target.value),
+      disabled: o,
+      className: "w-full px-2 py-1 rounded-md focus:outline-none disabled:opacity-50",
+      style: {
+        fontSize: 10,
+        background: "var(--bg-titlebar)",
+        border: "1px solid var(--border-subtle)",
+        color: "var(--text-primary)"
+      },
+      children: [
+        /* @__PURE__ */ t("option", { value: "", children: "—" }),
+        a.map((n) => /* @__PURE__ */ t("option", { value: n, children: G(n) }, n))
+      ]
+    }
+  );
+}
+function Ho({
+  value: e,
+  onChange: a,
+  min: r,
+  max: o,
+  placeholder: n,
+  disabled: l
+}) {
+  return /* @__PURE__ */ t(
+    "input",
+    {
+      type: "number",
+      value: e ?? "",
+      min: r,
+      max: o,
+      placeholder: n,
+      className: "w-full px-2 py-1 rounded-md focus:outline-none disabled:opacity-50",
+      onChange: (d) => {
+        const b = d.target.value;
+        if (b === "") {
+          a(void 0);
+          return;
+        }
+        const p = Number(b);
+        Number.isFinite(p) && a(p);
+      },
+      disabled: l,
+      style: {
+        fontSize: 10,
+        background: "var(--bg-titlebar)",
+        border: "1px solid var(--border-subtle)",
+        color: "var(--text-primary)"
+      }
+    }
+  );
+}
+function Bc({
+  value: e,
+  onChange: a,
+  placeholder: r,
+  maxLength: o,
+  disabled: n
+}) {
+  return /* @__PURE__ */ t(
+    "input",
+    {
+      type: "text",
+      value: e,
+      placeholder: r,
+      maxLength: o,
+      onChange: (l) => a(l.target.value),
+      disabled: n,
+      className: "w-full px-2 py-1 rounded-md focus:outline-none disabled:opacity-50",
+      style: {
+        fontSize: 10,
+        background: "var(--bg-titlebar)",
+        border: "1px solid var(--border-subtle)",
+        color: "var(--text-primary)"
+      }
+    }
+  );
+}
+function Oo({
+  value: e,
+  onChange: a,
+  disabled: r
+}) {
+  return /* @__PURE__ */ t(
+    "input",
+    {
+      type: "checkbox",
+      checked: !!e,
+      onChange: (o) => a(o.target.checked ? !0 : void 0),
+      disabled: r,
+      style: { cursor: r ? "not-allowed" : "pointer" }
+    }
+  );
+}
+function Fc({
+  value: e,
+  onChange: a,
+  disabled: r
+}) {
+  const o = e === void 0 ? !0 : e === !0 ? !1 : void 0;
+  return /* @__PURE__ */ t(
+    "button",
+    {
+      type: "button",
+      onClick: () => a(o),
+      disabled: r,
+      className: "px-2 py-0.5 rounded-full",
+      style: {
+        fontSize: 10,
+        background: e === !0 ? "var(--accent-primary)" : e === !1 ? "#555" : "var(--bg-titlebar)",
+        color: e === void 0 ? "var(--text-secondary)" : "white",
+        border: "1px solid var(--border-subtle)",
+        cursor: r ? "not-allowed" : "pointer"
+      },
+      children: e === void 0 ? "auto" : e ? "yes" : "no"
+    }
+  );
+}
+function Ct({
+  label: e,
+  options: a,
+  selected: r,
+  onChange: o,
+  disabled: n
+}) {
+  const l = (d) => {
+    r.includes(d) ? o(r.filter((b) => b !== d)) : o([...r, d]);
+  };
+  return /* @__PURE__ */ s("div", { className: "flex flex-col gap-1.5", children: [
+    /* @__PURE__ */ s(
+      "div",
+      {
+        style: {
+          fontSize: 9,
+          fontWeight: 600,
+          color: "var(--text-disabled)",
+          textTransform: "uppercase",
+          letterSpacing: 0.5
+        },
+        children: [
+          e,
+          r.length > 0 && /* @__PURE__ */ s("span", { style: { marginLeft: 6, color: "var(--accent-primary)" }, children: [
+            "· ",
+            r.length
+          ] })
+        ]
+      }
+    ),
+    /* @__PURE__ */ t("div", { className: "flex items-center gap-1 flex-wrap", children: a.map((d) => {
+      const b = r.includes(d);
+      return /* @__PURE__ */ s(
+        "button",
+        {
+          type: "button",
+          onClick: () => l(d),
+          disabled: n,
+          className: "flex items-center gap-1 px-2 py-1 rounded-full transition-all hover:opacity-90 disabled:opacity-40",
+          style: {
+            fontSize: 10,
+            background: b ? "var(--accent-primary)" : "var(--bg-titlebar)",
+            color: b ? "white" : "var(--text-secondary)",
+            border: "1px solid var(--border-subtle)",
+            cursor: n ? "not-allowed" : "pointer"
+          },
+          children: [
+            b && /* @__PURE__ */ t(aa, { size: 10 }),
+            G(d)
+          ]
+        },
+        d
+      );
+    }) })
+  ] });
+}
+function zt(e) {
+  const { intent: a, ...r } = e;
+  let o = 0;
+  const n = (l) => {
+    if (!(!l || typeof l != "object")) {
+      for (const d of Object.values(l))
+        if (d != null) {
+          if (Array.isArray(d)) {
+            d.length && (o += 1);
+            continue;
+          }
+          if (typeof d == "object") {
+            n(d);
+            continue;
+          }
+          d === "" || d === !1 || (o += 1);
+        }
     }
   };
-  return /* @__PURE__ */ d("div", { style: { minHeight: "100%", overflow: "auto", background: "radial-gradient(circle at 10% 0%, rgba(236,72,153,.38), transparent 28%), radial-gradient(circle at 86% 12%, rgba(168,85,247,.32), transparent 32%), linear-gradient(180deg, #12051f, #1f0b35 54%, #0d0614)", color: "#fff", fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif' }, children: [
-    /* @__PURE__ */ d("div", { style: { maxWidth: 1280, margin: "0 auto", padding: 28 }, children: [
-      /* @__PURE__ */ d("header", { style: { display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", marginBottom: 22 }, children: [
-        /* @__PURE__ */ d("div", { children: [
-          /* @__PURE__ */ d("div", { style: { display: "inline-flex", gap: 8, alignItems: "center", color: "#d8b4fe", fontSize: 12, fontWeight: 900, letterSpacing: 1 }, children: [
-            /* @__PURE__ */ n(ae, { size: 14 }),
-            " JULI3TA v0.1.0"
-          ] }),
-          /* @__PURE__ */ n("h1", { style: { fontSize: 54, margin: "4px 0 0", lineHeight: 1, letterSpacing: "-0.06em" }, children: "AI Music Creator" }),
-          /* @__PURE__ */ n("p", { style: { color: "#c4b5fd", margin: "8px 0 0" }, children: "Generate tracks through your pod, keep a local SQLite index, mirror audio to the daemon JULI3TA library when available." })
-        ] }),
-        /* @__PURE__ */ d("div", { style: { display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "flex-end" }, children: [
-          /* @__PURE__ */ d("button", { style: { ...k, background: "rgba(255,255,255,.10)" }, onClick: () => void b(), children: [
-            /* @__PURE__ */ n(We, { size: 16 }),
-            " Refresh"
-          ] }),
-          /* @__PURE__ */ d("button", { style: { ...k, background: "rgba(255,255,255,.10)" }, onClick: () => W(!0), children: [
-            /* @__PURE__ */ n(Je, { size: 16 }),
-            " Settings"
-          ] }),
-          /* @__PURE__ */ d("button", { style: { ...k, background: "linear-gradient(90deg,#a855f7,#ec4899)" }, onClick: () => void te(), children: [
-            /* @__PURE__ */ n(Ee, { size: 16 }),
-            " Open folder"
-          ] })
-        ] })
-      ] }),
-      (z || B) && /* @__PURE__ */ n("div", { style: { ...j, padding: 14, marginBottom: 16, borderColor: z ? "rgba(248,113,113,.45)" : "rgba(52,211,153,.35)", color: z ? "#fecaca" : "#bbf7d0" }, children: z ?? B }),
-      /* @__PURE__ */ d("main", { style: { display: "grid", gridTemplateColumns: "minmax(360px, 0.9fr) minmax(460px, 1.1fr)", gap: 18 }, children: [
-        /* @__PURE__ */ d("section", { style: { ...j, padding: 18 }, children: [
-          /* @__PURE__ */ d("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }, children: [
-            /* @__PURE__ */ n(Ze, {}),
-            " ",
-            /* @__PURE__ */ n("h2", { style: { margin: 0 }, children: "Creator Panel" })
-          ] }),
-          /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Title" }),
-          /* @__PURE__ */ n("input", { value: h, onChange: (i) => K(i.target.value), style: { ...E, margin: "6px 0 14px" }, placeholder: "Song title" }),
-          /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Prompt / style" }),
-          /* @__PURE__ */ n("textarea", { value: x, onChange: (i) => Z(i.target.value), rows: 4, style: { ...E, resize: "vertical", margin: "6px 0 14px" }, placeholder: "genre, mood, bpm, instruments, vocal direction…" }),
-          /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Lyrics" }),
-          /* @__PURE__ */ n("textarea", { value: S, onChange: (i) => Q(i.target.value), rows: 12, style: { ...E, resize: "vertical", margin: "6px 0 12px", fontFamily: "ui-monospace,SFMono-Regular,Menlo,monospace", fontSize: 13 }, placeholder: "Paste or write lyrics…" }),
-          /* @__PURE__ */ d("label", { style: { display: "flex", alignItems: "center", gap: 8, color: "#ddd6fe", fontSize: 13, marginBottom: 14 }, children: [
-            /* @__PURE__ */ n("input", { type: "checkbox", checked: $, onChange: (i) => he(i.target.checked) }),
-            " Instrumental mode"
-          ] }),
-          /* @__PURE__ */ d("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }, children: [
-            /* @__PURE__ */ d("button", { disabled: v, style: { ...k, background: "rgba(255,255,255,.12)", opacity: v ? 0.55 : 1 }, onClick: () => void X(), children: [
-              /* @__PURE__ */ n(Ge, { size: 16 }),
-              " Save draft"
-            ] }),
-            /* @__PURE__ */ d("button", { disabled: v || !p || !y, style: { ...k, background: "linear-gradient(90deg,#a855f7,#ec4899)", opacity: v || !p || !y ? 0.55 : 1 }, onClick: () => void ee(), children: [
-              v ? /* @__PURE__ */ n(re, { size: 16, className: "spin" }) : /* @__PURE__ */ n(ae, { size: 16 }),
-              " ",
-              v ? "Generating…" : "Generate"
+  return n(r), o;
+}
+const Wc = "#4ade80", qc = "#fbbf24", La = (e) => e.models.music || e.models.cover ? Wc : qc;
+function Jc({ endpoint: e, endpoints: a, onSwitch: r }) {
+  const [o, n] = _(!1), l = Z(null), d = a.length > 1;
+  ee(() => {
+    if (!o) return;
+    const p = (m) => {
+      l.current && !l.current.contains(m.target) && n(!1);
+    };
+    return document.addEventListener("mousedown", p), () => document.removeEventListener("mousedown", p);
+  }, [o]);
+  const b = (p) => /* @__PURE__ */ t(
+    "span",
+    {
+      className: "rounded-full",
+      style: {
+        width: 6,
+        height: 6,
+        background: p,
+        flexShrink: 0,
+        boxShadow: `0 0 6px ${p}`
+      }
+    }
+  );
+  return /* @__PURE__ */ s("div", { ref: l, className: "relative inline-flex", children: [
+    /* @__PURE__ */ s(
+      "button",
+      {
+        type: "button",
+        onClick: () => d && n((p) => !p),
+        className: "inline-flex items-center gap-1.5 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+        style: {
+          height: 32,
+          padding: "0 10px",
+          background: "var(--bg-window)",
+          border: "1px solid var(--border-subtle)",
+          cursor: d ? "pointer" : "default"
+        },
+        title: `${e.url}${e.models.music ? ` · music: ${e.models.music}` : ""}`,
+        children: [
+          b(La(e)),
+          /* @__PURE__ */ t("span", { style: { fontSize: 11, color: "var(--text-secondary)", whiteSpace: "nowrap" }, children: e.label }),
+          d && /* @__PURE__ */ t(
+            qo,
+            {
+              size: 12,
+              style: { color: "var(--text-secondary)", transform: o ? "rotate(180deg)" : "none", transition: "transform 0.15s" }
+            }
+          )
+        ]
+      }
+    ),
+    d && o && /* @__PURE__ */ t(
+      "div",
+      {
+        className: "absolute right-0 top-full mt-1 rounded-lg overflow-hidden z-50",
+        style: {
+          minWidth: 260,
+          background: "var(--bg-window)",
+          border: "1px solid var(--border-subtle)",
+          boxShadow: "var(--shadow-lg)"
+        },
+        children: a.map((p) => {
+          const m = p.podId === e.podId;
+          return /* @__PURE__ */ s(
+            "button",
+            {
+              onClick: () => {
+                r(p.podId), n(!1);
+              },
+              className: "w-full flex items-start gap-2 px-3 py-2 text-left transition-all hover:bg-[var(--bg-hover)]",
+              style: {
+                background: m ? "var(--bg-selected)" : "transparent",
+                borderBottom: "1px solid var(--border-subtle)"
+              },
+              children: [
+                /* @__PURE__ */ t("div", { className: "mt-1", children: b(La(p)) }),
+                /* @__PURE__ */ s("div", { className: "flex-1 min-w-0", children: [
+                  /* @__PURE__ */ s("div", { className: "flex items-center gap-1.5", children: [
+                    /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600, color: "var(--text-primary)" }, children: p.label }),
+                    m && /* @__PURE__ */ t(aa, { size: 11, style: { color: "var(--accent-primary)" } })
+                  ] }),
+                  /* @__PURE__ */ s("div", { style: { fontSize: 9, color: "var(--text-disabled)", marginTop: 2 }, children: [
+                    "music: ",
+                    p.models.music ?? "—",
+                    " · cover: ",
+                    p.models.cover ?? "—"
+                  ] })
+                ] })
+              ]
+            },
+            p.podId
+          );
+        })
+      }
+    )
+  ] });
+}
+const qe = ({ icon: e, label: a, onClick: r, danger: o }) => /* @__PURE__ */ s(
+  "button",
+  {
+    type: "button",
+    onClick: r,
+    className: "w-full flex items-center gap-2.5 px-3 h-8 text-sm transition-colors",
+    style: {
+      color: o ? "var(--accent-error, #ff6b6b)" : "var(--text-primary)",
+      borderRadius: "var(--radius-sm)",
+      margin: "0 4px",
+      width: "calc(100% - 8px)",
+      cursor: "pointer",
+      background: "transparent"
+    },
+    onMouseEnter: (n) => {
+      n.currentTarget.style.background = "var(--bg-hover)";
+    },
+    onMouseLeave: (n) => {
+      n.currentTarget.style.background = "transparent";
+    },
+    children: [
+      /* @__PURE__ */ t("span", { className: "shrink-0 opacity-80", children: e }),
+      /* @__PURE__ */ t("span", { className: "flex-1 text-left truncate", style: { fontSize: 12 }, children: a })
+    ]
+  }
+);
+function Gc({ tracks: e, player: a, onLoad: r, onOpenLyrics: o, onDelete: n, onRename: l }) {
+  const { t: d } = ht();
+  return /* @__PURE__ */ s("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: [
+    /* @__PURE__ */ s(
+      "div",
+      {
+        className: "grid items-center gap-2 px-2 sticky top-0 z-10",
+        style: {
+          gridTemplateColumns: "20px 1fr 60px 56px 18px",
+          height: 22,
+          fontSize: 9,
+          fontWeight: 600,
+          color: "var(--text-disabled)",
+          textTransform: "uppercase",
+          letterSpacing: 0.5,
+          background: "var(--bg-titlebar)",
+          borderBottom: "1px solid var(--border-subtle)"
+        },
+        children: [
+          /* @__PURE__ */ t("span", {}),
+          /* @__PURE__ */ t("span", { children: "Title" }),
+          /* @__PURE__ */ t("span", { style: { textAlign: "right" }, children: "Time" }),
+          /* @__PURE__ */ t("span", { style: { textAlign: "right" }, children: "Added" }),
+          /* @__PURE__ */ t("span", {})
+        ]
+      }
+    ),
+    e.map((b) => /* @__PURE__ */ t(
+      Vc,
+      {
+        track: b,
+        player: a,
+        onLoad: r,
+        onOpenLyrics: o,
+        onDelete: n,
+        onRename: l,
+        translate: d
+      },
+      b.id
+    ))
+  ] });
+}
+function Vc({
+  track: e,
+  player: a,
+  onLoad: r,
+  onOpenLyrics: o,
+  onDelete: n,
+  onRename: l,
+  translate: d
+}) {
+  const [b, p] = _(!1), [m, w] = _(null), u = a.state.trackId === e.id, y = u && a.state.playing, x = () => {
+    if (m === null) return;
+    const v = m.trim();
+    w(null), v && v !== e.title && l(e.id, v);
+  }, N = new Date(e.createdAt).toLocaleDateString(void 0, {
+    month: "short",
+    day: "numeric"
+  });
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      onMouseEnter: () => p(!0),
+      onMouseLeave: () => p(!1),
+      draggable: !0,
+      onDragStart: (v) => {
+        const A = {
+          id: e.id,
+          title: e.title,
+          styleTags: e.styleTags,
+          lyricsPreview: e.lyricsPreview,
+          durationMs: e.durationMs,
+          hasAudio: ve(e)
+        };
+        v.dataTransfer.setData(ta, JSON.stringify(A)), e.lyricsPreview && v.dataTransfer.setData("text/plain", e.lyricsPreview), v.dataTransfer.effectAllowed = "copyMove";
+      },
+      onClick: () => ve(e) ? a.toggle(e) : o(e),
+      className: "grid items-center gap-2 px-2 cursor-pointer transition-colors",
+      style: {
+        gridTemplateColumns: "20px 1fr 60px 56px 18px",
+        height: 30,
+        fontSize: 11,
+        background: u ? "var(--bg-selected)" : b ? "var(--bg-hover)" : "transparent",
+        color: "var(--text-primary)"
+      },
+      title: ve(e) ? y ? "Click to pause" : "Click to play" : "Click to open lyrics",
+      children: [
+        /* @__PURE__ */ t("div", { className: "flex items-center justify-center", style: { color: u ? "var(--accent-primary)" : "var(--text-disabled)" }, children: ve(e) ? y ? /* @__PURE__ */ t(Et, { size: 11 }) : b ? /* @__PURE__ */ t(fe, { size: 11 }) : /* @__PURE__ */ t(ja, { size: 11 }) : /* @__PURE__ */ t(Ia, { size: 11 }) }),
+        /* @__PURE__ */ t("div", { className: "min-w-0", children: m !== null ? (
+          // Inline rename editor — Enter commits, Escape cancels, blur
+          // also commits so the user can click anywhere else and not
+          // lose the edit. autoFocus + onClick.stopPropagation so the
+          // row's own click handler (play/toggle) doesn't fire.
+          /* @__PURE__ */ t(
+            "input",
+            {
+              autoFocus: !0,
+              value: m,
+              onChange: (v) => w(v.target.value),
+              onClick: (v) => v.stopPropagation(),
+              onKeyDown: (v) => {
+                v.stopPropagation(), v.key === "Enter" ? x() : v.key === "Escape" && w(null);
+              },
+              onBlur: x,
+              maxLength: 200,
+              className: "w-full px-1 py-0 rounded-md focus:outline-none focus:ring-1",
+              style: {
+                fontSize: 11,
+                fontWeight: u ? 600 : 500,
+                background: "var(--bg-window)",
+                border: "1px solid var(--accent-primary)",
+                color: "var(--text-primary)"
+              }
+            }
+          )
+        ) : /* @__PURE__ */ s(pe, { children: [
+          /* @__PURE__ */ t(
+            "div",
+            {
+              className: "truncate",
+              style: { fontWeight: u ? 600 : 500 },
+              onClick: (v) => v.stopPropagation(),
+              onDoubleClick: (v) => {
+                v.stopPropagation(), w(e.title);
+              },
+              title: "Double-click to rename",
+              children: e.title || d("musiccreator.track.untitled")
+            }
+          ),
+          e.styleTags && e.styleTags !== "—" && /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 9, color: "var(--text-disabled)" }, children: e.styleTags })
+        ] }) }),
+        /* @__PURE__ */ t("span", { className: "tabular-nums", style: { textAlign: "right", fontSize: 10, color: "var(--text-disabled)" }, children: e.durationMs > 0 ? He(e.durationMs) : "—" }),
+        /* @__PURE__ */ t("span", { style: { textAlign: "right", fontSize: 10, color: "var(--text-disabled)" }, children: N }),
+        /* @__PURE__ */ t(
+          "button",
+          {
+            onClick: (v) => {
+              v.stopPropagation(), v.shiftKey ? o(e) : v.altKey ? n(e.id) : r(e);
+            },
+            className: "flex items-center justify-center rounded-md transition-colors hover:bg-[var(--bg-selected)]",
+            style: { width: 18, height: 18, color: "var(--text-disabled)" },
+            title: "Click: load into form · Shift-click: open lyrics · Alt-click: delete",
+            children: /* @__PURE__ */ t(Jo, { size: 11 })
+          }
+        )
+      ]
+    }
+  );
+}
+function Yc({
+  track: e,
+  onDelete: a,
+  onLoad: r,
+  onOpenLyrics: o,
+  onSaveSongToDesktop: n,
+  onSaveLyricsToDesktop: l,
+  onPlayInPlayer: d,
+  onRename: b,
+  onEditCover: p,
+  onSelect: m,
+  selected: w,
+  player: u
+}) {
+  const { t: y } = ht(), x = Z(null), [N, f] = _(!1), [v, A] = _(null), [C, T] = _(null), P = () => {
+    if (C === null) return;
+    const j = C.trim();
+    T(null), j && j !== e.title && b(e.id, j);
+  }, O = u.state.trackId === e.id, L = O && u.state.playing, E = O && u.state.durationMs > 0 ? u.state.positionMs / u.state.durationMs : 0;
+  ee(() => {
+    if (!v) return;
+    const j = (Oe) => {
+      const xe = Oe.target;
+      x.current && xe && x.current.contains(xe) || xe && xe.closest?.("[data-track-menu]") || A(null);
+    }, ie = () => A(null);
+    return setTimeout(() => window.addEventListener("mousedown", j), 0), window.addEventListener("scroll", ie, !0), window.addEventListener("resize", ie), () => {
+      window.removeEventListener("mousedown", j), window.removeEventListener("scroll", ie, !0), window.removeEventListener("resize", ie);
+    };
+  }, [v]);
+  const U = () => {
+    const j = x.current?.getBoundingClientRect();
+    if (!j) return;
+    const ie = 220, Oe = Math.min(j.right - ie, window.innerWidth - ie - 8), xe = j.bottom + 4;
+    A({ x: Math.max(8, Oe), y: xe });
+  }, te = (j) => () => {
+    A(null), j();
+  }, ue = () => u.toggle(e), Je = () => {
+    const j = document.createElement("a");
+    j.href = e.audioDataUrl, j.download = `${e.title || "track"}.mp3`, j.click();
+  };
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      onMouseEnter: () => f(!0),
+      onMouseLeave: () => f(!1),
+      draggable: !0,
+      onDragStart: (j) => {
+        const ie = {
+          id: e.id,
+          title: e.title,
+          styleTags: e.styleTags,
+          lyricsPreview: e.lyricsPreview,
+          durationMs: e.durationMs,
+          hasAudio: ve(e)
+        };
+        j.dataTransfer.setData(ta, JSON.stringify(ie)), e.lyricsPreview && j.dataTransfer.setData("text/plain", e.lyricsPreview), j.dataTransfer.effectAllowed = "copyMove";
+      },
+      onClick: () => m?.(e),
+      className: "rounded-lg px-2 py-2 transition-all",
+      style: {
+        background: w ? "var(--bg-selected)" : N ? "var(--bg-hover)" : "transparent",
+        border: w ? "1px solid var(--accent-primary)" : "1px solid transparent",
+        cursor: m ? "pointer" : "grab"
+      },
+      title: m ? "Click to open in player · drag to other fields" : "Drag to Desktop, Cover field, Text Editor, or any text field",
+      children: [
+        /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+          ve(e) ? /* @__PURE__ */ s(
+            "button",
+            {
+              onClick: ue,
+              className: "relative flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 group",
+              style: { width: 36, height: 36 },
+              title: L ? "Pause" : "Play",
+              children: [
+                /* @__PURE__ */ t(Mt, { track: e, size: 36, iconSize: 14, radius: 6 }),
+                /* @__PURE__ */ t(
+                  "span",
+                  {
+                    className: "absolute inset-0 flex items-center justify-center rounded-md transition-opacity",
+                    style: {
+                      background: Ir(e) ? "rgba(0, 0, 0, 0.35)" : "transparent",
+                      borderRadius: "var(--radius-md)"
+                    },
+                    children: L ? /* @__PURE__ */ t(Et, { size: 14, style: { color: "white" } }) : /* @__PURE__ */ t(fe, { size: 14, style: { color: "white", marginLeft: 1 } })
+                  }
+                )
+              ]
+            }
+          ) : (
+            // Lyrics-only — no audio to play. Show the lyric-sheet glyph
+            // so the row reads as "this is text, not music" at a glance.
+            /* @__PURE__ */ t(
+              "div",
+              {
+                className: "flex items-center justify-center rounded-md flex-shrink-0",
+                style: {
+                  width: 36,
+                  height: 36,
+                  background: "linear-gradient(135deg, rgba(124,77,255,0.35), rgba(56,189,248,0.30))",
+                  border: "1px solid var(--border-subtle)"
+                },
+                title: y("musiccreator.track.lyricsOnly"),
+                children: /* @__PURE__ */ t(Ia, { size: 16, style: { color: "var(--text-primary)" } })
+              }
+            )
+          ),
+          /* @__PURE__ */ s("div", { className: "flex-1 min-w-0", children: [
+            C !== null ? /* @__PURE__ */ t(
+              "input",
+              {
+                autoFocus: !0,
+                value: C,
+                onChange: (j) => T(j.target.value),
+                onClick: (j) => j.stopPropagation(),
+                onKeyDown: (j) => {
+                  j.stopPropagation(), j.key === "Enter" ? P() : j.key === "Escape" && T(null);
+                },
+                onBlur: P,
+                maxLength: 200,
+                className: "w-full px-1.5 py-0.5 rounded-md focus:outline-none focus:ring-1",
+                style: {
+                  fontSize: 12,
+                  fontWeight: 600,
+                  background: "var(--bg-window)",
+                  border: "1px solid var(--accent-primary)",
+                  color: "var(--text-primary)"
+                }
+              }
+            ) : /* @__PURE__ */ t(
+              "div",
+              {
+                className: "truncate",
+                style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" },
+                onDoubleClick: (j) => {
+                  j.stopPropagation(), T(e.title);
+                },
+                title: "Double-click to rename",
+                children: e.title || y("musiccreator.track.untitled")
+              }
+            ),
+            /* @__PURE__ */ s("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)" }, children: [
+              e.durationMs > 0 ? He(e.durationMs) : y("musiccreator.track.lyricsOnly"),
+              e.styleTags && e.styleTags !== "—" && ` · ${e.styleTags}`
             ] })
           ] }),
-          /* @__PURE__ */ d("div", { style: { marginTop: 14, color: "#a78bfa", fontSize: 12 }, children: [
-            "Pod: ",
-            /* @__PURE__ */ n("b", { children: be?.id ?? "none" }),
-            " · Model: ",
-            /* @__PURE__ */ n("b", { children: y || "none discovered" }),
-            w ? /* @__PURE__ */ d(ve, { children: [
-              " · Mirror: ",
-              /* @__PURE__ */ n("b", { children: w })
-            ] }) : null
-          ] })
+          /* @__PURE__ */ t(
+            "button",
+            {
+              ref: x,
+              onClick: (j) => {
+                j.stopPropagation(), v ? A(null) : U();
+              },
+              className: "flex items-center justify-center rounded-md flex-shrink-0 transition-all hover:bg-[var(--bg-selected)]",
+              style: {
+                width: 24,
+                height: 24,
+                color: N || v ? "var(--text-primary)" : "var(--text-disabled)"
+              },
+              "aria-label": "Track actions",
+              title: "Track actions",
+              children: /* @__PURE__ */ t(Jo, { size: 14 })
+            }
+          )
         ] }),
-        /* @__PURE__ */ d("section", { style: { ...j, padding: 18 }, children: [
-          /* @__PURE__ */ d("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }, children: [
-            /* @__PURE__ */ d("div", { style: { display: "flex", alignItems: "center", gap: 10 }, children: [
-              /* @__PURE__ */ n(Te, {}),
-              /* @__PURE__ */ n("h2", { style: { margin: 0 }, children: "Library Gallery" })
-            ] }),
-            /* @__PURE__ */ d("span", { style: { color: "#c4b5fd", fontSize: 12, fontWeight: 800 }, children: [
-              O.length,
-              " tracks"
-            ] })
-          ] }),
-          L ? /* @__PURE__ */ d("div", { style: { color: "#c4b5fd", padding: 24 }, children: [
-            /* @__PURE__ */ n(re, { size: 18, className: "spin" }),
-            " Loading…"
-          ] }) : null,
-          !L && O.length === 0 ? /* @__PURE__ */ d("div", { style: { border: "1px dashed rgba(255,255,255,.18)", borderRadius: 16, padding: 32, textAlign: "center", color: "#c4b5fd" }, children: [
-            /* @__PURE__ */ n(Pe, { size: 36 }),
-            /* @__PURE__ */ n("p", { children: "No tracks yet. Generate one or save a draft." })
-          ] }) : null,
-          /* @__PURE__ */ n("div", { style: { display: "grid", gap: 12 }, children: O.map((i) => {
-            const l = ce(i, o), c = i.favourited;
-            return /* @__PURE__ */ d("article", { style: { display: "grid", gridTemplateColumns: "92px 1fr auto", gap: 14, alignItems: "center", padding: 12, borderRadius: 16, background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.08)" }, children: [
-              /* @__PURE__ */ n("img", { alt: "cover", src: se(i.title, i.prompt), style: { width: 92, height: 92, borderRadius: 14, objectFit: "cover" } }),
-              /* @__PURE__ */ d("div", { style: { minWidth: 0 }, children: [
-                /* @__PURE__ */ n("div", { style: { fontWeight: 900, fontSize: 18, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }, children: i.title }),
-                /* @__PURE__ */ d("div", { style: { color: "#c4b5fd", fontSize: 12, margin: "4px 0 8px" }, children: [
-                  i.modelId ?? "draft",
-                  " · ",
-                  i.durationSeconds ? `${Math.round(i.durationSeconds)}s` : l ? "audio mirrored" : "lyrics/draft"
+        v && Tr(
+          /* @__PURE__ */ s(
+            "div",
+            {
+              "data-track-menu": !0,
+              className: "fixed z-[3000] py-1.5 select-none",
+              style: {
+                left: v.x,
+                top: v.y,
+                width: 220,
+                background: "var(--bg-context-menu)",
+                borderRadius: "var(--radius-md)",
+                border: "1px solid var(--border-default)",
+                boxShadow: "var(--shadow-lg)"
+              },
+              children: [
+                ve(e) && /* @__PURE__ */ s(pe, { children: [
+                  /* @__PURE__ */ t("div", { style: { padding: "4px 12px 2px", fontSize: 9, fontWeight: 600, color: "var(--text-disabled)", textTransform: "uppercase", letterSpacing: 0.5 }, children: y("musiccreator.track.section.song") }),
+                  /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(ja, { size: 14 }), label: y("musiccreator.track.playInPlayer"), onClick: te(() => d(e)) }),
+                  /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(ko, { size: 14 }), label: y("musiccreator.track.saveSongToDesktop"), onClick: te(() => n(e)) }),
+                  e.audioDataUrl && /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(ts, { size: 14 }), label: y("musiccreator.track.download"), onClick: te(Je) })
                 ] }),
-                /* @__PURE__ */ n("div", { style: { color: "#ddd6fe", fontSize: 13, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }, children: i.prompt || i.lyrics || "No prompt" })
+                e.lyricsPreview && /* @__PURE__ */ s(pe, { children: [
+                  ve(e) && /* @__PURE__ */ t("div", { style: { height: 1, background: "var(--border-subtle)", margin: "4px 6px" } }),
+                  /* @__PURE__ */ t("div", { style: { padding: "4px 12px 2px", fontSize: 9, fontWeight: 600, color: "var(--text-disabled)", textTransform: "uppercase", letterSpacing: 0.5 }, children: y("musiccreator.track.section.lyrics") }),
+                  /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(Ia, { size: 14 }), label: y("musiccreator.track.openInEditor"), onClick: te(() => o(e)) }),
+                  /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(ko, { size: 14 }), label: y("musiccreator.track.saveLyricsToDesktop"), onClick: te(() => l(e)) })
+                ] }),
+                /* @__PURE__ */ t("div", { style: { height: 1, background: "var(--border-subtle)", margin: "4px 6px" } }),
+                /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(Go, { size: 14 }), label: "Rename", onClick: te(() => T(e.title)) }),
+                /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(oa, { size: 14 }), label: "Edit cover art", onClick: te(() => p(e)) }),
+                /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(pt, { size: 14 }), label: y("musiccreator.track.loadIntoForm"), onClick: te(() => r(e)) }),
+                /* @__PURE__ */ t(qe, { icon: /* @__PURE__ */ t(ia, { size: 14 }), label: y("musiccreator.track.delete"), onClick: te(() => a(e.id)), danger: !0 })
+              ]
+            }
+          ),
+          document.body
+        ),
+        L && /* @__PURE__ */ t(
+          "div",
+          {
+            className: "mt-1.5 rounded-full overflow-hidden",
+            style: { height: 2, background: "var(--bg-hover)" },
+            children: /* @__PURE__ */ t(
+              "div",
+              {
+                style: {
+                  width: `${E * 100}%`,
+                  height: "100%",
+                  background: "linear-gradient(to right, var(--accent-primary), var(--accent-secondary))",
+                  transition: "width 0.25s linear"
+                }
+              }
+            )
+          }
+        )
+      ]
+    }
+  );
+}
+function Kc({
+  track: e,
+  endpoint: a,
+  onSave: r,
+  onClose: o
+}) {
+  const [n, l] = _(e.coverDataUrl), [d, b] = _(""), [p, m] = _(!1), [w, u] = _(null), y = Z(null), x = Z(null), N = e.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""), f = za(N, "", e.styleTags || "");
+  ee(() => {
+    const C = (T) => {
+      T.key === "Escape" && (T.stopPropagation(), o());
+    };
+    return document.addEventListener("keydown", C), () => document.removeEventListener("keydown", C);
+  }, [o]), ee(() => () => x.current?.abort(), []);
+  const v = async () => {
+    if (!a) {
+      u("Connect to a pod to generate cover art.");
+      return;
+    }
+    if (!a.models.image) {
+      u(`This endpoint (${a.label}) has no image model. Pick one in JULI3TA Settings → Cover art.`);
+      return;
+    }
+    if (p) return;
+    x.current?.abort(), x.current = new AbortController();
+    const C = x.current.signal;
+    m(!0), u(null);
+    try {
+      const T = (d.trim() || f).slice(0, 1500), P = await _r(a, T, C);
+      if (C.aborted) return;
+      l(P);
+    } catch (T) {
+      if (T.name === "AbortError") return;
+      u(T.message || "Cover-art generation failed.");
+    } finally {
+      m(!1);
+    }
+  }, A = (C) => {
+    if (u(null), !C.type.startsWith("image/")) {
+      u("That file is not an image.");
+      return;
+    }
+    if (C.size > 4 * 1024 * 1024) {
+      u("Image is too big (limit 4 MB).");
+      return;
+    }
+    const T = new FileReader();
+    T.onerror = () => u("Could not read that image."), T.onload = () => {
+      const P = T.result;
+      typeof P == "string" && l(P);
+    }, T.readAsDataURL(C);
+  };
+  return Tr(
+    /* @__PURE__ */ t(
+      "div",
+      {
+        className: "fixed inset-0 z-[4000] flex items-center justify-center",
+        style: { background: "rgba(0,0,0,0.55)" },
+        onClick: o,
+        children: /* @__PURE__ */ s(
+          "div",
+          {
+            className: "rounded-xl shadow-2xl",
+            style: {
+              width: 480,
+              maxWidth: "calc(100vw - 48px)",
+              background: "var(--bg-window)",
+              border: "1px solid var(--border-default)"
+            },
+            onClick: (C) => C.stopPropagation(),
+            children: [
+              /* @__PURE__ */ s(
+                "div",
+                {
+                  className: "flex items-center gap-2 px-4 py-3",
+                  style: { borderBottom: "1px solid var(--border-subtle)" },
+                  children: [
+                    /* @__PURE__ */ t(oa, { size: 14, style: { color: "var(--accent-primary)" } }),
+                    /* @__PURE__ */ s("span", { style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }, children: [
+                      "Cover Art — ",
+                      N || "Untitled"
+                    ] }),
+                    /* @__PURE__ */ t(
+                      "button",
+                      {
+                        onClick: o,
+                        className: "ml-auto rounded-md hover:bg-[var(--bg-hover)] flex items-center justify-center",
+                        style: { width: 24, height: 24, color: "var(--text-secondary)" },
+                        title: "Close",
+                        children: /* @__PURE__ */ t(de, { size: 14 })
+                      }
+                    )
+                  ]
+                }
+              ),
+              /* @__PURE__ */ s("div", { className: "p-4 flex flex-col gap-3", children: [
+                /* @__PURE__ */ s("div", { className: "flex gap-3", children: [
+                  /* @__PURE__ */ s(
+                    "div",
+                    {
+                      className: "rounded-lg overflow-hidden flex-shrink-0 relative",
+                      style: {
+                        width: 140,
+                        height: 140,
+                        background: n ? `url(${n}) center/cover no-repeat` : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                        border: "1px solid var(--border-subtle)"
+                      },
+                      children: [
+                        !n && /* @__PURE__ */ t("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ t(oa, { size: 36, style: { color: "white", opacity: 0.85 } }) }),
+                        p && /* @__PURE__ */ t("div", { className: "absolute inset-0 flex items-center justify-center", style: { background: "rgba(0,0,0,0.5)" }, children: /* @__PURE__ */ t(X, { size: 24, className: "animate-spin", style: { color: "white" } }) })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ s("div", { className: "flex-1 flex flex-col gap-2 min-w-0", children: [
+                    /* @__PURE__ */ s(
+                      "button",
+                      {
+                        onClick: v,
+                        disabled: p || !a?.models.image,
+                        className: "flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg disabled:opacity-40",
+                        style: {
+                          fontSize: 12,
+                          fontWeight: 600,
+                          color: "white",
+                          background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                          border: "1px solid transparent",
+                          cursor: p || !a?.models.image ? "not-allowed" : "pointer"
+                        },
+                        children: [
+                          p ? /* @__PURE__ */ t(X, { size: 12, className: "animate-spin" }) : /* @__PURE__ */ t(Ns, { size: 12 }),
+                          n ? "Regenerate" : "Generate"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ s(
+                      "button",
+                      {
+                        onClick: () => y.current?.click(),
+                        disabled: p,
+                        className: "flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg disabled:opacity-40 hover:bg-[var(--bg-hover)]",
+                        style: {
+                          fontSize: 12,
+                          color: "var(--text-secondary)",
+                          background: "var(--bg-titlebar)",
+                          border: "1px solid var(--border-subtle)"
+                        },
+                        children: [
+                          /* @__PURE__ */ t(Cr, { size: 12 }),
+                          "Upload"
+                        ]
+                      }
+                    ),
+                    n && /* @__PURE__ */ s(
+                      "button",
+                      {
+                        onClick: () => l(""),
+                        disabled: p,
+                        className: "flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg disabled:opacity-40 hover:bg-[var(--bg-hover)]",
+                        style: {
+                          fontSize: 12,
+                          color: "var(--text-disabled)",
+                          background: "var(--bg-titlebar)",
+                          border: "1px solid var(--border-subtle)"
+                        },
+                        children: [
+                          /* @__PURE__ */ t(de, { size: 12 }),
+                          "Clear"
+                        ]
+                      }
+                    )
+                  ] })
+                ] }),
+                /* @__PURE__ */ s("div", { children: [
+                  /* @__PURE__ */ t("div", { style: { fontSize: 10, fontWeight: 600, color: "var(--text-disabled)", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 4 }, children: "Prompt" }),
+                  /* @__PURE__ */ t(
+                    "textarea",
+                    {
+                      value: d,
+                      onChange: (C) => b(C.target.value),
+                      placeholder: f,
+                      disabled: p,
+                      rows: 3,
+                      className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
+                      style: {
+                        fontSize: 11,
+                        background: "var(--bg-window)",
+                        border: "1px solid var(--border-subtle)",
+                        color: "var(--text-primary)"
+                      }
+                    }
+                  )
+                ] }),
+                w && /* @__PURE__ */ s(
+                  "div",
+                  {
+                    className: "flex items-center gap-2 px-3 py-2 rounded-lg",
+                    style: {
+                      fontSize: 11,
+                      color: "#ff8a80",
+                      background: "rgba(255,82,82,0.06)",
+                      border: "1px solid rgba(255,82,82,0.18)"
+                    },
+                    children: [
+                      /* @__PURE__ */ t(ra, { size: 12, style: { flexShrink: 0 } }),
+                      w
+                    ]
+                  }
+                )
               ] }),
-              /* @__PURE__ */ d("div", { style: { display: "flex", gap: 8 }, children: [
-                /* @__PURE__ */ n("button", { title: "Play", disabled: !l, style: { ...k, padding: 10, background: l ? "rgba(255,255,255,.12)" : "rgba(255,255,255,.05)", opacity: l ? 1 : 0.4 }, onClick: () => ke(i), children: J === i.id ? /* @__PURE__ */ n(Fe, { size: 16 }) : /* @__PURE__ */ n(Ue, { size: 16 }) }),
-                /* @__PURE__ */ n("button", { title: "Favorite", style: { ...k, padding: 10, background: c ? "#ec4899" : "rgba(255,255,255,.12)" }, onClick: () => void et(t, i.id, !c).then(b), children: /* @__PURE__ */ n(Ne, { size: 16, fill: c ? "currentColor" : "none" }) }),
-                /* @__PURE__ */ n("button", { title: "Delete", style: { ...k, padding: 10, background: "rgba(248,113,113,.16)" }, onClick: () => void Xe(t, i.id).then(b), children: /* @__PURE__ */ n(qe, { size: 16 }) })
-              ] })
-            ] }, i.id);
-          }) })
+              /* @__PURE__ */ s(
+                "div",
+                {
+                  className: "flex items-center gap-2 px-4 py-3",
+                  style: { borderTop: "1px solid var(--border-subtle)" },
+                  children: [
+                    /* @__PURE__ */ t(
+                      "button",
+                      {
+                        onClick: o,
+                        disabled: p,
+                        className: "px-3 py-1.5 rounded-lg ml-auto disabled:opacity-40 hover:bg-[var(--bg-hover)]",
+                        style: {
+                          fontSize: 12,
+                          color: "var(--text-secondary)",
+                          background: "var(--bg-titlebar)",
+                          border: "1px solid var(--border-subtle)"
+                        },
+                        children: "Cancel"
+                      }
+                    ),
+                    /* @__PURE__ */ t(
+                      "button",
+                      {
+                        onClick: () => {
+                          r(e.id, n), o();
+                        },
+                        disabled: p,
+                        className: "px-3 py-1.5 rounded-lg disabled:opacity-40",
+                        style: {
+                          fontSize: 12,
+                          fontWeight: 600,
+                          color: "white",
+                          background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                          border: "1px solid transparent"
+                        },
+                        children: "Save"
+                      }
+                    )
+                  ]
+                }
+              ),
+              /* @__PURE__ */ t(
+                "input",
+                {
+                  ref: y,
+                  type: "file",
+                  accept: "image/png,image/jpeg,image/webp,image/gif",
+                  style: { display: "none" },
+                  onChange: (C) => {
+                    const T = C.target.files?.[0];
+                    T && A(T), C.target.value = "";
+                  }
+                }
+              )
+            ]
+          }
+        )
+      }
+    ),
+    document.body
+  );
+}
+function Ca({ label: e, children: a }) {
+  return /* @__PURE__ */ s("div", { children: [
+    /* @__PURE__ */ t(
+      "div",
+      {
+        style: {
+          fontSize: 10,
+          fontWeight: 600,
+          color: "var(--text-disabled)",
+          textTransform: "uppercase",
+          letterSpacing: 0.5,
+          marginBottom: 4
+        },
+        children: e
+      }
+    ),
+    /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-primary)", whiteSpace: "pre-wrap" }, children: a })
+  ] });
+}
+function Qc({
+  songName: e,
+  mode: a,
+  theme: r,
+  style: o,
+  intent: n,
+  lyrics: l,
+  specs: d,
+  coverDataUrl: b,
+  endpoint: p,
+  busy: m,
+  onRegenerate: w,
+  onUpload: u,
+  onClear: y,
+  onClose: x
+}) {
+  const N = Z(null), f = ce(() => zr(d), [d]), v = ce(() => zt(d), [d]);
+  ee(() => {
+    const T = (P) => {
+      P.key === "Escape" && (P.stopPropagation(), x());
+    };
+    return document.addEventListener("keydown", T), () => document.removeEventListener("keydown", T);
+  }, [x]);
+  const A = a === "restyle" ? "Restyle" : a === "lyricsOnly" ? "Lyrics only" : "Song", C = e.trim().replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "Untitled";
+  return Tr(
+    /* @__PURE__ */ t(
+      "div",
+      {
+        className: "fixed inset-0 z-[4000] flex items-center justify-center",
+        style: { background: "rgba(0,0,0,0.6)" },
+        onClick: x,
+        children: /* @__PURE__ */ s(
+          "div",
+          {
+            className: "rounded-xl shadow-2xl flex flex-col",
+            style: {
+              width: 720,
+              maxWidth: "calc(100vw - 48px)",
+              maxHeight: "calc(100vh - 48px)",
+              background: "var(--bg-window)",
+              border: "1px solid var(--border-default)"
+            },
+            onClick: (T) => T.stopPropagation(),
+            children: [
+              /* @__PURE__ */ s(
+                "div",
+                {
+                  className: "flex items-center gap-2 px-4 py-3 flex-shrink-0",
+                  style: { borderBottom: "1px solid var(--border-subtle)" },
+                  children: [
+                    /* @__PURE__ */ t(ut, { size: 14, style: { color: "var(--accent-primary)" } }),
+                    /* @__PURE__ */ t("span", { style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }, children: "Song Card" }),
+                    /* @__PURE__ */ t(
+                      "span",
+                      {
+                        className: "px-2 py-0.5 rounded-full",
+                        style: {
+                          fontSize: 10,
+                          color: "var(--accent-secondary)",
+                          background: "rgba(168, 85, 247, 0.12)",
+                          border: "1px solid var(--border-subtle)"
+                        },
+                        children: A
+                      }
+                    ),
+                    /* @__PURE__ */ t(
+                      "button",
+                      {
+                        onClick: x,
+                        className: "ml-auto rounded-md hover:bg-[var(--bg-hover)] flex items-center justify-center",
+                        style: { width: 24, height: 24, color: "var(--text-secondary)" },
+                        title: "Close (Esc)",
+                        children: /* @__PURE__ */ t(de, { size: 14 })
+                      }
+                    )
+                  ]
+                }
+              ),
+              /* @__PURE__ */ s("div", { className: "flex-1 overflow-y-auto invisible-scrollbar p-5 flex gap-5", children: [
+                /* @__PURE__ */ s(
+                  "div",
+                  {
+                    className: "rounded-lg overflow-hidden flex-shrink-0 relative",
+                    style: {
+                      width: 320,
+                      height: 320,
+                      background: b ? `url(${b}) center/cover no-repeat` : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                      border: "1px solid var(--border-subtle)",
+                      boxShadow: "var(--shadow-md)"
+                    },
+                    children: [
+                      !b && /* @__PURE__ */ t("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ t(oa, { size: 64, style: { color: "white", opacity: 0.7 } }) }),
+                      m && /* @__PURE__ */ t("div", { className: "absolute inset-0 flex items-center justify-center", style: { background: "rgba(0,0,0,0.5)" }, children: /* @__PURE__ */ t(X, { size: 28, className: "animate-spin", style: { color: "white" } }) })
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ s("div", { className: "flex-1 min-w-0 flex flex-col gap-3", children: [
+                  /* @__PURE__ */ s("div", { children: [
+                    /* @__PURE__ */ t("div", { style: { fontSize: 18, fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.2 }, children: C }),
+                    o.trim() && /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 4 }, children: o.trim() })
+                  ] }),
+                  /* @__PURE__ */ s("div", { className: "flex flex-wrap items-center gap-2", children: [
+                    /* @__PURE__ */ s(
+                      "button",
+                      {
+                        type: "button",
+                        onClick: w,
+                        disabled: m || !p?.models.image,
+                        className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg disabled:opacity-40",
+                        style: {
+                          fontSize: 11,
+                          fontWeight: 600,
+                          color: "white",
+                          background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                          border: "1px solid transparent",
+                          cursor: m || !p?.models.image ? "not-allowed" : "pointer"
+                        },
+                        title: p?.models.image ? "Generate cover art" : "No image model available",
+                        children: [
+                          m ? /* @__PURE__ */ t(X, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(De, { size: 11 }),
+                          b ? "Regenerate" : "Generate"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ s(
+                      "button",
+                      {
+                        type: "button",
+                        onClick: () => N.current?.click(),
+                        disabled: m,
+                        className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg disabled:opacity-40 hover:bg-[var(--bg-hover)]",
+                        style: {
+                          fontSize: 11,
+                          color: "var(--text-secondary)",
+                          background: "var(--bg-titlebar)",
+                          border: "1px solid var(--border-subtle)"
+                        },
+                        children: [
+                          /* @__PURE__ */ t(Cr, { size: 11 }),
+                          "Upload"
+                        ]
+                      }
+                    ),
+                    b && /* @__PURE__ */ s(
+                      "button",
+                      {
+                        type: "button",
+                        onClick: y,
+                        disabled: m,
+                        className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg disabled:opacity-40 hover:bg-[var(--bg-hover)]",
+                        style: {
+                          fontSize: 11,
+                          color: "var(--text-disabled)",
+                          background: "var(--bg-titlebar)",
+                          border: "1px solid var(--border-subtle)"
+                        },
+                        children: [
+                          /* @__PURE__ */ t(de, { size: 11 }),
+                          "Clear"
+                        ]
+                      }
+                    )
+                  ] }),
+                  r.trim() && /* @__PURE__ */ t(Ca, { label: "Theme", children: r.trim() }),
+                  n.trim() && /* @__PURE__ */ t(Ca, { label: "Lyrics Direction", children: n.trim() }),
+                  v > 0 && f && /* @__PURE__ */ t(Ca, { label: `Track Specs (${v} set)`, children: f }),
+                  l.trim() && /* @__PURE__ */ t(Ca, { label: "Lyrics", children: /* @__PURE__ */ t(
+                    "div",
+                    {
+                      className: "rounded-md px-3 py-2 invisible-scrollbar",
+                      style: {
+                        maxHeight: 220,
+                        overflowY: "auto",
+                        background: "var(--bg-titlebar)",
+                        border: "1px solid var(--border-subtle)",
+                        fontSize: 12,
+                        lineHeight: 1.5,
+                        whiteSpace: "pre-wrap",
+                        fontFamily: "inherit"
+                      },
+                      children: l
+                    }
+                  ) }),
+                  !r.trim() && !n.trim() && v === 0 && !l.trim() && /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-disabled)", fontStyle: "italic" }, children: "No metadata yet — fill in the form behind this card and click Create Song." })
+                ] })
+              ] }),
+              /* @__PURE__ */ t(
+                "input",
+                {
+                  ref: N,
+                  type: "file",
+                  accept: "image/png,image/jpeg,image/webp,image/gif",
+                  style: { display: "none" },
+                  onChange: (T) => {
+                    const P = T.target.files?.[0];
+                    P && u(P), T.target.value = "";
+                  }
+                }
+              )
+            ]
+          }
+        )
+      }
+    ),
+    document.body
+  );
+}
+function Xc(e) {
+  if (!e || e <= 0) return "—";
+  const a = e / 1024;
+  return a < 1024 ? `${a.toFixed(1)} KB` : `${(a / 1024).toFixed(2)} MB`;
+}
+function Zc(e) {
+  return !e || e <= 0 ? "—" : `${Math.round(e / 1e3)} kbps`;
+}
+function ed(e) {
+  return !e || e <= 0 ? "—" : `${(e / 1e3).toFixed(1)} kHz`;
+}
+function td(e) {
+  if (!e) return "—";
+  try {
+    return new Date(e).toLocaleString(void 0, { dateStyle: "medium", timeStyle: "short" });
+  } catch {
+    return "—";
+  }
+}
+function ad(e) {
+  const a = [], r = [];
+  e.structure?.tempo_bpm ? r.push({ label: "Tempo", value: `${e.structure.tempo_bpm} BPM` }) : e.structure?.tempo_class && r.push({ label: "Tempo", value: G(e.structure.tempo_class) }), e.structure?.time_signature && e.structure.time_signature !== "other" && r.push({ label: "Time", value: e.structure.time_signature }), e.structure?.rhythm_feel && r.push({ label: "Feel", value: G(e.structure.rhythm_feel) }), e.structure?.groove_pattern && r.push({ label: "Groove", value: G(e.structure.groove_pattern) }), e.structure?.song_form && r.push({ label: "Form", value: G(e.structure.song_form) }), e.structure?.length_seconds && r.push({ label: "Length", value: `~${e.structure.length_seconds}s` }), r.length && a.push({ label: "Structure", rows: r });
+  const o = [];
+  e.tonal?.key && o.push({ label: "Key", value: e.tonal.key }), e.tonal?.mode && o.push({ label: "Mode", value: G(e.tonal.mode) }), o.length && a.push({ label: "Tonal", rows: o });
+  const n = [];
+  if (e.instrumentation?.primary_instruments?.length && n.push({ label: "Instruments", value: e.instrumentation.primary_instruments.map(G).join(", ") }), e.instrumentation?.has_vocals === !1)
+    n.push({ label: "Vocals", value: "Instrumental" });
+  else if (e.instrumentation?.has_vocals || e.instrumentation?.vocal_style?.length || e.instrumentation?.vocal_gender || e.instrumentation?.vocal_processing?.length) {
+    const p = [];
+    e.instrumentation.vocal_gender && e.instrumentation.vocal_gender !== "none" && p.push(G(e.instrumentation.vocal_gender)), e.instrumentation.vocal_style?.length && p.push(e.instrumentation.vocal_style.map(G).join("/")), n.push({ label: "Vocals", value: p.length ? p.join(" ") : "With vocals" }), e.instrumentation.vocal_processing?.length && n.push({ label: "Processing", value: e.instrumentation.vocal_processing.map(G).join(" + ") });
+  }
+  e.instrumentation?.language_iso639_1 && n.push({ label: "Language", value: e.instrumentation.language_iso639_1.toUpperCase() }), n.length && a.push({ label: "Instrumentation", rows: n });
+  const l = [];
+  e.dynamics?.overall_dynamic_range && l.push({ label: "Range", value: G(e.dynamics.overall_dynamic_range) }), e.dynamics?.crescendo_shape && e.dynamics.crescendo_shape !== "none" && l.push({ label: "Crescendo", value: G(e.dynamics.crescendo_shape) }), e.dynamics?.has_big_drops && l.push({ label: "Big drops", value: "Yes" }), l.length && a.push({ label: "Dynamics", rows: l });
+  const d = [];
+  e.mood?.primary_moods?.length && d.push({ label: "Moods", value: e.mood.primary_moods.join(", ") }), e.mood?.emotional_intensity && d.push({ label: "Intensity", value: G(e.mood.emotional_intensity) }), e.mood?.occasion_tags?.length && d.push({ label: "For", value: e.mood.occasion_tags.map(G).join(", ") }), d.length && a.push({ label: "Mood", rows: d });
+  const b = [];
+  return e.context?.era_reference && b.push({ label: "Era", value: G(e.context.era_reference) }), e.context?.cultural_region && e.context.cultural_region !== "global" && b.push({ label: "Region", value: G(e.context.cultural_region) }), e.context?.intended_use?.length && b.push({ label: "Use", value: e.context.intended_use.map(G).join("/") }), e.context?.explicit_lyrics && b.push({ label: "Explicit", value: "Yes" }), b.length && a.push({ label: "Context", rows: b }), a;
+}
+function _e({ label: e, value: a }) {
+  return /* @__PURE__ */ s("div", { className: "flex items-baseline", style: { fontSize: 13, gap: 14 }, children: [
+    /* @__PURE__ */ t("span", { style: {
+      color: "var(--text-disabled)",
+      flexShrink: 0,
+      minWidth: 84,
+      fontSize: 12
+    }, children: e }),
+    /* @__PURE__ */ t("span", { style: { color: "var(--text-primary)", lineHeight: 1.5 }, children: a })
+  ] });
+}
+function Nt({ label: e, children: a }) {
+  return /* @__PURE__ */ s(
+    "div",
+    {
+      className: "rounded-xl px-5 py-5",
+      style: {
+        background: "var(--bg-titlebar)",
+        border: "1px solid var(--border-subtle)"
+      },
+      children: [
+        /* @__PURE__ */ t(
+          "div",
+          {
+            style: {
+              fontSize: 11,
+              fontWeight: 700,
+              color: "var(--text-disabled)",
+              textTransform: "uppercase",
+              letterSpacing: 0.8,
+              marginBottom: 14
+            },
+            children: e
+          }
+        ),
+        /* @__PURE__ */ t("div", { className: "flex flex-col", style: { gap: 10 }, children: a })
+      ]
+    }
+  );
+}
+const rd = /^\s*\[([^\]]+)\]\s*$/;
+function od({ text: e }) {
+  const a = e.split(`
+`);
+  return /* @__PURE__ */ t("div", { style: { fontSize: 14, lineHeight: 1.85, color: "var(--text-primary)" }, children: a.map((r, o) => {
+    const n = r.match(rd);
+    return n ? /* @__PURE__ */ t(
+      "div",
+      {
+        style: {
+          display: "inline-flex",
+          alignItems: "center",
+          marginTop: o === 0 ? 0 : 18,
+          marginBottom: 6,
+          padding: "4px 10px",
+          fontSize: 10,
+          fontWeight: 700,
+          letterSpacing: 1,
+          textTransform: "uppercase",
+          color: "var(--text-secondary)",
+          background: "var(--bg-titlebar)",
+          borderRadius: "var(--radius-sm)",
+          border: "1px solid var(--border-subtle)"
+        },
+        children: n[1].trim()
+      },
+      o
+    ) : r.trim() === "" ? /* @__PURE__ */ t("div", { style: { height: 8 } }, o) : /* @__PURE__ */ t("div", { style: { whiteSpace: "pre-wrap" }, children: r }, o);
+  }) });
+}
+function id({ track: e, player: a, onEditInCreator: r, onSwitchToCreator: o, onSearchMusic: n }) {
+  const { t: l } = ht(), d = e?.specsJson ?? "", b = ce(() => {
+    if (!d) return {};
+    try {
+      return JSON.parse(d);
+    } catch {
+      return {};
+    }
+  }, [d]), p = (b.intent ?? "").trim(), m = ce(() => ad(b), [b]);
+  if (!e)
+    return /* @__PURE__ */ s("div", { className: "flex-1 flex flex-col items-center justify-center px-8", style: { background: "var(--bg-window)" }, children: [
+      /* @__PURE__ */ t(
+        "img",
+        {
+          src: "/brand/juli3ta/icon-gradient-256.png",
+          alt: "JULI3TA",
+          width: 120,
+          height: 120,
+          draggable: !1,
+          style: {
+            width: 120,
+            height: 120,
+            borderRadius: "var(--radius-2xl)",
+            marginBottom: 20,
+            boxShadow: "var(--shadow-md)",
+            userSelect: "none",
+            pointerEvents: "none"
+          }
+        }
+      ),
+      /* @__PURE__ */ t("div", { style: { fontSize: 16, fontWeight: 600, color: "var(--text-primary)", marginBottom: 6 }, children: l("musiccreator.player.empty.title") }),
+      /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", textAlign: "center", maxWidth: 360 }, children: l("musiccreator.player.empty.body") }),
+      /* @__PURE__ */ s(
+        "button",
+        {
+          onClick: o,
+          className: "mt-5 flex items-center gap-1.5 px-4 rounded-lg transition-all hover:scale-[1.02]",
+          style: {
+            height: 32,
+            fontSize: 12,
+            fontWeight: 600,
+            color: "white",
+            background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+            boxShadow: "var(--shadow-md)"
+          },
+          children: [
+            /* @__PURE__ */ t(De, { size: 13 }),
+            l("musiccreator.player.empty.openCreator")
+          ]
+        }
+      ),
+      n && /* @__PURE__ */ s(
+        "button",
+        {
+          onClick: n,
+          className: "mt-2 flex items-center gap-1.5 px-4 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+          style: {
+            height: 32,
+            fontSize: 12,
+            fontWeight: 600,
+            color: "var(--text-secondary)",
+            background: "var(--bg-titlebar)",
+            border: "1px solid var(--border-subtle)"
+          },
+          children: [
+            /* @__PURE__ */ t(It, { size: 13 }),
+            "Search free music"
+          ]
+        }
+      )
+    ] });
+  const w = e.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "Untitled", u = ve(e), y = Ir(e), x = e.source === "youtube" ? e.artist || "YouTube" : "JULI3TA", N = e.styleTags && e.styleTags !== "—" ? e.styleTags : "", f = a.state.trackId === e.id, v = f && a.state.playing, A = f && a.state.loadingTrackId === e.id, C = e.source === "youtube", T = C ? "YouTube" : "JULI3TA", P = a.queue.filter((O) => O.id !== e.id && (O.artist || "").trim() && O.artist === e.artist).slice(0, 4);
+  return /* @__PURE__ */ s("div", { className: "flex-1 flex flex-col min-h-0 overflow-hidden relative", style: { background: "var(--bg-window)" }, children: [
+    /* @__PURE__ */ s("div", { className: "flex-shrink-0 relative overflow-hidden", children: [
+      /* @__PURE__ */ t(
+        "div",
+        {
+          "aria-hidden": !0,
+          className: "absolute inset-0",
+          style: {
+            background: y ? `url(${y}) center/cover no-repeat` : "linear-gradient(135deg, #7B43C9 0%, #C8377E 55%, #F08A4B 100%)",
+            filter: "blur(48px) saturate(1.4)",
+            transform: "scale(1.4)",
+            opacity: 0.55
+          }
+        }
+      ),
+      /* @__PURE__ */ t(
+        "div",
+        {
+          "aria-hidden": !0,
+          className: "absolute inset-0",
+          style: {
+            background: "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 60%, var(--bg-window) 100%)"
+          }
+        }
+      ),
+      /* @__PURE__ */ s("div", { className: "relative px-7 pt-8 pb-7 flex flex-wrap gap-7 items-end", children: [
+        /* @__PURE__ */ s(
+          "button",
+          {
+            type: "button",
+            onClick: () => {
+              u && a.toggle(e);
+            },
+            disabled: !u,
+            className: "rounded-lg overflow-hidden flex-shrink-0 relative group disabled:cursor-not-allowed",
+            style: {
+              width: 220,
+              height: 220,
+              background: y ? `url(${y}) center/cover no-repeat` : "linear-gradient(135deg, #7B43C9 0%, #C8377E 55%, #F08A4B 100%)",
+              boxShadow: "0 24px 60px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06)",
+              cursor: u ? "pointer" : "default"
+            },
+            title: u ? f && v ? "Pause" : "Play" : "Lyric sheet — no audio",
+            children: [
+              !y && /* @__PURE__ */ t("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ t(
+                "img",
+                {
+                  src: "/brand/juli3ta/mark-cream-256.png",
+                  alt: "",
+                  width: 104,
+                  height: 104,
+                  draggable: !1,
+                  style: { width: 104, height: 104, opacity: 0.9, userSelect: "none", pointerEvents: "none" }
+                }
+              ) }),
+              u && /* @__PURE__ */ t(
+                "div",
+                {
+                  className: "absolute inset-0 flex items-center justify-center transition-opacity",
+                  style: {
+                    background: "rgba(0,0,0,0.35)",
+                    opacity: f && v ? 0 : 1
+                  },
+                  children: /* @__PURE__ */ t(
+                    "div",
+                    {
+                      className: "flex items-center justify-center rounded-full transition-transform group-hover:scale-110",
+                      style: {
+                        width: 72,
+                        height: 72,
+                        background: "linear-gradient(135deg, #7B43C9 0%, #C8377E 55%, #F08A4B 100%)",
+                        boxShadow: "0 12px 32px rgba(200, 55, 126, 0.55)"
+                      },
+                      children: f && v ? /* @__PURE__ */ t(Et, { size: 30, style: { color: "white" } }) : A ? /* @__PURE__ */ t(X, { size: 30, className: "animate-spin", style: { color: "white" } }) : /* @__PURE__ */ t(fe, { size: 30, style: { color: "white", marginLeft: 3 } })
+                    }
+                  )
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ s("div", { className: "flex-1 min-w-0 flex flex-col", style: { minWidth: 280 }, children: [
+          /* @__PURE__ */ s(
+            "div",
+            {
+              style: {
+                display: "inline-flex",
+                alignItems: "center",
+                alignSelf: "flex-start",
+                gap: 5,
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: 1.2,
+                color: "rgba(255,255,255,0.92)",
+                textTransform: "uppercase",
+                background: "rgba(255,255,255,0.12)",
+                backdropFilter: "blur(8px)",
+                padding: "4px 10px",
+                borderRadius: "var(--radius-full)",
+                marginBottom: 12,
+                border: "1px solid rgba(255,255,255,0.10)"
+              },
+              children: [
+                u ? /* @__PURE__ */ t(fe, { size: 9, style: { marginLeft: -1 } }) : /* @__PURE__ */ t(pt, { size: 10 }),
+                C ? "YouTube track" : l(u ? "musiccreator.player.eyebrow.track" : "musiccreator.player.eyebrow.lyricSheet")
+              ]
+            }
+          ),
+          /* @__PURE__ */ t(
+            "div",
+            {
+              className: "leading-none",
+              style: {
+                fontSize: w.length > 24 ? 38 : w.length > 14 ? 52 : 64,
+                fontWeight: 900,
+                color: "#fff",
+                letterSpacing: "-0.035em",
+                wordBreak: "break-word",
+                marginBottom: 16,
+                textShadow: "0 2px 16px rgba(0,0,0,0.4)"
+              },
+              children: w
+            }
+          ),
+          /* @__PURE__ */ s(
+            "div",
+            {
+              className: "flex items-center flex-wrap",
+              style: { fontSize: 13, color: "rgba(255,255,255,0.85)", gap: 8 },
+              children: [
+                /* @__PURE__ */ t(Xo, { name: "juli3ta:mark", size: 22, scale: 1.2, style: { marginRight: 2 } }),
+                /* @__PURE__ */ t("span", { style: { fontWeight: 700, color: "#fff" }, children: x }),
+                e.source === "youtube" && e.album && e.album !== x && /* @__PURE__ */ s(pe, { children: [
+                  /* @__PURE__ */ t("span", { style: { opacity: 0.5 }, children: "·" }),
+                  /* @__PURE__ */ t("span", { children: e.album })
+                ] }),
+                N && /* @__PURE__ */ s(pe, { children: [
+                  /* @__PURE__ */ t("span", { style: { opacity: 0.5 }, children: "·" }),
+                  /* @__PURE__ */ t("span", { children: N })
+                ] }),
+                e.durationMs > 0 && /* @__PURE__ */ s(pe, { children: [
+                  /* @__PURE__ */ t("span", { style: { opacity: 0.5 }, children: "·" }),
+                  /* @__PURE__ */ t("span", { children: He(e.durationMs) })
+                ] })
+              ]
+            }
+          ),
+          /* @__PURE__ */ s("div", { className: "mt-5 flex items-center gap-3 flex-wrap", children: [
+            u && /* @__PURE__ */ t(
+              "button",
+              {
+                onClick: () => a.toggle(e),
+                className: "flex items-center gap-2 px-6 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98]",
+                style: {
+                  height: 44,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: "white",
+                  background: "linear-gradient(135deg, #7B43C9 0%, #C8377E 55%, #F08A4B 100%)",
+                  boxShadow: "0 10px 28px rgba(200, 55, 126, 0.5), inset 0 1px 0 rgba(255,255,255,0.18)",
+                  border: "none",
+                  letterSpacing: 0.2
+                },
+                title: f && v ? "Pause" : "Play",
+                children: A ? /* @__PURE__ */ s(pe, { children: [
+                  /* @__PURE__ */ t(X, { size: 16, className: "animate-spin" }),
+                  " Loading…"
+                ] }) : f && v ? /* @__PURE__ */ s(pe, { children: [
+                  /* @__PURE__ */ t(Et, { size: 16 }),
+                  " ",
+                  l("musiccreator.player.pause")
+                ] }) : /* @__PURE__ */ s(pe, { children: [
+                  /* @__PURE__ */ t(fe, { size: 16, style: { marginLeft: 2 } }),
+                  " ",
+                  l("musiccreator.player.play")
+                ] })
+              }
+            ),
+            /* @__PURE__ */ s(
+              "button",
+              {
+                onClick: () => r(e),
+                className: "flex items-center gap-1.5 px-4 rounded-full transition-all",
+                style: {
+                  height: 38,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.95)",
+                  background: "rgba(255,255,255,0.10)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255,255,255,0.18)"
+                },
+                title: l("musiccreator.player.remixInRestyle.tip"),
+                children: [
+                  /* @__PURE__ */ t(Lt, { size: 13 }),
+                  l("musiccreator.player.remixInRestyle")
+                ]
+              }
+            )
+          ] })
         ] })
       ] })
     ] }),
-    me && /* @__PURE__ */ n("div", { style: { position: "fixed", inset: 0, background: "rgba(0,0,0,.58)", display: "grid", placeItems: "center", padding: 24 }, onClick: () => W(!1), children: /* @__PURE__ */ d("div", { style: { ...j, width: "min(680px, 100%)", padding: 20 }, onClick: (i) => i.stopPropagation(), children: [
-      /* @__PURE__ */ n("h2", { style: { marginTop: 0 }, children: "JULI3TA Settings" }),
-      /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Pod" }),
-      /* @__PURE__ */ n("select", { value: p, onChange: (i) => {
-        U(i.target.value), D("");
-      }, style: { ...E, margin: "6px 0 14px" }, children: T.length === 0 ? /* @__PURE__ */ n("option", { value: "", children: "No runnable pods" }) : T.map((i) => /* @__PURE__ */ d("option", { value: i.id, children: [
-        i.id,
-        " · ",
-        i.status
-      ] }, i.id)) }),
-      /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Music model" }),
-      /* @__PURE__ */ n("select", { value: y, onChange: (i) => D(i.target.value), style: { ...E, margin: "6px 0 14px" }, children: V.length === 0 ? /* @__PURE__ */ n("option", { value: "", children: "No models discovered" }) : V.map((i) => /* @__PURE__ */ n("option", { value: i, children: i }, i)) }),
-      /* @__PURE__ */ n("p", { style: { color: "#c4b5fd", fontSize: 13 }, children: "Technical note: v0.1 uses host.daemon.callPodEndpoint for `/v1/models` and `/v1/music/generations`. It mirrors generated data through `host.daemon.juli3taLibrary` when available; real Finder file implementation remains daemon-owned." }),
-      /* @__PURE__ */ n("button", { style: { ...k, background: "linear-gradient(90deg,#a855f7,#ec4899)" }, onClick: () => W(!1), children: "Done" })
-    ] }) }),
-    /* @__PURE__ */ n("style", { children: ".spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}} select option{background:#1f0b35;color:white}" })
+    /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar px-7 py-7", children: /* @__PURE__ */ s("div", { className: "flex flex-wrap gap-6 items-start", children: [
+      /* @__PURE__ */ s("div", { className: "flex-1 min-w-0", style: { minWidth: 320, maxWidth: 720 }, children: [
+        /* @__PURE__ */ t(
+          "div",
+          {
+            style: {
+              fontSize: 11,
+              fontWeight: 700,
+              color: "var(--text-disabled)",
+              textTransform: "uppercase",
+              letterSpacing: 0.8,
+              marginBottom: 16
+            },
+            children: l("musiccreator.player.lyrics")
+          }
+        ),
+        e.lyricsPreview ? /* @__PURE__ */ t(od, { text: e.lyricsPreview }) : C ? /* @__PURE__ */ s(
+          "div",
+          {
+            className: "rounded-2xl",
+            style: {
+              background: "var(--bg-titlebar)",
+              border: "1px solid var(--border-subtle)",
+              padding: "20px",
+              color: "var(--text-secondary)"
+            },
+            children: [
+              /* @__PURE__ */ s("div", { className: "flex items-center gap-3 mb-4", children: [
+                /* @__PURE__ */ t("div", { className: "flex items-center justify-center rounded-xl", style: { width: 44, height: 44, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" }, children: /* @__PURE__ */ t(Ts, { size: 18 }) }),
+                /* @__PURE__ */ s("div", { children: [
+                  /* @__PURE__ */ s("div", { style: { fontSize: 15, fontWeight: 900, color: "var(--text-primary)" }, children: [
+                    "Streamed from ",
+                    T
+                  ] }),
+                  /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 2 }, children: "No lyrics stored. This area is now a live track dashboard instead of an empty lyrics box." })
+                ] })
+              ] }),
+              /* @__PURE__ */ s("div", { className: "grid gap-3", style: { gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))" }, children: [
+                /* @__PURE__ */ s("div", { className: "rounded-xl p-3", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
+                  /* @__PURE__ */ t("div", { style: { fontSize: 10, textTransform: "uppercase", letterSpacing: 0.8, color: "var(--text-disabled)", fontWeight: 800 }, children: "Artist" }),
+                  /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 6 }, children: e.artist || "Unknown artist" })
+                ] }),
+                /* @__PURE__ */ s("div", { className: "rounded-xl p-3", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
+                  /* @__PURE__ */ t("div", { style: { fontSize: 10, textTransform: "uppercase", letterSpacing: 0.8, color: "var(--text-disabled)", fontWeight: 800 }, children: "Channel / Album" }),
+                  /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 6 }, children: e.album || "YouTube" })
+                ] }),
+                /* @__PURE__ */ s("div", { className: "rounded-xl p-3", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
+                  /* @__PURE__ */ t("div", { style: { fontSize: 10, textTransform: "uppercase", letterSpacing: 0.8, color: "var(--text-disabled)", fontWeight: 800 }, children: "Duration" }),
+                  /* @__PURE__ */ t("div", { style: { fontSize: 14, fontWeight: 900, color: "var(--text-primary)", marginTop: 6 }, children: e.durationMs ? He(e.durationMs) : "Unknown" })
+                ] })
+              ] }),
+              e.externalUrl && /* @__PURE__ */ s(
+                "a",
+                {
+                  href: e.externalUrl,
+                  target: "_blank",
+                  rel: "noreferrer",
+                  className: "mt-4 inline-flex items-center gap-1.5 rounded-lg px-3",
+                  style: { height: 32, fontSize: 12, fontWeight: 800, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" },
+                  children: [
+                    /* @__PURE__ */ t(os, { size: 13 }),
+                    " Open source"
+                  ]
+                }
+              )
+            ]
+          }
+        ) : /* @__PURE__ */ s(
+          "div",
+          {
+            className: "rounded-xl flex flex-col items-center justify-center text-center",
+            style: {
+              background: "var(--bg-titlebar)",
+              border: "1px dashed var(--border-subtle)",
+              padding: "40px 24px",
+              color: "var(--text-disabled)"
+            },
+            children: [
+              /* @__PURE__ */ t(pt, { size: 28, style: { opacity: 0.4, marginBottom: 10 } }),
+              /* @__PURE__ */ t("div", { style: { fontSize: 13, color: "var(--text-secondary)", fontWeight: 600 }, children: l("musiccreator.player.lyrics.empty") })
+            ]
+          }
+        )
+      ] }),
+      /* @__PURE__ */ s("div", { className: "flex flex-col gap-4", style: { width: 420, flexShrink: 0 }, children: [
+        e.theme.trim() && /* @__PURE__ */ t(Nt, { label: l("musiccreator.player.theme"), children: /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-primary)", whiteSpace: "pre-wrap", lineHeight: 1.55 }, children: e.theme.trim() }) }),
+        p && /* @__PURE__ */ t(Nt, { label: l("musiccreator.player.lyricsDirection"), children: /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-primary)", whiteSpace: "pre-wrap", lineHeight: 1.55 }, children: p }) }),
+        m.map((O) => /* @__PURE__ */ t(Nt, { label: O.label, children: /* @__PURE__ */ t("div", { className: "flex flex-col gap-1.5", children: O.rows.map((L) => /* @__PURE__ */ t(_e, { label: L.label, value: L.value }, `${O.label}-${L.label}`)) }) }, O.label)),
+        C && /* @__PURE__ */ t(Nt, { label: "Artist / Source", children: /* @__PURE__ */ s("div", { className: "flex items-start gap-3", children: [
+          /* @__PURE__ */ t("div", { className: "flex items-center justify-center rounded-xl", style: { width: 48, height: 48, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" }, children: /* @__PURE__ */ t(Hs, { size: 20 }) }),
+          /* @__PURE__ */ s("div", { className: "min-w-0", children: [
+            /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 15, fontWeight: 900, color: "var(--text-primary)" }, children: e.artist || "Unknown artist" }),
+            /* @__PURE__ */ s("div", { className: "truncate", style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 4 }, children: [
+              e.album || "YouTube",
+              " · streamed audio"
+            ] }),
+            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-disabled)", lineHeight: 1.45, marginTop: 8 }, children: "Spotify/Last.fm/Discogs connector slots are exposed in Sources; once credentials exist this card can expand with bios, listeners, releases and richer artwork." })
+          ] })
+        ] }) }),
+        P.length > 0 && /* @__PURE__ */ t(Nt, { label: "More from this artist", children: /* @__PURE__ */ t("div", { className: "flex flex-col gap-2", children: P.map((O) => /* @__PURE__ */ s(
+          "button",
+          {
+            type: "button",
+            onClick: () => a.select(O),
+            className: "flex items-center gap-2 rounded-lg p-2 text-left transition-all hover:bg-[var(--bg-hover)]",
+            style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
+            children: [
+              /* @__PURE__ */ t(Mt, { track: O, size: 34, iconSize: 14, radius: 8 }),
+              /* @__PURE__ */ s("div", { className: "min-w-0 flex-1", children: [
+                /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 12, fontWeight: 800, color: "var(--text-primary)" }, children: O.title }),
+                /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)" }, children: O.durationMs ? He(O.durationMs) : T })
+              ] })
+            ]
+          },
+          O.id
+        )) }) }),
+        /* @__PURE__ */ t(Nt, { label: l("musiccreator.player.about"), children: /* @__PURE__ */ s("div", { className: "flex flex-col gap-1.5", children: [
+          /* @__PURE__ */ t(_e, { label: l("musiccreator.player.about.created"), value: td(e.createdAt) }),
+          e.source === "youtube" && /* @__PURE__ */ t(_e, { label: "Source", value: "YouTube" }),
+          e.source === "youtube" && e.artist && /* @__PURE__ */ t(_e, { label: "Artist", value: e.artist }),
+          e.source === "youtube" && e.album && e.album !== e.artist && /* @__PURE__ */ t(_e, { label: "Channel", value: e.album }),
+          u && e.durationMs > 0 && /* @__PURE__ */ t(_e, { label: l("musiccreator.player.about.duration"), value: He(e.durationMs) }),
+          e.source !== "youtube" && u && e.bitrate > 0 && /* @__PURE__ */ t(_e, { label: l("musiccreator.player.about.bitrate"), value: Zc(e.bitrate) }),
+          e.source !== "youtube" && u && e.sampleRate > 0 && /* @__PURE__ */ t(_e, { label: l("musiccreator.player.about.sampleRate"), value: ed(e.sampleRate) }),
+          e.source !== "youtube" && u && e.sizeBytes > 0 && /* @__PURE__ */ t(_e, { label: l("musiccreator.player.about.size"), value: Xc(e.sizeBytes) }),
+          N && /* @__PURE__ */ t(_e, { label: l("musiccreator.player.about.style"), value: N }),
+          e.source === "youtube" && e.externalId && /* @__PURE__ */ t(_e, { label: "Video ID", value: e.externalId }),
+          /* @__PURE__ */ t(_e, { label: l("musiccreator.player.about.format"), value: e.source === "youtube" ? "Streamed audio" : l(u ? "musiccreator.player.about.format.mp3" : "musiccreator.player.about.format.lyricSheet") })
+        ] }) })
+      ] })
+    ] }) })
   ] });
 }
-function ft(e) {
-  const t = e.host.storage.current(), r = t.migrate?.("migrations/") ?? Promise.resolve();
-  return function() {
-    return /* @__PURE__ */ n(
-      ct,
+function nd({
+  tab: e,
+  onTabChange: a,
+  query: r,
+  onQueryChange: o,
+  resultType: n,
+  onResultTypeChange: l,
+  results: d,
+  busy: b,
+  error: p,
+  status: m,
+  providers: w,
+  connectors: u,
+  libraryTracks: y,
+  playlists: x,
+  playlistNameDraft: N,
+  playlistBusy: f,
+  favoriteIds: v,
+  warmupIds: A,
+  previewBusyId: C,
+  addBusyId: T,
+  savedYoutubeIds: P,
+  player: O,
+  onPreview: L,
+  onAdd: E,
+  onOpenTrack: U,
+  onToggleFavorite: te,
+  onRemoveLibraryTrack: ue,
+  onPlaylistNameDraftChange: Je,
+  onCreatePlaylist: me,
+  onAddTrackToPlaylist: j,
+  onRemoveTrackFromPlaylist: ie,
+  onPlayPlaylist: Oe,
+  onDeletePlaylist: xe,
+  onConfigureConnector: Da,
+  onDisconnectConnector: Ue,
+  onClose: Dt
+}) {
+  const [Y, Xe] = _(null), [K, Te] = _({}), [Ht, Ge] = _(!1), [gt, we] = _(null), yt = [
+    { id: "search", label: "Search" },
+    { id: "library", label: "Library", count: y.length },
+    { id: "artists", label: "Artists", count: new Set(y.map((h) => h.artist || "Unknown")).size },
+    { id: "albums", label: "Albums", count: new Set(y.map((h) => h.album || h.artist || "YouTube")).size },
+    { id: "playlists", label: "Playlists", count: x.length },
+    { id: "favorites", label: "Favorites", count: y.filter((h) => v.has(h.id)).length },
+    { id: "sources", label: "Sources", count: w.length || 4 }
+  ], Ae = (h) => {
+    const M = O.state.trackId === h.id, H = M && O.state.loadingTrackId === h.id, he = M && O.state.playing;
+    return /* @__PURE__ */ s(
+      "div",
       {
-        host: e.host,
-        db: t,
-        migrationReady: r
-      }
+        className: "flex items-center gap-3 rounded-xl px-3 py-2 transition-all hover:bg-[var(--bg-hover)]",
+        style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+        children: [
+          /* @__PURE__ */ t(Mt, { track: h, size: 48, iconSize: 20, radius: 10 }),
+          /* @__PURE__ */ s("button", { type: "button", onClick: () => U(h), className: "flex-1 min-w-0 text-left", children: [
+            /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, fontWeight: 800, color: "var(--text-primary)" }, children: h.title }),
+            /* @__PURE__ */ s("div", { className: "truncate", style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }, children: [
+              h.artist || "YouTube",
+              h.album ? ` · ${h.album}` : "",
+              h.durationMs ? ` · ${He(h.durationMs)}` : ""
+            ] })
+          ] }),
+          /* @__PURE__ */ t(
+            "button",
+            {
+              type: "button",
+              onClick: () => te(h),
+              className: "flex items-center justify-center rounded-lg",
+              style: {
+                width: 32,
+                height: 32,
+                color: v.has(h.id) ? "white" : "var(--text-secondary)",
+                background: v.has(h.id) ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
+                border: "1px solid var(--border-subtle)"
+              },
+              title: v.has(h.id) ? "Remove favorite" : "Favorite",
+              children: /* @__PURE__ */ t(cs, { size: 13, fill: v.has(h.id) ? "currentColor" : "none" })
+            }
+          ),
+          /* @__PURE__ */ s(
+            "button",
+            {
+              type: "button",
+              onClick: () => O.toggle(h),
+              className: "flex items-center gap-1.5 rounded-lg px-3",
+              style: {
+                height: 32,
+                fontSize: 11,
+                fontWeight: 700,
+                color: "white",
+                background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
+              },
+              children: [
+                H ? /* @__PURE__ */ t(X, { size: 12, className: "animate-spin" }) : he ? /* @__PURE__ */ t(Et, { size: 12 }) : /* @__PURE__ */ t(fe, { size: 12 }),
+                H ? "Loading" : he ? "Pause" : "Play"
+              ]
+            }
+          ),
+          /* @__PURE__ */ t(
+            "button",
+            {
+              type: "button",
+              onClick: () => ue(h),
+              className: "flex items-center justify-center rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+              style: { width: 32, height: 32, color: "var(--text-disabled)", background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
+              title: "Remove from music library",
+              children: /* @__PURE__ */ t(ia, { size: 13 })
+            }
+          )
+        ]
+      },
+      h.id
     );
+  }, Ot = Array.from(
+    y.reduce((h, M) => {
+      const H = (M.artist || "Unknown artist").trim();
+      return h.set(H, [...h.get(H) ?? [], M]), h;
+    }, /* @__PURE__ */ new Map())
+  ).sort((h, M) => h[0].localeCompare(M[0])), Ce = Array.from(
+    y.reduce((h, M) => {
+      const H = (M.album || M.artist || "YouTube collection").trim();
+      return h.set(H, [...h.get(H) ?? [], M]), h;
+    }, /* @__PURE__ */ new Map())
+  ).sort((h, M) => h[0].localeCompare(M[0])), Ze = w.length > 0 ? w.map((h) => {
+    const M = u.find((ze) => ze.provider === h.id), H = M?.connected ?? h.configured, he = M?.oauthRequired ?? h.state === "oauth_required";
+    return {
+      id: h.id,
+      name: h.name,
+      state: H ? "Connected" : he ? "OAuth required" : h.state.replace(/_/g, " "),
+      body: M?.message ?? h.message,
+      action: H ? "Manage" : he ? "Coming soon" : "Configure",
+      enabled: H,
+      needs: h.needs,
+      kind: h.kind,
+      connector: M,
+      oauthRequired: he,
+      configurable: M?.configurable ?? !he
+    };
+  }) : [
+    {
+      id: "youtube",
+      name: "YouTube",
+      state: m?.ready ? "Connected" : "Starting",
+      body: "Streaming source. Search, stream resolving and local proxy playback are enabled.",
+      action: "Active",
+      enabled: !0,
+      needs: [],
+      kind: "streaming",
+      connector: void 0,
+      oauthRequired: !1,
+      configurable: !1
+    },
+    {
+      id: "spotify",
+      name: "Spotify",
+      state: "OAuth required",
+      body: "Nuclear uses Spotify for rich album/artist metadata. JULI3TA needs a Spotify app client ID before real account linking can be enabled.",
+      action: "Configure",
+      enabled: !1,
+      needs: ["SPOTIFY_OAUTH_PKCE"],
+      kind: "metadata",
+      connector: u.find((h) => h.provider === "spotify"),
+      oauthRequired: !0,
+      configurable: !1
+    },
+    {
+      id: "lastfm",
+      name: "Last.fm",
+      state: u.find((h) => h.provider === "lastfm")?.connected ? "Connected" : "Metadata connector",
+      body: "Artist bios, tags and now-playing style metadata. API key required before live use.",
+      action: "Configure",
+      enabled: !1,
+      needs: ["apiKey"],
+      kind: "metadata",
+      connector: u.find((h) => h.provider === "lastfm"),
+      oauthRequired: !1,
+      configurable: !0
+    },
+    {
+      id: "discogs",
+      name: "Discogs",
+      state: u.find((h) => h.provider === "discogs")?.connected ? "Connected" : "Metadata connector",
+      body: "Release/catalog metadata and album artwork. Token required before live use.",
+      action: "Configure",
+      enabled: !1,
+      needs: ["token"],
+      kind: "catalog",
+      connector: u.find((h) => h.provider === "discogs"),
+      oauthRequired: !1,
+      configurable: !0
+    }
+  ];
+  return /* @__PURE__ */ s("div", { className: "flex-1 flex flex-col min-h-0 overflow-hidden", style: { background: "var(--bg-window)" }, children: [
+    /* @__PURE__ */ s("div", { className: "flex-shrink-0 px-7 pt-6 pb-4", style: { borderBottom: "1px solid var(--border-subtle)" }, children: [
+      /* @__PURE__ */ s("div", { className: "flex items-center justify-between gap-4 mb-4", children: [
+        /* @__PURE__ */ s("div", { children: [
+          /* @__PURE__ */ t("div", { style: { fontSize: 24, fontWeight: 900, color: "var(--text-primary)", letterSpacing: "-0.03em" }, children: "Music" }),
+          /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 4 }, children: "Search, artists, favorites and streamed tracks — separate from My Work." })
+        ] }),
+        /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+          m && /* @__PURE__ */ s(
+            "div",
+            {
+              className: "flex items-center gap-2 rounded-full px-3",
+              style: {
+                height: 30,
+                fontSize: 11,
+                color: m.ready ? "var(--status-success)" : "var(--text-secondary)",
+                background: "var(--bg-titlebar)",
+                border: "1px solid var(--border-subtle)"
+              },
+              children: [
+                /* @__PURE__ */ t("span", { style: { width: 7, height: 7, borderRadius: "var(--radius-full)", background: m.ready ? "var(--status-success)" : "var(--accent-secondary)" } }),
+                m.ready ? "Music engine ready" : m.installing ? "Installing engine…" : "Music engine offline"
+              ]
+            }
+          ),
+          /* @__PURE__ */ t(
+            "button",
+            {
+              type: "button",
+              onClick: Dt,
+              className: "flex items-center justify-center rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+              style: { width: 32, height: 32, color: "var(--text-secondary)", background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+              title: "Close music search",
+              children: /* @__PURE__ */ t(de, { size: 14 })
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ t("div", { className: "flex items-center gap-2 mb-4", children: yt.map((h) => /* @__PURE__ */ s(
+        "button",
+        {
+          type: "button",
+          onClick: () => a(h.id),
+          className: "rounded-lg px-3 transition-all",
+          style: {
+            height: 30,
+            fontSize: 12,
+            fontWeight: e === h.id ? 800 : 600,
+            color: e === h.id ? "white" : "var(--text-secondary)",
+            background: e === h.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-titlebar)",
+            border: "1px solid var(--border-subtle)"
+          },
+          children: [
+            h.label,
+            typeof h.count == "number" ? ` · ${h.count}` : ""
+          ]
+        },
+        h.id
+      )) }),
+      e === "search" && /* @__PURE__ */ s("div", { className: "flex items-center gap-2 rounded-xl px-4", style: { height: 44, background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" }, children: [
+        /* @__PURE__ */ t(It, { size: 16, style: { color: "var(--text-disabled)" } }),
+        /* @__PURE__ */ t(
+          "input",
+          {
+            value: r,
+            onChange: (h) => o(h.target.value),
+            placeholder: "Search music, artists, albums…",
+            className: "flex-1 bg-transparent outline-none",
+            style: { color: "var(--text-primary)", fontSize: 14, fontWeight: 600 },
+            autoFocus: !0
+          }
+        ),
+        b && /* @__PURE__ */ t(X, { size: 16, className: "animate-spin", style: { color: "var(--accent-primary)" } }),
+        r && /* @__PURE__ */ t("button", { type: "button", onClick: () => o(""), style: { color: "var(--text-secondary)" }, children: /* @__PURE__ */ t(de, { size: 16 }) })
+      ] }),
+      e === "search" && /* @__PURE__ */ s("div", { className: "mt-3 flex items-center justify-between gap-3 flex-wrap", children: [
+        /* @__PURE__ */ t("div", { className: "flex items-center gap-2", children: ["tracks", "playlists"].map((h) => /* @__PURE__ */ t(
+          "button",
+          {
+            type: "button",
+            onClick: () => l(h),
+            className: "rounded-lg px-3 transition-all",
+            style: {
+              height: 28,
+              fontSize: 11,
+              fontWeight: n === h ? 900 : 700,
+              color: n === h ? "white" : "var(--text-secondary)",
+              background: n === h ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-titlebar)",
+              border: "1px solid var(--border-subtle)",
+              textTransform: "capitalize"
+            },
+            children: h
+          },
+          h
+        )) }),
+        /* @__PURE__ */ s("div", { className: "rounded-lg px-3 flex items-center gap-2", style: { height: 28, fontSize: 11, color: "var(--text-secondary)", background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" }, children: [
+          /* @__PURE__ */ t("span", { style: { width: 7, height: 7, borderRadius: "var(--radius-full)", background: "var(--status-success)" } }),
+          "Provider: Auto / YouTube"
+        ] })
+      ] }),
+      p && /* @__PURE__ */ t("div", { className: "mt-3", style: { fontSize: 12, color: "var(--status-danger)" }, children: p })
+    ] }),
+    /* @__PURE__ */ s("div", { className: "flex-1 overflow-y-auto invisible-scrollbar px-7 py-5", children: [
+      e === "search" && /* @__PURE__ */ s("div", { className: "flex flex-col gap-2", children: [
+        r.trim().length < 2 && /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "Type two letters. Results appear here, not in a floating overlay." }),
+        r.trim().length >= 2 && !b && d.length === 0 && !p && /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "No results yet." }),
+        b && d.length === 0 && Array.from({ length: 5 }).map((h, M) => /* @__PURE__ */ s(
+          "div",
+          {
+            className: "flex items-center gap-3 rounded-xl px-3 py-2",
+            style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", opacity: 0.78 },
+            children: [
+              /* @__PURE__ */ t("div", { className: "animate-pulse", style: { width: 56, height: 56, borderRadius: "var(--radius-xl)", background: "var(--bg-hover)" } }),
+              /* @__PURE__ */ s("div", { className: "flex-1 min-w-0", children: [
+                /* @__PURE__ */ t("div", { className: "animate-pulse", style: { height: 12, width: `${70 - M * 6}%`, borderRadius: "var(--radius-full)", background: "var(--bg-hover)" } }),
+                /* @__PURE__ */ t("div", { className: "animate-pulse", style: { height: 10, width: `${45 - M * 4}%`, borderRadius: "var(--radius-full)", background: "var(--bg-hover)", marginTop: 8 } })
+              ] }),
+              /* @__PURE__ */ t(X, { size: 14, className: "animate-spin", style: { color: "var(--accent-primary)" } })
+            ]
+          },
+          `music-search-skeleton-${M}`
+        )),
+        d.map((h) => {
+          const M = bi(h.title, h.channel), H = P.has(h.id), he = C === h.id, ze = T === h.id, Ut = A.has(h.id);
+          return /* @__PURE__ */ s(
+            "div",
+            {
+              className: "flex items-center gap-3 rounded-xl px-3 py-2 transition-all hover:bg-[var(--bg-hover)]",
+              style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+              children: [
+                h.thumbnailUrl || Ea(h.id) ? /* @__PURE__ */ t("img", { src: h.thumbnailUrl || Ea(h.id), alt: "", style: { width: 56, height: 56, borderRadius: "var(--radius-xl)", objectFit: "cover" } }) : /* @__PURE__ */ t("div", { className: "flex items-center justify-center", style: { width: 56, height: 56, borderRadius: "var(--radius-xl)", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" }, children: /* @__PURE__ */ t(ja, { size: 20, style: { color: "white" } }) }),
+                /* @__PURE__ */ s("div", { className: "flex-1 min-w-0", children: [
+                  /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, fontWeight: 800, color: "var(--text-primary)" }, children: M.song }),
+                  /* @__PURE__ */ s("div", { className: "truncate", style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }, children: [
+                    M.artist || h.channel || "YouTube",
+                    " · YouTube",
+                    h.durationMs ? ` · ${He(h.durationMs)}` : ""
+                  ] }),
+                  /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 2 }, children: h.title })
+                ] }),
+                Ut && !he && /* @__PURE__ */ s("div", { className: "hidden md:flex items-center gap-1", style: { fontSize: 10, color: "var(--text-disabled)" }, children: [
+                  /* @__PURE__ */ t(X, { size: 10, className: "animate-spin" }),
+                  " preloading"
+                ] }),
+                /* @__PURE__ */ s(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => L(h),
+                    disabled: he,
+                    className: "flex items-center gap-1 rounded-md px-3 disabled:opacity-60",
+                    style: { height: 32, fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", border: "1px solid var(--border-subtle)", background: "var(--bg-window)" },
+                    children: [
+                      he ? /* @__PURE__ */ t(X, { size: 12, className: "animate-spin" }) : /* @__PURE__ */ t(fe, { size: 12 }),
+                      he ? "Starting" : "Play"
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ s(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => E(h),
+                    disabled: H || ze,
+                    className: "flex items-center gap-1 rounded-md px-3 disabled:opacity-60",
+                    style: { height: 32, fontSize: 11, fontWeight: 800, color: H ? "var(--text-disabled)" : "white", background: H ? "transparent" : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))", border: "1px solid var(--border-subtle)" },
+                    children: [
+                      ze ? /* @__PURE__ */ t(X, { size: 12, className: "animate-spin" }) : H ? /* @__PURE__ */ t(aa, { size: 12 }) : /* @__PURE__ */ t(vr, { size: 12 }),
+                      ze ? "Adding" : H ? "Saved" : "Add"
+                    ]
+                  }
+                )
+              ]
+            },
+            h.id
+          );
+        })
+      ] }),
+      e === "library" && /* @__PURE__ */ t("div", { className: "flex flex-col gap-2", children: y.length === 0 ? /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "No streamed tracks saved yet." }) : y.map(Ae) }),
+      e === "favorites" && /* @__PURE__ */ t("div", { className: "flex flex-col gap-2", children: y.filter((h) => v.has(h.id)).length === 0 ? /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "No favorites yet." }) : y.filter((h) => v.has(h.id)).map(Ae) }),
+      e === "artists" && /* @__PURE__ */ s("div", { className: "grid gap-3", style: { gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }, children: [
+        Ot.length === 0 && /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "No artists yet." }),
+        Ot.map(([h, M]) => /* @__PURE__ */ s(
+          "button",
+          {
+            type: "button",
+            onClick: () => {
+              M[0] && U(M[0]);
+            },
+            className: "rounded-2xl p-4 text-left transition-all hover:scale-[1.01]",
+            style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+            children: [
+              /* @__PURE__ */ t("div", { style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)" }, children: h }),
+              /* @__PURE__ */ s("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 6 }, children: [
+                M.length,
+                " track",
+                M.length === 1 ? "" : "s"
+              ] })
+            ]
+          },
+          h
+        ))
+      ] }),
+      e === "albums" && /* @__PURE__ */ s("div", { className: "grid gap-3", style: { gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }, children: [
+        Ce.length === 0 && /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "No albums or source collections yet." }),
+        Ce.map(([h, M]) => {
+          const H = M[0];
+          return /* @__PURE__ */ t(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                H && U(H);
+              },
+              className: "rounded-2xl p-4 text-left transition-all hover:scale-[1.01]",
+              style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+              children: /* @__PURE__ */ s("div", { className: "flex items-center gap-3", children: [
+                H && /* @__PURE__ */ t(Mt, { track: H, size: 64, iconSize: 24, radius: 14 }),
+                /* @__PURE__ */ s("div", { className: "min-w-0", children: [
+                  /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)" }, children: h }),
+                  /* @__PURE__ */ s("div", { className: "truncate", style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 6 }, children: [
+                    H?.artist || "Mixed artists",
+                    " · ",
+                    M.length,
+                    " track",
+                    M.length === 1 ? "" : "s"
+                  ] })
+                ] })
+              ] })
+            },
+            h
+          );
+        })
+      ] }),
+      e === "playlists" && /* @__PURE__ */ s("div", { className: "flex flex-col gap-3", children: [
+        /* @__PURE__ */ t("div", { className: "rounded-2xl p-4", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" }, children: /* @__PURE__ */ s("div", { className: "flex items-center gap-3 flex-wrap", children: [
+          /* @__PURE__ */ t("div", { className: "flex items-center justify-center rounded-xl", style: { width: 54, height: 54, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" }, children: /* @__PURE__ */ t(ms, { size: 22 }) }),
+          /* @__PURE__ */ s("div", { className: "min-w-0 flex-1", style: { minWidth: 220 }, children: [
+            /* @__PURE__ */ t("div", { style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)" }, children: "Playlists" }),
+            /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 4 }, children: "Real SQLite-backed playlists, separate from My Work." })
+          ] }),
+          /* @__PURE__ */ t(
+            "input",
+            {
+              value: N,
+              onChange: (h) => Je(h.target.value),
+              onKeyDown: (h) => {
+                h.key === "Enter" && me();
+              },
+              placeholder: "New playlist name…",
+              className: "rounded-lg bg-transparent outline-none px-3",
+              style: { height: 34, minWidth: 180, color: "var(--text-primary)", border: "1px solid var(--border-subtle)", background: "var(--bg-window)", fontSize: 12, fontWeight: 700 }
+            }
+          ),
+          /* @__PURE__ */ s(
+            "button",
+            {
+              type: "button",
+              onClick: me,
+              disabled: f,
+              className: "flex items-center gap-1.5 rounded-lg px-3 disabled:opacity-50",
+              style: { height: 34, fontSize: 12, fontWeight: 800, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" },
+              children: [
+                f ? /* @__PURE__ */ t(X, { size: 13, className: "animate-spin" }) : /* @__PURE__ */ t(vr, { size: 13 }),
+                "Create"
+              ]
+            }
+          )
+        ] }) }),
+        x.length === 0 ? /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "Create a playlist, then add tracks from Library rows below." }) : x.map((h) => /* @__PURE__ */ s("div", { className: "rounded-2xl p-4", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" }, children: [
+          /* @__PURE__ */ s("div", { className: "flex items-center justify-between gap-3 mb-3", children: [
+            /* @__PURE__ */ s("div", { children: [
+              /* @__PURE__ */ t("div", { style: { fontSize: 15, fontWeight: 900, color: "var(--text-primary)" }, children: h.name }),
+              /* @__PURE__ */ s("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 3 }, children: [
+                h.items.length,
+                " track",
+                h.items.length === 1 ? "" : "s"
+              ] })
+            ] }),
+            /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+              /* @__PURE__ */ s(
+                "button",
+                {
+                  type: "button",
+                  onClick: () => Oe(h),
+                  disabled: h.items.length === 0,
+                  className: "flex items-center gap-1.5 rounded-lg px-3 disabled:opacity-40",
+                  style: { height: 30, fontSize: 11, fontWeight: 900, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" },
+                  children: [
+                    /* @__PURE__ */ t(fe, { size: 12 }),
+                    " Play"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ t(
+                "button",
+                {
+                  type: "button",
+                  onClick: () => xe(h.id),
+                  className: "flex items-center justify-center rounded-lg",
+                  style: { width: 30, height: 30, color: "var(--text-disabled)", background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
+                  title: "Delete playlist",
+                  children: /* @__PURE__ */ t(ia, { size: 13 })
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ t("div", { className: "flex flex-col gap-2", children: h.items.length === 0 ? /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)" }, children: "Empty. Add tracks from Library." }) : h.items.map((M) => /* @__PURE__ */ s("div", { className: "flex items-center gap-2 rounded-lg p-2", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
+            /* @__PURE__ */ t(Mt, { track: M, size: 34, iconSize: 14, radius: 8 }),
+            /* @__PURE__ */ s("button", { type: "button", onClick: () => U(M), className: "min-w-0 flex-1 text-left", children: [
+              /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 12, fontWeight: 800, color: "var(--text-primary)" }, children: M.title }),
+              /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)" }, children: M.artist || "YouTube" })
+            ] }),
+            /* @__PURE__ */ t(
+              "button",
+              {
+                type: "button",
+                onClick: () => ie(h.id, M.id),
+                className: "flex items-center justify-center rounded-md",
+                style: { width: 28, height: 28, color: "var(--text-disabled)" },
+                title: "Remove from playlist",
+                children: /* @__PURE__ */ t(de, { size: 13 })
+              }
+            )
+          ] }, `${h.id}-${M.id}`)) }),
+          y.length > 0 && /* @__PURE__ */ t("div", { className: "mt-3 flex flex-wrap gap-2", children: y.slice(0, 8).filter((M) => !h.items.some((H) => H.id === M.id)).map((M) => /* @__PURE__ */ s(
+            "button",
+            {
+              type: "button",
+              onClick: () => j(h.id, M),
+              className: "rounded-full px-3",
+              style: { height: 28, fontSize: 11, fontWeight: 800, color: "var(--text-secondary)", background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
+              children: [
+                "+ ",
+                M.title.slice(0, 28)
+              ]
+            },
+            `${h.id}-add-${M.id}`
+          )) })
+        ] }, h.id))
+      ] }),
+      e === "sources" && /* @__PURE__ */ s("div", { className: "grid gap-3", style: { gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }, children: [
+        Ze.map((h) => /* @__PURE__ */ s(
+          "div",
+          {
+            className: "rounded-2xl p-4",
+            style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
+            children: [
+              /* @__PURE__ */ s("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ t(
+                  "div",
+                  {
+                    className: "flex items-center justify-center rounded-xl flex-shrink-0",
+                    style: { width: 46, height: 46, color: "white", background: h.enabled ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)", border: "1px solid var(--border-subtle)" },
+                    children: h.name === "Spotify" ? "♬" : h.name === "YouTube" ? /* @__PURE__ */ t(fe, { size: 18 }) : h.kind === "catalog" ? /* @__PURE__ */ t($n, { size: 18 }) : /* @__PURE__ */ t(ut, { size: 18 })
+                  }
+                ),
+                /* @__PURE__ */ s("div", { className: "min-w-0 flex-1", children: [
+                  /* @__PURE__ */ t("div", { style: { fontSize: 15, fontWeight: 900, color: "var(--text-primary)" }, children: h.name }),
+                  /* @__PURE__ */ t("div", { style: { fontSize: 11, color: h.enabled ? "var(--status-success)" : "var(--text-secondary)", marginTop: 2 }, children: h.state }),
+                  /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.45, marginTop: 10 }, children: h.body })
+                ] })
+              ] }),
+              /* @__PURE__ */ s("div", { className: "mt-4 flex items-center gap-2 flex-wrap", children: [
+                /* @__PURE__ */ t(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => {
+                      const M = h.connector?.credentialSpecs ?? h.needs.map((H) => ({ name: H, label: H, secret: !0, required: !0 }));
+                      Te({}), we(null), Xe({
+                        id: h.id,
+                        name: h.name,
+                        body: h.body,
+                        specs: M,
+                        oauthRequired: h.oauthRequired,
+                        configurable: h.configurable,
+                        connected: h.enabled
+                      });
+                    },
+                    className: "rounded-lg px-3 disabled:opacity-50",
+                    style: { height: 30, fontSize: 11, fontWeight: 800, color: h.enabled ? "white" : "var(--text-secondary)", background: h.enabled ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)", border: "1px solid var(--border-subtle)" },
+                    children: h.action
+                  }
+                ),
+                h.connector?.account && /* @__PURE__ */ s("span", { className: "truncate", style: { fontSize: 11, color: "var(--text-disabled)" }, children: [
+                  "@",
+                  h.connector.account
+                ] })
+              ] })
+            ]
+          },
+          h.name
+        )),
+        Y && /* @__PURE__ */ s("div", { className: "rounded-2xl p-5", style: { gridColumn: "1 / -1", background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" }, children: [
+          /* @__PURE__ */ s("div", { className: "flex items-start justify-between gap-3", children: [
+            /* @__PURE__ */ s("div", { children: [
+              /* @__PURE__ */ s("div", { style: { fontSize: 17, fontWeight: 900, color: "var(--text-primary)" }, children: [
+                "Configure ",
+                Y.name
+              ] }),
+              /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5, marginTop: 8 }, children: Y.body })
+            ] }),
+            /* @__PURE__ */ t("button", { type: "button", onClick: () => Xe(null), style: { color: "var(--text-secondary)" }, children: /* @__PURE__ */ t(de, { size: 16 }) })
+          ] }),
+          Y.oauthRequired ? /* @__PURE__ */ t("div", { className: "mt-4 rounded-xl p-3", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", fontSize: 12, lineHeight: 1.5 }, children: "Spotify needs a real OAuth PKCE browser flow. JULI3TA does not fake token-paste connection; this remains visible as a follow-up connector." }) : /* @__PURE__ */ s(pe, { children: [
+            /* @__PURE__ */ t("div", { className: "mt-4 grid gap-3", style: { gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }, children: Y.specs.map((h) => /* @__PURE__ */ s("label", { className: "rounded-xl px-3 py-2", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
+              /* @__PURE__ */ t("div", { style: { fontSize: 10, fontWeight: 800, letterSpacing: 0.8, textTransform: "uppercase", color: "var(--text-disabled)" }, children: h.required ? "Required" : "Optional" }),
+              /* @__PURE__ */ t("div", { style: { marginTop: 4, fontSize: 12, fontWeight: 800, color: "var(--text-primary)" }, children: h.label || h.name }),
+              /* @__PURE__ */ t(
+                "input",
+                {
+                  value: K[h.name] ?? "",
+                  type: h.secret ? "password" : "text",
+                  onChange: (M) => Te((H) => ({ ...H, [h.name]: M.target.value })),
+                  className: "mt-2 w-full rounded-lg bg-transparent outline-none px-3",
+                  style: { height: 34, color: "var(--text-primary)", border: "1px solid var(--border-subtle)", background: "var(--bg-titlebar)", fontSize: 12 },
+                  placeholder: h.name
+                }
+              )
+            ] }, h.name)) }),
+            gt && /* @__PURE__ */ t("div", { className: "mt-3", style: { color: "var(--status-danger)", fontSize: 12 }, children: gt }),
+            /* @__PURE__ */ s("div", { className: "mt-4 flex items-center gap-2 flex-wrap", children: [
+              /* @__PURE__ */ s(
+                "button",
+                {
+                  type: "button",
+                  disabled: Ht || !Y.configurable,
+                  onClick: () => {
+                    Ge(!0), we(null), Da(Y.id, K).then(() => {
+                      Te({}), Xe(null);
+                    }).catch((h) => we(h.message || "Connector setup failed.")).finally(() => Ge(!1));
+                  },
+                  className: "flex items-center gap-1.5 rounded-lg px-3 disabled:opacity-50",
+                  style: { height: 32, fontSize: 11, fontWeight: 900, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" },
+                  children: [
+                    Ht ? /* @__PURE__ */ t(X, { size: 12, className: "animate-spin" }) : /* @__PURE__ */ t(aa, { size: 12 }),
+                    "Verify + Save"
+                  ]
+                }
+              ),
+              Y.connected && /* @__PURE__ */ t(
+                "button",
+                {
+                  type: "button",
+                  disabled: Ht,
+                  onClick: () => {
+                    Ge(!0), we(null), Ue(Y.id).then(() => Xe(null)).catch((h) => we(h.message || "Disconnect failed.")).finally(() => Ge(!1));
+                  },
+                  className: "rounded-lg px-3 disabled:opacity-50",
+                  style: { height: 32, fontSize: 11, fontWeight: 800, color: "var(--text-secondary)", background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
+                  children: "Disconnect"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ t("div", { className: "mt-4 rounded-xl p-3", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", fontSize: 12, lineHeight: 1.5 }, children: "Secrets are posted once to the local tray API, verified live, stored in the OS keychain, and never persisted in browser localStorage." })
+          ] })
+        ] })
+      ] })
+    ] })
+  ] });
+}
+function sd() {
+  const e = Ys(), { t: a } = ht(), r = Qs(), o = tl(), { state: n, dispatch: l } = Qo(), { addNotification: d } = ol(), b = n.theme.mode, [p, m] = _("compose"), [w, u] = _(!1), [y, x] = _("creator"), [N, f] = _(null), [v, A] = _(""), [C, T] = _(""), [P, O] = _(null), [L, E] = _(""), [U, te] = _(""), [ue, Je] = _(!1), [me, j] = _(""), [ie, Oe] = _(""), [xe, Da] = _(!0), [Ue, Dt] = _(!1), [Y, Xe] = _(null), [K, Te] = _({}), [Ht, Ge] = _(!1), [gt, we] = _(null), [yt, Ae] = _(null), [Ot, Ce] = _(null), [Ze, h] = _(!1), [M, H] = _(!1), [he, ze] = _(!1), [Ut, Ha] = _([]), Mr = Z(null), Er = Z(null), [Oa, Lr] = _(!1), [Ie, jr] = _("best"), [vi, na] = _(!1), [$e, Pr] = _("mic"), [Me, Ua] = _(!1), [Rr, Dr] = _(0), [Hr, $t] = _(null), Or = Z(null), sa = Z([]), bt = Z(null), $a = Z(0), Bt = Z(null), [ft, Ee] = _("idle"), [Ft, W] = _(null), [xi, vt] = _(0), [Ur, $r] = _(0), [et, ke] = _([]), [xt, Q] = _(null), [wt, Br] = _(""), [Wt, Fr] = _("cards"), [Be, tt] = _(!1), [wi, la] = _("search"), [Ba, ki] = _(""), [qt, Si] = _("tracks"), [_i, Fa] = _([]), [Ti, ca] = _(!1), [Ci, Le] = _(null), [Ni, Wr] = _(null), [Ai, qr] = _([]), [zi, Jr] = _([]), [at, Wa] = _({}), [Ii, Gr] = _(() => /* @__PURE__ */ new Set()), [Mi, Vr] = _(null), [Ei, Yr] = _(null), [Kr, Qr] = _([]), [kt, qa] = _([]), [Li, Ja] = _(() => /* @__PURE__ */ new Set()), [Ga, St] = _([]), [Va, Xr] = _(""), [ji, Zr] = _(!1), eo = Z(/* @__PURE__ */ new Map()), Ya = Z(/* @__PURE__ */ new Map()), Ka = Z(/* @__PURE__ */ new Set()), [da, Jt] = _(null), [ua, to] = _(!1), [Qa, ao] = _(ai), [Pi, Xa] = _(!1);
+  ee(() => {
+    let i = !1;
+    return (async () => {
+      try {
+        await Promise.all([
+          Cc(),
+          jl()
+        ]);
+      } catch ($) {
+        console.warn("[Juli3ta] Legacy migration failed (non-fatal):", $);
+      }
+      await Cl().catch(($) => {
+        console.warn("[Juli3ta] music library bridge migration failed (non-fatal):", $);
+      });
+      const [c, g, k, S, z, R, J] = await Promise.allSettled([
+        ll(),
+        ur(),
+        vl(),
+        Co(),
+        _l(),
+        Nl("track"),
+        Qt()
+      ]);
+      if (i) return;
+      const ge = c.status === "fulfilled" ? c.value : [], We = g.status === "fulfilled" ? g.value.tracks.map(($) => ({ ...$, source: "juli3ta" })) : [];
+      g.status === "fulfilled" && (Jt(g.value.rootPath), Q(($) => $?.startsWith("Real file library unavailable") ? null : $)), c.status === "fulfilled" ? ke(Xt(We, ge)) : (console.error("[Juli3ta] listTracks failed:", c.reason), ke(Xt(We)), Q("Could not load the browser cache — using the real files from ~/Music/JULI3TA.")), g.status === "rejected" && (console.warn("[Juli3ta] host file library unavailable:", g.reason), Q("Real file library unavailable — generated songs will not be shared across browsers until the tray endpoint is back."));
+      const nt = new Set(We.map(($) => $.id)), Ne = ge.filter(($) => !nt.has($.id) && ec($));
+      Ne.length > 0 && (async () => {
+        const $ = [];
+        for (const le of Ne)
+          try {
+            const re = await Io({ ...le, source: "juli3ta" });
+            $.push({ ...le, ...re, source: "juli3ta" });
+          } catch (re) {
+            console.warn("[Juli3ta] host file backfill failed:", le.id, re);
+          }
+        !i && $.length > 0 && (ke((le) => Xt($, le)), ur().then((le) => Jt(le.rootPath)).catch(() => {
+        }));
+      })(), k.status === "fulfilled" && ao(k.value), S.status === "fulfilled" && Ha(S.value), z.status === "fulfilled" && qa(z.value), R.status === "fulfilled" && Ja(new Set(R.value.map(($) => $.entityId))), J.status === "fulfilled" && St(J.value);
+    })(), () => {
+      i = !0;
+    };
+  }, []), ee(() => {
+    if (!xt?.startsWith("Real file library unavailable")) return;
+    let i = !1;
+    const c = async () => {
+      try {
+        const k = await ur();
+        if (i) return;
+        Jt(k.rootPath), ke((S) => Xt(k.tracks.map((z) => ({ ...z, source: "juli3ta" })), S)), Q((S) => S?.startsWith("Real file library unavailable") ? null : S);
+      } catch {
+      }
+    }, g = window.setInterval(c, 4e3);
+    return c(), () => {
+      i = !0, window.clearInterval(g);
+    };
+  }, [xt]);
+  const Za = I(async (i) => {
+    try {
+      const c = await Io({ ...i, source: "juli3ta" }), g = { ...i, ...c, source: "juli3ta" };
+      return await xr(g), Jt(c.folderPath?.split("/").slice(0, -1).join("/") || da), Q(null), ke((k) => Xt([g], k)), !0;
+    } catch (c) {
+      const g = c.message || "Real file save failed";
+      return Q(`Couldn't save "${i.title}" as a real file — ${g}.`), !1;
+    }
+  }, [da]), Ri = I(async (i) => {
+    ao(i);
+    try {
+      await xl(i);
+    } catch (c) {
+      console.warn("Settings save failed:", c);
+    }
+  }, []), pa = ce(
+    () => e.state ? Nc(e.state.agents, e.state.included) : [],
+    [e.state]
+  ), [ma, Di] = _([]), [Hi, Oi] = _(() => {
+    try {
+      return localStorage.getItem("tytus.music-creator.preferred-pod");
+    } catch {
+      return null;
+    }
+  }), [Ui, ro] = _(!0), F = ma.find((i) => i.podId === Hi) ?? ma[0] ?? null, er = I(async () => {
+    ro(!0);
+    const i = new AbortController(), c = await Mc(pa, i.signal);
+    Di(c), ro(!1);
+  }, [pa]);
+  ee(() => {
+    pa.length !== 0 && queueMicrotask(() => void er());
+  }, [pa, er]);
+  const $i = I((i) => {
+    Oi(i);
+    try {
+      localStorage.setItem("tytus.music-creator.preferred-pod", i);
+    } catch {
+    }
+  }, []), Gt = Z(null), ne = Z(null), Vt = Z(null), ha = Z(!1);
+  ee(() => () => {
+    Gt.current?.abort(), ne.current?.abort();
+  }, []), ee(() => {
+    if (ft === "idle") {
+      queueMicrotask(() => {
+        vt(0), $r(0);
+      });
+      return;
+    }
+    const i = Date.now(), c = () => {
+      const S = (Date.now() - i) / 1e3, z = ft === "lyrics" ? Math.min(0.95, S / 5) : Math.min(0.95, 1 - Math.exp(-S / 35));
+      vt(z);
+    };
+    c();
+    const g = setInterval(c, 250), k = setInterval(() => $r((S) => S + 1), 4500);
+    return () => {
+      clearInterval(g), clearInterval(k);
+    };
+  }, [ft]);
+  const Yt = I((i) => {
+    if (!i.lyricsPreview) return null;
+    const c = o.ensureUserFolder("Music");
+    if (!c) return null;
+    const g = `${Sa(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""))}.lyrics.txt`, k = o.findChildByName(c, g);
+    return k ? (o.writeFile(k.id, i.lyricsPreview), k.id) : o.createFile(c, g, i.lyricsPreview, {
+      mimeType: "text/plain"
+    });
+  }, [o]), oo = I((i) => {
+    if (!i.audioDataUrl) return null;
+    const c = o.ensureUserFolder("Music");
+    if (!c) return null;
+    const g = `${Sa(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""))}.mp3`, k = o.findChildByName(c, g);
+    return k ? k.id : o.createFile(c, g, "", {
+      mimeType: "audio/mpeg",
+      refTrackId: i.id
+    });
+  }, [o]), Bi = I(async () => {
+    if (!F) {
+      W(a("musiccreator.error.noPod"));
+      return;
+    }
+    if (p === "restyle" && !yt) {
+      W("Restyle needs a reference audio file. Drop one in below.");
+      return;
+    }
+    if (ha.current) return;
+    ha.current = !0, W(null), Gt.current?.abort();
+    const i = new AbortController();
+    Gt.current = i;
+    try {
+      const c = Qa.overridesByEndpoint[F.url] ?? {}, g = {
+        ...F,
+        models: {
+          music: c.music || F.models.music,
+          cover: c.cover || F.models.cover,
+          lyrics: c.lyrics || F.models.lyrics,
+          lyricsBackup: c.lyricsBackup || F.models.lyricsBackup,
+          image: c.image || F.models.image,
+          allIds: F.models.allIds
+        }
+      }, k = zr(K);
+      let S = C.trim(), z = U.trim(), R = L.trim(), J = null;
+      if (!S && !ue) {
+        if (!v.trim() && !(K.intent ?? "").trim()) {
+          W(a("musiccreator.error.noInput"));
+          return;
+        }
+        Ee("lyrics");
+        const oe = [];
+        v.trim() && oe.push(v.trim());
+        const or = (K.intent ?? "").trim();
+        or && oe.push(`User intent (must respect): ${or}`), k && oe.push(`Musical context: ${k}`), P && oe.push(`Structure: ${P.prompt}`);
+        const En = oe.join(`
+
+`);
+        J = await Pc(g, En, i.signal), S = J.lyrics, z || (z = J.song_title), R || (R = J.style_tags);
+      } else !S && ue && (S = `[Intro]
+[Instrumental]
+[Outro]`);
+      if (J && (T(J.lyrics), z === "Untitled" && (z = ""), z && !U.trim() && te(z), R && !L.trim() && E(R), J.usedFallback && Q(
+        `Primary lyrics model errored — used backup chat model "${g.models.lyricsBackup ?? "unknown"}" instead.`
+      )), S.length > Tt) {
+        W(a("musiccreator.error.lyricsTooLong", { count: S.length, max: Tt })), Ee("idle");
+        return;
+      }
+      if (z.trim() || (z = Sc(S, v, R || L), z && z !== "Untitled" && !U.trim() && te(z)), p === "lyricsOnly") {
+        const oe = {
+          id: `t_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+          title: (z || a("musiccreator.track.untitled")) + " (lyrics)",
+          styleTags: R || "—",
+          lyricsPreview: S,
+          // store the full text — used by Load
+          durationMs: 0,
+          bitrate: 0,
+          sampleRate: 0,
+          sizeBytes: 0,
+          createdAt: Date.now(),
+          audioDataUrl: "",
+          // no audio
+          specsJson: zt(K) > 0 ? JSON.stringify(K) : "",
+          // Lyric sheets keep whatever cover art the user attached in
+          // the form (uploaded or pre-generated) — image autogen during
+          // Write Lyrics is skipped to keep the call cheap.
+          coverDataUrl: me,
+          theme: v
+        };
+        await Za(oe) && Yt(oe), Ee("idle"), vt(0);
+        return;
+      }
+      if (p === "restyle" && !yt) {
+        W("Restyle needs a reference audio file. Drop one in below."), Ee("idle");
+        return;
+      }
+      Ee("song");
+      const ge = [R, k].filter((oe) => oe && oe.length > 0).join(". "), We = Rc(
+        g,
+        {
+          lyrics: S,
+          prompt: ge || void 0,
+          instrumental: ue,
+          refAudioBase64: p === "restyle" ? yt ?? void 0 : void 0
+        },
+        i.signal
+      ), nt = xe && !me && !!g.models.image, Ne = me, $ = nt ? _r(
+        g,
+        (ie.trim() || za(z, v, R || L)).slice(0, 1500),
+        i.signal
+      ).catch((oe) => {
+        if (oe.name === "AbortError") throw oe;
+        return console.warn("[Juli3ta] Cover-art generation failed:", oe), Q(`Cover-art skipped: ${oe.message}`), Ne;
+      }) : Promise.resolve(Ne), le = await Promise.allSettled([We, $]), re = le[0], st = le[1];
+      if (re.status === "rejected")
+        throw i.abort(), re.reason;
+      const se = re.value, Ke = st.status === "fulfilled" ? st.value : Ne;
+      if (!se?.data?.audio || typeof se.data.audio != "string" || se.data.audio.length < 100) {
+        const oe = se?.trace_id ? ` (trace ${se.trace_id})` : "";
+        throw new Error(`Music gen returned no audio data${oe}. Try again or pick a different model in Settings.`);
+      }
+      const In = `data:audio/mpeg;base64,${se.data.audio}`, Mn = p === "restyle" ? " (restyle)" : "", Qe = {
+        id: `t_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        title: (z || a("musiccreator.track.untitled")) + Mn,
+        styleTags: R || "—",
+        lyricsPreview: S,
+        // store the full text — used by Load
+        durationMs: se.data.duration_ms ?? 0,
+        bitrate: se.data.bitrate ?? 0,
+        sampleRate: se.data.sample_rate ?? 0,
+        sizeBytes: se.data.size_bytes ?? 0,
+        createdAt: Date.now(),
+        audioDataUrl: In,
+        specsJson: zt(K) > 0 ? JSON.stringify(K) : "",
+        coverDataUrl: Ke,
+        theme: v
+      };
+      j(Ke), console.info("[Juli3ta] Saving generated song:", { id: Qe.id, title: Qe.title, durationMs: Qe.durationMs, sizeBytes: Qe.sizeBytes }), await Za(Qe) && (oo(Qe), Yt(Qe), d({
+        appId: "musiccreator",
+        appName: "JULI3TA",
+        appIcon: "Sparkles",
+        title: a("musiccreator.notify.songReadyTitle"),
+        message: a("musiccreator.notify.songReadyBody", { title: Qe.title }),
+        isRead: !1
+      })), Ee("idle"), vt(0);
+    } catch (c) {
+      if (c.name === "AbortError") {
+        Ee("idle");
+        return;
+      }
+      console.error("[Juli3ta] Generate failed:", c), W(c.message || "Generation failed — check the console for details."), Ee("idle"), vt(0);
+    } finally {
+      ha.current = !1;
+    }
+  }, [
+    F,
+    v,
+    C,
+    U,
+    L,
+    K,
+    P,
+    ue,
+    p,
+    yt,
+    a,
+    Za,
+    Qa,
+    oo,
+    Yt,
+    d,
+    xe,
+    me,
+    ie
+  ]), Fi = () => Mr.current?.click(), io = Z(0), rt = I(async (i, c) => {
+    const g = ++io.current, k = () => io.current === g;
+    W(null), h(!0), Ae(null), we(c), Ce(null);
+    try {
+      if (Ie === "mix") {
+        const S = await Jl(i);
+        if (!k()) return;
+        Ae(S.base64);
+        const z = S.sourceDurationSec / 60;
+        if (S.segments.length > 1) {
+          const R = S.segments.map((J) => `${Math.floor(J.startSec / 60)}:${Math.floor(J.startSec % 60).toString().padStart(2, "0")}`).join(" + ");
+          Ce(
+            `Mixed ${S.segments.length} iconic moments (${S.durationSec.toFixed(0)} s) from ${z.toFixed(1)} min — at ${R}`
+          );
+        } else
+          Ce(`Using whole clip (${S.durationSec.toFixed(0)} s)`);
+      } else {
+        const S = await pi(i);
+        if (!k()) return;
+        Ae(S.base64);
+        const z = S.sourceDurationSec / 60, R = S.startSec / 60, J = S.startSec < 60 ? `${S.startSec.toFixed(1)} s` : `${Math.floor(R)}:${Math.floor(S.startSec % 60).toString().padStart(2, "0")}`;
+        Ce(
+          S.sourceDurationSec <= S.durationSec + 0.5 ? `Using whole clip (${S.durationSec.toFixed(0)} s)` : `Auto-picked best ${S.durationSec.toFixed(0)} s starting at ${J} of ${z.toFixed(1)} min`
+        );
+      }
+    } catch (S) {
+      if (!k()) return;
+      W(S.message || "Could not analyze that audio."), we(null);
+    } finally {
+      k() && h(!1);
+    }
+  }, [Ie]), Wi = async () => {
+    $t(null);
+    try {
+      let i;
+      if ($e === "tab") {
+        const S = navigator.mediaDevices;
+        if (!S.getDisplayMedia)
+          throw new Error("Tab audio capture is not supported in this browser. Use mic instead.");
+        i = await S.getDisplayMedia({ video: !0, audio: !0 });
+        for (const z of i.getVideoTracks())
+          z.stop(), i.removeTrack(z);
+        if (i.getAudioTracks().length === 0)
+          throw new Error('No audio in the selected tab. In the share dialog, tick "Share tab audio".');
+      } else
+        i = await navigator.mediaDevices.getUserMedia({ audio: !0 });
+      bt.current = i;
+      const g = [
+        "audio/webm;codecs=opus",
+        "audio/webm",
+        "audio/mp4",
+        "audio/ogg;codecs=opus"
+      ].find((S) => MediaRecorder.isTypeSupported(S)) || "", k = new MediaRecorder(i, g ? { mimeType: g } : void 0);
+      sa.current = [], k.ondataavailable = (S) => {
+        S.data && S.data.size > 0 && sa.current.push(S.data);
+      }, k.onstop = async () => {
+        try {
+          const S = new Blob(sa.current, {
+            type: sa.current[0]?.type || g || "audio/webm"
+          });
+          if (S.size === 0) {
+            $t("Recording was empty.");
+            return;
+          }
+          const z = new FileReader();
+          z.onerror = () => $t("Could not read the recording."), z.onload = () => {
+            const R = typeof z.result == "string" ? z.result : "", J = {
+              id: `r_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+              name: `${$e === "tab" ? "Tab audio" : "Recording"} ${(/* @__PURE__ */ new Date()).toLocaleTimeString()}`,
+              durationMs: Date.now() - $a.current,
+              mimeType: S.type || g || "audio/webm",
+              audioDataUrl: R,
+              createdAt: Date.now()
+            };
+            (async () => {
+              try {
+                await si(J), Ha((ge) => [J, ...ge]);
+              } catch (ge) {
+                console.warn("Recording save failed", ge), $t("Could not save the recording. Try again.");
+              }
+            })(), na(!1), rt(S, J.name);
+          }, z.readAsDataURL(S);
+        } finally {
+          bt.current?.getTracks().forEach((S) => S.stop()), bt.current = null;
+        }
+      }, k.start(250), Or.current = k, $a.current = Date.now(), Dr(0), Ua(!0), Bt.current = setInterval(() => {
+        Dr(Date.now() - $a.current);
+      }, 100);
+    } catch (i) {
+      $t(i.message || "Could not start recording."), bt.current?.getTracks().forEach((c) => c.stop()), bt.current = null, Ua(!1);
+    }
+  }, qi = () => {
+    const i = Or.current;
+    i && i.state !== "inactive" && i.stop(), Bt.current && clearInterval(Bt.current), Ua(!1);
+  };
+  ee(() => () => {
+    bt.current?.getTracks().forEach((i) => i.stop()), Bt.current && clearInterval(Bt.current);
+  }, []);
+  const Ji = (i) => {
+    const c = i.target.files?.[0];
+    if (i.target.value = "", !!c) {
+      if (c.size > 50 * 1024 * 1024) {
+        W("Reference audio is too big. Max 50 MB.");
+        return;
+      }
+      rt(c, c.name);
+    }
+  }, Gi = (i) => {
+    H(!1), rt(i.audioDataUrl, i.name);
+  }, Vi = () => {
+    H(!0), Co().then((i) => Ha(i)).catch(() => {
+    });
+  }, Yi = () => ze(!0), Ki = (i) => {
+    if (ze(!1), !i.audioDataUrl) return;
+    const c = i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "Untitled";
+    rt(i.audioDataUrl, `${c}.mp3`);
+  }, Qi = () => {
+    Ae(null), we(null), Ce(null);
+  }, Xi = () => {
+    Gt.current?.abort(), Ee("idle");
+  }, Ve = I(async (i, c, g) => {
+    if (!F) throw new Error("No endpoint connected");
+    const k = ($) => {
+      const le = $, re = le.choices?.[0], st = [
+        re?.message?.content,
+        re?.delta?.content,
+        re?.text,
+        le.output_text
+      ];
+      for (const se of st)
+        if (typeof se == "string" && se.trim().length > 0) return se.trim();
+      return "";
+    }, S = ($) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test($), z = /* @__PURE__ */ new Set(), R = [], J = ($) => {
+      $ && !z.has($) && (z.add($), R.push($));
+    };
+    if (J(F.models.lyricsBackup), F.models.allIds.filter(S).forEach(J), R.length === 0)
+      throw new Error("No chat model available on this endpoint. Pick a different connection in Settings.");
+    const ge = typeof c == "string" ? c : JSON.stringify(c), We = g?.temperature ?? 0.5, nt = Math.max(g?.maxTokens ?? 800, 400), Ne = 45e3;
+    return Ra(R, async ($) => {
+      const le = jt(g?.signal, Ne);
+      let re;
+      try {
+        re = await fetch(`${F.url}/chat/completions`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${F.apiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: $,
+            messages: [
+              { role: "system", content: i },
+              { role: "user", content: ge }
+            ],
+            temperature: We,
+            max_tokens: nt
+          }),
+          signal: le.signal
+        });
+      } catch (Ke) {
+        throw Ke.name === "TimeoutError" ? new Error(`AI assist timed out after ${Ne / 1e3}s.`) : Ke;
+      } finally {
+        le.dispose();
+      }
+      if (!re.ok) {
+        const Ke = await re.text().catch(() => "");
+        throw new ye(re.status, Ke, `AI assist HTTP ${re.status}: ${Ke.slice(0, 200)}`);
+      }
+      const st = await re.json(), se = k(st);
+      if (!se)
+        throw console.warn("[Juli3ta] empty AI assist content from", $, st), new ye(502, "", `Model "${$}" returned empty content`);
+      return se.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
+    }, "chat-assist");
+  }, [F]), Zi = I(async () => {
+    if (F) {
+      Ge(!0), W(null);
+      try {
+        const i = `You are a music-production assistant. Given a theme, style, and (optionally) lyrics, return ONE JSON object that fills in optimal Track Specs for the song.
+
+Output schema (every field optional, OMIT fields you can't infer confidently):
+{
+  "structure": {
+    "tempo_bpm": 40-260,
+    "tempo_class": "very_slow"|"slow"|"medium"|"fast"|"very_fast",
+    "time_signature": "3/4"|"4/4"|"6/8"|"7/8"|"5/4"|"other",
+    "rhythm_feel": "straight"|"swing"|"shuffled"|"syncopated"|"polyrhythmic"|"free",
+    "groove_pattern": "four_on_the_floor"|"halftime"|"doubletime"|"broken_beat"|"backbeat"|"free",
+    "song_form": "verse_chorus"|"aaba"|"drop_based"|"loop_based"|"through_composed"|"strophic",
+    "length_seconds": 10-600
+  },
+  "tonal": { "key": "C"|"Db"|...|"B", "mode": "major"|"minor"|"dorian"|"mixolydian"|"phrygian"|"lydian"|"locrian" },
+  "instrumentation": {
+    "primary_instruments": ["drums_acoustic","drum_machine","percussion","bass_electric","bass_synth","bass_upright","electric_guitar","acoustic_guitar","piano","keys_synth","organ","strings","brass","woodwinds","synth_pad","synth_lead","pluck_synth","fx","lead_vocal","choir"],
+    "has_vocals": true|false,
+    "vocal_style": ["sung"|"rap"|"spoken_word"|"chant"|"choir"|"vocoder"],
+    "vocal_gender": "male"|"female"|"mixed"|"other"|"none",
+    "vocal_processing": ["dry"|"reverb"|"delay"|"autotune_light"|"autotune_heavy"|"distortion"|"chorus"|"double_tracked"],
+    "language_iso639_1": "en"|"es"|...
+  },
+  "dynamics": {
+    "overall_dynamic_range": "narrow"|"medium"|"wide",
+    "has_big_drops": true|false,
+    "crescendo_shape": "none"|"gradual"|"sudden"
+  },
+  "mood": {
+    "primary_moods": ["happy"|"uplifting"|"dark"|"melancholic"|"dreamy"|"chill"|"epic"|"romantic"|"energetic"|"aggressive"],
+    "emotional_intensity": "low"|"medium"|"high",
+    "occasion_tags": ["party"|"club"|"study"|"sleep"|"workout"|"background"|"focus"|"film_trailer"|"game"|"kids"|"holiday_christmas"]
+  },
+  "context": {
+    "era_reference": "60s"|"70s"|"80s"|"90s"|"2000s"|"2010s"|"2020s"|"timeless",
+    "cultural_region": "global"|"us_uk"|"latin"|"afrobeats_scene"|"kpop_scene"|"jpop_scene"|"caribbean"|"middle_east"|"asia_other"|"europe_other",
+    "explicit_lyrics": true|false,
+    "intended_use": ["background"|"featured_listen"|"sync_film"|"sync_ad"|"game"|"live_show_intro"]
+  }
+}
+
+Return ONLY the JSON. No markdown, no explanation, no code fences.`;
+        ne.current?.abort(), ne.current = new AbortController();
+        const c = await Ve(i, {
+          theme: v || null,
+          style: L || null,
+          lyrics: C ? C.slice(0, 1500) : null,
+          existing_specs: zt(K) > 0 ? K : null
+        }, {
+          temperature: 0.4,
+          // The full schema is ~6 sections × multiple fields. 800 tokens
+          // truncates roughly half the response and leaves the JSON
+          // unparseable mid-string. 2000 fits a complete fill comfortably.
+          maxTokens: 2e3,
+          signal: ne.current.signal
+        }), g = fi(c) ?? c;
+        let k;
+        try {
+          k = JSON.parse(g);
+        } catch {
+          throw new Error(`Optimize returned non-JSON: ${c.slice(0, 160)}`);
+        }
+        Te((S) => ({ ...k, intent: S.intent }));
+      } catch (i) {
+        W(i.message || "Optimize failed.");
+      } finally {
+        Ge(!1);
+      }
+    }
+  }, [F, v, L, C, K, Ve]), [Se, ot] = _(null), no = I(async () => {
+    if (!F) return;
+    if (!F.models.image) {
+      W(`This endpoint (${F.label}) doesn't expose an image model. Pick one in Settings → Cover art, or upload your own image.`);
+      return;
+    }
+    if (Ue) return;
+    ne.current?.abort(), ne.current = new AbortController();
+    const i = ne.current.signal;
+    Dt(!0), W(null);
+    try {
+      const c = (ie.trim() || za(U, v, L)).slice(0, 1500), g = await _r(F, c, i);
+      if (i.aborted) return;
+      j(g), Y && Vt.current?.(Y, g);
+    } catch (c) {
+      if (c.name === "AbortError") return;
+      W(c.message || "Cover-art generation failed.");
+    } finally {
+      Dt(!1);
+    }
+  }, [F, ie, U, v, L, Ue, Y]), so = I((i) => {
+    if (!i.type.startsWith("image/")) {
+      W("That file is not an image. Pick a PNG/JPG/WebP.");
+      return;
+    }
+    if (i.size > 4 * 1024 * 1024) {
+      W("Cover image is too big (limit 4 MB). Try a smaller file.");
+      return;
+    }
+    const c = new FileReader();
+    c.onerror = () => W("Could not read that image file."), c.onload = () => {
+      const g = c.result;
+      typeof g == "string" && g.startsWith("data:image/") && (j(g), Y && Vt.current?.(Y, g));
+    }, c.readAsDataURL(i);
+  }, [Y]), en = I(async () => {
+    if (!Se) {
+      ot("theme"), W(null);
+      try {
+        const i = "You are a creative songwriter. Given a Style description (genre, mood, instrumentation hints), write a vivid one-paragraph THEME for the song — a setting, a story arc, an emotional core. Keep it 2-4 sentences, evocative but specific. Plain prose only, no headers, no markdown, no quotes.";
+        ne.current?.abort(), ne.current = new AbortController();
+        const c = await Ve(i, {
+          style: L || "pop",
+          existing_theme: v || null
+        }, { temperature: 0.85, maxTokens: 200, signal: ne.current.signal });
+        A(c);
+      } catch (i) {
+        W(i.message || "Theme inspiration failed.");
+      } finally {
+        ot(null);
+      }
+    }
+  }, [Se, Ve, L, v]), tn = I(async () => {
+    if (!Se) {
+      ot("style"), W(null);
+      try {
+        const i = 'You are a music-production assistant. Given a song THEME, propose a Style description: a comma-separated list of genre + mood + tempo + instrument cues (8-12 tags). Plain text, lowercase, comma-separated, no headers, no markdown, no surrounding prose. Example: "indie folk, acoustic, melancholic, 80 bpm, fingerpicked guitar, soft female vocals, reverb-heavy".';
+        ne.current?.abort(), ne.current = new AbortController();
+        const c = await Ve(i, {
+          theme: v || "a quiet evening",
+          existing_style: L || null
+        }, { temperature: 0.7, maxTokens: 120, signal: ne.current.signal });
+        E(c.replace(/^["']|["']$/g, ""));
+      } catch (i) {
+        W(i.message || "Style suggestion failed.");
+      } finally {
+        ot(null);
+      }
+    }
+  }, [Se, Ve, v, L]), an = I(async () => {
+    if (!Se) {
+      if (!C.trim()) {
+        W("Nothing to polish — write some lyrics first.");
+        return;
+      }
+      ot("lyrics"), W(null);
+      try {
+        const i = "You are a senior songwriter. Polish the user's lyrics for flow, rhyme, imagery, and structural balance. Preserve the user's intent and language. Keep [Verse], [Chorus], [Bridge], [Intro], [Outro], [Inst] section markers if present (or add appropriate ones). Return ONLY the polished lyrics — no commentary, no markdown, no quotes.";
+        ne.current?.abort(), ne.current = new AbortController();
+        const c = await Ve(i, {
+          style: L || null,
+          lyrics: C
+        }, { temperature: 0.6, maxTokens: 1200, signal: ne.current.signal });
+        if (c.length > Tt) {
+          W(`Polished lyrics exceeded ${Tt} chars (${c.length}). Trimming the original first might help.`);
+          return;
+        }
+        T(c);
+      } catch (i) {
+        W(i.message || "Lyrics polish failed.");
+      } finally {
+        ot(null);
+      }
+    }
+  }, [Se, Ve, L, C]), rn = (i) => {
+    E((c) => c ? `${c}, ${i.toLowerCase()}` : i.toLowerCase());
+  }, lo = () => {
+    const i = [
+      "Late-night coding session, neon city skyline, focus and flow.",
+      "Sunday-morning coffee, soft rain, lo-fi piano.",
+      "Synthwave anthem about shipping on Friday evening.",
+      "Jazz ballad about a forgotten train station at 3am.",
+      "Acoustic folk song about a long road trip with old friends.",
+      "Cinematic orchestral piece for a heroic underdog scene.",
+      "Upbeat pop anthem about finishing a hard project."
+    ];
+    A(i[Math.floor(Math.random() * i.length)]);
+  }, co = I((i) => {
+    ke((c) => c.filter((g) => g.id !== i)), dl(i).catch((c) => console.warn("Track cache delete failed:", c)), Xl(i).catch((c) => console.warn("Track file delete failed:", c));
+  }, []), on = I(async () => {
+    if (!ua) {
+      to(!0);
+      try {
+        const i = await Zl();
+        Jt(i), d({
+          appId: "musiccreator",
+          appName: "JULI3TA",
+          appIcon: "FolderOpen",
+          title: "JULI3TA folder opened",
+          message: i,
+          isRead: !1
+        });
+      } catch (i) {
+        Q(`Could not open JULI3TA folder — ${i.message || i}`);
+      } finally {
+        to(!1);
+      }
+    }
+  }, [d, ua]), ga = I(async (i, c) => {
+    const g = c.trim().slice(0, 200) || "Untitled";
+    ke((k) => k.map((S) => S.id === i ? { ...S, title: g } : S));
+    try {
+      await ul(i, g), Q(null);
+    } catch (k) {
+      const S = k.message || "Database write failed";
+      Q(`Couldn't rename track — ${S}.`);
+    }
+  }, []), tr = I(async (i, c) => {
+    ke((g) => g.map((k) => k.id === i ? { ...k, coverDataUrl: c } : k));
+    try {
+      await pl(i, c), Q(null);
+    } catch (g) {
+      const k = g.message || "Database write failed";
+      Q(`Couldn't save cover art — ${k}.`);
+    }
+  }, []);
+  ee(() => {
+    Vt.current = tr;
+  }, [tr]);
+  const uo = I(async (i, c) => {
+    ke((g) => g.map((k) => k.id === i ? { ...k, styleTags: c || "—" } : k));
+    try {
+      await ml(i, c), Q(null);
+    } catch (g) {
+      const k = g.message || "Database write failed";
+      Q(`Couldn't save style — ${k}.`);
+    }
+  }, []), po = I(async (i, c) => {
+    ke((g) => g.map((k) => k.id === i ? { ...k, lyricsPreview: c } : k));
+    try {
+      await hl(i, c), Q(null);
+    } catch (g) {
+      const k = g.message || "Database write failed";
+      Q(`Couldn't save lyrics — ${k}.`);
+    }
+  }, []), mo = I(async (i, c) => {
+    ke((g) => g.map((k) => k.id === i ? { ...k, specsJson: c } : k));
+    try {
+      await gl(i, c), Q(null);
+    } catch (g) {
+      const k = g.message || "Database write failed";
+      Q(`Couldn't save specs — ${k}.`);
+    }
+  }, []), ho = I(async (i, c) => {
+    ke((g) => g.map((k) => k.id === i ? { ...k, theme: c } : k));
+    try {
+      await yl(i, c), Q(null);
+    } catch (g) {
+      const k = g.message || "Database write failed";
+      Q(`Couldn't save theme — ${k}.`);
+    }
+  }, []);
+  ee(() => {
+    if (!Y) return;
+    const i = Y, c = setTimeout(() => {
+      const g = et.find((ge) => ge.id === i);
+      if (!g) return;
+      const k = U.trim() || g.title, S = L.trim(), z = v, R = zt(K) > 0 ? JSON.stringify(K) : "", J = g.styleTags === "—" ? "" : g.styleTags || "";
+      g.title !== k && ga(i, k), J !== S && uo(i, S), (g.lyricsPreview || "") !== C && po(i, C), (g.specsJson || "") !== R && mo(i, R), (g.theme || "") !== z && ho(i, z);
+    }, 600);
+    return () => clearTimeout(c);
+  }, [Y, U, L, v, C, K, et, ga, uo, po, mo, ho]);
+  const [go, yo] = _(null), [nn, bo] = _(!1), ar = I((i) => {
+    T(i.lyricsPreview ?? ""), E(i.styleTags && i.styleTags !== "—" ? i.styleTags : ""), A(i.theme ?? "");
+    const c = i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "");
+    if (te(c), Je(!1), i.specsJson)
+      try {
+        Te(JSON.parse(i.specsJson));
+      } catch {
+        Te({});
+      }
+    else
+      Te({});
+    j(i.coverDataUrl ?? ""), Oe(""), Xe(i.id), W(null), O(null), Je(!1), ve(i) ? i.source === "youtube" ? (m("restyle"), Ae(null), we(null), Ce(null), W("Remote reference extraction is not installed yet. Play/save works; restyle from online music is next.")) : (m("restyle"), rt(i.audioDataUrl, `${c}.mp3`)) : (Ae(null), we(null), Ce(null), m("lyricsOnly"));
+  }, [rt]), fo = I((i) => {
+    const c = Yt(i);
+    if (!c) {
+      d({
+        appId: "musiccreator",
+        appName: "JULI3TA",
+        appIcon: "AlertCircle",
+        title: a("musiccreator.notify.noLyricsTitle"),
+        message: a("musiccreator.notify.noLyricsBody"),
+        isRead: !1
+      });
+      return;
+    }
+    l({
+      type: "OPEN_OR_FOCUS_WINDOW",
+      appId: "texteditor",
+      args: { editor: { nodeId: c } }
+    });
+  }, [Yt, l, d, a]), ya = I((i, c, g, k) => {
+    const S = o.ensureUserFolder("Desktop");
+    if (!S) return;
+    const z = o.findChildByName(S, i);
+    let R;
+    if (z)
+      g.refTrackId || o.writeFile(z.id, c), R = z.id;
+    else {
+      R = o.createFile(S, i, c, g);
+      const J = Array.from(k).reduce((nt, Ne) => nt + Ne.charCodeAt(0), 0), ge = J % 6 + 1, We = Math.floor(J / 6) % 4;
+      l({
+        type: "ADD_DESKTOP_ICON",
+        icon: {
+          name: i,
+          icon: el(i),
+          fileSystemNodeId: R,
+          position: { x: 16 + ge * 80, y: 16 + We * 90 },
+          isSelected: !1
+        }
+      });
+    }
+    d({
+      appId: "musiccreator",
+      appName: "JULI3TA",
+      appIcon: "Sparkles",
+      title: a("musiccreator.notify.savedToDesktopTitle"),
+      message: a("musiccreator.notify.savedToDesktopBody", { name: i }),
+      isRead: !1
+    });
+  }, [o, l, d, a]), sn = I((i) => {
+    if (!i.audioDataUrl) return;
+    const c = Sa(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""));
+    ya(`${c}.mp3`, "", { mimeType: "audio/mpeg", refTrackId: i.id }, i.id);
+  }, [ya]), ln = I((i) => {
+    if (!i.lyricsPreview) return;
+    const c = Sa(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""));
+    ya(`${c}.lyrics.txt`, i.lyricsPreview, { mimeType: "text/plain" }, `${i.id}-lyrics`);
+  }, [ya]), cn = I((i) => {
+    tt(!1), x("player"), f(i.id);
+  }, []), Fe = I((i) => {
+    const c = i.dataTransfer.getData(ta);
+    if (!c) return null;
+    try {
+      return JSON.parse(c);
+    } catch {
+      return null;
+    }
+  }, []), dn = I((i) => {
+    const c = Fe(i);
+    if (c && c.lyricsPreview) {
+      i.preventDefault(), T(c.lyricsPreview);
+      const g = c.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "");
+      !U.trim() && g && te(g), !L.trim() && c.styleTags && c.styleTags !== "—" && E(c.styleTags);
+      return;
+    }
+  }, [Fe, U, L]), un = I((i) => {
+    const c = Fe(i);
+    c && c.styleTags && c.styleTags !== "—" && (i.preventDefault(), E((g) => g ? `${g}, ${c.styleTags}` : c.styleTags));
+  }, [Fe]), pn = I((i) => {
+    const c = Fe(i);
+    if (c) {
+      i.preventDefault();
+      const g = c.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""), k = c.styleTags && c.styleTags !== "—" ? `Inspired by "${g}" — ${c.styleTags}` : `Inspired by "${g}"`;
+      A(k);
+    }
+  }, [Fe]), mn = I((i) => {
+    const c = Fe(i);
+    c && (i.preventDefault(), te(c.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "")));
+  }, [Fe]), ba = (i) => {
+    i.dataTransfer.types.includes(ta) && (i.preventDefault(), i.dataTransfer.dropEffect = "copy");
+  }, vo = C.length, hn = L.length, q = ft !== "idle", gn = ce(() => ({
+    appLabel: "JULI3TA",
+    groups: [
+      {
+        id: "song",
+        label: "Song",
+        items: [
+          { id: "new", label: "New Song", onSelect: () => {
+            Gt.current?.abort(), ne.current?.abort(), ha.current = !1, m("compose"), A(""), T(""), E(""), te(""), Te({}), O(null), Je(!1), j(""), Oe(""), Lr(!1), Ae(null), we(null), Ce(null), W(null), Q(null), Ee("idle"), vt(0), ot(null), Dt(!1), Ge(!1), Xe(null);
+          } },
+          { id: "surprise", label: "Surprise me…", onSelect: () => lo() },
+          { id: "mode-restyle", label: "Restyle Mode", onSelect: () => m("restyle") },
+          { id: "mode-lyrics", label: "Lyrics Only Mode", onSelect: () => m("lyricsOnly") }
+        ]
+      },
+      {
+        id: "view",
+        label: "View",
+        items: [
+          { id: "view-creator", label: "Creator", onSelect: () => x("creator") },
+          { id: "view-player", label: "Player", onSelect: () => x("player") },
+          { id: "open-help", label: "How it works…", onSelect: () => u(!0) },
+          { id: "open-settings", label: "JULI3TA Settings…", onSelect: () => Xa(!0) }
+        ]
+      },
+      {
+        id: "window",
+        label: "Window",
+        items: [
+          { id: "minimize", label: "Minimize Window", actionId: "minimize-window", disabled: !r },
+          { id: "close", label: "Close Window", actionId: "close-window", disabled: !r }
+        ]
+      },
+      {
+        id: "help",
+        label: "Help",
+        items: [
+          { id: "juli3ta-help", label: "JULI3TA Help…", onSelect: () => u(!0) },
+          { id: "tytus-help", label: "Tytus Help", actionId: "open-help" }
+        ]
+      }
+    ]
+  }), [r]);
+  Ks(r?.id ?? null, gn);
+  const Ye = ce(
+    () => et.filter(gi),
+    [et]
+  ), it = ce(() => {
+    const i = wt.trim().toLowerCase();
+    return i ? Ye.filter((c) => c.title.toLowerCase().includes(i) || c.styleTags.toLowerCase().includes(i)) : Ye;
+  }, [Ye, wt]), Kt = I((i) => {
+    i.slice(0, 4).forEach((c) => {
+      const g = _a(c.id), k = at[g];
+      k && Date.now() - k.resolvedAt < 5400 * 1e3 || Ka.current.has(c.id) || (Ka.current.add(c.id), Gr((S) => new Set(S).add(c.id)), dr(c.id).then((S) => {
+        Wa((z) => ({
+          ...z,
+          [g]: { src: S.proxyUrl, resolvedAt: Date.now() }
+        }));
+      }).catch(() => {
+      }).finally(() => {
+        Ka.current.delete(c.id), Gr((S) => {
+          const z = new Set(S);
+          return z.delete(c.id), z;
+        });
+      }));
+    });
+  }, [at]);
+  ee(() => {
+    if (!Be) return;
+    const i = new AbortController();
+    return Promise.allSettled([
+      Gl(i.signal),
+      Ao(i.signal),
+      zo(i.signal)
+    ]).then(([c, g, k]) => {
+      c.status === "fulfilled" ? Wr(c.value) : Wr(null), g.status === "fulfilled" && qr(g.value), k.status === "fulfilled" && Jr(k.value);
+    }), () => i.abort();
+  }, [Be]), ee(() => {
+    if (!Be) return;
+    const i = (c) => {
+      c.key === "Escape" && tt(!1);
+    };
+    return window.addEventListener("keydown", i), () => window.removeEventListener("keydown", i);
+  }, [Be]), ee(() => {
+    if (!Be) return;
+    const i = Ba.trim();
+    if (i.length < 2) {
+      const z = window.setTimeout(() => {
+        Fa([]), Le(null), ca(!1);
+      }, 0);
+      return () => window.clearTimeout(z);
+    }
+    const c = `${qt}:${i.toLowerCase()}`, g = eo.current.get(c);
+    if (g) {
+      Fa(g), ca(!1), Le(null), Kt(g);
+      return;
+    }
+    const k = new AbortController(), S = setTimeout(() => {
+      ca(!0), Le(null);
+      let z = Ya.current.get(c);
+      z || (z = Ql(i, qt, 20, k.signal).then((R) => qt === "playlists" ? R.results.playlists : R.results.tracks).catch(() => Kl(i, 20, k.signal)).finally(() => {
+        Ya.current.delete(c);
+      }), Ya.current.set(c, z)), z.then((R) => {
+        eo.current.set(c, R), Fa(R), Kt(R);
+      }).catch((R) => {
+        k.signal.aborted || Le(R.message || "Music search failed.");
+      }).finally(() => {
+        k.signal.aborted || ca(!1);
+      });
+    }, 120);
+    return () => {
+      k.abort(), clearTimeout(S);
+    };
+  }, [Ba, qt, Be, Kt]);
+  const fa = I(async () => {
+    const [i, c] = await Promise.allSettled([
+      Ao(),
+      zo()
+    ]);
+    i.status === "fulfilled" && qr(i.value), c.status === "fulfilled" && Jr(c.value);
+  }, []), yn = I(async (i, c) => {
+    await Vl(i, c), await fa(), d({
+      appId: "musiccreator",
+      appName: "JULI3TA",
+      appIcon: "Music",
+      title: "Music source connected",
+      message: `${i} verified and saved to the OS keychain.`,
+      isRead: !1
+    });
+  }, [d, fa]), bn = I(async (i) => {
+    await Yl(i), await fa(), d({
+      appId: "musiccreator",
+      appName: "JULI3TA",
+      appIcon: "Music",
+      title: "Music source disconnected",
+      message: `${i} credentials removed from the OS keychain.`,
+      isRead: !1
+    });
+  }, [d, fa]), fn = ce(
+    () => new Set(kt.filter((i) => i.externalId).map((i) => i.externalId)),
+    [kt]
+  ), va = I((i, c) => {
+    const g = bi(i.title, i.channel);
+    return {
+      id: c?.id ?? _a(i.id),
+      title: g.song || i.title || "Untitled",
+      styleTags: "YouTube",
+      lyricsPreview: "",
+      durationMs: i.durationMs ?? 0,
+      bitrate: 0,
+      sampleRate: 0,
+      sizeBytes: 0,
+      createdAt: Date.now(),
+      audioDataUrl: c?.audioDataUrl ?? "",
+      specsJson: "",
+      coverDataUrl: "",
+      theme: "",
+      source: "youtube",
+      audioKind: "remote_stream",
+      externalId: i.id,
+      externalUrl: `https://www.youtube.com/watch?v=${i.id}`,
+      thumbnailUrl: i.thumbnailUrl || Ea(i.id),
+      artist: g.artist || i.channel || "YouTube",
+      album: i.channel ?? ""
+    };
+  }, []), vn = I(async (i, c) => {
+    if (i.audioDataUrl && !c?.force) return i.audioDataUrl;
+    if (!yi(i) || !i.externalId) return i.audioDataUrl || null;
+    const g = _a(i.externalId), k = at[g] ?? at[i.id];
+    if (!c?.force && k && Date.now() - k.resolvedAt < 5400 * 1e3) return k.src;
+    const S = await dr(i.externalId);
+    return Wa((z) => ({ ...z, [g]: { src: S.proxyUrl, resolvedAt: Date.now() } })), S.proxyUrl;
+  }, [at]), rr = ce(
+    () => [...Kr, ...kt, ...it],
+    [Kr, kt, it]
+  ), xo = Z(null), je = Dc(rr, xo, vn), xn = I((i) => {
+    const c = i.items.find(ve);
+    c && (Qr((g) => [
+      ...i.items.filter((k) => !g.some((S) => S.id === k.id)),
+      ...g
+    ]), f(c.id), tt(!1), x("player"), je.play(c));
+  }, [je]), wn = I(async (i) => {
+    await Il(i), St(await Qt());
+  }, []), kn = I(async (i) => {
+    Le(null), Vr(i.id);
+    try {
+      const c = _a(i.id), g = at[c], k = g && Date.now() - g.resolvedAt < 5400 * 1e3 ? { videoId: i.id, proxyUrl: g.src, durationMs: i.durationMs } : await dr(i.id), S = va(
+        { ...i, durationMs: i.durationMs ?? k.durationMs ?? 0 },
+        { id: c, audioDataUrl: k.proxyUrl }
+      );
+      Qr((z) => [S, ...z.filter((R) => R.id !== S.id)]), Wa((z) => ({ ...z, [c]: { src: k.proxyUrl, resolvedAt: Date.now() } })), f(S.id), x("player"), je.play(S);
+    } catch (c) {
+      Le(c.message || "Could not start preview.");
+    } finally {
+      Vr(null);
+    }
+  }, [je, va, at]), Sn = I(async (i) => {
+    Yr(i.id);
+    const c = va(i);
+    try {
+      await ni(c), qa((g) => [c, ...g.filter((k) => k.id !== c.id)]), f(c.id), la("library"), x("player"), Kt([i]), Ga.length > 0;
+    } catch (g) {
+      Le(g.message || "Could not save track.");
+    } finally {
+      Yr(null);
+    }
+  }, [va, Kt, Ga.length]), _n = I((i) => {
+    Ja((c) => {
+      const g = new Set(c);
+      return g.has(i.id) ? g.delete(i.id) : g.add(i.id), g;
+    }), Al({
+      kind: "track",
+      entityId: i.id,
+      provider: i.source ?? "youtube",
+      title: i.title
+    }).catch((c) => console.warn("Favorite toggle failed:", c));
+  }, []), Tn = I(async () => {
+    const i = Va.trim() || "New Playlist";
+    Zr(!0);
+    try {
+      const c = await zl(i);
+      St((g) => [c, ...g]), Xr("");
+    } catch (c) {
+      Le(c.message || "Could not create playlist.");
+    } finally {
+      Zr(!1);
+    }
+  }, [Va]), Cn = I(async (i, c) => {
+    try {
+      await Ml(i, c);
+      const g = await Qt();
+      St(g);
+    } catch (g) {
+      Le(g.message || "Could not add to playlist.");
+    }
+  }, []), Nn = I(async (i, c) => {
+    try {
+      await El(i, c);
+      const g = await Qt();
+      St(g);
+    } catch (g) {
+      Le(g.message || "Could not remove from playlist.");
+    }
+  }, []), An = I((i) => {
+    qa((c) => c.filter((g) => g.id !== i.id)), Ja((c) => {
+      const g = new Set(c);
+      return g.delete(i.id), g;
+    }), Tl(i.id).then(() => Qt().then(St)).catch((c) => console.warn("Library track delete failed:", c));
+  }, []), zn = I((i) => {
+    f(i.id), x("player");
+  }, []);
+  return F ? /* @__PURE__ */ s("div", { className: "flex h-full overflow-hidden", style: { background: "var(--bg-window)" }, children: [
+    /* @__PURE__ */ s(
+      "aside",
+      {
+        className: "flex flex-col flex-shrink-0",
+        style: {
+          width: 260,
+          borderRight: "1px solid var(--border-subtle)",
+          background: "var(--bg-titlebar)"
+        },
+        children: [
+          /* @__PURE__ */ s(
+            "div",
+            {
+              className: "flex items-center gap-2 px-3 flex-shrink-0",
+              style: {
+                height: 38,
+                borderBottom: "1px solid var(--border-subtle)"
+              },
+              children: [
+                /* @__PURE__ */ t(De, { size: 13, style: { color: "var(--accent-primary)" } }),
+                /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }, children: a("musiccreator.gallery.title") }),
+                /* @__PURE__ */ s("div", { className: "ml-auto flex items-center gap-2", children: [
+                  /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: wt.trim() ? `${it.length} / ${Ye.length}` : a(
+                    Ye.length === 1 ? "musiccreator.gallery.count.one" : "musiccreator.gallery.count.other",
+                    { n: Ye.length }
+                  ) }),
+                  /* @__PURE__ */ t(
+                    "button",
+                    {
+                      onClick: on,
+                      disabled: ua,
+                      className: "flex items-center justify-center transition-all",
+                      style: {
+                        width: 22,
+                        height: 22,
+                        border: "1px solid var(--border-subtle)",
+                        borderRadius: "var(--radius-sm)",
+                        background: "var(--bg-window)",
+                        color: "var(--text-secondary)",
+                        opacity: ua ? 0.5 : 1
+                      },
+                      title: da ? `Open real folder: ${da}` : "Open real JULI3TA folder",
+                      children: /* @__PURE__ */ t(ss, { size: 11 })
+                    }
+                  ),
+                  /* @__PURE__ */ s(
+                    "div",
+                    {
+                      className: "flex rounded-md overflow-hidden flex-shrink-0",
+                      style: { border: "1px solid var(--border-subtle)" },
+                      children: [
+                        /* @__PURE__ */ t(
+                          "button",
+                          {
+                            onClick: () => Fr("cards"),
+                            className: "flex items-center justify-center transition-all",
+                            style: {
+                              width: 22,
+                              height: 22,
+                              background: Wt === "cards" ? "var(--bg-hover)" : "transparent",
+                              color: Wt === "cards" ? "var(--text-primary)" : "var(--text-disabled)"
+                            },
+                            title: "Cards",
+                            children: /* @__PURE__ */ t(br, { size: 11 })
+                          }
+                        ),
+                        /* @__PURE__ */ t(
+                          "button",
+                          {
+                            onClick: () => Fr("list"),
+                            className: "flex items-center justify-center transition-all",
+                            style: {
+                              width: 22,
+                              height: 22,
+                              background: Wt === "list" ? "var(--bg-hover)" : "transparent",
+                              color: Wt === "list" ? "var(--text-primary)" : "var(--text-disabled)"
+                            },
+                            title: "List",
+                            children: /* @__PURE__ */ t(pt, { size: 11 })
+                          }
+                        )
+                      ]
+                    }
+                  )
+                ] })
+              ]
+            }
+          ),
+          Ye.length > 0 && /* @__PURE__ */ s(
+            "div",
+            {
+              className: "flex items-center gap-1 px-2 flex-shrink-0",
+              style: {
+                height: 32,
+                borderBottom: "1px solid var(--border-subtle)",
+                background: "var(--bg-window)"
+              },
+              children: [
+                /* @__PURE__ */ t(It, { size: 11, style: { color: "var(--text-disabled)", marginLeft: 4 } }),
+                /* @__PURE__ */ t(
+                  "input",
+                  {
+                    value: wt,
+                    onChange: (i) => Br(i.target.value),
+                    placeholder: a("musiccreator.gallery.searchPlaceholder"),
+                    className: "flex-1 rounded-input bg-transparent outline-none px-1",
+                    style: { fontSize: 11, color: "var(--text-primary)" }
+                  }
+                ),
+                wt && /* @__PURE__ */ t(
+                  "button",
+                  {
+                    onClick: () => Br(""),
+                    className: "opacity-60 hover:opacity-100 px-1",
+                    title: "Clear search",
+                    children: /* @__PURE__ */ t(de, { size: 11 })
+                  }
+                )
+              ]
+            }
+          ),
+          Ye.length === 0 ? /* @__PURE__ */ s("div", { className: "flex-1 flex flex-col items-center justify-center px-4 text-center", children: [
+            /* @__PURE__ */ t(
+              "div",
+              {
+                className: "flex items-center justify-center rounded-2xl mb-2",
+                style: {
+                  width: 44,
+                  height: 44,
+                  background: "var(--bg-hover)"
+                },
+                children: /* @__PURE__ */ t(pt, { size: 18, style: { color: "var(--text-disabled)" } })
+              }
+            ),
+            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)" }, children: a("musiccreator.gallery.empty.title") }),
+            /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 4, maxWidth: 220, lineHeight: 1.4 }, children: a("musiccreator.gallery.empty.body") }),
+            /* @__PURE__ */ s("div", { className: "flex items-center gap-1 mt-3", style: { fontSize: 9, color: "var(--text-disabled)" }, children: [
+              /* @__PURE__ */ t(Re, { size: 10 }),
+              a("musiccreator.gallery.empty.footer")
+            ] })
+          ] }) : it.length === 0 ? /* @__PURE__ */ s("div", { className: "flex-1 flex flex-col items-center justify-center px-4 text-center", children: [
+            /* @__PURE__ */ t(It, { size: 18, style: { color: "var(--text-disabled)", opacity: 0.5 } }),
+            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 8 }, children: a("musiccreator.gallery.searchEmpty", { q: wt }) })
+          ] }) : /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar p-1.5 flex flex-col gap-0.5", children: Wt === "list" ? /* @__PURE__ */ t(
+            Gc,
+            {
+              tracks: it,
+              player: je,
+              onLoad: ar,
+              onOpenLyrics: fo,
+              onDelete: co,
+              onRename: ga
+            }
+          ) : it.map((i) => /* @__PURE__ */ t(
+            Yc,
+            {
+              track: i,
+              onDelete: co,
+              onLoad: ar,
+              onOpenLyrics: fo,
+              onSaveSongToDesktop: sn,
+              onSaveLyricsToDesktop: ln,
+              onPlayInPlayer: cn,
+              onRename: ga,
+              onEditCover: yo,
+              onSelect: zn,
+              selected: y === "player" && N === i.id,
+              player: je
+            },
+            i.id
+          )) })
+        ]
+      }
+    ),
+    /* @__PURE__ */ s("div", { className: "flex-1 flex flex-col min-w-0 overflow-hidden relative", children: [
+      /* @__PURE__ */ s(
+        "div",
+        {
+          className: "flex items-center px-5 flex-shrink-0",
+          style: {
+            height: 56,
+            gap: 12,
+            borderBottom: "1px solid var(--border-subtle)",
+            background: "var(--bg-titlebar)"
+          },
+          children: [
+            /* @__PURE__ */ s("div", { className: "flex items-center", style: { gap: 2, flexShrink: 0 }, children: [
+              /* @__PURE__ */ t(Xo, { name: "juli3ta:mark", size: 60, scale: 1, style: { flexShrink: 0, marginLeft: -8 } }),
+              /* @__PURE__ */ t(
+                "img",
+                {
+                  src: b === "light" ? "/brand/juli3ta/wordmark-ink-transparent.png" : "/brand/juli3ta/wordmark-cream-transparent.png",
+                  alt: "JULI3TA",
+                  draggable: !1,
+                  style: {
+                    height: 24,
+                    width: "auto",
+                    display: "block",
+                    marginLeft: -6,
+                    userSelect: "none",
+                    pointerEvents: "none"
+                  }
+                }
+              )
+            ] }),
+            /* @__PURE__ */ t(
+              "div",
+              {
+                className: "flex items-center gap-0.5 ml-4 rounded-lg p-0.5 flex-shrink-0",
+                style: {
+                  background: "var(--bg-window)",
+                  border: "1px solid var(--border-subtle)"
+                },
+                children: [
+                  { id: "creator", icon: /* @__PURE__ */ t(De, { size: 12 }), label: a("musiccreator.view.creator"), tip: a("musiccreator.view.creator.tip") },
+                  { id: "player", icon: /* @__PURE__ */ t(fe, { size: 12 }), label: a("musiccreator.view.player"), tip: a("musiccreator.view.player.tip") }
+                ].map((i) => /* @__PURE__ */ s(
+                  "button",
+                  {
+                    onClick: () => x(i.id),
+                    title: i.tip,
+                    className: "flex items-center gap-1.5 px-3 rounded-md transition-all",
+                    style: {
+                      height: 28,
+                      fontSize: 11,
+                      fontWeight: y === i.id ? 600 : 500,
+                      color: y === i.id ? "white" : "var(--text-secondary)",
+                      background: y === i.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "transparent",
+                      border: "none"
+                    },
+                    children: [
+                      i.icon,
+                      i.label
+                    ]
+                  },
+                  i.id
+                ))
+              }
+            ),
+            /* @__PURE__ */ s("div", { className: "ml-auto flex items-center gap-1.5 flex-shrink-0", children: [
+              y === "player" && /* @__PURE__ */ s(
+                "button",
+                {
+                  onClick: () => {
+                    tt((i) => !i), la("search");
+                  },
+                  className: "flex items-center gap-1.5 px-3 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+                  style: {
+                    height: 32,
+                    fontSize: 11,
+                    color: Be ? "white" : "var(--text-secondary)",
+                    background: Be ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
+                    border: "1px solid var(--border-subtle)"
+                  },
+                  title: "Search free music",
+                  children: [
+                    /* @__PURE__ */ t(It, { size: 12 }),
+                    "Search music"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ t(Jc, { endpoint: F, endpoints: ma, onSwitch: $i }),
+              /* @__PURE__ */ s(
+                "button",
+                {
+                  onClick: lo,
+                  disabled: q,
+                  className: "flex items-center gap-1.5 px-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
+                  style: {
+                    height: 32,
+                    fontSize: 11,
+                    color: "var(--text-secondary)",
+                    background: "var(--bg-window)",
+                    border: "1px solid var(--border-subtle)"
+                  },
+                  title: a("musiccreator.header.surpriseTitle"),
+                  children: [
+                    /* @__PURE__ */ t(Ms, { size: 12 }),
+                    a("musiccreator.header.surprise")
+                  ]
+                }
+              ),
+              /* @__PURE__ */ t(
+                "button",
+                {
+                  onClick: () => Xa(!0),
+                  className: "flex items-center justify-center rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+                  style: {
+                    width: 32,
+                    height: 32,
+                    color: "var(--text-secondary)",
+                    background: "var(--bg-window)",
+                    border: "1px solid var(--border-subtle)"
+                  },
+                  title: "JULI3TA Settings",
+                  children: /* @__PURE__ */ t(Vo, { size: 14 })
+                }
+              ),
+              /* @__PURE__ */ t(
+                "button",
+                {
+                  onClick: () => u(!0),
+                  className: "flex items-center justify-center rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+                  style: {
+                    width: 32,
+                    height: 32,
+                    color: "var(--text-secondary)",
+                    background: "var(--bg-window)",
+                    border: "1px solid var(--border-subtle)"
+                  },
+                  title: a("julietaHelp.title"),
+                  children: /* @__PURE__ */ t(Kn, { size: 14 })
+                }
+              )
+            ] })
+          ]
+        }
+      ),
+      y === "player" && (Be ? /* @__PURE__ */ t(
+        nd,
+        {
+          tab: wi,
+          onTabChange: la,
+          query: Ba,
+          onQueryChange: ki,
+          resultType: qt,
+          onResultTypeChange: Si,
+          results: _i,
+          busy: Ti,
+          error: Ci,
+          status: Ni,
+          providers: Ai,
+          connectors: zi,
+          libraryTracks: kt,
+          playlists: Ga,
+          playlistNameDraft: Va,
+          playlistBusy: ji,
+          favoriteIds: Li,
+          warmupIds: Ii,
+          previewBusyId: Mi,
+          addBusyId: Ei,
+          savedYoutubeIds: fn,
+          player: je,
+          onPreview: kn,
+          onAdd: Sn,
+          onOpenTrack: (i) => {
+            f(i.id), tt(!1), x("player");
+          },
+          onToggleFavorite: _n,
+          onRemoveLibraryTrack: An,
+          onPlaylistNameDraftChange: Xr,
+          onCreatePlaylist: Tn,
+          onAddTrackToPlaylist: Cn,
+          onRemoveTrackFromPlaylist: Nn,
+          onPlayPlaylist: xn,
+          onDeletePlaylist: wn,
+          onConfigureConnector: yn,
+          onDisconnectConnector: bn,
+          onClose: () => tt(!1)
+        }
+      ) : /* @__PURE__ */ t(
+        id,
+        {
+          track: (() => {
+            const i = N ?? je.state.trackId ?? it[0]?.id ?? kt[0]?.id ?? null;
+            return i ? rr.find((c) => c.id === i) ?? null : null;
+          })(),
+          player: je,
+          onSwitchToCreator: () => x("creator"),
+          onSearchMusic: () => {
+            x("player"), tt(!0), la("search");
+          },
+          onEditInCreator: (i) => {
+            ar(i), x("creator");
+          }
+        }
+      )),
+      y === "creator" && /* @__PURE__ */ s(pe, { children: [
+        /* @__PURE__ */ s(
+          "div",
+          {
+            className: "flex items-center gap-2 px-5 flex-shrink-0",
+            style: {
+              height: 48,
+              borderBottom: "1px solid var(--border-subtle)"
+            },
+            children: [
+              [
+                { id: "compose", icon: /* @__PURE__ */ t(ja, { size: 13 }), label: "Song", tip: "Theme → lyrics → music" },
+                { id: "restyle", icon: /* @__PURE__ */ t(Lt, { size: 13 }), label: "Restyle", tip: "Re-sing your song in the style of a reference track" },
+                { id: "lyricsOnly", icon: /* @__PURE__ */ t(Ia, { size: 13 }), label: "Lyrics", tip: "Words only, no audio" }
+              ].map((i) => /* @__PURE__ */ s(
+                "button",
+                {
+                  onClick: () => m(i.id),
+                  disabled: q,
+                  title: i.tip,
+                  className: "flex items-center gap-1.5 px-4 rounded-lg transition-all disabled:opacity-50",
+                  style: {
+                    height: 32,
+                    fontSize: 12,
+                    fontWeight: p === i.id ? 600 : 500,
+                    color: p === i.id ? "white" : "var(--text-secondary)",
+                    background: p === i.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-titlebar)",
+                    border: p === i.id ? "1px solid transparent" : "1px solid var(--border-subtle)"
+                  },
+                  children: [
+                    i.icon,
+                    i.label
+                  ]
+                },
+                i.id
+              )),
+              /* @__PURE__ */ t("div", { className: "ml-auto flex items-center gap-2", children: q ? /* @__PURE__ */ s(
+                "button",
+                {
+                  onClick: Xi,
+                  className: "flex items-center gap-1.5 px-4 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+                  style: {
+                    height: 32,
+                    fontSize: 12,
+                    fontWeight: 500,
+                    color: "var(--text-secondary)",
+                    background: "var(--bg-titlebar)",
+                    border: "1px solid var(--border-subtle)"
+                  },
+                  children: [
+                    /* @__PURE__ */ t(X, { size: 12, className: "animate-spin" }),
+                    a("musiccreator.button.cancel")
+                  ]
+                }
+              ) : /* @__PURE__ */ s(
+                "button",
+                {
+                  onClick: Bi,
+                  className: "flex items-center gap-1.5 px-4 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.99]",
+                  style: {
+                    height: 32,
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: "white",
+                    background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                    boxShadow: "var(--shadow-md)"
+                  },
+                  children: [
+                    /* @__PURE__ */ t(Lt, { size: 13 }),
+                    p === "restyle" ? "Restyle Song" : p === "lyricsOnly" ? "Write Lyrics" : a("musiccreator.button.create")
+                  ]
+                }
+              ) })
+            ]
+          }
+        ),
+        /* @__PURE__ */ s(
+          "div",
+          {
+            className: "flex items-center gap-3 px-5 flex-shrink-0",
+            style: {
+              height: 40,
+              borderBottom: "1px solid var(--border-subtle)",
+              background: "var(--bg-window)"
+            },
+            children: [
+              /* @__PURE__ */ t(
+                "label",
+                {
+                  htmlFor: "juli3ta-song-name",
+                  style: {
+                    fontSize: 10,
+                    fontWeight: 600,
+                    color: "var(--text-disabled)",
+                    textTransform: "uppercase",
+                    letterSpacing: 0.5,
+                    flexShrink: 0
+                  },
+                  children: a("musiccreator.songName.label")
+                }
+              ),
+              /* @__PURE__ */ t(
+                "input",
+                {
+                  id: "juli3ta-song-name",
+                  value: U,
+                  onChange: (i) => te(i.target.value),
+                  onDragOver: ba,
+                  onDrop: mn,
+                  placeholder: a("musiccreator.songName.placeholder"),
+                  disabled: q,
+                  className: "flex-1 px-2.5 py-1 rounded-md focus:outline-none focus:ring-1 disabled:opacity-50",
+                  style: {
+                    fontSize: 12,
+                    background: "var(--bg-titlebar)",
+                    border: "1px solid var(--border-subtle)",
+                    color: "var(--text-primary)",
+                    minWidth: 0
+                  }
+                }
+              ),
+              p !== "lyricsOnly" && /* @__PURE__ */ s(
+                "label",
+                {
+                  htmlFor: "juli3ta-instrumental",
+                  className: "flex items-center gap-2 cursor-pointer select-none flex-shrink-0",
+                  style: { fontSize: 11, color: "var(--text-secondary)" },
+                  children: [
+                    a("musiccreator.lyrics.instrumental"),
+                    /* @__PURE__ */ t(
+                      Do,
+                      {
+                        id: "juli3ta-instrumental",
+                        checked: ue,
+                        onChange: Je,
+                        disabled: q
+                      }
+                    )
+                  ]
+                }
+              )
+            ]
+          }
+        ),
+        (q || Ft || xt) && /* @__PURE__ */ s(
+          "div",
+          {
+            className: "flex-shrink-0",
+            style: {
+              borderBottom: "1px solid var(--border-subtle)",
+              background: Ft ? "rgba(255, 82, 82, 0.06)" : xt ? "rgba(251, 191, 36, 0.06)" : "var(--bg-titlebar)"
+            },
+            children: [
+              q && /* @__PURE__ */ t("div", { className: "overflow-hidden", style: { height: 2, background: "var(--bg-hover)" }, children: /* @__PURE__ */ t(
+                "div",
+                {
+                  style: {
+                    width: `${xi * 100}%`,
+                    height: "100%",
+                    background: "linear-gradient(to right, var(--accent-primary), var(--accent-secondary))",
+                    transition: "width 0.25s ease"
+                  }
+                }
+              ) }),
+              /* @__PURE__ */ t("div", { className: "flex items-center gap-2 px-5", style: { height: 30, fontSize: 11 }, children: Ft ? /* @__PURE__ */ s(pe, { children: [
+                /* @__PURE__ */ t(ra, { size: 12, style: { color: "#ff5252", flexShrink: 0 } }),
+                /* @__PURE__ */ t("span", { className: "flex-1 truncate", style: { color: "#ff8a80" }, title: Ft, children: Ft }),
+                /* @__PURE__ */ t(
+                  "button",
+                  {
+                    onClick: () => W(null),
+                    className: "rounded-md transition-all hover:bg-[var(--bg-hover)] flex-shrink-0 flex items-center justify-center",
+                    style: { width: 18, height: 18, color: "var(--text-secondary)" },
+                    title: a("musiccreator.error.dismiss"),
+                    children: /* @__PURE__ */ t(de, { size: 11 })
+                  }
+                )
+              ] }) : q ? /* @__PURE__ */ s(pe, { children: [
+                /* @__PURE__ */ t(X, { size: 11, className: "animate-spin", style: { color: "var(--accent-primary)", flexShrink: 0 } }),
+                /* @__PURE__ */ t("span", { className: "flex-1 truncate", style: { color: "var(--text-secondary)" }, children: ft === "lyrics" ? Po[Ur % Po.length] : Ro[Ur % Ro.length] }),
+                /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)", flexShrink: 0 }, children: ft === "lyrics" ? "Step 1 / 2 · Lyrics" : "Step 2 / 2 · Music" })
+              ] }) : /* @__PURE__ */ s(pe, { children: [
+                /* @__PURE__ */ t(ra, { size: 12, style: { color: "#fbbf24", flexShrink: 0 } }),
+                /* @__PURE__ */ t("span", { className: "flex-1 truncate", style: { color: "#fde68a" }, title: xt ?? "", children: xt }),
+                /* @__PURE__ */ t(
+                  "button",
+                  {
+                    onClick: () => Q(null),
+                    className: "rounded-md transition-all hover:bg-[var(--bg-hover)] flex-shrink-0 flex items-center justify-center",
+                    style: { width: 18, height: 18, color: "var(--text-secondary)" },
+                    title: "Dismiss",
+                    children: /* @__PURE__ */ t(de, { size: 11 })
+                  }
+                )
+              ] }) })
+            ]
+          }
+        ),
+        /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: /* @__PURE__ */ s("div", { className: "px-6 py-5", children: [
+          p === "restyle" && /* @__PURE__ */ s(
+            "div",
+            {
+              className: "mb-5",
+              onDragOver: (i) => {
+                i.dataTransfer.types.includes(ta) && (i.preventDefault(), i.dataTransfer.dropEffect = "copy");
+              },
+              onDrop: (i) => {
+                const c = Fe(i);
+                c && c.hasAudio && (i.preventDefault(), (async () => {
+                  const g = await cl(c.id);
+                  if (!g?.audioDataUrl) {
+                    W("Could not load that track’s audio. Try dragging again.");
+                    return;
+                  }
+                  rt(g.audioDataUrl, `${c.title}.mp3`);
+                })());
+              },
+              children: [
+                /* @__PURE__ */ t("label", { style: { fontSize: 11, fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: 0.5 }, children: "Reference audio" }),
+                gt ? /* @__PURE__ */ s(
+                  "div",
+                  {
+                    className: "mt-1 px-3 py-2 rounded-lg",
+                    style: {
+                      background: "var(--bg-titlebar)",
+                      border: `1px solid ${Ze ? "var(--border-subtle)" : "var(--accent-primary)"}`
+                    },
+                    children: [
+                      /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+                        Ze ? /* @__PURE__ */ t(X, { size: 14, className: "animate-spin", style: { color: "var(--accent-primary)", flexShrink: 0 } }) : /* @__PURE__ */ t(pt, { size: 16, style: { color: "var(--accent-primary)", flexShrink: 0 } }),
+                        /* @__PURE__ */ t("div", { className: "flex-1 truncate", style: { fontSize: 12, color: "var(--text-primary)" }, children: gt }),
+                        /* @__PURE__ */ t(
+                          "button",
+                          {
+                            onClick: Qi,
+                            disabled: q || Ze,
+                            className: "p-1 rounded-md transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
+                            style: { color: "var(--text-secondary)" },
+                            title: "Remove reference",
+                            children: /* @__PURE__ */ t(ia, { size: 14 })
+                          }
+                        )
+                      ] }),
+                      (Ze || Ot) && /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 4 }, children: Ze ? "🔍  Listening for the best part…" : `✨  ${Ot}` })
+                    ]
+                  }
+                ) : /* @__PURE__ */ s("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-2 mt-1", children: [
+                  /* @__PURE__ */ s(
+                    "button",
+                    {
+                      onClick: () => na(!0),
+                      disabled: q,
+                      className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
+                      style: {
+                        fontSize: 11,
+                        color: "var(--text-secondary)",
+                        background: "var(--bg-titlebar)",
+                        border: "1px dashed var(--accent-primary)"
+                      },
+                      title: "Record new audio (mic or tab)",
+                      children: [
+                        /* @__PURE__ */ t(Re, { size: 16, style: { color: "var(--accent-primary)" } }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600 }, children: "Record now" }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "mic or tab audio" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ s(
+                    "button",
+                    {
+                      onClick: Fi,
+                      disabled: q,
+                      className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
+                      style: {
+                        fontSize: 11,
+                        color: "var(--text-secondary)",
+                        background: "var(--bg-titlebar)",
+                        border: "1px dashed var(--border-subtle)"
+                      },
+                      children: [
+                        /* @__PURE__ */ t(pt, { size: 16 }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600 }, children: "Pick file" }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "mp3 · wav · flac" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ s(
+                    "button",
+                    {
+                      onClick: Yi,
+                      disabled: q || et.filter((i) => i.audioDataUrl).length === 0,
+                      className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
+                      style: {
+                        fontSize: 11,
+                        color: "var(--text-secondary)",
+                        background: "var(--bg-titlebar)",
+                        border: "1px dashed var(--accent-primary)"
+                      },
+                      title: "Use a song from your JULI3TA library as the reference",
+                      children: [
+                        /* @__PURE__ */ t(ut, { size: 16, style: { color: "var(--accent-primary)" } }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600 }, children: a("musiccreator.restyle.button.mySongs") }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: a("musiccreator.restyle.button.mySongs.count", { count: et.filter((i) => i.audioDataUrl).length }) })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ s(
+                    "button",
+                    {
+                      onClick: Vi,
+                      disabled: q,
+                      className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50 relative",
+                      style: {
+                        fontSize: 11,
+                        color: "var(--text-secondary)",
+                        background: "var(--bg-titlebar)",
+                        border: "1px dashed var(--border-subtle)"
+                      },
+                      title: "Pick a Voice Recorder clip",
+                      children: [
+                        /* @__PURE__ */ t(Re, { size: 16 }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600 }, children: a("musiccreator.restyle.button.voiceClips") }),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: a("musiccreator.restyle.button.voiceClips.count", { count: Ut.length }) })
+                      ]
+                    }
+                  )
+                ] }),
+                !gt && /* @__PURE__ */ s("div", { className: "mt-3", children: [
+                  /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 600, marginBottom: 4 }, children: "Sample strategy" }),
+                  /* @__PURE__ */ s("div", { className: "grid grid-cols-2 gap-2", children: [
+                    /* @__PURE__ */ s(
+                      "button",
+                      {
+                        onClick: () => jr("best"),
+                        className: "flex items-center gap-2 px-3 py-2 rounded-lg transition-all",
+                        style: {
+                          background: Ie === "best" ? "var(--bg-selected)" : "var(--bg-titlebar)",
+                          border: `1px solid ${Ie === "best" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
+                          color: Ie === "best" ? "var(--text-primary)" : "var(--text-secondary)"
+                        },
+                        children: [
+                          /* @__PURE__ */ t(De, { size: 13, style: { color: Ie === "best" ? "var(--accent-primary)" : "var(--text-secondary)" } }),
+                          /* @__PURE__ */ s("div", { className: "text-left flex-1", children: [
+                            /* @__PURE__ */ t("div", { style: { fontSize: 11, fontWeight: 600 }, children: "Best 30 s" }),
+                            /* @__PURE__ */ t("div", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "single chorus-like window" })
+                          ] })
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ s(
+                      "button",
+                      {
+                        onClick: () => jr("mix"),
+                        className: "flex items-center gap-2 px-3 py-2 rounded-lg transition-all",
+                        style: {
+                          background: Ie === "mix" ? "var(--bg-selected)" : "var(--bg-titlebar)",
+                          border: `1px solid ${Ie === "mix" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
+                          color: Ie === "mix" ? "var(--text-primary)" : "var(--text-secondary)"
+                        },
+                        children: [
+                          /* @__PURE__ */ t(br, { size: 13, style: { color: Ie === "mix" ? "var(--accent-primary)" : "var(--text-secondary)" } }),
+                          /* @__PURE__ */ s("div", { className: "text-left flex-1", children: [
+                            /* @__PURE__ */ t("div", { style: { fontSize: 11, fontWeight: 600 }, children: "Iconic mix" }),
+                            /* @__PURE__ */ t("div", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "3 best parts crossfaded" })
+                          ] })
+                        ]
+                      }
+                    )
+                  ] })
+                ] }),
+                vi && /* @__PURE__ */ t(
+                  "div",
+                  {
+                    className: "absolute inset-0 z-30 flex items-center justify-center",
+                    style: { background: "rgba(0,0,0,0.6)" },
+                    onClick: () => !Me && na(!1),
+                    children: /* @__PURE__ */ s(
+                      "div",
+                      {
+                        onClick: (i) => i.stopPropagation(),
+                        className: "rounded-xl flex flex-col",
+                        style: {
+                          width: 380,
+                          background: "var(--bg-window)",
+                          border: "1px solid var(--border-subtle)",
+                          boxShadow: "var(--shadow-lg)"
+                        },
+                        children: [
+                          /* @__PURE__ */ s("div", { className: "px-5 py-4", style: { borderBottom: "1px solid var(--border-subtle)" }, children: [
+                            /* @__PURE__ */ t("div", { style: { fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }, children: "Record audio for cover" }),
+                            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 4, lineHeight: 1.4 }, children: "Capture 1–3 minutes of music for best results. JULI3TA will auto-extract the iconic parts." })
+                          ] }),
+                          /* @__PURE__ */ s("div", { className: "px-5 pt-3", children: [
+                            /* @__PURE__ */ s("div", { className: "grid grid-cols-2 gap-2", children: [
+                              /* @__PURE__ */ s(
+                                "button",
+                                {
+                                  onClick: () => !Me && Pr("mic"),
+                                  disabled: Me,
+                                  className: "flex items-center gap-2 px-3 py-2 rounded-lg transition-all",
+                                  style: {
+                                    background: $e === "mic" ? "var(--bg-selected)" : "var(--bg-titlebar)",
+                                    border: `1px solid ${$e === "mic" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
+                                    color: "var(--text-primary)"
+                                  },
+                                  children: [
+                                    /* @__PURE__ */ t(Re, { size: 14 }),
+                                    /* @__PURE__ */ s("div", { className: "text-left flex-1", children: [
+                                      /* @__PURE__ */ t("div", { style: { fontSize: 11, fontWeight: 600 }, children: "Microphone" }),
+                                      /* @__PURE__ */ t("div", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "laptop or USB mic" })
+                                    ] })
+                                  ]
+                                }
+                              ),
+                              /* @__PURE__ */ s(
+                                "button",
+                                {
+                                  onClick: () => !Me && Pr("tab"),
+                                  disabled: Me,
+                                  className: "flex items-center gap-2 px-3 py-2 rounded-lg transition-all",
+                                  style: {
+                                    background: $e === "tab" ? "var(--bg-selected)" : "var(--bg-titlebar)",
+                                    border: `1px solid ${$e === "tab" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
+                                    color: "var(--text-primary)"
+                                  },
+                                  children: [
+                                    /* @__PURE__ */ t(fr, { size: 14 }),
+                                    /* @__PURE__ */ s("div", { className: "text-left flex-1", children: [
+                                      /* @__PURE__ */ t("div", { style: { fontSize: 11, fontWeight: 600 }, children: "Tab audio" }),
+                                      /* @__PURE__ */ t("div", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "YouTube, Spotify Web…" })
+                                    ] })
+                                  ]
+                                }
+                              )
+                            ] }),
+                            $e === "tab" && /* @__PURE__ */ s("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 6, lineHeight: 1.4 }, children: [
+                              "💡 In the share dialog, pick a tab playing music and tick ",
+                              /* @__PURE__ */ t("strong", { children: '"Share tab audio"' }),
+                              "."
+                            ] })
+                          ] }),
+                          /* @__PURE__ */ s("div", { className: "px-5 py-6 flex flex-col items-center", children: [
+                            /* @__PURE__ */ s(
+                              "div",
+                              {
+                                style: {
+                                  fontSize: 32,
+                                  fontWeight: 300,
+                                  color: "var(--text-primary)",
+                                  fontVariantNumeric: "tabular-nums",
+                                  marginBottom: 16
+                                },
+                                children: [
+                                  Math.floor(Rr / 6e4).toString().padStart(2, "0"),
+                                  ":",
+                                  Math.floor(Rr / 1e3 % 60).toString().padStart(2, "0")
+                                ]
+                              }
+                            ),
+                            Me ? /* @__PURE__ */ t(
+                              "button",
+                              {
+                                onClick: qi,
+                                className: "flex items-center justify-center rounded-full transition-all hover:scale-105",
+                                style: {
+                                  width: 64,
+                                  height: 64,
+                                  background: "#ef4444",
+                                  color: "white",
+                                  animation: "pulse 1s infinite"
+                                },
+                                title: "Stop & analyze",
+                                children: /* @__PURE__ */ t(js, { size: 26 })
+                              }
+                            ) : /* @__PURE__ */ t(
+                              "button",
+                              {
+                                onClick: Wi,
+                                className: "flex items-center justify-center rounded-full transition-all hover:scale-105",
+                                style: {
+                                  width: 64,
+                                  height: 64,
+                                  background: "#ef4444",
+                                  color: "white",
+                                  boxShadow: "0 0 24px rgba(239,68,68,0.4)"
+                                },
+                                title: "Start recording",
+                                children: $e === "tab" ? /* @__PURE__ */ t(fr, { size: 28 }) : /* @__PURE__ */ t(Re, { size: 28 })
+                              }
+                            ),
+                            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 12 }, children: Me ? $e === "tab" ? "🔊 Capturing tab audio…" : "🎙️  Recording…" : "Tap to start" }),
+                            Hr && /* @__PURE__ */ t(
+                              "div",
+                              {
+                                className: "mt-3 px-3 py-1.5 rounded-md text-center",
+                                style: { background: "rgba(239,68,68,0.12)", maxWidth: 280 },
+                                children: /* @__PURE__ */ t("span", { style: { fontSize: 11, color: "#ff8a80" }, children: Hr })
+                              }
+                            )
+                          ] }),
+                          /* @__PURE__ */ s(
+                            "div",
+                            {
+                              className: "px-5 py-3 flex items-center justify-between",
+                              style: { borderTop: "1px solid var(--border-subtle)", background: "var(--bg-titlebar)" },
+                              children: [
+                                /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: Me ? "Stop to auto-analyze" : "Saves to your library + uses as cover" }),
+                                /* @__PURE__ */ t(
+                                  "button",
+                                  {
+                                    onClick: () => !Me && na(!1),
+                                    disabled: Me,
+                                    className: "px-3 py-1 rounded-md transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
+                                    style: { fontSize: 11, color: "var(--text-secondary)" },
+                                    children: "Close"
+                                  }
+                                )
+                              ]
+                            }
+                          )
+                        ]
+                      }
+                    )
+                  }
+                ),
+                /* @__PURE__ */ t(
+                  "input",
+                  {
+                    ref: Mr,
+                    type: "file",
+                    accept: "audio/*",
+                    onChange: Ji,
+                    style: { display: "none" }
+                  }
+                ),
+                /* @__PURE__ */ s("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 6, lineHeight: 1.4 }, children: [
+                  "💡 JULI3TA will ",
+                  /* @__PURE__ */ t("strong", { children: "auto-pick the best 30 s" }),
+                  " of the clip by analyzing energy + steadiness. Long recordings get trimmed to the most musical chunk."
+                ] }),
+                M && /* @__PURE__ */ t(
+                  "div",
+                  {
+                    className: "absolute inset-0 z-30 flex items-center justify-center",
+                    style: { background: "rgba(0,0,0,0.5)" },
+                    onClick: () => H(!1),
+                    children: /* @__PURE__ */ s(
+                      "div",
+                      {
+                        onClick: (i) => i.stopPropagation(),
+                        className: "rounded-xl overflow-hidden flex flex-col",
+                        style: {
+                          width: 380,
+                          maxHeight: 480,
+                          background: "var(--bg-window)",
+                          border: "1px solid var(--border-subtle)",
+                          boxShadow: "var(--shadow-lg)"
+                        },
+                        children: [
+                          /* @__PURE__ */ s(
+                            "div",
+                            {
+                              className: "px-4 py-3 flex items-center justify-between",
+                              style: { borderBottom: "1px solid var(--border-subtle)" },
+                              children: [
+                                /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+                                  /* @__PURE__ */ t(Re, { size: 14, style: { color: "var(--accent-primary)" } }),
+                                  /* @__PURE__ */ t("span", { style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }, children: "Pick a recording" })
+                                ] }),
+                                /* @__PURE__ */ s(
+                                  "button",
+                                  {
+                                    onClick: () => H(!1),
+                                    className: "p-1 rounded-md hover:bg-[var(--bg-hover)]",
+                                    style: { color: "var(--text-secondary)" },
+                                    children: [
+                                      /* @__PURE__ */ t(ia, { size: 14, style: { visibility: "hidden" } }),
+                                      /* @__PURE__ */ t("span", { style: { fontSize: 14, fontWeight: 600 }, children: "×" })
+                                    ]
+                                  }
+                                )
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: Ut.length === 0 ? /* @__PURE__ */ s("div", { className: "flex flex-col items-center justify-center py-10 px-6 text-center gap-2", children: [
+                            /* @__PURE__ */ t(Re, { size: 28, style: { color: "var(--text-disabled)" } }),
+                            /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)" }, children: "No recordings yet" }),
+                            /* @__PURE__ */ s("div", { style: { fontSize: 11, color: "var(--text-disabled)", maxWidth: 280 }, children: [
+                              "Open ",
+                              /* @__PURE__ */ t("strong", { children: "Voice Recorder" }),
+                              ", capture some audio (a melody, a hum, music playing in the room), then come back here."
+                            ] })
+                          ] }) : Ut.map((i) => {
+                            const c = i.durationMs / 1e3, g = c < 6;
+                            return /* @__PURE__ */ s(
+                              "button",
+                              {
+                                onClick: () => !g && Gi(i),
+                                disabled: g,
+                                className: "w-full flex items-center gap-3 px-4 py-3 transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40 disabled:cursor-not-allowed text-left",
+                                style: { borderBottom: "1px solid var(--border-subtle)" },
+                                children: [
+                                  /* @__PURE__ */ t(
+                                    "div",
+                                    {
+                                      className: "flex items-center justify-center rounded-lg flex-shrink-0",
+                                      style: {
+                                        width: 36,
+                                        height: 36,
+                                        background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
+                                      },
+                                      children: /* @__PURE__ */ t(Re, { size: 16, style: { color: "white" } })
+                                    }
+                                  ),
+                                  /* @__PURE__ */ s("div", { className: "flex-1 min-w-0", children: [
+                                    /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, color: "var(--text-primary)" }, children: i.name }),
+                                    /* @__PURE__ */ s("div", { style: { fontSize: 11, color: "var(--text-disabled)" }, children: [
+                                      Math.floor(c / 60),
+                                      ":",
+                                      Math.floor(c % 60).toString().padStart(2, "0"),
+                                      g && " · too short for cover (need ≥6 s)"
+                                    ] })
+                                  ] })
+                                ]
+                              },
+                              i.id
+                            );
+                          }) }),
+                          /* @__PURE__ */ t(
+                            "a",
+                            {
+                              href: "#",
+                              onClick: (i) => {
+                                i.preventDefault(), H(!1);
+                              },
+                              className: "px-4 py-2 text-center",
+                              style: {
+                                fontSize: 11,
+                                color: "var(--text-disabled)",
+                                borderTop: "1px solid var(--border-subtle)",
+                                background: "var(--bg-titlebar)"
+                              },
+                              children: "Tip: open Voice Recorder to capture more"
+                            }
+                          )
+                        ]
+                      }
+                    )
+                  }
+                ),
+                he && /* @__PURE__ */ t(
+                  "div",
+                  {
+                    className: "absolute inset-0 z-30 flex items-center justify-center",
+                    style: { background: "rgba(0,0,0,0.5)" },
+                    onClick: () => ze(!1),
+                    children: /* @__PURE__ */ s(
+                      "div",
+                      {
+                        onClick: (i) => i.stopPropagation(),
+                        className: "rounded-xl overflow-hidden flex flex-col",
+                        style: {
+                          width: 420,
+                          maxHeight: 520,
+                          background: "var(--bg-window)",
+                          border: "1px solid var(--border-subtle)",
+                          boxShadow: "var(--shadow-lg)"
+                        },
+                        children: [
+                          /* @__PURE__ */ s(
+                            "div",
+                            {
+                              className: "px-4 py-3 flex items-center justify-between",
+                              style: { borderBottom: "1px solid var(--border-subtle)" },
+                              children: [
+                                /* @__PURE__ */ s("div", { className: "flex items-center gap-2", children: [
+                                  /* @__PURE__ */ t(ut, { size: 14, style: { color: "var(--accent-primary)" } }),
+                                  /* @__PURE__ */ t("span", { style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }, children: a("musiccreator.restyle.songsPicker.title") })
+                                ] }),
+                                /* @__PURE__ */ t(
+                                  "button",
+                                  {
+                                    onClick: () => ze(!1),
+                                    className: "p-1 rounded-md hover:bg-[var(--bg-hover)]",
+                                    style: { color: "var(--text-secondary)" },
+                                    title: "Close",
+                                    children: /* @__PURE__ */ t(de, { size: 14 })
+                                  }
+                                )
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: (() => {
+                            const i = et.filter((c) => c.audioDataUrl);
+                            return i.length === 0 ? /* @__PURE__ */ s("div", { className: "flex flex-col items-center justify-center py-10 px-6 text-center gap-2", children: [
+                              /* @__PURE__ */ t(ut, { size: 28, style: { color: "var(--text-disabled)" } }),
+                              /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)" }, children: a("musiccreator.restyle.songsPicker.empty.title") }),
+                              /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-disabled)", maxWidth: 320 }, children: a("musiccreator.restyle.songsPicker.empty.body") })
+                            ] }) : i.map((c) => {
+                              const g = c.durationMs / 1e3, k = g > 0 && g < 6, S = c.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "Untitled";
+                              return /* @__PURE__ */ s(
+                                "button",
+                                {
+                                  onClick: () => !k && Ki(c),
+                                  disabled: k,
+                                  className: "w-full flex items-center gap-3 px-4 py-3 transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40 disabled:cursor-not-allowed text-left",
+                                  style: { borderBottom: "1px solid var(--border-subtle)" },
+                                  children: [
+                                    /* @__PURE__ */ t(
+                                      "div",
+                                      {
+                                        className: "rounded-lg flex-shrink-0 overflow-hidden flex items-center justify-center",
+                                        style: {
+                                          width: 40,
+                                          height: 40,
+                                          background: c.coverDataUrl ? `url(${c.coverDataUrl}) center/cover no-repeat` : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                                          border: "1px solid var(--border-subtle)"
+                                        },
+                                        children: !c.coverDataUrl && /* @__PURE__ */ t(ut, { size: 18, style: { color: "white", opacity: 0.85 } })
+                                      }
+                                    ),
+                                    /* @__PURE__ */ s("div", { className: "flex-1 min-w-0", children: [
+                                      /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, color: "var(--text-primary)", fontWeight: 600 }, children: S }),
+                                      /* @__PURE__ */ s("div", { className: "truncate", style: { fontSize: 11, color: "var(--text-disabled)" }, children: [
+                                        g > 0 ? `${Math.floor(g / 60)}:${Math.floor(g % 60).toString().padStart(2, "0")}` : "—",
+                                        c.styleTags && c.styleTags !== "—" && ` · ${c.styleTags}`,
+                                        k && " · too short for cover (need ≥6 s)"
+                                      ] })
+                                    ] })
+                                  ]
+                                },
+                                c.id
+                              );
+                            });
+                          })() })
+                        ]
+                      }
+                    )
+                  }
+                )
+              ]
+            }
+          ),
+          /* @__PURE__ */ s(
+            "div",
+            {
+              className: "grid gap-5 mb-5",
+              style: { gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" },
+              children: [
+                /* @__PURE__ */ t(
+                  Zt,
+                  {
+                    label: a("musiccreator.theme.label"),
+                    hint: a("musiccreator.theme.hint"),
+                    headerExtra: /* @__PURE__ */ t(
+                      hr,
+                      {
+                        label: "Inspire",
+                        tooltip: "Use AI to write a theme based on your Style",
+                        onClick: en,
+                        busy: Se === "theme",
+                        disabled: q || Se !== null
+                      }
+                    ),
+                    children: /* @__PURE__ */ t(
+                      "textarea",
+                      {
+                        value: v,
+                        onChange: (i) => A(i.target.value),
+                        onDragOver: ba,
+                        onDrop: pn,
+                        placeholder: a("musiccreator.theme.placeholder"),
+                        disabled: q,
+                        rows: 4,
+                        className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none focus:ring-2 disabled:opacity-50",
+                        style: {
+                          fontSize: 12,
+                          background: "var(--bg-window)",
+                          border: "1px solid var(--border-subtle)",
+                          color: "var(--text-primary)"
+                        }
+                      }
+                    )
+                  }
+                ),
+                /* @__PURE__ */ t(
+                  Zt,
+                  {
+                    label: a("musiccreator.style.label"),
+                    counter: `${hn} / ${Tc}`,
+                    hint: "Type freely or pick from the genre palette below.",
+                    headerExtra: /* @__PURE__ */ t(
+                      hr,
+                      {
+                        label: "Suggest",
+                        tooltip: "Use AI to suggest a Style from your Theme",
+                        onClick: tn,
+                        busy: Se === "style",
+                        disabled: q || Se !== null
+                      }
+                    ),
+                    children: /* @__PURE__ */ t(
+                      "textarea",
+                      {
+                        value: L,
+                        onChange: (i) => E(i.target.value),
+                        onDragOver: ba,
+                        onDrop: un,
+                        placeholder: a("musiccreator.style.placeholder"),
+                        disabled: q,
+                        rows: 4,
+                        className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
+                        style: {
+                          fontSize: 12,
+                          background: "var(--bg-window)",
+                          border: "1px solid var(--border-subtle)",
+                          color: "var(--text-primary)"
+                        }
+                      }
+                    )
+                  }
+                )
+              ]
+            }
+          ),
+          p !== "lyricsOnly" && /* @__PURE__ */ s("div", { className: "flex flex-col gap-4 mb-5", children: [
+            /* @__PURE__ */ t(Uc, { onPick: rn, disabled: q }),
+            /* @__PURE__ */ t(
+              $c,
+              {
+                specs: K,
+                onChange: Te,
+                disabled: q,
+                onOptimize: Zi,
+                optimizing: Ht
+              }
+            )
+          ] }),
+          /* @__PURE__ */ s(
+            Zt,
+            {
+              label: "Cover Art",
+              hint: F?.models.image ? "Auto-generated when you create the song. Override the prompt or upload your own image." : "No image model on this endpoint — pick one in Settings → Cover art, or upload your own image below.",
+              className: "mb-5",
+              headerExtra: /* @__PURE__ */ s("label", { className: "flex items-center gap-2 cursor-pointer select-none", style: { fontSize: 11, color: "var(--text-secondary)" }, children: [
+                "Auto-generate",
+                /* @__PURE__ */ t(
+                  Do,
+                  {
+                    checked: xe,
+                    onChange: Da,
+                    disabled: q || !F?.models.image
+                  }
+                )
+              ] }),
+              children: [
+                /* @__PURE__ */ s("div", { className: "flex gap-3", children: [
+                  /* @__PURE__ */ s(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: () => bo(!0),
+                      disabled: q,
+                      className: "relative flex-shrink-0 rounded-lg overflow-hidden transition-all hover:opacity-90 disabled:opacity-50",
+                      style: {
+                        width: 88,
+                        height: 88,
+                        background: me ? `url(${me}) center/cover no-repeat` : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                        border: "1px solid var(--border-subtle)",
+                        cursor: q ? "not-allowed" : "pointer"
+                      },
+                      title: "Open song card — big cover preview + metadata",
+                      children: [
+                        !me && /* @__PURE__ */ t("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ t(oa, { size: 28, style: { color: "white", opacity: 0.85 } }) }),
+                        Ue && /* @__PURE__ */ t(
+                          "div",
+                          {
+                            className: "absolute inset-0 flex items-center justify-center",
+                            style: { background: "rgba(0,0,0,0.5)" },
+                            children: /* @__PURE__ */ t(X, { size: 20, className: "animate-spin", style: { color: "white" } })
+                          }
+                        )
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ s("div", { className: "flex-1 min-w-0 flex flex-col gap-2", children: [
+                    /* @__PURE__ */ s("div", { className: "flex flex-wrap items-center gap-2", children: [
+                      /* @__PURE__ */ s(
+                        "button",
+                        {
+                          type: "button",
+                          onClick: no,
+                          disabled: q || Ue || !F?.models.image,
+                          className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40",
+                          style: {
+                            fontSize: 11,
+                            fontWeight: 600,
+                            color: "white",
+                            background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
+                            border: "1px solid transparent",
+                            cursor: q || Ue || !F?.models.image ? "not-allowed" : "pointer"
+                          },
+                          title: F?.models.image ? "Generate cover art from the prompt below" : "No image model available",
+                          children: [
+                            Ue ? /* @__PURE__ */ t(X, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(De, { size: 11 }),
+                            me ? "Regenerate" : "Generate"
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ s(
+                        "button",
+                        {
+                          type: "button",
+                          onClick: () => Er.current?.click(),
+                          disabled: q,
+                          className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40 hover:bg-[var(--bg-hover)]",
+                          style: {
+                            fontSize: 11,
+                            color: "var(--text-secondary)",
+                            background: "var(--bg-titlebar)",
+                            border: "1px solid var(--border-subtle)"
+                          },
+                          title: "Upload your own image (PNG/JPG/WebP, max 4 MB)",
+                          children: [
+                            /* @__PURE__ */ t(Cr, { size: 11 }),
+                            "Upload"
+                          ]
+                        }
+                      ),
+                      me && /* @__PURE__ */ s(
+                        "button",
+                        {
+                          type: "button",
+                          onClick: () => {
+                            j(""), Y && Vt.current?.(Y, "");
+                          },
+                          disabled: q,
+                          className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40 hover:bg-[var(--bg-hover)]",
+                          style: {
+                            fontSize: 11,
+                            color: "var(--text-disabled)",
+                            background: "var(--bg-titlebar)",
+                            border: "1px solid var(--border-subtle)"
+                          },
+                          title: "Remove the cover and fall back to the gradient placeholder",
+                          children: [
+                            /* @__PURE__ */ t(de, { size: 11 }),
+                            "Clear"
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ s(
+                        "button",
+                        {
+                          type: "button",
+                          onClick: () => Lr((i) => !i),
+                          className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:bg-[var(--bg-hover)] ml-auto",
+                          style: {
+                            fontSize: 10,
+                            color: "var(--text-disabled)",
+                            background: "transparent",
+                            border: "1px solid transparent"
+                          },
+                          title: "Edit the cover-art prompt",
+                          children: [
+                            Oa ? /* @__PURE__ */ t(Gn, { size: 11 }) : /* @__PURE__ */ t(Go, { size: 11 }),
+                            Oa ? "Hide prompt" : "Edit prompt"
+                          ]
+                        }
+                      )
+                    ] }),
+                    Oa && /* @__PURE__ */ t(
+                      "textarea",
+                      {
+                        value: ie,
+                        onChange: (i) => Oe(i.target.value),
+                        placeholder: za(U, v, L),
+                        disabled: q,
+                        rows: 3,
+                        className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
+                        style: {
+                          fontSize: 11,
+                          background: "var(--bg-window)",
+                          border: "1px solid var(--border-subtle)",
+                          color: "var(--text-primary)"
+                        }
+                      }
+                    )
+                  ] })
+                ] }),
+                /* @__PURE__ */ t(
+                  "input",
+                  {
+                    ref: Er,
+                    type: "file",
+                    accept: "image/png,image/jpeg,image/webp,image/gif",
+                    style: { display: "none" },
+                    onChange: (i) => {
+                      const c = i.target.files?.[0];
+                      c && so(c), i.target.value = "";
+                    }
+                  }
+                )
+              ]
+            }
+          ),
+          p !== "restyle" && !ue && /* @__PURE__ */ t(
+            Zt,
+            {
+              label: "Lyrics Direction",
+              hint: "Free-form direction for the lyrics — perspective, language, taboo lines, references. Sent to the AI alongside Theme and the song form below.",
+              className: "mb-5",
+              counter: (K.intent ?? "").length > 0 ? `${(K.intent ?? "").length} chars` : void 0,
+              children: /* @__PURE__ */ t(
+                "textarea",
+                {
+                  value: K.intent ?? "",
+                  onChange: (i) => Te((c) => ({ ...c, intent: i.target.value })),
+                  placeholder: 'e.g. "first-person, mostly Spanish with one English chorus, mention rain, no clichés"',
+                  disabled: q,
+                  rows: 2,
+                  className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
+                  style: {
+                    fontSize: 11,
+                    background: "var(--bg-window)",
+                    border: "1px solid var(--border-subtle)",
+                    color: "var(--text-primary)"
+                  }
+                }
+              )
+            }
+          ),
+          /* @__PURE__ */ s(
+            Zt,
+            {
+              label: a("musiccreator.lyrics.label"),
+              counter: ue ? "instrumental — no vocals" : `${vo} / ${Tt}`,
+              counterDanger: !ue && vo > Tt,
+              className: "mb-5",
+              headerExtra: ue ? void 0 : /* @__PURE__ */ t(
+                hr,
+                {
+                  label: "Polish",
+                  tooltip: "Use AI to refine flow, rhyme, and structure",
+                  onClick: an,
+                  busy: Se === "lyrics",
+                  disabled: q || Se !== null || !C.trim()
+                }
+              ),
+              children: [
+                /* @__PURE__ */ t(
+                  "textarea",
+                  {
+                    value: C,
+                    onChange: (i) => T(i.target.value),
+                    onDragOver: ba,
+                    onDrop: dn,
+                    placeholder: ue ? "🎻 Instrumental mode — turn off the toggle above to write lyrics" : a("musiccreator.lyrics.placeholder"),
+                    disabled: q || ue,
+                    rows: 8,
+                    className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50 font-mono",
+                    style: {
+                      fontSize: 11,
+                      background: "var(--bg-window)",
+                      border: "1px solid var(--border-subtle)",
+                      color: "var(--text-primary)"
+                    }
+                  }
+                ),
+                /* @__PURE__ */ s("div", { className: "flex items-center gap-1 mt-2 flex-wrap", children: [
+                  /* @__PURE__ */ t(
+                    "span",
+                    {
+                      style: {
+                        fontSize: 9,
+                        fontWeight: 600,
+                        color: "var(--text-disabled)",
+                        textTransform: "uppercase",
+                        letterSpacing: 0.5,
+                        marginRight: 4
+                      },
+                      children: "Song form"
+                    }
+                  ),
+                  _c.map((i) => {
+                    const c = P?.id === i.id;
+                    return /* @__PURE__ */ s(
+                      "button",
+                      {
+                        onClick: () => {
+                          c ? O(null) : (O(i), C.trim() || T(i.skeleton));
+                        },
+                        disabled: q,
+                        className: "px-2 py-0.5 rounded-full transition-all disabled:opacity-40",
+                        style: {
+                          fontSize: 10,
+                          fontWeight: c ? 600 : 500,
+                          color: c ? "white" : "var(--text-secondary)",
+                          background: c ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-titlebar)",
+                          border: "1px solid var(--border-subtle)"
+                        },
+                        title: i.description + (c ? " · click to clear" : " · click to use this form"),
+                        children: [
+                          c ? "✓ " : "",
+                          i.label
+                        ]
+                      },
+                      i.id
+                    );
+                  }),
+                  P && /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--accent-primary)", marginLeft: 4 }, children: "AI will use this structure" })
+                ] })
+              ]
+            }
+          )
+        ] }) })
+      ] }),
+      /* @__PURE__ */ t(Hc, { player: je, allTracks: rr }),
+      /* @__PURE__ */ t("audio", { ref: xo, preload: "none", style: { display: "none" } })
+    ] }),
+    /* @__PURE__ */ t(
+      Gs,
+      {
+        open: w,
+        onClose: () => u(!1),
+        onUseRecipe: (i, c) => {
+          m("compose"), A(i), E(c);
+        }
+      }
+    ),
+    Pi && /* @__PURE__ */ t(
+      ld,
+      {
+        settings: Qa,
+        endpoints: ma,
+        onChange: Ri,
+        onClose: () => Xa(!1)
+      }
+    ),
+    go && /* @__PURE__ */ t(
+      Kc,
+      {
+        track: go,
+        endpoint: F,
+        onSave: tr,
+        onClose: () => yo(null)
+      }
+    ),
+    nn && /* @__PURE__ */ t(
+      Qc,
+      {
+        songName: U,
+        mode: p,
+        theme: v,
+        style: L,
+        intent: K.intent ?? "",
+        lyrics: C,
+        specs: K,
+        coverDataUrl: me,
+        endpoint: F,
+        busy: Ue,
+        onRegenerate: no,
+        onUpload: so,
+        onClear: () => {
+          j(""), Y && Vt.current?.(Y, "");
+        },
+        onClose: () => bo(!1)
+      }
+    )
+  ] }) : /* @__PURE__ */ t(Oc, { retrying: Ui, onRetry: er });
+}
+function ld({ settings: e, endpoints: a, onChange: r, onClose: o }) {
+  const n = (l, d, b) => {
+    const p = b.trim(), w = { ...e.overridesByEndpoint[l] ?? {} };
+    p ? w[d] = p : delete w[d];
+    const u = {
+      ...e,
+      overridesByEndpoint: {
+        ...e.overridesByEndpoint,
+        [l]: w
+      }
+    };
+    r(u);
+  };
+  return /* @__PURE__ */ t(
+    "div",
+    {
+      className: "absolute inset-0 z-40 flex items-center justify-center",
+      style: { background: "rgba(0,0,0,0.55)" },
+      onClick: o,
+      children: /* @__PURE__ */ s(
+        "div",
+        {
+          onClick: (l) => l.stopPropagation(),
+          className: "rounded-xl flex flex-col overflow-hidden",
+          style: {
+            width: 560,
+            maxWidth: "90%",
+            maxHeight: "85%",
+            background: "var(--bg-window)",
+            border: "1px solid var(--border-subtle)",
+            boxShadow: "var(--shadow-lg)"
+          },
+          children: [
+            /* @__PURE__ */ s(
+              "div",
+              {
+                className: "flex items-center gap-2 px-5 flex-shrink-0",
+                style: {
+                  height: 48,
+                  borderBottom: "1px solid var(--border-subtle)",
+                  background: "var(--bg-titlebar)"
+                },
+                children: [
+                  /* @__PURE__ */ t(Vo, { size: 14, style: { color: "var(--accent-primary)" } }),
+                  /* @__PURE__ */ t("div", { style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }, children: "JULI3TA Settings" }),
+                  /* @__PURE__ */ t(
+                    "button",
+                    {
+                      onClick: o,
+                      className: "ml-auto flex items-center justify-center rounded-md transition-all hover:bg-[var(--bg-hover)]",
+                      style: { width: 24, height: 24, color: "var(--text-secondary)" },
+                      title: "Close",
+                      children: /* @__PURE__ */ t(de, { size: 14 })
+                    }
+                  )
+                ]
+              }
+            ),
+            /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: /* @__PURE__ */ s("div", { className: "px-5 py-4", children: [
+              /* @__PURE__ */ s("div", { className: "mb-4", children: [
+                /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }, children: "Model mapping" }),
+                /* @__PURE__ */ s("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: [
+                  "Pick a model id per endpoint. Each dropdown lists every id the gateway exposes via ",
+                  /* @__PURE__ */ t("code", { style: { margin: "0 4px", color: "var(--accent-primary)" }, children: "/v1/models" }),
+                  ", filtered to the right shape for that slot."
+                ] }),
+                /* @__PURE__ */ s(
+                  "ul",
+                  {
+                    style: {
+                      fontSize: 10,
+                      color: "var(--text-disabled)",
+                      lineHeight: 1.5,
+                      marginTop: 6,
+                      paddingLeft: 16,
+                      listStyle: "disc"
+                    },
+                    children: [
+                      /* @__PURE__ */ s("li", { children: [
+                        /* @__PURE__ */ t("strong", { style: { color: "var(--text-secondary)" }, children: "Music / Cover" }),
+                        " — sent in the",
+                        /* @__PURE__ */ t("code", { style: { margin: "0 4px" }, children: "/music/generations" }),
+                        " body."
+                      ] }),
+                      /* @__PURE__ */ s("li", { children: [
+                        /* @__PURE__ */ t("strong", { style: { color: "var(--text-secondary)" }, children: "Lyrics" }),
+                        " — usually leave on Auto. The ",
+                        /* @__PURE__ */ t("code", { style: { margin: "0 4px" }, children: "/music/lyrics" }),
+                        " endpoint runs minimax's internal lyrics generator server-side (no enumerable id). Only override if your gateway exposes a separate ",
+                        /* @__PURE__ */ t("code", { children: "lyrics_generation" }),
+                        " alias."
+                      ] }),
+                      /* @__PURE__ */ s("li", { children: [
+                        /* @__PURE__ */ t("strong", { style: { color: "var(--text-secondary)" }, children: "Lyrics fallback" }),
+                        " — chat model used when ",
+                        /* @__PURE__ */ t("code", { style: { margin: "0 4px" }, children: "/music/lyrics" }),
+                        " errors (quota, upstream 502)."
+                      ] })
+                    ]
+                  }
+                )
+              ] }),
+              a.length === 0 ? /* @__PURE__ */ s(
+                "div",
+                {
+                  className: "flex items-center gap-2 px-3 py-3 rounded-lg",
+                  style: {
+                    fontSize: 11,
+                    color: "var(--text-secondary)",
+                    background: "var(--bg-titlebar)",
+                    border: "1px solid var(--border-subtle)"
+                  },
+                  children: [
+                    /* @__PURE__ */ t(ra, { size: 14, style: { color: "#fbbf24" } }),
+                    "No reachable endpoints yet — connect a Tytus pod or start local switchAILocal, then come back."
+                  ]
+                }
+              ) : /* @__PURE__ */ t("div", { className: "flex flex-col gap-3", children: a.map((l) => {
+                const d = e.overridesByEndpoint[l.url] ?? {}, b = [
+                  { key: "music", label: "Music", discovered: l.models.music, kind: "music" },
+                  { key: "cover", label: "Restyle", discovered: l.models.cover, kind: "cover" },
+                  { key: "lyrics", label: "Lyrics", discovered: l.models.lyrics, kind: "lyrics" },
+                  { key: "lyricsBackup", label: "Lyrics fallback", discovered: l.models.lyricsBackup, kind: "chat" },
+                  { key: "image", label: "Cover art", discovered: l.models.image, kind: "image" }
+                ], p = (u) => /music|cover/i.test(u), m = (u) => /image|diffusion|dall-?e|flux|sdxl/i.test(u), w = (u) => u === "chat" ? l.models.allIds.filter((y) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl/i.test(y)) : u === "image" ? l.models.allIds.filter(m) : l.models.allIds.filter(p);
+                return /* @__PURE__ */ s(
+                  "div",
+                  {
+                    className: "rounded-lg p-3",
+                    style: {
+                      background: "var(--bg-titlebar)",
+                      border: "1px solid var(--border-subtle)"
+                    },
+                    children: [
+                      /* @__PURE__ */ s("div", { className: "flex items-center gap-2 mb-2", children: [
+                        /* @__PURE__ */ t(
+                          "span",
+                          {
+                            className: "rounded-full",
+                            style: {
+                              width: 6,
+                              height: 6,
+                              background: La(l),
+                              boxShadow: `0 0 6px ${La(l)}`
+                            }
+                          }
+                        ),
+                        /* @__PURE__ */ t("span", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }, children: l.label }),
+                        /* @__PURE__ */ s("span", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: [
+                          l.url,
+                          " · ",
+                          l.models.allIds.length,
+                          " models"
+                        ] })
+                      ] }),
+                      /* @__PURE__ */ t("div", { className: "grid gap-2", style: { gridTemplateColumns: "120px 1fr" }, children: b.map((u) => {
+                        const y = w(u.kind), x = d[u.key] ?? "";
+                        return /* @__PURE__ */ s(Ln, { children: [
+                          /* @__PURE__ */ t(
+                            "div",
+                            {
+                              className: "flex items-center",
+                              style: { fontSize: 11, color: "var(--text-secondary)" },
+                              children: u.label
+                            }
+                          ),
+                          /* @__PURE__ */ s(
+                            "select",
+                            {
+                              value: x,
+                              onChange: (N) => n(l.url, u.key, N.target.value),
+                              className: "w-full px-2 py-1 rounded-md focus:outline-none",
+                              style: {
+                                height: 28,
+                                fontSize: 11,
+                                fontFamily: "monospace",
+                                background: "var(--bg-window)",
+                                border: "1px solid var(--border-subtle)",
+                                color: "var(--text-primary)",
+                                appearance: "auto"
+                              },
+                              children: [
+                                /* @__PURE__ */ t("option", { value: "", children: u.discovered ? `Auto · ${u.discovered}` : u.kind === "lyrics" ? "Auto · server-side (no model param)" : y.length === 0 ? "(no models match)" : "Auto · (no preferred match — pick one)" }),
+                                y.length > 0 && /* @__PURE__ */ t("optgroup", { label: "Available models", children: y.map((N) => /* @__PURE__ */ t("option", { value: N, children: N }, N)) })
+                              ]
+                            }
+                          )
+                        ] }, u.key);
+                      }) })
+                    ]
+                  },
+                  l.podId
+                );
+              }) })
+            ] }) }),
+            /* @__PURE__ */ t(
+              "div",
+              {
+                className: "flex items-center justify-end gap-2 px-5 flex-shrink-0",
+                style: {
+                  height: 48,
+                  borderTop: "1px solid var(--border-subtle)",
+                  background: "var(--bg-titlebar)"
+                },
+                children: /* @__PURE__ */ t(
+                  "button",
+                  {
+                    onClick: o,
+                    className: "px-4 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
+                    style: {
+                      height: 30,
+                      fontSize: 12,
+                      color: "var(--text-secondary)",
+                      background: "var(--bg-window)",
+                      border: "1px solid var(--border-subtle)"
+                    },
+                    children: "Done"
+                  }
+                )
+              }
+            )
+          ]
+        }
+      )
+    }
+  );
+}
+function md(e) {
+  const a = e.host.storage.current();
+  return sl(a), a.migrate?.("migrations/"), function() {
+    return /* @__PURE__ */ t(jn, { value: e, children: /* @__PURE__ */ t(sd, {}) });
   };
 }
 export {
-  ft as default
+  md as default
 };
 //# sourceMappingURL=index.js.map

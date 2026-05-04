@@ -2,10 +2,10 @@
   "$schema": "https://tytus.traylinx.com/schema/app/v1.json",
   "id": "juli3ta",
   "name": "JULI3TA",
-  "version": "0.1.0",
-  "icon": "Music",
+  "version": "0.2.0-dev",
+  "icon": "juli3ta:mark",
   "category": "Creative",
-  "description": "JULI3TA \u2014 AI-native music creator for Tytus OS. Generate tracks through pod music endpoints, manage drafts, and mirror generated audio to the JULI3TA library.",
+  "description": "JULI3TA full extraction development build. Not for public catalog until parity gates pass.",
   "window": {
     "defaultSize": {
       "width": 1100,
@@ -30,10 +30,14 @@
       {
         "name": "tracks",
         "schema": "migrations/0001_tracks.sql"
+      },
+      {
+        "name": "music_creator_tracks",
+        "schema": "migrations/0002_legacy_compat_tables.sql"
       }
     ]
   },
   "entry": {
-    "url": "https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@v0.1.0/dist/index.js"
+    "url": "https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@full-extract-dev/dist/index.js"
   }
 }
