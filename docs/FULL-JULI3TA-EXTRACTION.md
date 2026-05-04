@@ -55,3 +55,23 @@ Status: PASS for Tytus OS launcher transition. Still not public-catalog promoted
 - Screenshot evidence: `/Users/sebastian/MAKAKOO/data/reports/juli3ta-standalone-launcher-transition.png`
 
 Public catalog remains blocked until the catalog repo is bumped deliberately and the OS denylist is changed in the same reviewed release. Do not do that as an incidental code cleanup.
+
+## 2026-05-04 G5 public catalog promotion
+
+Status: PASS — verified standalone JULI3TA is now public in the Tytus App Catalog.
+
+- Stable standalone commit/tag: `2dd0215` / `juli3ta-0.2.1`
+- Stable manifest: `https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@juli3ta-0.2.1/tytus-app.json`
+- Stable entry: `https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@juli3ta-0.2.1/dist/index.js`
+- CDN verification: manifest and entry returned HTTP 200; manifest reports `version: 0.2.1`.
+- Catalog commit/tag: `e72003a` / `v0.7.0`
+- Catalog result: `featured.json` version `8`, six apps, includes `juli3ta` with stable manifest URL.
+- Tytus OS commit/tag: `bb09b72` / `v1.0.4-apps-platform`
+- OS result: `FEATURED_CATALOG_URL` points at catalog `v0.7.0`, hardcoded fallback includes `juli3ta`, and `AUTO_INSTALL_DENYLIST` is empty.
+- Smoke after promotion: installed stable `juli3ta` `0.2.1`, launcher grid has one JULI3TA button, window persisted as appId `juli3ta`, no legacy `musiccreator` window, full UI signals present, `app_juli3ta_music_creator_tracks` count `14`.
+- Gates after promotion:
+  - `npm run test --workspace app -- featured-apps-catalog auto-install-featured cleanup-juli3ta-alpha legacy-app-aliases` → 31/31 passed.
+  - `npm run typecheck --workspaces --if-present` → passed.
+  - `npm run test --workspaces --if-present` → 104 files, 1024 tests passed.
+
+Still pending outside this extraction: real Finder-visible `~/Music/JULI3TA/*.mp3`, real `~/Documents/Tytus/Memo/*.md`, Linux/Windows port, and native Trash/clipboard/shortcuts.
