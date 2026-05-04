@@ -2,21 +2,38 @@
   "$schema": "https://tytus.traylinx.com/schema/app/v1.json",
   "id": "juli3ta",
   "name": "JULI3TA",
-  "version": "0.0.2-alpha.1",
+  "version": "0.1.0",
   "icon": "Music",
   "category": "Creative",
-  "description": "JULI3TA — AI-native music creator for Tytus OS. Alpha placeholder; full Music Creator UI lift in progress.",
+  "description": "JULI3TA \u2014 AI-native music creator for Tytus OS. Generate tracks through pod music endpoints, manage drafts, and mirror generated audio to the JULI3TA library.",
   "window": {
-    "defaultSize": { "width": 1100, "height": 760 },
-    "minSize": { "width": 720, "height": 540 }
+    "defaultSize": {
+      "width": 1100,
+      "height": 760
+    },
+    "minSize": {
+      "width": 720,
+      "height": 540
+    }
   },
-  "permissions": ["vfs.user.music", "daemon.network", "storage.app", "shell.openWindow"],
+  "permissions": [
+    "vfs.user.music",
+    "daemon.read",
+    "daemon.network",
+    "storage.app",
+    "shell.openWindow",
+    "shell.notifications",
+    "shell.menu"
+  ],
   "storage": {
     "tables": [
-      { "name": "tracks", "schema": "migrations/0001_tracks.sql" }
+      {
+        "name": "tracks",
+        "schema": "migrations/0001_tracks.sql"
+      }
     ]
   },
   "entry": {
-    "url": "https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@v0.0.2-alpha.1/dist/index.js"
+    "url": "https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@v0.1.0/dist/index.js"
   }
 }

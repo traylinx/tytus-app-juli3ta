@@ -1,36 +1,26 @@
 /**
- * tytus-app-juli3ta — bootApp wrapper.
+ * tytus-app-juli3ta — v0.1 standalone bootApp.
  *
- * v0.0.2-alpha.1: app-local SQLite migrated + draft tracks can be
- * saved + listed. Real `/v1/music/generations` wiring pending the full
- * lift (SPRINT-TYTUS-APP-JULI3TA-V1).
+ * The public app now owns the creator UI: library gallery, player,
+ * prompt/lyrics creator panel, pod model picker, shell menu, app-local
+ * SQLite, and daemon file-library mirroring when the host exposes it.
  */
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore — host-api types resolved via tsconfig paths in dev.
 import type { AppBootEnv, AppDb } from '@tytus/host-api';
-import Juli3taAlpha from './Juli3taAlpha';
+import Juli3taApp from './Juli3taApp';
 
 export default function bootApp(env: AppBootEnv) {
-  // Run migrations on boot. Idempotent — migrations table is checked
-  // before each .sql is applied. Per-app DBs share the same SQLite
-  // worker but live in a prefixed namespace (`app_juli3ta_*`).
   const db = env.host.storage.current() as AppDb;
-  let migrationDone: Promise<void> | null = db.migrate?.('migrations/') ?? Promise.resolve();
+  const migrationDone = db.migrate?.('migrations/') ?? Promise.resolve();
 
-  return function Juli3taApp() {
-    const handleOpenStudio = () => {
-      try {
-        env.host.windows?.open?.('musiccreator', undefined);
-      } catch (err) {
-        console.warn('[juli3ta] failed to open music-creator window', err);
-      }
-    };
+  return function Juli3taStandalone() {
     return (
-      <Juli3taAlpha
+      <Juli3taApp
+        host={env.host}
         db={db}
         migrationReady={migrationDone}
-        onOpenStudio={handleOpenStudio}
       />
     );
   };

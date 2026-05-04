@@ -1,9 +1,8 @@
-/**
- * JULI3TA app-local SQLite repo. Wraps the per-app DB exposed via
- * `host.storage.current()` with typed accessors for the `tracks` table.
- * Migrations are declared in `tytus-app.json` and run once at boot via
- * `host.storage.current().migrate('migrations/')`.
- */
+// JULI3TA v0.1 app-local persistence.
+// The app DB is the durable browser-native index. If daemon-side
+// `host.daemon.juli3taLibrary` exists, generated tracks are also mirrored
+// into the daemon's JULI3TA file library; failure there never corrupts the
+// local index.
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore — host-api types resolved via tsconfig paths in dev.
@@ -62,7 +61,8 @@ function map(row: RawTrackRow): TrackRow {
   };
 }
 
-const id = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
+export const makeId = (prefix = 'trk') =>
+  `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 9)}`;
 
 export async function listTracks(db: AppDb): Promise<TrackRow[]> {
   const rows = await db.query<RawTrackRow>(
@@ -79,26 +79,75 @@ export async function getTrack(db: AppDb, trackId: string): Promise<TrackRow | n
   return rows[0] ? map(rows[0]) : null;
 }
 
-export interface CreateDraftOpts {
+export interface SaveTrackOpts {
+  id?: string;
   title: string;
   prompt: string;
   lyrics?: string;
+  audioFileNodeId?: string | null;
+  coverFileNodeId?: string | null;
+  modelId?: string | null;
+  bpm?: number | null;
+  key?: string | null;
+  durationSeconds?: number | null;
+  favourited?: boolean;
+}
+
+export async function upsertTrack(db: AppDb, opts: SaveTrackOpts): Promise<TrackRow> {
+  const now = new Date().toISOString();
+  const trackId = opts.id ?? makeId();
+  const existing = await getTrack(db, trackId);
+  if (existing) {
+    await db.run(
+      `UPDATE tracks
+       SET title = ?, prompt = ?, lyrics = ?, updated_at = ?, audio_file_node_id = ?, cover_file_node_id = ?, model_id = ?, bpm = ?, key = ?, duration_seconds = ?, favourited = ?
+       WHERE id = ?`,
+      [
+        opts.title,
+        opts.prompt,
+        opts.lyrics ?? '',
+        now,
+        opts.audioFileNodeId ?? existing.audioFileNodeId,
+        opts.coverFileNodeId ?? existing.coverFileNodeId,
+        opts.modelId ?? existing.modelId,
+        opts.bpm ?? existing.bpm,
+        opts.key ?? existing.key,
+        opts.durationSeconds ?? existing.durationSeconds,
+        opts.favourited ?? existing.favourited ? 1 : 0,
+        trackId,
+      ],
+    );
+  } else {
+    await db.run(
+      `INSERT INTO tracks (id, title, prompt, lyrics, created_at, updated_at, audio_file_node_id, cover_file_node_id, model_id, bpm, key, duration_seconds, favourited)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        trackId,
+        opts.title,
+        opts.prompt,
+        opts.lyrics ?? '',
+        now,
+        now,
+        opts.audioFileNodeId ?? null,
+        opts.coverFileNodeId ?? null,
+        opts.modelId ?? null,
+        opts.bpm ?? null,
+        opts.key ?? null,
+        opts.durationSeconds ?? null,
+        opts.favourited ? 1 : 0,
+      ],
+    );
+  }
+  const row = await getTrack(db, trackId);
+  if (!row) throw new Error('upsertTrack: write succeeded but row missing');
+  return row;
 }
 
 export async function createDraftTrack(
   db: AppDb,
-  opts: CreateDraftOpts,
+  opts: { title: string; prompt: string; lyrics?: string },
 ): Promise<TrackRow> {
-  const now = new Date().toISOString();
-  const trackId = id();
-  await db.run(
-    `INSERT INTO tracks (id, title, prompt, lyrics, created_at, updated_at, favourited)
-     VALUES (?, ?, ?, ?, ?, ?, 0)`,
-    [trackId, opts.title, opts.prompt, opts.lyrics ?? '', now, now],
-  );
-  const row = await getTrack(db, trackId);
-  if (!row) throw new Error('createDraftTrack: insert succeeded but row missing');
-  return row;
+  return upsertTrack(db, opts);
 }
 
 export async function deleteTrack(db: AppDb, trackId: string): Promise<void> {
@@ -117,7 +166,4 @@ export async function setFavourited(
   );
 }
 
-// Re-exports so the bootApp can satisfy the AppDb signature the host
-// passes in. RunResult is exported only for callers that need the
-// changed-row count from a custom UPDATE.
 export type { AppDb, RunResult };

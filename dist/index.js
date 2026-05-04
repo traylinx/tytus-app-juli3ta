@@ -1,18 +1,18 @@
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { forwardRef as A, createElement as x, useState as p, useCallback as j, useEffect as $ } from "react";
+import { jsxs as d, jsx as n, Fragment as ve } from "react/jsx-runtime";
+import { forwardRef as ue, createElement as G, useState as u, useRef as ie, useCallback as P, useEffect as A, useMemo as xe } from "react";
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const B = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), O = (e) => e.replace(
+const Se = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), _e = (e) => e.replace(
   /^([A-Z])|[\s-_]+(\w)/g,
-  (t, o, n) => n ? n.toUpperCase() : o.toLowerCase()
-), M = (e) => {
-  const t = O(e);
+  (t, r, a) => a ? a.toUpperCase() : r.toLowerCase()
+), ne = (e) => {
+  const t = _e(e);
   return t.charAt(0).toUpperCase() + t.slice(1);
-}, E = (...e) => e.filter((t, o, n) => !!t && t.trim() !== "" && n.indexOf(t) === o).join(" ").trim(), F = (e) => {
+}, pe = (...e) => e.filter((t, r, a) => !!t && t.trim() !== "" && a.indexOf(t) === r).join(" ").trim(), we = (e) => {
   for (const t in e)
     if (t.startsWith("aria-") || t === "role" || t === "title")
       return !0;
@@ -23,7 +23,7 @@ const B = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), O = (e)
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-var H = {
+var Ce = {
   xmlns: "http://www.w3.org/2000/svg",
   width: 24,
   height: 24,
@@ -40,32 +40,32 @@ var H = {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const P = A(
+const Ie = ue(
   ({
     color: e = "currentColor",
     size: t = 24,
-    strokeWidth: o = 2,
-    absoluteStrokeWidth: n,
-    className: l = "",
-    children: d,
-    iconNode: v,
-    ...f
-  }, m) => x(
+    strokeWidth: r = 2,
+    absoluteStrokeWidth: a,
+    className: s = "",
+    children: o,
+    iconNode: g,
+    ...w
+  }, F) => G(
     "svg",
     {
-      ref: m,
-      ...H,
+      ref: F,
+      ...Ce,
       width: t,
       height: t,
       stroke: e,
-      strokeWidth: n ? Number(o) * 24 / Number(t) : o,
-      className: E("lucide", l),
-      ...!d && !F(f) && { "aria-hidden": "true" },
-      ...f
+      strokeWidth: a ? Number(r) * 24 / Number(t) : r,
+      className: pe("lucide", s),
+      ...!o && !we(w) && { "aria-hidden": "true" },
+      ...w
     },
     [
-      ...v.map(([s, b]) => x(s, b)),
-      ...Array.isArray(d) ? d : [d]
+      ...g.map(([L, N]) => G(L, N)),
+      ...Array.isArray(o) ? o : [o]
     ]
   )
 );
@@ -75,20 +75,20 @@ const P = A(
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const c = (e, t) => {
-  const o = A(
-    ({ className: n, ...l }, d) => x(P, {
-      ref: d,
+const f = (e, t) => {
+  const r = ue(
+    ({ className: a, ...s }, o) => G(Ie, {
+      ref: o,
       iconNode: t,
-      className: E(
-        `lucide-${B(M(e))}`,
+      className: pe(
+        `lucide-${Se(ne(e))}`,
         `lucide-${e}`,
-        n
+        a
       ),
-      ...l
+      ...s
     })
   );
-  return o.displayName = M(e), o;
+  return r.displayName = ne(e), r;
 };
 /**
  * @license lucide-react v0.562.0 - ISC
@@ -96,53 +96,34 @@ const c = (e, t) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const q = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]], U = c("chevron-right", q);
-/**
- * @license lucide-react v0.562.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const V = [
+const Me = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M6 12c0-1.7.7-3.2 1.8-4.2", key: "oqkarx" }],
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["path", { d: "M18 12c0 1.7-.7 3.2-1.8 4.2", key: "1eah9h" }]
-], G = c("disc-3", V);
+], Te = f("disc-3", Me);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const J = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
-], Y = c("external-link", J);
-/**
- * @license lucide-react v0.562.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Z = [
+const Ae = [
   [
     "path",
     {
-      d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4",
-      key: "tonef"
+      d: "m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2",
+      key: "usdka0"
     }
-  ],
-  ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
-], K = c("github", Z);
+  ]
+], Ee = f("folder-open", Ae);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Q = [
+const Le = [
   [
     "path",
     {
@@ -150,53 +131,81 @@ const Q = [
       key: "mvr1a0"
     }
   ]
-], X = c("heart", Q);
+], Ne = f("heart", Le);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const ee = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]], te = c("loader-circle", ee);
+const ze = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]], re = f("loader-circle", ze);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const ae = [
-  ["path", { d: "M12 19v3", key: "npa21l" }],
-  ["path", { d: "M19 10v2a7 7 0 0 1-14 0v-2", key: "1vc78b" }],
-  ["rect", { x: "9", y: "2", width: "6", height: "13", rx: "3", key: "s6n7sd" }]
-], re = c("mic", ae);
+const $e = [
+  [
+    "path",
+    {
+      d: "m11 7.601-5.994 8.19a1 1 0 0 0 .1 1.298l.817.818a1 1 0 0 0 1.314.087L15.09 12",
+      key: "80a601"
+    }
+  ],
+  [
+    "path",
+    {
+      d: "M16.5 21.174C15.5 20.5 14.372 20 13 20c-2.058 0-3.928 2.356-6 2-2.072-.356-2.775-3.369-1.5-4.5",
+      key: "j0ngtp"
+    }
+  ],
+  ["circle", { cx: "16", cy: "7", r: "5", key: "d08jfb" }]
+], Pe = f("mic-vocal", $e);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const oe = [
-  ["path", { d: "M9 18V5l12-2v13", key: "1jmyc2" }],
-  ["circle", { cx: "6", cy: "18", r: "3", key: "fqmcym" }],
-  ["circle", { cx: "18", cy: "16", r: "3", key: "1hluhg" }]
-], I = c("music", oe);
+const je = [
+  ["rect", { x: "14", y: "3", width: "5", height: "18", rx: "1", key: "kaeet6" }],
+  ["rect", { x: "5", y: "3", width: "5", height: "18", rx: "1", key: "1wsw3u" }]
+], Fe = f("pause", je);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const ie = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "M12 5v14", key: "s699le" }]
-], ne = c("plus", ie);
+const Re = [
+  [
+    "path",
+    {
+      d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
+      key: "10ikf1"
+    }
+  ]
+], Ue = f("play", Re);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const ce = [
+const De = [
+  ["path", { d: "M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "14sxne" }],
+  ["path", { d: "M3 3v5h5", key: "1xhq8a" }],
+  ["path", { d: "M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16", key: "1hlbsb" }],
+  ["path", { d: "M16 16h5v5", key: "ccwih5" }]
+], We = f("refresh-ccw", De);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Oe = [
   [
     "path",
     {
@@ -206,14 +215,30 @@ const ce = [
   ],
   ["path", { d: "M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7", key: "1ydtos" }],
   ["path", { d: "M7 3v4a1 1 0 0 0 1 1h7", key: "t51u73" }]
-], le = c("save", ce);
+], Ge = f("save", Oe);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const de = [
+const He = [
+  [
+    "path",
+    {
+      d: "M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915",
+      key: "1i5ecw"
+    }
+  ],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
+], Je = f("settings", He);
+/**
+ * @license lucide-react v0.562.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Be = [
   [
     "path",
     {
@@ -224,27 +249,27 @@ const de = [
   ["path", { d: "M20 2v4", key: "1rf3ol" }],
   ["path", { d: "M22 4h-4", key: "gwowj6" }],
   ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
-], se = c("sparkles", de);
+], ae = f("sparkles", Be);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const pe = [
+const Ve = [
   ["path", { d: "M10 11v6", key: "nco0om" }],
   ["path", { d: "M14 11v6", key: "outv1u" }],
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
-], fe = c("trash-2", pe);
+], qe = f("trash-2", Ve);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const ue = [
+const Ke = [
   [
     "path",
     {
@@ -259,8 +284,8 @@ const ue = [
   ["path", { d: "M7 8H3", key: "zfb6yr" }],
   ["path", { d: "M21 16h-4", key: "1cnmox" }],
   ["path", { d: "M11 3H9", key: "1obp7u" }]
-], he = c("wand-sparkles", ue), L = "id, title, prompt, lyrics, created_at, updated_at, audio_file_node_id, cover_file_node_id, model_id, bpm, key, duration_seconds, favourited";
-function R(e) {
+], Ze = f("wand-sparkles", Ke), fe = "id, title, prompt, lyrics, created_at, updated_at, audio_file_node_id, cover_file_node_id, model_id, bpm, key, duration_seconds, favourited";
+function ge(e) {
   return {
     id: e.id,
     title: e.title,
@@ -277,444 +302,465 @@ function R(e) {
     favourited: !!e.favourited
   };
 }
-const ge = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
-async function ye(e) {
+const Qe = (e = "trk") => `${e}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 9)}`;
+async function Ye(e) {
   return (await e.query(
-    `SELECT ${L} FROM tracks ORDER BY favourited DESC, created_at DESC`
-  )).map(R);
+    `SELECT ${fe} FROM tracks ORDER BY favourited DESC, created_at DESC`
+  )).map(ge);
 }
-async function me(e, t) {
-  const o = await e.query(
-    `SELECT ${L} FROM tracks WHERE id = ?`,
+async function oe(e, t) {
+  const r = await e.query(
+    `SELECT ${fe} FROM tracks WHERE id = ?`,
     [t]
   );
-  return o[0] ? R(o[0]) : null;
+  return r[0] ? ge(r[0]) : null;
 }
-async function be(e, t) {
-  const o = (/* @__PURE__ */ new Date()).toISOString(), n = ge();
-  await e.run(
-    `INSERT INTO tracks (id, title, prompt, lyrics, created_at, updated_at, favourited)
-     VALUES (?, ?, ?, ?, ?, ?, 0)`,
-    [n, t.title, t.prompt, t.lyrics ?? "", o, o]
+async function le(e, t) {
+  const r = (/* @__PURE__ */ new Date()).toISOString(), a = t.id ?? Qe(), s = await oe(e, a);
+  s ? await e.run(
+    `UPDATE tracks
+       SET title = ?, prompt = ?, lyrics = ?, updated_at = ?, audio_file_node_id = ?, cover_file_node_id = ?, model_id = ?, bpm = ?, key = ?, duration_seconds = ?, favourited = ?
+       WHERE id = ?`,
+    [
+      t.title,
+      t.prompt,
+      t.lyrics ?? "",
+      r,
+      t.audioFileNodeId ?? s.audioFileNodeId,
+      t.coverFileNodeId ?? s.coverFileNodeId,
+      t.modelId ?? s.modelId,
+      t.bpm ?? s.bpm,
+      t.key ?? s.key,
+      t.durationSeconds ?? s.durationSeconds,
+      t.favourited ?? s.favourited ? 1 : 0,
+      a
+    ]
+  ) : await e.run(
+    `INSERT INTO tracks (id, title, prompt, lyrics, created_at, updated_at, audio_file_node_id, cover_file_node_id, model_id, bpm, key, duration_seconds, favourited)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      a,
+      t.title,
+      t.prompt,
+      t.lyrics ?? "",
+      r,
+      r,
+      t.audioFileNodeId ?? null,
+      t.coverFileNodeId ?? null,
+      t.modelId ?? null,
+      t.bpm ?? null,
+      t.key ?? null,
+      t.durationSeconds ?? null,
+      t.favourited ? 1 : 0
+    ]
   );
-  const l = await me(e, n);
-  if (!l) throw new Error("createDraftTrack: insert succeeded but row missing");
-  return l;
+  const o = await oe(e, a);
+  if (!o) throw new Error("upsertTrack: write succeeded but row missing");
+  return o;
 }
-async function ve(e, t) {
+async function Xe(e, t) {
   await e.run("DELETE FROM tracks WHERE id = ?", [t]);
 }
-async function ke(e, t, o) {
-  const n = (/* @__PURE__ */ new Date()).toISOString();
+async function et(e, t, r) {
+  const a = (/* @__PURE__ */ new Date()).toISOString();
   await e.run(
     "UPDATE tracks SET favourited = ?, updated_at = ? WHERE id = ?",
-    [o ? 1 : 0, n, t]
+    [r ? 1 : 0, a, t]
   );
 }
-const xe = [
-  { icon: he, title: "AI lyrics + song generation", sub: "Coming v0.1.0 — pod gateway POST /v1/music/generations." },
-  { icon: I, title: "Multi-track sequencer", sub: "Drums, bass, lead, pad — AI-generated or hand-arranged." },
-  { icon: re, title: "Voice + sample import", sub: "Drop in voice memos from Voice Recorder or upload a stem." },
-  { icon: G, title: "Project workspace", sub: "~/Music/JULI3TA Projects — every track is a real file you own." }
-];
-function Se({ db: e, migrationReady: t, onOpenStudio: o }) {
-  const [n, l] = p([]), [d, v] = p(!0), [f, m] = p(!1), [s, b] = p(""), [u, S] = p(""), [w, _] = p(""), [h, C] = p(!1), g = j(async () => {
-    try {
-      await t;
-      const a = await ye(e);
-      l(a);
-    } catch (a) {
-      console.warn("[juli3ta] listTracks failed", a), l([]);
-    } finally {
-      v(!1);
+function tt(e) {
+  return (e.daemon?.state?.included ?? []).filter((r) => {
+    const a = String(r.status ?? "").toLowerCase();
+    return ["running", "ready", "idle", "connected"].some((s) => a.includes(s)) || !!r.publicUrl;
+  });
+}
+async function it(e, t, r) {
+  const a = await e.daemon.callPodEndpoint(t, "/v1/models", { method: "GET", signal: r });
+  if (!a.ok) throw new Error(`Models HTTP ${a.status}: ${(await a.text()).slice(0, 240)}`);
+  return ((await a.json()).data ?? []).map((o) => o.id).filter((o) => typeof o == "string" && o.length > 0).map((o) => ({ id: o }));
+}
+function nt(e) {
+  return e.startsWith("data:") ? e : `data:audio/mpeg;base64,${e}`;
+}
+function rt(e) {
+  const t = e;
+  if (!t || typeof t != "object") return null;
+  const r = t.data;
+  if (r && !Array.isArray(r) && typeof r == "object") {
+    const s = r.audio ?? r.audio_base64 ?? r.b64_json ?? r.url;
+    if (typeof s == "string" && s.length > 0) return s;
+  }
+  if (Array.isArray(r))
+    for (const s of r) {
+      const o = s, g = o.audio ?? o.audio_base64 ?? o.b64_json ?? o.url;
+      if (typeof g == "string" && g.length > 0) return g;
     }
-  }, [e, t]);
-  $(() => {
-    g();
-  }, [g]);
-  const N = async () => {
-    if (!(!s.trim() || !u.trim())) {
-      C(!0);
-      try {
-        await be(e, {
-          title: s.trim(),
-          prompt: u.trim(),
-          lyrics: w.trim()
-        }), b(""), S(""), _(""), m(!1), await g();
-      } catch (a) {
-        console.error("[juli3ta] save draft failed", a);
-      } finally {
-        C(!1);
-      }
-    }
-  }, D = async (a) => {
-    try {
-      await ve(e, a), await g();
-    } catch (y) {
-      console.error("[juli3ta] delete failed", y);
-    }
-  }, W = async (a) => {
-    try {
-      await ke(e, a.id, !a.favourited), await g();
-    } catch (y) {
-      console.error("[juli3ta] toggle fav failed", y);
-    }
+  const a = t.audio ?? t.audio_base64 ?? t.b64_json ?? t.url;
+  return typeof a == "string" && a.length > 0 ? a : null;
+}
+function at(e) {
+  const t = e, r = t?.data, a = r?.duration_seconds ?? r?.durationSeconds ?? t?.duration_seconds ?? t?.durationSeconds;
+  return typeof a == "number" && Number.isFinite(a) ? a : null;
+}
+async function ot(e, t) {
+  const r = {
+    model: t.model,
+    lyrics: t.lyrics || `[Intro]
+[Instrumental]
+[Outro]`,
+    prompt: t.prompt
   };
-  return /* @__PURE__ */ r(
-    "div",
-    {
-      style: {
-        height: "100%",
-        overflow: "auto",
-        background: "linear-gradient(180deg, #1a0b2e 0%, #2d1245 50%, #1a0b2e 100%)",
-        color: "#f4f0ff",
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-      },
-      children: /* @__PURE__ */ i("div", { style: { maxWidth: 920, margin: "0 auto", padding: "40px 32px" }, children: [
-        /* @__PURE__ */ i("div", { style: { textAlign: "center", marginBottom: 40 }, children: [
-          /* @__PURE__ */ i(
-            "div",
-            {
-              style: {
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                padding: "4px 12px",
-                borderRadius: 999,
-                background: "rgba(168, 85, 247, 0.2)",
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: 0.5,
-                color: "#d8b4fe",
-                marginBottom: 16,
-                border: "1px solid rgba(168, 85, 247, 0.3)"
-              },
-              children: [
-                /* @__PURE__ */ r(se, { size: 12 }),
-                " ALPHA · v0.0.2"
-              ]
-            }
-          ),
-          /* @__PURE__ */ r(
-            "h1",
-            {
-              style: {
-                fontSize: 56,
-                fontWeight: 800,
-                letterSpacing: "-0.04em",
-                margin: 0,
-                marginBottom: 12,
-                background: "linear-gradient(180deg, #fff 0%, #d8b4fe 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent"
-              },
-              children: "JULI3TA"
-            }
-          ),
-          /* @__PURE__ */ r("div", { style: { fontSize: 16, color: "#c4b5fd" }, children: "AI-native music creator for Tytus OS" })
-        ] }),
-        /* @__PURE__ */ i("div", { style: { marginBottom: 40 }, children: [
-          /* @__PURE__ */ i("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12 }, children: [
-            /* @__PURE__ */ i("div", { children: [
-              /* @__PURE__ */ r("div", { style: { fontSize: 14, fontWeight: 600, color: "#a78bfa", letterSpacing: 0.5 }, children: "MY DRAFTS" }),
-              /* @__PURE__ */ r("div", { style: { fontSize: 12, color: "#a78bfa", marginTop: 2 }, children: "Saved prompts + lyrics. Generation arrives in v0.1.0." })
-            ] }),
-            /* @__PURE__ */ i(
-              "button",
-              {
-                onClick: () => m((a) => !a),
-                style: {
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "8px 14px",
-                  background: f ? "rgba(255,255,255,0.08)" : "linear-gradient(90deg, #a855f7, #ec4899)",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 8,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  cursor: "pointer"
-                },
-                children: [
-                  /* @__PURE__ */ r(ne, { size: 13 }),
-                  " ",
-                  f ? "Cancel" : "New draft"
-                ]
-              }
-            )
-          ] }),
-          f && /* @__PURE__ */ i(
-            "div",
-            {
-              style: {
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(168, 85, 247, 0.25)",
-                borderRadius: 12,
-                padding: 16,
-                marginBottom: 16
-              },
-              children: [
-                /* @__PURE__ */ r(
-                  "input",
-                  {
-                    value: s,
-                    onChange: (a) => b(a.target.value),
-                    placeholder: "Track title…",
-                    style: k
-                  }
-                ),
-                /* @__PURE__ */ r(
-                  "textarea",
-                  {
-                    value: u,
-                    onChange: (a) => S(a.target.value),
-                    placeholder: "Prompt — describe the song. ('80s synthwave, melancholy, 124 bpm, female vocal'…)",
-                    rows: 3,
-                    style: { ...k, resize: "vertical", marginTop: 10 }
-                  }
-                ),
-                /* @__PURE__ */ r(
-                  "textarea",
-                  {
-                    value: w,
-                    onChange: (a) => _(a.target.value),
-                    placeholder: "Lyrics (optional) — paste or type the verse / chorus / bridge…",
-                    rows: 5,
-                    style: { ...k, resize: "vertical", marginTop: 10 }
-                  }
-                ),
-                /* @__PURE__ */ i(
-                  "button",
-                  {
-                    onClick: N,
-                    disabled: h || !s.trim() || !u.trim(),
-                    style: {
-                      marginTop: 12,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                      padding: "8px 16px",
-                      background: h ? "rgba(168,85,247,0.4)" : "#a855f7",
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: 8,
-                      fontSize: 13,
-                      fontWeight: 600,
-                      cursor: h || !s.trim() || !u.trim() ? "not-allowed" : "pointer",
-                      opacity: !s.trim() || !u.trim() ? 0.5 : 1
-                    },
-                    children: [
-                      h ? /* @__PURE__ */ r(te, { size: 13, className: "animate-spin" }) : /* @__PURE__ */ r(le, { size: 13 }),
-                      h ? "Saving…" : "Save draft"
-                    ]
-                  }
-                )
-              ]
-            }
-          ),
-          d ? /* @__PURE__ */ r("div", { style: { padding: 20, color: "#a78bfa", fontSize: 13 }, children: "Loading drafts…" }) : n.length === 0 ? /* @__PURE__ */ r(
-            "div",
-            {
-              style: {
-                padding: 24,
-                textAlign: "center",
-                border: "1px dashed rgba(168, 85, 247, 0.3)",
-                borderRadius: 12,
-                color: "#a78bfa",
-                fontSize: 13
-              },
-              children: 'No drafts yet. Click "New draft" to save your first prompt + lyrics.'
-            }
-          ) : /* @__PURE__ */ r("div", { style: { display: "grid", gap: 8 }, children: n.map((a) => /* @__PURE__ */ i(
-            "div",
-            {
-              style: {
-                display: "flex",
-                gap: 12,
-                padding: 14,
-                background: "rgba(255,255,255,0.04)",
-                border: `1px solid ${a.favourited ? "rgba(236, 72, 153, 0.3)" : "rgba(168, 85, 247, 0.15)"}`,
-                borderRadius: 12
-              },
-              children: [
-                /* @__PURE__ */ r(I, { size: 20, style: { color: "#d8b4fe", flexShrink: 0, marginTop: 2 } }),
-                /* @__PURE__ */ i("div", { style: { flex: 1, minWidth: 0 }, children: [
-                  /* @__PURE__ */ r("div", { style: { fontSize: 14, fontWeight: 600, color: "#f4f0ff", marginBottom: 2 }, children: a.title }),
-                  /* @__PURE__ */ r(
-                    "div",
-                    {
-                      style: {
-                        fontSize: 12,
-                        color: "#a78bfa",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden"
-                      },
-                      children: a.prompt
-                    }
-                  ),
-                  /* @__PURE__ */ i("div", { style: { fontSize: 10, color: "#9b87d6", marginTop: 4 }, children: [
-                    "Created ",
-                    new Date(a.createdAt).toLocaleString()
-                  ] })
-                ] }),
-                /* @__PURE__ */ r(
-                  "button",
-                  {
-                    onClick: () => W(a),
-                    style: T,
-                    title: a.favourited ? "Unfavourite" : "Favourite",
-                    children: /* @__PURE__ */ r(X, { size: 14, fill: a.favourited ? "#ec4899" : "none", color: a.favourited ? "#ec4899" : "#c4b5fd" })
-                  }
-                ),
-                /* @__PURE__ */ r(
-                  "button",
-                  {
-                    onClick: () => D(a.id),
-                    style: T,
-                    title: "Delete",
-                    children: /* @__PURE__ */ r(fe, { size: 14, color: "#c4b5fd" })
-                  }
-                )
-              ]
-            },
-            a.id
-          )) })
-        ] }),
-        /* @__PURE__ */ i("div", { style: { marginBottom: 32 }, children: [
-          /* @__PURE__ */ r("div", { style: { fontSize: 14, fontWeight: 600, color: "#a78bfa", marginBottom: 12, letterSpacing: 0.5 }, children: "WHAT'S COMING IN v0.1.0" }),
-          /* @__PURE__ */ r("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))", gap: 12 }, children: xe.map((a) => {
-            const y = a.icon;
-            return /* @__PURE__ */ i(
-              "div",
-              {
-                style: {
-                  display: "flex",
-                  gap: 12,
-                  padding: 14,
-                  background: "rgba(255, 255, 255, 0.04)",
-                  border: "1px solid rgba(168, 85, 247, 0.15)",
-                  borderRadius: 12
-                },
-                children: [
-                  /* @__PURE__ */ r(y, { size: 20, style: { color: "#d8b4fe", flexShrink: 0, marginTop: 2 } }),
-                  /* @__PURE__ */ i("div", { children: [
-                    /* @__PURE__ */ r("div", { style: { fontSize: 13, fontWeight: 600, color: "#f4f0ff", marginBottom: 2 }, children: a.title }),
-                    /* @__PURE__ */ r("div", { style: { fontSize: 12, color: "#a78bfa", lineHeight: 1.5 }, children: a.sub })
-                  ] })
-                ]
-              },
-              a.title
-            );
-          }) })
-        ] }),
-        /* @__PURE__ */ i(
-          "div",
-          {
-            style: {
-              paddingTop: 20,
-              borderTop: "1px solid rgba(168, 85, 247, 0.2)",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: 12
-            },
-            children: [
-              /* @__PURE__ */ r("div", { style: { fontSize: 11, color: "#a78bfa" }, children: "Drafts saved to per-app SQLite (`app_juli3ta_tracks`). Generation comes online with the full Music Creator UI lift." }),
-              /* @__PURE__ */ i("div", { style: { display: "flex", gap: 8 }, children: [
-                o && /* @__PURE__ */ i(
-                  "button",
-                  {
-                    onClick: o,
-                    style: z,
-                    children: [
-                      "Open Music Creator ",
-                      /* @__PURE__ */ r(U, { size: 12 })
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ i(
-                  "a",
-                  {
-                    href: "https://github.com/traylinx/tytus-app-juli3ta",
-                    target: "_blank",
-                    rel: "noreferrer",
-                    style: { ...z, textDecoration: "none", color: "#c4b5fd" },
-                    children: [
-                      /* @__PURE__ */ r(K, { size: 12 }),
-                      " Repo ",
-                      /* @__PURE__ */ r(Y, { size: 10 })
-                    ]
-                  }
-                )
-              ] })
-            ]
-          }
-        )
-      ] })
-    }
-  );
+  t.instrumental && (r.instrumental = !0);
+  const a = await e.daemon.callPodEndpoint(t.podId, "/v1/music/generations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(r),
+    signal: t.signal
+  }), s = await a.text();
+  let o = s;
+  try {
+    o = s ? JSON.parse(s) : {};
+  } catch {
+  }
+  if (!a.ok) throw new Error(`Music HTTP ${a.status}: ${typeof o == "string" ? o.slice(0, 300) : JSON.stringify(o).slice(0, 300)}`);
+  const g = rt(o);
+  if (!g) throw new Error("Music generation returned no audio payload");
+  return {
+    audioDataUrl: nt(g),
+    modelId: t.model,
+    durationSeconds: at(o),
+    raw: o
+  };
 }
-const k = {
+const lt = `[Verse 1]
+City lights are blinking like a signal in the rain
+I hear the future humming through the wire again
+
+[Chorus]
+We build a little thunder, we teach the dark to sing
+JULI3TA, wake the machine`, E = {
   width: "100%",
-  background: "rgba(0,0,0,0.3)",
-  color: "#f4f0ff",
-  border: "1px solid rgba(168, 85, 247, 0.2)",
-  borderRadius: 6,
-  padding: "8px 10px",
-  fontSize: 13,
-  fontFamily: "inherit",
   boxSizing: "border-box",
-  outline: "none"
-}, T = {
+  border: "1px solid rgba(255,255,255,0.14)",
+  borderRadius: 12,
+  background: "rgba(255,255,255,0.06)",
+  color: "#fff",
+  padding: "12px 14px",
+  outline: "none",
+  font: "inherit"
+}, j = {
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.10)",
+  borderRadius: 20,
+  boxShadow: "0 24px 80px rgba(0,0,0,0.25)"
+}, k = {
+  border: 0,
+  borderRadius: 12,
+  color: "#fff",
+  padding: "10px 14px",
+  fontWeight: 800,
+  cursor: "pointer",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: 30,
-  height: 30,
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(168, 85, 247, 0.2)",
-  borderRadius: 6,
-  cursor: "pointer",
-  flexShrink: 0
-}, z = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: 6,
-  padding: "6px 12px",
-  background: "rgba(255,255,255,0.05)",
-  color: "#f4f0ff",
-  border: "1px solid rgba(168, 85, 247, 0.3)",
-  borderRadius: 6,
-  fontSize: 12,
-  fontWeight: 500,
-  cursor: "pointer"
+  gap: 8
 };
-function Ce(e) {
-  const t = e.host.storage.current();
-  let o = t.migrate?.("migrations/") ?? Promise.resolve();
+function de(e) {
+  return e.replace(/[&<>]/g, (t) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[t] ?? t);
+}
+function se(e, t) {
+  const r = Math.abs([...e].reduce((g, w) => g + w.charCodeAt(0), 0)) % 360, a = de(e || "JULI3TA"), s = de((t || "AI music").slice(0, 72)), o = `<svg xmlns="http://www.w3.org/2000/svg" width="768" height="768" viewBox="0 0 768 768"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="hsl(${r},88%,62%)"/><stop offset="0.52" stop-color="hsl(${(r + 62) % 360},86%,44%)"/><stop offset="1" stop-color="#140622"/></linearGradient><filter id="blur"><feGaussianBlur stdDeviation="26"/></filter></defs><rect width="768" height="768" fill="url(#g)"/><circle cx="196" cy="188" r="142" fill="rgba(255,255,255,.22)" filter="url(#blur)"/><circle cx="584" cy="536" r="190" fill="rgba(0,0,0,.30)" filter="url(#blur)"/><path d="M162 515c96-144 202-144 318 0 35 44 76 62 124 54" stroke="rgba(255,255,255,.55)" stroke-width="28" fill="none" stroke-linecap="round"/><text x="64" y="650" fill="white" font-family="Inter,Arial" font-size="54" font-weight="900">${a}</text><text x="66" y="696" fill="rgba(255,255,255,.76)" font-family="Inter,Arial" font-size="24">${s}</text></svg>`;
+  return `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(o)))}`;
+}
+function ce(e, t) {
+  return t.find((a) => a.id === e.id)?.audioDataUrl ?? "";
+}
+function dt(e, t, r) {
+  return {
+    id: e.id,
+    title: e.title,
+    styleTags: e.prompt,
+    lyricsPreview: e.lyrics,
+    durationMs: Math.round((e.durationSeconds ?? 0) * 1e3),
+    bitrate: 32e4,
+    sampleRate: 44100,
+    sizeBytes: t.length,
+    createdAt: new Date(e.createdAt).getTime(),
+    audioDataUrl: t,
+    specsJson: JSON.stringify({ modelId: e.modelId, prompt: e.prompt }),
+    coverDataUrl: r,
+    theme: e.prompt,
+    source: "juli3ta",
+    audioKind: t ? "data_url" : "lyrics_only"
+  };
+}
+function st(e) {
+  return e.find((t) => /music/i.test(t) && !/cover/i.test(t)) ?? e[0] ?? "";
+}
+function ct({ host: e, db: t, migrationReady: r }) {
+  const [a, s] = u([]), [o, g] = u([]), [w, F] = u(""), [L, N] = u(!0), [v, H] = u(!1), [J, R] = u(null), [z, m] = u(null), [B, M] = u(null), [T, ye] = u(() => tt(e)), [p, U] = u(""), [V, q] = u([]), [y, D] = u(""), [me, W] = u(!1), [h, K] = u("Neon Ghosts"), [x, Z] = u("cinematic synthwave, 124 bpm, melancholic but powerful, female vocal"), [S, Q] = u(lt), [$, he] = u(!1), I = ie(null), Y = ie(null), b = P(async () => {
+    N(!0);
+    try {
+      await r;
+      const [i, l] = await Promise.allSettled([
+        Ye(t),
+        e.daemon.juli3taLibrary?.listGeneratedTracks?.()
+      ]);
+      i.status === "fulfilled" && s(i.value), l.status === "fulfilled" && l.value && (F(l.value.rootPath), g(l.value.tracks ?? []));
+    } catch (i) {
+      m(i instanceof Error ? i.message : String(i));
+    } finally {
+      N(!1);
+    }
+  }, [t, e, r]);
+  A(() => {
+    b();
+  }, [b]), A(() => e.daemon.onStateChange?.((l) => {
+    const c = (l.included ?? []).filter((_) => !!_.publicUrl || /running|ready|idle|connected/i.test(String(_.status)));
+    ye(c), !p && c[0] && U(c[0].id);
+  }), [e, p]), A(() => {
+    if (!p) {
+      const i = T[0]?.id;
+      i && U(i);
+    }
+  }, [T, p]), A(() => {
+    if (!p) return;
+    const i = new AbortController();
+    return it(e, p, i.signal).then((l) => {
+      const c = l.map((_) => _.id);
+      q(c), D((_) => _ || st(c));
+    }).catch((l) => {
+      console.warn("[juli3ta] model discovery failed", l), q([]);
+    }), () => i.abort();
+  }, [e, p]), A(() => e.shellMenu?.register?.({
+    appId: "juli3ta",
+    groups: [
+      { label: "File", items: [
+        { id: "new-track", label: "New track", shortcut: "⌘N", onClick: () => {
+          K(""), Z(""), Q("");
+        } },
+        { id: "save-draft", label: "Save draft", shortcut: "⌘S", onClick: () => void X() },
+        { id: "open-folder", label: "Open JULI3TA folder", onClick: () => void te() }
+      ] },
+      { label: "Track", items: [
+        { id: "generate", label: "Generate", shortcut: "⌘↩", disabled: v, onClick: () => void ee() }
+      ] }
+    ]
+  }), [e, v, h, x, S, p, y]);
+  const X = P(async () => {
+    if (!h.trim()) return;
+    const i = await le(t, {
+      title: h.trim(),
+      prompt: x.trim(),
+      lyrics: S.trim(),
+      modelId: y || null
+    });
+    M(`Draft saved: ${i.title}`), e.notifications.notify({ title: "JULI3TA draft saved", body: i.title, level: "success", unread: !1 }), await b();
+  }, [t, e, S, y, x, b, h]), ee = P(async () => {
+    if (!h.trim()) {
+      m("Track title required.");
+      return;
+    }
+    if (!x.trim()) {
+      m("Prompt/style required.");
+      return;
+    }
+    if (!$ && !S.trim()) {
+      m("Lyrics required unless instrumental is enabled.");
+      return;
+    }
+    if (!p || !y) {
+      m("No runnable music pod/model available. Save a draft or start a pod.");
+      return;
+    }
+    Y.current?.abort();
+    const i = new AbortController();
+    Y.current = i, H(!0), m(null), M("Generating audio…");
+    try {
+      const l = await ot(e, {
+        podId: p,
+        model: y,
+        title: h.trim(),
+        prompt: x.trim(),
+        lyrics: S.trim(),
+        instrumental: $,
+        signal: i.signal
+      }), c = await le(t, {
+        title: h.trim(),
+        prompt: x.trim(),
+        lyrics: S.trim(),
+        modelId: l.modelId,
+        durationSeconds: l.durationSeconds
+      }), _ = se(c.title, c.prompt);
+      try {
+        const C = await e.daemon.juli3taLibrary.saveGeneratedTrack(dt(c, l.audioDataUrl, _));
+        M(C.audioPath ? `Generated + mirrored: ${C.audioPath}` : `Generated: ${c.title}`);
+      } catch (C) {
+        console.warn("[juli3ta] daemon file mirror failed", C), M(`Generated locally. File mirror pending: ${C instanceof Error ? C.message : String(C)}`);
+      }
+      e.notifications.notify({ title: "JULI3TA track generated", body: c.title, level: "success", unread: !0 }), await b();
+    } catch (l) {
+      l.name !== "AbortError" && (m(l instanceof Error ? l.message : String(l)), e.notifications.notify({ title: "JULI3TA generation failed", body: l instanceof Error ? l.message : String(l), level: "error" }));
+    } finally {
+      H(!1);
+    }
+  }, [t, e, $, S, y, p, x, b, h]), te = P(async () => {
+    try {
+      const i = await e.daemon.juli3taLibrary.openGeneratedTracksFolder();
+      M(`Opened ${i}`);
+    } catch (i) {
+      m(`Could not open JULI3TA folder: ${i instanceof Error ? i.message : String(i)}`);
+    }
+  }, [e]), O = xe(() => a, [a]), be = T.find((i) => i.id === p), ke = (i) => {
+    const l = ce(i, o);
+    if (l) {
+      if (I.current || (I.current = new Audio()), J === i.id) {
+        I.current.pause(), R(null);
+        return;
+      }
+      I.current.src = l, I.current.play().then(() => R(i.id)).catch((c) => m(String(c))), I.current.onended = () => R(null);
+    }
+  };
+  return /* @__PURE__ */ d("div", { style: { minHeight: "100%", overflow: "auto", background: "radial-gradient(circle at 10% 0%, rgba(236,72,153,.38), transparent 28%), radial-gradient(circle at 86% 12%, rgba(168,85,247,.32), transparent 32%), linear-gradient(180deg, #12051f, #1f0b35 54%, #0d0614)", color: "#fff", fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif' }, children: [
+    /* @__PURE__ */ d("div", { style: { maxWidth: 1280, margin: "0 auto", padding: 28 }, children: [
+      /* @__PURE__ */ d("header", { style: { display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", marginBottom: 22 }, children: [
+        /* @__PURE__ */ d("div", { children: [
+          /* @__PURE__ */ d("div", { style: { display: "inline-flex", gap: 8, alignItems: "center", color: "#d8b4fe", fontSize: 12, fontWeight: 900, letterSpacing: 1 }, children: [
+            /* @__PURE__ */ n(ae, { size: 14 }),
+            " JULI3TA v0.1.0"
+          ] }),
+          /* @__PURE__ */ n("h1", { style: { fontSize: 54, margin: "4px 0 0", lineHeight: 1, letterSpacing: "-0.06em" }, children: "AI Music Creator" }),
+          /* @__PURE__ */ n("p", { style: { color: "#c4b5fd", margin: "8px 0 0" }, children: "Generate tracks through your pod, keep a local SQLite index, mirror audio to the daemon JULI3TA library when available." })
+        ] }),
+        /* @__PURE__ */ d("div", { style: { display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "flex-end" }, children: [
+          /* @__PURE__ */ d("button", { style: { ...k, background: "rgba(255,255,255,.10)" }, onClick: () => void b(), children: [
+            /* @__PURE__ */ n(We, { size: 16 }),
+            " Refresh"
+          ] }),
+          /* @__PURE__ */ d("button", { style: { ...k, background: "rgba(255,255,255,.10)" }, onClick: () => W(!0), children: [
+            /* @__PURE__ */ n(Je, { size: 16 }),
+            " Settings"
+          ] }),
+          /* @__PURE__ */ d("button", { style: { ...k, background: "linear-gradient(90deg,#a855f7,#ec4899)" }, onClick: () => void te(), children: [
+            /* @__PURE__ */ n(Ee, { size: 16 }),
+            " Open folder"
+          ] })
+        ] })
+      ] }),
+      (z || B) && /* @__PURE__ */ n("div", { style: { ...j, padding: 14, marginBottom: 16, borderColor: z ? "rgba(248,113,113,.45)" : "rgba(52,211,153,.35)", color: z ? "#fecaca" : "#bbf7d0" }, children: z ?? B }),
+      /* @__PURE__ */ d("main", { style: { display: "grid", gridTemplateColumns: "minmax(360px, 0.9fr) minmax(460px, 1.1fr)", gap: 18 }, children: [
+        /* @__PURE__ */ d("section", { style: { ...j, padding: 18 }, children: [
+          /* @__PURE__ */ d("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }, children: [
+            /* @__PURE__ */ n(Ze, {}),
+            " ",
+            /* @__PURE__ */ n("h2", { style: { margin: 0 }, children: "Creator Panel" })
+          ] }),
+          /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Title" }),
+          /* @__PURE__ */ n("input", { value: h, onChange: (i) => K(i.target.value), style: { ...E, margin: "6px 0 14px" }, placeholder: "Song title" }),
+          /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Prompt / style" }),
+          /* @__PURE__ */ n("textarea", { value: x, onChange: (i) => Z(i.target.value), rows: 4, style: { ...E, resize: "vertical", margin: "6px 0 14px" }, placeholder: "genre, mood, bpm, instruments, vocal direction…" }),
+          /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Lyrics" }),
+          /* @__PURE__ */ n("textarea", { value: S, onChange: (i) => Q(i.target.value), rows: 12, style: { ...E, resize: "vertical", margin: "6px 0 12px", fontFamily: "ui-monospace,SFMono-Regular,Menlo,monospace", fontSize: 13 }, placeholder: "Paste or write lyrics…" }),
+          /* @__PURE__ */ d("label", { style: { display: "flex", alignItems: "center", gap: 8, color: "#ddd6fe", fontSize: 13, marginBottom: 14 }, children: [
+            /* @__PURE__ */ n("input", { type: "checkbox", checked: $, onChange: (i) => he(i.target.checked) }),
+            " Instrumental mode"
+          ] }),
+          /* @__PURE__ */ d("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }, children: [
+            /* @__PURE__ */ d("button", { disabled: v, style: { ...k, background: "rgba(255,255,255,.12)", opacity: v ? 0.55 : 1 }, onClick: () => void X(), children: [
+              /* @__PURE__ */ n(Ge, { size: 16 }),
+              " Save draft"
+            ] }),
+            /* @__PURE__ */ d("button", { disabled: v || !p || !y, style: { ...k, background: "linear-gradient(90deg,#a855f7,#ec4899)", opacity: v || !p || !y ? 0.55 : 1 }, onClick: () => void ee(), children: [
+              v ? /* @__PURE__ */ n(re, { size: 16, className: "spin" }) : /* @__PURE__ */ n(ae, { size: 16 }),
+              " ",
+              v ? "Generating…" : "Generate"
+            ] })
+          ] }),
+          /* @__PURE__ */ d("div", { style: { marginTop: 14, color: "#a78bfa", fontSize: 12 }, children: [
+            "Pod: ",
+            /* @__PURE__ */ n("b", { children: be?.id ?? "none" }),
+            " · Model: ",
+            /* @__PURE__ */ n("b", { children: y || "none discovered" }),
+            w ? /* @__PURE__ */ d(ve, { children: [
+              " · Mirror: ",
+              /* @__PURE__ */ n("b", { children: w })
+            ] }) : null
+          ] })
+        ] }),
+        /* @__PURE__ */ d("section", { style: { ...j, padding: 18 }, children: [
+          /* @__PURE__ */ d("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }, children: [
+            /* @__PURE__ */ d("div", { style: { display: "flex", alignItems: "center", gap: 10 }, children: [
+              /* @__PURE__ */ n(Te, {}),
+              /* @__PURE__ */ n("h2", { style: { margin: 0 }, children: "Library Gallery" })
+            ] }),
+            /* @__PURE__ */ d("span", { style: { color: "#c4b5fd", fontSize: 12, fontWeight: 800 }, children: [
+              O.length,
+              " tracks"
+            ] })
+          ] }),
+          L ? /* @__PURE__ */ d("div", { style: { color: "#c4b5fd", padding: 24 }, children: [
+            /* @__PURE__ */ n(re, { size: 18, className: "spin" }),
+            " Loading…"
+          ] }) : null,
+          !L && O.length === 0 ? /* @__PURE__ */ d("div", { style: { border: "1px dashed rgba(255,255,255,.18)", borderRadius: 16, padding: 32, textAlign: "center", color: "#c4b5fd" }, children: [
+            /* @__PURE__ */ n(Pe, { size: 36 }),
+            /* @__PURE__ */ n("p", { children: "No tracks yet. Generate one or save a draft." })
+          ] }) : null,
+          /* @__PURE__ */ n("div", { style: { display: "grid", gap: 12 }, children: O.map((i) => {
+            const l = ce(i, o), c = i.favourited;
+            return /* @__PURE__ */ d("article", { style: { display: "grid", gridTemplateColumns: "92px 1fr auto", gap: 14, alignItems: "center", padding: 12, borderRadius: 16, background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.08)" }, children: [
+              /* @__PURE__ */ n("img", { alt: "cover", src: se(i.title, i.prompt), style: { width: 92, height: 92, borderRadius: 14, objectFit: "cover" } }),
+              /* @__PURE__ */ d("div", { style: { minWidth: 0 }, children: [
+                /* @__PURE__ */ n("div", { style: { fontWeight: 900, fontSize: 18, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }, children: i.title }),
+                /* @__PURE__ */ d("div", { style: { color: "#c4b5fd", fontSize: 12, margin: "4px 0 8px" }, children: [
+                  i.modelId ?? "draft",
+                  " · ",
+                  i.durationSeconds ? `${Math.round(i.durationSeconds)}s` : l ? "audio mirrored" : "lyrics/draft"
+                ] }),
+                /* @__PURE__ */ n("div", { style: { color: "#ddd6fe", fontSize: 13, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }, children: i.prompt || i.lyrics || "No prompt" })
+              ] }),
+              /* @__PURE__ */ d("div", { style: { display: "flex", gap: 8 }, children: [
+                /* @__PURE__ */ n("button", { title: "Play", disabled: !l, style: { ...k, padding: 10, background: l ? "rgba(255,255,255,.12)" : "rgba(255,255,255,.05)", opacity: l ? 1 : 0.4 }, onClick: () => ke(i), children: J === i.id ? /* @__PURE__ */ n(Fe, { size: 16 }) : /* @__PURE__ */ n(Ue, { size: 16 }) }),
+                /* @__PURE__ */ n("button", { title: "Favorite", style: { ...k, padding: 10, background: c ? "#ec4899" : "rgba(255,255,255,.12)" }, onClick: () => void et(t, i.id, !c).then(b), children: /* @__PURE__ */ n(Ne, { size: 16, fill: c ? "currentColor" : "none" }) }),
+                /* @__PURE__ */ n("button", { title: "Delete", style: { ...k, padding: 10, background: "rgba(248,113,113,.16)" }, onClick: () => void Xe(t, i.id).then(b), children: /* @__PURE__ */ n(qe, { size: 16 }) })
+              ] })
+            ] }, i.id);
+          }) })
+        ] })
+      ] })
+    ] }),
+    me && /* @__PURE__ */ n("div", { style: { position: "fixed", inset: 0, background: "rgba(0,0,0,.58)", display: "grid", placeItems: "center", padding: 24 }, onClick: () => W(!1), children: /* @__PURE__ */ d("div", { style: { ...j, width: "min(680px, 100%)", padding: 20 }, onClick: (i) => i.stopPropagation(), children: [
+      /* @__PURE__ */ n("h2", { style: { marginTop: 0 }, children: "JULI3TA Settings" }),
+      /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Pod" }),
+      /* @__PURE__ */ n("select", { value: p, onChange: (i) => {
+        U(i.target.value), D("");
+      }, style: { ...E, margin: "6px 0 14px" }, children: T.length === 0 ? /* @__PURE__ */ n("option", { value: "", children: "No runnable pods" }) : T.map((i) => /* @__PURE__ */ d("option", { value: i.id, children: [
+        i.id,
+        " · ",
+        i.status
+      ] }, i.id)) }),
+      /* @__PURE__ */ n("label", { style: { fontSize: 12, color: "#c4b5fd", fontWeight: 800 }, children: "Music model" }),
+      /* @__PURE__ */ n("select", { value: y, onChange: (i) => D(i.target.value), style: { ...E, margin: "6px 0 14px" }, children: V.length === 0 ? /* @__PURE__ */ n("option", { value: "", children: "No models discovered" }) : V.map((i) => /* @__PURE__ */ n("option", { value: i, children: i }, i)) }),
+      /* @__PURE__ */ n("p", { style: { color: "#c4b5fd", fontSize: 13 }, children: "Technical note: v0.1 uses host.daemon.callPodEndpoint for `/v1/models` and `/v1/music/generations`. It mirrors generated data through `host.daemon.juli3taLibrary` when available; real Finder file implementation remains daemon-owned." }),
+      /* @__PURE__ */ n("button", { style: { ...k, background: "linear-gradient(90deg,#a855f7,#ec4899)" }, onClick: () => W(!1), children: "Done" })
+    ] }) }),
+    /* @__PURE__ */ n("style", { children: ".spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}} select option{background:#1f0b35;color:white}" })
+  ] });
+}
+function ft(e) {
+  const t = e.host.storage.current(), r = t.migrate?.("migrations/") ?? Promise.resolve();
   return function() {
-    return /* @__PURE__ */ r(
-      Se,
+    return /* @__PURE__ */ n(
+      ct,
       {
+        host: e.host,
         db: t,
-        migrationReady: o,
-        onOpenStudio: () => {
-          try {
-            e.host.windows?.open?.("musiccreator", void 0);
-          } catch (d) {
-            console.warn("[juli3ta] failed to open music-creator window", d);
-          }
-        }
+        migrationReady: r
       }
     );
   };
 }
 export {
-  Ce as default
+  ft as default
 };
 //# sourceMappingURL=index.js.map
