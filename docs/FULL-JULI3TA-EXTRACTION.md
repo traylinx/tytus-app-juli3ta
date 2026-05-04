@@ -25,7 +25,8 @@ Status: PASS for dev-tag standalone smoke. Not public-catalog promoted yet.
 
 - Dev CDN manifest: `https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@full-extract-0.2.1-dev/tytus-app.json`
 - Dev tag: `full-extract-0.2.1-dev`
-- Branch head after smoke: `ace2a41`
+- Smoked code commit/tag target: `ace2a41`
+- Documentation commit after smoke: `7d17c24`
 - Host: `http://localhost:4242` via Chrome CDP temp profile `/tmp/chrome-cdp-juli3ta`
 - Install path: `installAppFromManifestUrl()` against the real Tytus OS OPFS DB.
 - Render result: standalone installed app `juli3ta` opens full copied JULI3TA UI.
