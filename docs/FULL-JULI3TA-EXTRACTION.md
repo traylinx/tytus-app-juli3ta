@@ -36,3 +36,22 @@ Status: PASS for dev-tag standalone smoke. Not public-catalog promoted yet.
 - Screenshot evidence: `/Users/sebastian/MAKAKOO/data/reports/juli3ta-standalone-g2-smoke.png`
 
 Important: legacy in-tree `musiccreator` remains active. Do not add `juli3ta` to the public catalog until launcher dedupe/retirement is implemented, otherwise users can see two JULI3TA entries during transition.
+
+## 2026-05-04 G4 host transition result
+
+Status: PASS for Tytus OS launcher transition. Still not public-catalog promoted.
+
+- Tytus OS branch: `main`
+- Transition behavior: legacy launcher id `musiccreator` resolves to installed standalone id `juli3ta` when the verified v0.2+ row exists.
+- Fallback behavior: if `juli3ta` is not installed, AppRouter still falls through to the legacy in-tree `musiccreator` component. No user loses JULI3TA.
+- Guardrail: alias intentionally points to `juli3ta`, not bundled `music-creator`.
+- Dock behavior: opening third-party/standalone apps now creates an unpinned dock item when missing, so `juli3ta` can open from App Store/launcher without disappearing from the Dock.
+- Cleanup behavior: stale `juli3ta` `0.0.x` / `0.1.x` rows are still removed on boot; verified `0.2.x` rows are preserved.
+- Gate evidence:
+  - `npm run test --workspace app -- legacy-app-aliases cleanup-juli3ta-alpha` → 12/12 passed.
+  - `npm run typecheck --workspaces --if-present` → passed.
+  - `npm run test --workspaces --if-present` → 104 files, 1024 tests passed.
+  - Browser smoke from launcher grid → persisted window appId `juli3ta`, no `musiccreator` window, full JULI3TA signals present, `app_juli3ta_music_creator_tracks` count `14`.
+- Screenshot evidence: `/Users/sebastian/MAKAKOO/data/reports/juli3ta-standalone-launcher-transition.png`
+
+Public catalog remains blocked until the catalog repo is bumped deliberately and the OS denylist is changed in the same reviewed release. Do not do that as an incidental code cleanup.
