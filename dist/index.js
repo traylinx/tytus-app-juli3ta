@@ -1,5 +1,5 @@
 import { jsx as t, jsxs as n, Fragment as ue } from "react/jsx-runtime";
-import { createContext as ci, useContext as di, forwardRef as ui, createElement as Dr, useState as T, useEffect as B, useMemo as ge, useRef as ee, useCallback as I, Fragment as us } from "react";
+import { createContext as ci, useContext as di, forwardRef as ui, createElement as Dr, useState as T, useEffect as W, useMemo as ge, useRef as ee, useCallback as I, Fragment as us } from "react";
 import { createPortal as Za } from "react-dom";
 const pi = ci(null), ps = pi.Provider;
 function Vt() {
@@ -15,11 +15,11 @@ function Vt() {
  */
 const ms = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), hs = (e) => e.replace(
   /^([A-Z])|[\s-_]+(\w)/g,
-  (a, r, o) => o ? o.toUpperCase() : r.toLowerCase()
+  (a, r, i) => i ? i.toUpperCase() : r.toLowerCase()
 ), $o = (e) => {
   const a = hs(e);
   return a.charAt(0).toUpperCase() + a.slice(1);
-}, mi = (...e) => e.filter((a, r, o) => !!a && a.trim() !== "" && o.indexOf(a) === r).join(" ").trim(), gs = (e) => {
+}, mi = (...e) => e.filter((a, r, i) => !!a && a.trim() !== "" && i.indexOf(a) === r).join(" ").trim(), gs = (e) => {
   for (const a in e)
     if (a.startsWith("aria-") || a === "role" || a === "title")
       return !0;
@@ -52,7 +52,7 @@ const fs = ui(
     color: e = "currentColor",
     size: a = 24,
     strokeWidth: r = 2,
-    absoluteStrokeWidth: o,
+    absoluteStrokeWidth: i,
     className: s = "",
     children: c,
     iconNode: d,
@@ -65,7 +65,7 @@ const fs = ui(
       width: a,
       height: a,
       stroke: e,
-      strokeWidth: o ? Number(r) * 24 / Number(a) : r,
+      strokeWidth: i ? Number(r) * 24 / Number(a) : r,
       className: mi("lucide", s),
       ...!c && !gs(f) && { "aria-hidden": "true" },
       ...f
@@ -84,13 +84,13 @@ const fs = ui(
  */
 const D = (e, a) => {
   const r = ui(
-    ({ className: o, ...s }, c) => Dr(fs, {
+    ({ className: i, ...s }, c) => Dr(fs, {
       ref: c,
       iconNode: a,
       className: mi(
         `lucide-${ms($o(e))}`,
         `lucide-${e}`,
-        o
+        i
       ),
       ...s
     })
@@ -337,7 +337,7 @@ const Ws = [
   ["path", { d: "M12 19v3", key: "npa21l" }],
   ["path", { d: "M19 10v2a7 7 0 0 1-14 0v-2", key: "1vc78b" }],
   ["rect", { x: "9", y: "2", width: "6", height: "13", rx: "3", key: "s6n7sd" }]
-], Ve = D("mic", Ws);
+], Ye = D("mic", Ws);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
@@ -541,7 +541,7 @@ const cl = [
   ["path", { d: "M20 2v4", key: "1rf3ol" }],
   ["path", { d: "M22 4h-4", key: "gwowj6" }],
   ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
-], Oe = D("sparkles", cl);
+], He = D("sparkles", cl);
 /**
  * @license lucide-react v0.562.0 - ISC
  *
@@ -1753,11 +1753,11 @@ Añade tu propia letra…
   "julietaHelp.help.q.shortrec.body": "El modo Cover necesita al menos 6 segundos de audio. Graba un clip más largo e inténtalo de nuevo — la reproducción sostenida (música, un instrumento, tarareando un verso) funciona mucho mejor que ráfagas cortas.",
   "julietaHelp.help.q.privacy.title": "¿Dónde va mi audio?",
   "julietaHelp.help.q.privacy.body": "Las grabaciones viven en el localStorage del navegador — nunca salen de tu máquina hasta que decides usar una para un cover. Cuando lo haces, JULI3TA auto-extrae un trozo de 30 s y solo envía ese trozo a tu pod Tytus (o al AIL local). Las grabaciones originales se quedan locales."
-}, qo = { en: kl, es: Sl }, Ua = (e) => (e || "en").trim().toLowerCase().replace("_", "-").split("-")[0] || "en", Tl = (e, a) => a ? e.replace(/\{(\w+)\}/g, (r, o) => String(a[o] ?? `{${o}}`)) : e;
+}, qo = { en: kl, es: Sl }, Ua = (e) => (e || "en").trim().toLowerCase().replace("_", "-").split("-")[0] || "en", Tl = (e, a) => a ? e.replace(/\{(\w+)\}/g, (r, i) => String(a[i] ?? `{${i}}`)) : e;
 function It() {
   const { host: e } = Vt(), [a, r] = T(() => Ua(e.i18n?.locale));
-  B(() => e.i18n?.onLocaleChange?.((s) => r(Ua(s))), [e]);
-  const o = ge(() => (s, c) => {
+  W(() => e.i18n?.onLocaleChange?.((s) => r(Ua(s))), [e]);
+  const i = ge(() => (s, c) => {
     const d = e.i18n?.t?.(s, c);
     if (d && d !== s) return d;
     const f = Ua(a), m = qo[f]?.[s] ?? qo.en[s] ?? s;
@@ -1769,7 +1769,7 @@ function It() {
       { locale: "en", name: "English", nativeName: "English", bundled: !0 },
       { locale: "es", name: "Spanish", nativeName: "Español", bundled: !0 }
     ],
-    t: o,
+    t: i,
     setLanguage: (s) => r(Ua(s)),
     installLanguagePack: (s) => {
       throw new Error("Language packs are managed by Tytus OS host.");
@@ -1866,7 +1866,7 @@ const _l = [
   }
 ];
 function Cl({ recipe: e, onUse: a }) {
-  const { t: r } = It(), [o, s] = T(!1), c = async () => {
+  const { t: r } = It(), [i, s] = T(!1), c = async () => {
     try {
       await navigator.clipboard.writeText(`${e.theme}
 
@@ -1920,7 +1920,7 @@ Style: ${e.style}`), s(!0), setTimeout(() => s(!1), 1500);
                 border: "1px solid var(--border-subtle)"
               },
               title: r("julietaHelp.recipe.copy"),
-              children: o ? /* @__PURE__ */ t(Jt, { size: 12, style: { color: "#4ade80" } }) : /* @__PURE__ */ t(gi, { size: 12 })
+              children: i ? /* @__PURE__ */ t(Jt, { size: 12, style: { color: "#4ade80" } }) : /* @__PURE__ */ t(gi, { size: 12 })
             }
           )
         ] })
@@ -1929,7 +1929,7 @@ Style: ${e.style}`), s(!0), setTimeout(() => s(!1), 1500);
   );
 }
 function El({ open: e, onClose: a, onUseRecipe: r }) {
-  const { t: o, language: s } = It(), [c, d] = T("start");
+  const { t: i, language: s } = It(), [c, d] = T("start");
   if (!e) return null;
   const f = s === "es" ? Nl : _l;
   return /* @__PURE__ */ t(
@@ -1971,8 +1971,8 @@ function El({ open: e, onClose: a, onUseRecipe: r }) {
                       }
                     ),
                     /* @__PURE__ */ n("div", { children: [
-                      /* @__PURE__ */ t("div", { style: { fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }, children: o("julietaHelp.title") }),
-                      /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: o("julietaHelp.subtitle") })
+                      /* @__PURE__ */ t("div", { style: { fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }, children: i("julietaHelp.title") }),
+                      /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: i("julietaHelp.subtitle") })
                     ] })
                   ] }),
                   /* @__PURE__ */ t(
@@ -2001,26 +2001,26 @@ function El({ open: e, onClose: a, onUseRecipe: r }) {
                     background: h ? "var(--bg-titlebar)" : "transparent",
                     border: h ? "1px solid var(--border-subtle)" : "1px solid transparent"
                   },
-                  children: o(`julietaHelp.tab.${m}`)
+                  children: i(`julietaHelp.tab.${m}`)
                 },
                 m
               );
             }) }),
             /* @__PURE__ */ n("div", { className: "flex-1 overflow-y-auto invisible-scrollbar px-5 py-4", style: { paddingBottom: 96 }, children: [
               c === "start" && /* @__PURE__ */ n("div", { className: "space-y-4", children: [
-                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(Oe, { size: 14 }), text: o("julietaHelp.start.workflow.title") }),
-                /* @__PURE__ */ t(Oa, { n: 1, title: o("julietaHelp.start.s1.title"), body: o("julietaHelp.start.s1.body") }),
-                /* @__PURE__ */ t(Oa, { n: 2, title: o("julietaHelp.start.s2.title"), body: o("julietaHelp.start.s2.body") }),
-                /* @__PURE__ */ t(Oa, { n: 3, title: o("julietaHelp.start.s3.title"), body: o("julietaHelp.start.s3.body") }),
-                /* @__PURE__ */ t(Oa, { n: 4, title: o("julietaHelp.start.s4.title"), body: o("julietaHelp.start.s4.body") }),
-                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(zt, { size: 14 }), text: o("julietaHelp.start.modes.title") }),
+                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(He, { size: 14 }), text: i("julietaHelp.start.workflow.title") }),
+                /* @__PURE__ */ t(Oa, { n: 1, title: i("julietaHelp.start.s1.title"), body: i("julietaHelp.start.s1.body") }),
+                /* @__PURE__ */ t(Oa, { n: 2, title: i("julietaHelp.start.s2.title"), body: i("julietaHelp.start.s2.body") }),
+                /* @__PURE__ */ t(Oa, { n: 3, title: i("julietaHelp.start.s3.title"), body: i("julietaHelp.start.s3.body") }),
+                /* @__PURE__ */ t(Oa, { n: 4, title: i("julietaHelp.start.s4.title"), body: i("julietaHelp.start.s4.body") }),
+                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(zt, { size: 14 }), text: i("julietaHelp.start.modes.title") }),
                 /* @__PURE__ */ n("div", { className: "space-y-2", children: [
-                  /* @__PURE__ */ t(Nr, { emoji: "🎵", name: o("julietaHelp.start.mode.song.name"), body: o("julietaHelp.start.mode.song.body") }),
-                  /* @__PURE__ */ t(Nr, { emoji: "🎨", name: o("julietaHelp.start.mode.cover.name"), body: o("julietaHelp.start.mode.cover.body") }),
-                  /* @__PURE__ */ t(Nr, { emoji: "✍️", name: o("julietaHelp.start.mode.lyrics.name"), body: o("julietaHelp.start.mode.lyrics.body") })
+                  /* @__PURE__ */ t(Nr, { emoji: "🎵", name: i("julietaHelp.start.mode.song.name"), body: i("julietaHelp.start.mode.song.body") }),
+                  /* @__PURE__ */ t(Nr, { emoji: "🎨", name: i("julietaHelp.start.mode.cover.name"), body: i("julietaHelp.start.mode.cover.body") }),
+                  /* @__PURE__ */ t(Nr, { emoji: "✍️", name: i("julietaHelp.start.mode.lyrics.name"), body: i("julietaHelp.start.mode.lyrics.body") })
                 ] }),
-                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(Ve, { size: 14 }), text: o("julietaHelp.start.recorder.title") }),
-                /* @__PURE__ */ t(Al, { body: o("julietaHelp.start.recorder.body") }),
+                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(Ye, { size: 14 }), text: i("julietaHelp.start.recorder.title") }),
+                /* @__PURE__ */ t(Al, { body: i("julietaHelp.start.recorder.body") }),
                 /* @__PURE__ */ n(
                   "div",
                   {
@@ -2030,14 +2030,14 @@ function El({ open: e, onClose: a, onUseRecipe: r }) {
                       border: "1px solid var(--border-subtle)"
                     },
                     children: [
-                      /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)", marginBottom: 6 }, children: o("julietaHelp.start.tip.title") }),
-                      /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: o("julietaHelp.start.tip.body") })
+                      /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)", marginBottom: 6 }, children: i("julietaHelp.start.tip.title") }),
+                      /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: i("julietaHelp.start.tip.body") })
                     ]
                   }
                 )
               ] }),
               c === "recipes" && /* @__PURE__ */ n("div", { className: "space-y-3", children: [
-                /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: o("julietaHelp.recipes.intro") }),
+                /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.5 }, children: i("julietaHelp.recipes.intro") }),
                 f.map((m) => /* @__PURE__ */ t(
                   Cl,
                   {
@@ -2050,19 +2050,19 @@ function El({ open: e, onClose: a, onUseRecipe: r }) {
                 ))
               ] }),
               c === "help" && /* @__PURE__ */ n("div", { className: "space-y-4", children: [
-                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(fa, { size: 14 }), text: o("julietaHelp.help.connection.title") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.failed.title"), a: o("julietaHelp.help.q.failed.body") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.nopod.title"), a: o("julietaHelp.help.q.nopod.body") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.local.title"), a: o("julietaHelp.help.q.local.body") }),
-                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(zt, { size: 14 }), text: o("julietaHelp.help.usage.title") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.howlong.title"), a: o("julietaHelp.help.q.howlong.body") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.quota.title"), a: o("julietaHelp.help.q.quota.body") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.length.title"), a: o("julietaHelp.help.q.length.body") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.coverlen.title"), a: o("julietaHelp.help.q.coverlen.body") }),
-                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(Ve, { size: 14 }), text: o("julietaHelp.help.troubleshoot.title") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.silentmic.title"), a: o("julietaHelp.help.q.silentmic.body") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.shortrec.title"), a: o("julietaHelp.help.q.shortrec.body") }),
-                /* @__PURE__ */ t(Je, { q: o("julietaHelp.help.q.privacy.title"), a: o("julietaHelp.help.q.privacy.body") })
+                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(fa, { size: 14 }), text: i("julietaHelp.help.connection.title") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.failed.title"), a: i("julietaHelp.help.q.failed.body") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.nopod.title"), a: i("julietaHelp.help.q.nopod.body") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.local.title"), a: i("julietaHelp.help.q.local.body") }),
+                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(zt, { size: 14 }), text: i("julietaHelp.help.usage.title") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.howlong.title"), a: i("julietaHelp.help.q.howlong.body") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.quota.title"), a: i("julietaHelp.help.q.quota.body") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.length.title"), a: i("julietaHelp.help.q.length.body") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.coverlen.title"), a: i("julietaHelp.help.q.coverlen.body") }),
+                /* @__PURE__ */ t($t, { icon: /* @__PURE__ */ t(Ye, { size: 14 }), text: i("julietaHelp.help.troubleshoot.title") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.silentmic.title"), a: i("julietaHelp.help.q.silentmic.body") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.shortrec.title"), a: i("julietaHelp.help.q.shortrec.body") }),
+                /* @__PURE__ */ t(Ge, { q: i("julietaHelp.help.q.privacy.title"), a: i("julietaHelp.help.q.privacy.body") })
               ] })
             ] })
           ]
@@ -2126,8 +2126,8 @@ function Al({ body: e }) {
     }
   );
 }
-function Je({ q: e, a }) {
-  const [r, o] = T(!1);
+function Ge({ q: e, a }) {
+  const [r, i] = T(!1);
   return /* @__PURE__ */ n(
     "div",
     {
@@ -2137,7 +2137,7 @@ function Je({ q: e, a }) {
         /* @__PURE__ */ n(
           "button",
           {
-            onClick: () => o((s) => !s),
+            onClick: () => i((s) => !s),
             className: "w-full flex items-center gap-2 px-3 py-2 text-left transition-all hover:bg-[var(--bg-hover)]",
             children: [
               /* @__PURE__ */ t(
@@ -2171,26 +2171,26 @@ const Cr = (e) => {
     ...a
   };
 }, zl = () => {
-  const { host: e } = Vt(), [a, r] = T(0), [o, s] = T(() => Cr(e.daemon?.state));
-  return B(() => (s(Cr(e.daemon?.state)), e.daemon?.onStateChange?.((c) => s(Cr(c)))), [e, a]), ge(() => ({
-    state: o,
+  const { host: e } = Vt(), [a, r] = T(0), [i, s] = T(() => Cr(e.daemon?.state));
+  return W(() => (s(Cr(e.daemon?.state)), e.daemon?.onStateChange?.((c) => s(Cr(c)))), [e, a]), ge(() => ({
+    state: i,
     error: null,
-    status: o ? "online" : "loading",
+    status: i ? "online" : "loading",
     failureCount: 0,
     bannerVisible: !1,
     version: null,
     daemonVersionStatus: "supported",
     refresh: () => r((c) => c + 1)
-  }), [o]);
+  }), [i]);
 }, Ll = (e, a) => {
   const { host: r } = Vt();
-  B(() => {
+  W(() => {
     if (!(!a || !r.shellMenu?.register))
       return r.shellMenu.register({
         appId: r.appId,
-        groups: a.groups.map((o) => ({
-          label: o.label,
-          items: o.items.map((s) => ({
+        groups: a.groups.map((i) => ({
+          label: i.label,
+          items: i.items.map((s) => ({
             id: s.id,
             label: s.label,
             disabled: s.disabled,
@@ -2211,8 +2211,8 @@ const Si = "juli3ta_standalone_vfs_v1", Ti = () => Math.random().toString(36).sl
   createdAt: Date.now(),
   modifiedAt: Date.now()
 }), Ml = () => {
-  const e = _t("/", null), a = _t("home", e.id), r = _t("user", a.id), o = _t("Desktop", r.id), s = _t("Music", r.id), c = _t("Documents", r.id);
-  return { nodes: Object.fromEntries([e, a, r, o, s, c].map((d) => [d.id, d])) };
+  const e = _t("/", null), a = _t("home", e.id), r = _t("user", a.id), i = _t("Desktop", r.id), s = _t("Music", r.id), c = _t("Documents", r.id);
+  return { nodes: Object.fromEntries([e, a, r, i, s, c].map((d) => [d.id, d])) };
 }, Ha = () => {
   try {
     const a = localStorage.getItem(Si);
@@ -2233,25 +2233,25 @@ const Si = "juli3ta_standalone_vfs_v1", Ti = () => Math.random().toString(36).sl
 function Pl() {
   return {
     ensureUserFolder(a) {
-      const r = Ha(), o = Rl(a);
-      let s = Object.values(r.nodes).find((c) => c.type === "folder" && c.name === o);
+      const r = Ha(), i = Rl(a);
+      let s = Object.values(r.nodes).find((c) => c.type === "folder" && c.name === i);
       if (!s) {
         const c = Object.values(r.nodes).find((d) => d.type === "folder" && d.name === "user");
-        s = _t(o, c?.id ?? null), r.nodes[s.id] = s, Wa(r);
+        s = _t(i, c?.id ?? null), r.nodes[s.id] = s, Wa(r);
       }
       return s.id;
     },
     findChildByName(a, r) {
-      const o = Ha();
-      return Object.values(o.nodes).find((s) => s.parentId === a && s.name === r);
+      const i = Ha();
+      return Object.values(i.nodes).find((s) => s.parentId === a && s.name === r);
     },
-    createFile(a, r, o = "", s = {}) {
-      const c = Ha(), d = { id: Ti(), name: r, type: "file", parentId: a, content: o, mimeType: s.mimeType, refTrackId: s.refTrackId, createdAt: Date.now(), modifiedAt: Date.now() };
+    createFile(a, r, i = "", s = {}) {
+      const c = Ha(), d = { id: Ti(), name: r, type: "file", parentId: a, content: i, mimeType: s.mimeType, refTrackId: s.refTrackId, createdAt: Date.now(), modifiedAt: Date.now() };
       return c.nodes[d.id] = d, Wa(c), d.id;
     },
     writeFile(a, r) {
-      const o = Ha();
-      o.nodes[a] && (o.nodes[a].content = r, o.nodes[a].modifiedAt = Date.now(), Wa(o));
+      const i = Ha();
+      i.nodes[a] && (i.nodes[a].content = r, i.nodes[a].modifiedAt = Date.now(), Wa(i));
     }
   };
 }
@@ -2262,10 +2262,10 @@ function _i() {
     state: Dl,
     dispatch: (r) => {
       if (r.type === "OPEN_OR_FOCUS_WINDOW" && typeof r.appId == "string" && a.windows.openOrFocus(r.appId, r.args), r.type === "ADD_DESKTOP_ICON") {
-        const o = r.icon;
+        const i = r.icon;
         a.windows.addDesktopIcon?.({
-          label: o.name,
-          iconUrl: o.icon,
+          label: i.name,
+          iconUrl: i.icon,
           onClick: () => {
           }
         });
@@ -2304,7 +2304,7 @@ const Hl = {
 }, $l = {
   juli3ta: Hl
 };
-function Ni({ name: e, size: a = 24, className: r, style: o, alt: s, scale: c }) {
+function Ni({ name: e, size: a = 24, className: r, style: i, alt: s, scale: c }) {
   const [d, f = "mark"] = e.split(":"), m = $l[d], { state: h } = _i();
   let w;
   if (f === "mark" ? w = h.theme.mode === "light" ? m?.["mark-ink"] : m?.["mark-white"] : w = m?.[f], !w) return null;
@@ -2326,7 +2326,7 @@ function Ni({ name: e, size: a = 24, className: r, style: o, alt: s, scale: c })
         pointerEvents: "none",
         ...y !== 1 ? { transform: `scale(${y})`, transformOrigin: "center" } : null,
         ...w.filter ? { filter: w.filter } : null,
-        ...o
+        ...i
       },
       className: r,
       draggable: !1
@@ -2362,12 +2362,12 @@ function Bl(e) {
   Ci = {
     exec: async (r) => {
       await a();
-      for (const o of Er(r).split(";").map((s) => s.trim()).filter(Boolean))
-        await e.run(o);
+      for (const i of Er(r).split(";").map((s) => s.trim()).filter(Boolean))
+        await e.run(i);
     },
-    query: async (r, o = []) => (await a(), e.query(Er(r), o)),
-    run: async (r, o = []) => {
-      await a(), await e.run(Er(r), o);
+    query: async (r, i = []) => (await a(), e.query(Er(r), i)),
+    run: async (r, i = []) => {
+      await a(), await e.run(Er(r), i);
     },
     tx: async (r) => (await a(), r())
   };
@@ -2393,7 +2393,7 @@ const ae = () => Ci, Ya = (e) => ({
   thumbnailUrl: e.thumbnail_url ?? "",
   artist: e.artist ?? "",
   album: e.album ?? ""
-}), W = (e, a) => new RegExp(`no such column:\\s*${a}`, "i").test(String(e)), Gr = (e) => W(e, "specs_json") || W(e, "cover_data_url") || W(e, "theme") || W(e, "source") || W(e, "audio_kind") || W(e, "external_id") || W(e, "external_url") || W(e, "thumbnail_url") || W(e, "artist") || W(e, "album"), Go = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
+}), q = (e, a) => new RegExp(`no such column:\\s*${a}`, "i").test(String(e)), Gr = (e) => q(e, "specs_json") || q(e, "cover_data_url") || q(e, "theme") || q(e, "source") || q(e, "audio_kind") || q(e, "external_id") || q(e, "external_url") || q(e, "thumbnail_url") || q(e, "artist") || q(e, "album"), Go = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
               sample_rate, size_bytes, created_at, audio_data_url, specs_json, cover_data_url`, Vo = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
               sample_rate, size_bytes, created_at, audio_data_url, specs_json`, Ar = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
               sample_rate, size_bytes, created_at, audio_data_url`, St = (e) => ({
@@ -2405,56 +2405,56 @@ const ae = () => Ci, Ya = (e) => ({
   thumbnail_url: "",
   artist: "",
   album: ""
-}), Ei = async (e, a, r, o) => {
-  if (W(o, "source") || W(o, "audio_kind") || W(o, "external_id") || W(o, "external_url") || W(o, "thumbnail_url") || W(o, "artist") || W(o, "album"))
+}), Ei = async (e, a, r, i) => {
+  if (q(i, "source") || q(i, "audio_kind") || q(i, "external_id") || q(i, "external_url") || q(i, "thumbnail_url") || q(i, "artist") || q(i, "album"))
     try {
       return (await e.query(
         `SELECT ${Go}, theme FROM music_creator_tracks ${a}`,
         r
       )).map(St);
     } catch (s) {
-      o = s;
+      i = s;
     }
-  if (W(o, "theme"))
+  if (q(i, "theme"))
     try {
       return (await e.query(
         `SELECT ${Go} FROM music_creator_tracks ${a}`,
         r
       )).map((c) => St({ ...c, theme: "" }));
     } catch (s) {
-      if (!W(s, "cover_data_url")) throw s;
+      if (!q(s, "cover_data_url")) throw s;
       try {
         return (await e.query(
           `SELECT ${Vo} FROM music_creator_tracks ${a}`,
           r
         )).map((d) => St({ ...d, cover_data_url: "", theme: "" }));
       } catch (c) {
-        if (!W(c, "specs_json")) throw c;
+        if (!q(c, "specs_json")) throw c;
         return (await e.query(
           `SELECT ${Ar} FROM music_creator_tracks ${a}`,
           r
         )).map((f) => St({ ...f, specs_json: "", cover_data_url: "", theme: "" }));
       }
     }
-  if (W(o, "cover_data_url"))
+  if (q(i, "cover_data_url"))
     try {
       return (await e.query(
         `SELECT ${Vo} FROM music_creator_tracks ${a}`,
         r
       )).map((c) => St({ ...c, cover_data_url: "", theme: "" }));
     } catch (s) {
-      if (!W(s, "specs_json")) throw s;
+      if (!q(s, "specs_json")) throw s;
       return (await e.query(
         `SELECT ${Ar} FROM music_creator_tracks ${a}`,
         r
       )).map((d) => St({ ...d, specs_json: "", cover_data_url: "", theme: "" }));
     }
-  if (W(o, "specs_json"))
+  if (q(i, "specs_json"))
     return (await e.query(
       `SELECT ${Ar} FROM music_creator_tracks ${a}`,
       r
     )).map((c) => St({ ...c, specs_json: "", cover_data_url: "", theme: "" }));
-  throw o;
+  throw i;
 }, Ai = `id, title, style_tags, lyrics_preview, duration_ms, bitrate,
               sample_rate, size_bytes, created_at, audio_data_url, specs_json, cover_data_url, theme,
               source, audio_kind, external_id, external_url, thumbnail_url, artist, album`, Wl = async () => {
@@ -2479,8 +2479,8 @@ const ae = () => Ci, Ya = (e) => ({
     return r.length === 0 ? null : Ya(r[0]);
   } catch (r) {
     if (!Gr(r)) throw r;
-    const o = await Ei(a, "WHERE id = ? LIMIT 1", [e], r);
-    return o.length === 0 ? null : Ya(o[0]);
+    const i = await Ei(a, "WHERE id = ? LIMIT 1", [e], r);
+    return i.length === 0 ? null : Ya(i[0]);
   }
 }, Ka = async (e) => {
   const a = ae();
@@ -2518,9 +2518,9 @@ const ae = () => Ci, Ya = (e) => ({
         e.album ?? ""
       ]
     );
-  } catch (o) {
-    if (!Gr(o)) throw o;
-    if (W(o, "source") || W(o, "audio_kind") || W(o, "external_id") || W(o, "external_url") || W(o, "thumbnail_url") || W(o, "artist") || W(o, "album"))
+  } catch (i) {
+    if (!Gr(i)) throw i;
+    if (q(i, "source") || q(i, "audio_kind") || q(i, "external_id") || q(i, "external_url") || q(i, "thumbnail_url") || q(i, "artist") || q(i, "album"))
       try {
         await a.run(
           `INSERT OR REPLACE INTO music_creator_tracks
@@ -2531,9 +2531,9 @@ const ae = () => Ci, Ya = (e) => ({
         );
         return;
       } catch (s) {
-        o = s;
+        i = s;
       }
-    if (W(o, "theme"))
+    if (q(i, "theme"))
       try {
         await a.run(
           `INSERT OR REPLACE INTO music_creator_tracks
@@ -2544,9 +2544,9 @@ const ae = () => Ci, Ya = (e) => ({
         );
         return;
       } catch (s) {
-        if (!W(s, "cover_data_url")) throw s;
+        if (!q(s, "cover_data_url")) throw s;
       }
-    if (W(o, "cover_data_url"))
+    if (q(i, "cover_data_url"))
       try {
         await a.run(
           `INSERT OR REPLACE INTO music_creator_tracks
@@ -2557,7 +2557,7 @@ const ae = () => Ci, Ya = (e) => ({
         );
         return;
       } catch (s) {
-        if (!W(s, "specs_json")) throw s;
+        if (!q(s, "specs_json")) throw s;
       }
     await a.run(
       `INSERT OR REPLACE INTO music_creator_tracks
@@ -2573,15 +2573,15 @@ const ae = () => Ci, Ya = (e) => ({
 }, Gl = async (e, a) => {
   const r = ae();
   if (!r) throw new Error("Database not ready");
-  const o = a.trim().slice(0, 200) || "Untitled";
-  return await r.run("UPDATE music_creator_tracks SET title = ? WHERE id = ?", [o, e]), o;
+  const i = a.trim().slice(0, 200) || "Untitled";
+  return await r.run("UPDATE music_creator_tracks SET title = ? WHERE id = ?", [i, e]), i;
 }, Vl = async (e, a) => {
   const r = ae();
   if (!r) throw new Error("Database not ready");
   try {
     await r.run("UPDATE music_creator_tracks SET cover_data_url = ? WHERE id = ?", [a, e]);
-  } catch (o) {
-    if (!new RegExp("no such column:\\s*cover_data_url", "i").test(String(o))) throw o;
+  } catch (i) {
+    if (!new RegExp("no such column:\\s*cover_data_url", "i").test(String(i))) throw i;
     console.warn("[musicCreator] updateTrackCover skipped — pre-V6 schema");
   }
 }, Yl = async (e, a) => {
@@ -2597,8 +2597,8 @@ const ae = () => Ci, Ya = (e) => ({
   if (!r) throw new Error("Database not ready");
   try {
     await r.run("UPDATE music_creator_tracks SET specs_json = ? WHERE id = ?", [a, e]);
-  } catch (o) {
-    if (!new RegExp("no such column:\\s*specs_json", "i").test(String(o))) throw o;
+  } catch (i) {
+    if (!new RegExp("no such column:\\s*specs_json", "i").test(String(i))) throw i;
     console.warn("[musicCreator] updateTrackSpecs skipped — pre-V5 schema");
   }
 }, Ql = async (e, a) => {
@@ -2606,20 +2606,20 @@ const ae = () => Ci, Ya = (e) => ({
   if (!r) throw new Error("Database not ready");
   try {
     await r.run("UPDATE music_creator_tracks SET theme = ? WHERE id = ?", [a, e]);
-  } catch (o) {
-    if (!new RegExp("no such column:\\s*theme", "i").test(String(o))) throw o;
+  } catch (i) {
+    if (!new RegExp("no such column:\\s*theme", "i").test(String(i))) throw i;
     console.warn("[musicCreator] updateTrackTheme skipped — pre-V7 schema");
   }
 }, Zl = async (e, a) => {
   const r = ae();
   if (!r) return a;
-  const o = await r.query(
+  const i = await r.query(
     "SELECT value FROM music_creator_settings WHERE key = ? LIMIT 1",
     [e]
   );
-  if (o.length === 0) return a;
+  if (i.length === 0) return a;
   try {
-    return JSON.parse(o[0].value);
+    return JSON.parse(i[0].value);
   } catch {
     return a;
   }
@@ -2754,20 +2754,20 @@ const ae = () => Ci, Ya = (e) => ({
        FROM music_playlist_items pi
        JOIN music_library_tracks t ON t.id = pi.track_id
       ORDER BY pi.playlist_id, pi.pos ASC`
-  ), o = /* @__PURE__ */ new Map();
+  ), i = /* @__PURE__ */ new Map();
   return r.forEach((s) => {
-    o.set(s.playlist_id, [...o.get(s.playlist_id) ?? [], Ii(s)]);
+    i.set(s.playlist_id, [...i.get(s.playlist_id) ?? [], Ii(s)]);
   }), a.map((s) => ({
     id: s.id,
     name: s.name,
     createdAt: s.created_at,
     updatedAt: s.updated_at,
-    items: o.get(s.id) ?? []
+    items: i.get(s.id) ?? []
   }));
 }, uc = async (e) => {
   const a = ae();
   if (!a) throw new Error("Database not ready");
-  const r = e.trim().slice(0, 80) || "New Playlist", o = Lt(), s = { id: `playlist:${o}:${Math.random().toString(36).slice(2, 8)}`, name: r, createdAt: o, updatedAt: o, items: [] };
+  const r = e.trim().slice(0, 80) || "New Playlist", i = Lt(), s = { id: `playlist:${i}:${Math.random().toString(36).slice(2, 8)}`, name: r, createdAt: i, updatedAt: i, items: [] };
   return await a.run(
     "INSERT INTO music_playlists (id, name, created_at, updated_at) VALUES (?, ?, ?, ?)",
     [s.id, s.name, s.createdAt, s.updatedAt]
@@ -2782,10 +2782,10 @@ const ae = () => Ci, Ya = (e) => ({
   if (!r) throw new Error("Database not ready");
   await r.tx(async () => {
     await Ri(a);
-    const o = await r.query(
+    const i = await r.query(
       "SELECT COALESCE(MAX(pos), -1) + 1 as n FROM music_playlist_items WHERE playlist_id = ?",
       [e]
-    ), s = Number(o[0]?.n ?? 0);
+    ), s = Number(i[0]?.n ?? 0);
     await r.run(
       `INSERT OR IGNORE INTO music_playlist_items (playlist_id, track_id, pos, added_at)
        VALUES (?, ?, ?, ?)`,
@@ -2847,8 +2847,8 @@ const ae = () => Ci, Ya = (e) => ({
 }, fc = (e, a) => e._value, Vr = 100, bc = 30, qa = 6, vc = 360, Ko = 12, xc = 3, wc = 0.4, kc = async (e, a, r) => {
   if (typeof MediaRecorder > "u")
     throw new Error("MediaRecorder unavailable in this environment.");
-  const o = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"].find((d) => MediaRecorder.isTypeSupported(d));
-  if (!o)
+  const i = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"].find((d) => MediaRecorder.isTypeSupported(d));
+  if (!i)
     throw new Error("No supported recorder mime type for fallback.");
   const s = URL.createObjectURL(e), c = new Audio();
   c.src = s, c.muted = !0, c.crossOrigin = "anonymous", c.preload = "auto";
@@ -2859,7 +2859,7 @@ const ae = () => Ci, Ya = (e) => ({
     });
     const d = a.createMediaElementSource(c), f = a.createMediaStreamDestination();
     d.connect(f);
-    const m = new MediaRecorder(f.stream, { mimeType: o }), h = [];
+    const m = new MediaRecorder(f.stream, { mimeType: i }), h = [];
     m.ondataavailable = (S) => {
       S.data.size > 0 && h.push(S.data);
     };
@@ -2870,7 +2870,7 @@ const ae = () => Ci, Ya = (e) => ({
       m.onstop = () => S();
     });
     m.start(250), c.currentTime = 0, await c.play(), await new Promise((S) => setTimeout(S, w)), m.stop(), c.pause(), await u;
-    const y = new Blob(h, { type: o });
+    const y = new Blob(h, { type: i });
     if (y.size === 0)
       throw new Error("Fallback capture produced no audio data.");
     const v = await y.arrayBuffer();
@@ -2879,14 +2879,14 @@ const ae = () => Ci, Ya = (e) => ({
     URL.revokeObjectURL(s);
   }
 }, Pi = async (e, a = 35) => {
-  const r = window.AudioContext || window.webkitAudioContext, o = new r();
+  const r = window.AudioContext || window.webkitAudioContext, i = new r();
   try {
     const s = await e.arrayBuffer();
     try {
-      return await o.decodeAudioData(s.slice(0));
+      return await i.decodeAudioData(s.slice(0));
     } catch (c) {
       try {
-        return await kc(e, o, a);
+        return await kc(e, i, a);
       } catch (d) {
         const f = c.message || "decodeAudioData failed", m = d.message || "fallback failed";
         throw new Error(
@@ -2895,19 +2895,19 @@ const ae = () => Ci, Ya = (e) => ({
       }
     }
   } finally {
-    o.close().catch(() => {
+    i.close().catch(() => {
     });
   }
 }, Di = async (e) => (await fetch(e)).blob(), Hr = (e) => new Promise((a, r) => {
-  const o = new FileReader();
-  o.onload = () => {
-    const s = typeof o.result == "string" ? o.result : "", c = s.indexOf("base64,");
+  const i = new FileReader();
+  i.onload = () => {
+    const s = typeof i.result == "string" ? i.result : "", c = s.indexOf("base64,");
     a(c >= 0 ? s.slice(c + 7) : "");
-  }, o.onerror = () => r(o.error), o.readAsDataURL(e);
+  }, i.onerror = () => r(i.error), i.readAsDataURL(e);
 }), Sc = (e) => {
-  const a = e.sampleRate, r = Math.max(1, Math.floor(a * Vr / 1e3)), o = Math.floor(e.length / r), s = new Float32Array(o), c = [];
+  const a = e.sampleRate, r = Math.max(1, Math.floor(a * Vr / 1e3)), i = Math.floor(e.length / r), s = new Float32Array(i), c = [];
   for (let d = 0; d < e.numberOfChannels; d++) c.push(e.getChannelData(d));
-  for (let d = 0; d < o; d++) {
+  for (let d = 0; d < i; d++) {
     const f = d * r;
     let m = 0;
     for (let h = 0; h < r; h++) {
@@ -2919,9 +2919,9 @@ const ae = () => Ci, Ya = (e) => ({
   }
   return s;
 }, Tc = (e) => {
-  const a = e.sampleRate, r = Math.max(1, Math.floor(a * Vr / 1e3)), o = Math.floor(e.length / r), s = new Float32Array(o), c = [];
+  const a = e.sampleRate, r = Math.max(1, Math.floor(a * Vr / 1e3)), i = Math.floor(e.length / r), s = new Float32Array(i), c = [];
   for (let d = 0; d < e.numberOfChannels; d++) c.push(e.getChannelData(d));
-  for (let d = 0; d < o; d++) {
+  for (let d = 0; d < i; d++) {
     const f = d * r;
     let m = 0, h = 0;
     for (let w = 0; w < c.length; w++) h += c[w][f];
@@ -2940,21 +2940,21 @@ const ae = () => Ci, Ya = (e) => ({
 }, _c = (e, a = 4) => {
   let r = 0;
   for (let m = 0; m < e.length; m++) r += e[m];
-  const o = r / e.length;
+  const i = r / e.length;
   let s = 0;
-  for (let m = 0; m < e.length; m++) s += (e[m] - o) ** 2;
+  for (let m = 0; m < e.length; m++) s += (e[m] - i) ** 2;
   const c = Math.sqrt(s / e.length) || 1, d = Math.floor(e.length / a), f = new Float32Array(d);
   for (let m = 0; m < d; m++) {
     let h = 0;
     for (let w = 0; w < a; w++) h += e[m * a + w];
-    f[m] = (h / a - o) / c;
+    f[m] = (h / a - i) / c;
   }
   return f;
 }, Nc = (e, a, r) => {
   if (a + r >= e.length) return 0;
-  const o = Math.max(1, Math.floor(r / 4));
+  const i = Math.max(1, Math.floor(r / 4));
   let s = -1 / 0, c = 0;
-  for (let m = 0; m + r < e.length; m += o) {
+  for (let m = 0; m + r < e.length; m += i) {
     if (Math.abs(m - a) < r) continue;
     let h = 0;
     for (let w = 0; w < r; w++)
@@ -2966,12 +2966,12 @@ const ae = () => Ci, Ya = (e) => ({
 }, Oi = (e, a) => {
   const r = Math.max(1, Math.floor(a * e.framesPerSec));
   if (e.rms.length <= r) return [];
-  const o = _c(e.rms, 4), s = e.rms.length / o.length, c = Math.max(1, Math.floor(r / s));
+  const i = _c(e.rms, 4), s = e.rms.length / i.length, c = Math.max(1, Math.floor(r / s));
   let d = 0, f = 0, m = 0;
   for (let y = 0; y < r; y++)
     d += e.rms[y], f += e.rms[y] * e.rms[y], m += e.centroid[y];
   const h = [], w = Math.max(1, Math.floor(e.framesPerSec)), u = (y) => {
-    const v = d / r, S = Math.max(0, f / r - v * v), E = Math.sqrt(S), b = m / r, P = Math.floor(y / s), M = Nc(o, P, c), C = 0.45 * Math.min(1, v * 4) + 0.2 * b + 0.25 * M - 0.1 * Math.min(1, E * 6);
+    const v = d / r, S = Math.max(0, f / r - v * v), E = Math.sqrt(S), b = m / r, P = Math.floor(y / s), M = Nc(i, P, c), C = 0.45 * Math.min(1, v * 4) + 0.2 * b + 0.25 * M - 0.1 * Math.min(1, E * 6);
     h.push({
       startFrame: y,
       lenFrames: r,
@@ -2993,14 +2993,14 @@ const ae = () => Ci, Ya = (e) => ({
   }
   return h;
 }, $r = (e, a, r) => {
-  const o = new Float32Array(r), s = [];
+  const i = new Float32Array(r), s = [];
   for (let c = 0; c < e.numberOfChannels; c++) s.push(e.getChannelData(c));
   for (let c = 0; c < r; c++) {
     let d = 0;
     for (let f = 0; f < s.length; f++) d += s[f][a + c] || 0;
-    o[c] = d / s.length;
+    i[c] = d / s.length;
   }
-  return o;
+  return i;
 }, Fr = (e, a) => {
   const s = a * 1 * 2, c = 1 * (16 / 8), d = e.length * 2, f = new ArrayBuffer(44 + d), m = new DataView(f);
   let h = 0;
@@ -3018,63 +3018,63 @@ const ae = () => Ci, Ya = (e) => ({
   }
   return new Blob([f], { type: "audio/wav" });
 }, Hi = async (e, a = bc) => {
-  const r = typeof e == "string" ? await Di(e) : e, o = await Pi(r), s = o.length / o.sampleRate;
+  const r = typeof e == "string" ? await Di(e) : e, i = await Pi(r), s = i.length / i.sampleRate;
   if (s < qa)
     throw new Error(`Source is too short (${s.toFixed(1)} s). Need at least ${qa} s.`);
   const c = Math.min(vc, Math.max(qa, a));
   if (s <= c) {
-    const S = $r(o, 0, o.length), E = Fr(S, o.sampleRate);
+    const S = $r(i, 0, i.length), E = Fr(S, i.sampleRate);
     return { base64: await Hr(E), durationSec: s, startSec: 0, sourceDurationSec: s, score: 1 };
   }
-  const d = Ui(o), f = Oi(d, c);
+  const d = Ui(i), f = Oi(d, c);
   if (f.length === 0)
     throw new Error("Could not analyze the audio (track too short).");
   f.sort((S, E) => E.score - S.score);
-  const m = f[0], h = Math.floor(m.startFrame / d.framesPerSec * o.sampleRate), w = Math.floor(m.lenFrames / d.framesPerSec * o.sampleRate), u = $r(o, h, w), y = Fr(u, o.sampleRate);
+  const m = f[0], h = Math.floor(m.startFrame / d.framesPerSec * i.sampleRate), w = Math.floor(m.lenFrames / d.framesPerSec * i.sampleRate), u = $r(i, h, w), y = Fr(u, i.sampleRate);
   return {
     base64: await Hr(y),
-    durationSec: w / o.sampleRate,
-    startSec: h / o.sampleRate,
+    durationSec: w / i.sampleRate,
+    startSec: h / i.sampleRate,
     sourceDurationSec: s,
     score: Math.max(0, Math.min(1, m.score))
   };
 }, Cc = (e, a, r) => {
   if (e.length === 0) return new Float32Array(0);
   if (e.length === 1) return e[0];
-  const o = Math.floor(r * a);
+  const i = Math.floor(r * a);
   let s = 0;
   for (const f of e) s += f.length;
-  s -= o * (e.length - 1);
+  s -= i * (e.length - 1);
   const c = new Float32Array(s);
   let d = 0;
-  c.set(e[0], 0), d = e[0].length - o;
+  c.set(e[0], 0), d = e[0].length - i;
   for (let f = 1; f < e.length; f++) {
     const m = e[f];
-    for (let h = 0; h < o; h++) {
-      const w = h / o;
+    for (let h = 0; h < i; h++) {
+      const w = h / i;
       c[d + h] = c[d + h] * (1 - w) + m[h] * w;
     }
-    for (let h = o; h < m.length; h++)
+    for (let h = i; h < m.length; h++)
       c[d + h] = m[h];
-    d += m.length - o;
+    d += m.length - i;
   }
   return c;
 }, Ec = (e, a, r) => {
-  const o = [...e].sort((c, d) => d.score - c.score), s = [];
-  for (const c of o)
+  const i = [...e].sort((c, d) => d.score - c.score), s = [];
+  for (const c of i)
     if (s.some(
       (f) => Math.abs(f.startFrame - c.startFrame) < Math.max(f.lenFrames, c.lenFrames) + r
     ) || s.push(c), s.length >= a) break;
   return s.sort((c, d) => c.startFrame - d.startFrame), s;
 }, Ac = async (e) => {
-  const a = typeof e == "string" ? await Di(e) : e, r = await Pi(a), o = r.length / r.sampleRate;
-  if (o < qa * 2) {
+  const a = typeof e == "string" ? await Di(e) : e, r = await Pi(a), i = r.length / r.sampleRate;
+  if (i < qa * 2) {
     const v = await Hi(a);
     return {
       base64: v.base64,
       durationSec: v.durationSec,
       segments: [{ startSec: v.startSec, endSec: v.startSec + v.durationSec, score: v.score }],
-      sourceDurationSec: o
+      sourceDurationSec: i
     };
   }
   const s = Ui(r), c = Oi(s, Ko);
@@ -3095,14 +3095,14 @@ const ae = () => Ci, Ya = (e) => ({
     base64: u,
     durationSec: h.length / r.sampleRate,
     segments: y,
-    sourceDurationSec: o
+    sourceDurationSec: i
   };
 };
 class $i extends Error {
   status;
   code;
-  constructor(a, r, o) {
-    super(o), this.name = "MusicDaemonError", this.status = a, this.code = r;
+  constructor(a, r, i) {
+    super(i), this.name = "MusicDaemonError", this.status = a, this.code = r;
   }
 }
 const Yt = async (e, a) => {
@@ -3112,19 +3112,19 @@ const Yt = async (e, a) => {
     credentials: "same-origin",
     signal: a
   });
-  let o = null;
+  let i = null;
   try {
-    o = await r.json();
+    i = await r.json();
   } catch {
-    o = null;
+    i = null;
   }
   if (!r.ok) {
-    const s = o, c = typeof s?.error == "string" ? s.error : `http_${r.status}`;
+    const s = i, c = typeof s?.error == "string" ? s.error : `http_${r.status}`;
     throw new $i(r.status, c, c === "music_unavailable" ? "Music search is still starting up." : c);
   }
-  return o;
+  return i;
 }, Fi = async (e, a, r) => {
-  const o = await fetch(e, {
+  const i = await fetch(e, {
     method: "POST",
     headers: { Accept: "application/json", "Content-Type": "application/json", "Sec-Fetch-Site": "same-origin" },
     credentials: "same-origin",
@@ -3133,21 +3133,21 @@ const Yt = async (e, a) => {
   });
   let s = null;
   try {
-    s = await o.json();
+    s = await i.json();
   } catch {
     s = null;
   }
-  if (!o.ok) {
-    const c = s, d = typeof c?.error == "string" ? c.error : `http_${o.status}`;
-    throw new $i(o.status, d, d);
+  if (!i.ok) {
+    const c = s, d = typeof c?.error == "string" ? c.error : `http_${i.status}`;
+    throw new $i(i.status, d, d);
   }
   return s;
 }, zc = (e) => Yt("/api/music/status", e), Xo = async (e) => (await Yt("/api/music/providers", e)).providers ?? [], Qo = async (e) => (await Yt("/api/music/connectors", e)).connectors ?? [], Lc = (e, a, r) => Fi("/api/music/connectors/configure", { provider: e, credentials: a }, r), Ic = (e, a) => Fi("/api/music/connectors/disconnect", { provider: e }, a), Mc = async (e, a = 20, r) => {
-  const o = new URLSearchParams({ q: e, limit: String(a) });
-  return (await Yt(`/api/music/search?${o.toString()}`, r)).results ?? [];
-}, Rc = (e, a = "tracks,albums,artists,playlists", r = 20, o) => {
+  const i = new URLSearchParams({ q: e, limit: String(a) });
+  return (await Yt(`/api/music/search?${i.toString()}`, r)).results ?? [];
+}, Rc = (e, a = "tracks,albums,artists,playlists", r = 20, i) => {
   const s = new URLSearchParams({ q: e, types: a, provider: "auto", limit: String(r) });
-  return Yt(`/api/music/search2?${s.toString()}`, o);
+  return Yt(`/api/music/search2?${s.toString()}`, i);
 }, Lr = (e, a) => {
   const r = new URLSearchParams({ videoId: e });
   return Yt(`/api/music/stream?${r.toString()}`, a);
@@ -3158,15 +3158,15 @@ const Yt = async (e, a) => {
       ...a?.body ? { "Content-Type": "application/json" } : {},
       ...a?.headers ?? {}
     }
-  }), o = await r.text();
+  }), i = await r.text();
   let s = null;
   try {
-    s = o ? JSON.parse(o) : null;
+    s = i ? JSON.parse(i) : null;
   } catch {
-    s = o;
+    s = i;
   }
   if (!r.ok) {
-    const c = typeof s == "object" && s && "error" in s ? String(s.error) : o || r.statusText;
+    const c = typeof s == "object" && s && "error" in s ? String(s.error) : i || r.statusText;
     throw new Error(c);
   }
   return s;
@@ -3194,9 +3194,9 @@ const Yt = async (e, a) => {
 })).path, ya = "application/x-juli3ta-track", $a = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", Bi = (e) => e.source !== "youtube", pa = (...e) => {
   const a = /* @__PURE__ */ new Map();
   for (const r of e)
-    for (const o of r)
-      a.has(o.id) || a.set(o.id, o);
-  return Array.from(a.values()).sort((r, o) => o.createdAt - r.createdAt);
+    for (const i of r)
+      a.has(i.id) || a.set(i.id, i);
+  return Array.from(a.values()).sort((r, i) => i.createdAt - r.createdAt);
 }, Dc = (e) => Bi(e) && (e.audioDataUrl.startsWith("data:") || !!e.lyricsPreview.trim() || !!e.coverDataUrl.startsWith("data:")), Uc = "http://localhost:18080/v1", Oc = "sk-test-123", Nt = [
   {
     label: "Pop & Mainstream",
@@ -3583,7 +3583,7 @@ const Yt = async (e, a) => {
   "game",
   "live_show_intro"
 ], Z = (e) => e.replace(/_/g, " "), nd = (e, a, r) => {
-  const o = (c) => c.trim().replace(/^[-••\d.)(]+\s*/, "").trim(), s = (c, d) => o(c).split(/\s+/).slice(0, d).join(" ");
+  const i = (c) => c.trim().replace(/^[-••\d.)(]+\s*/, "").trim(), s = (c, d) => i(c).split(/\s+/).slice(0, d).join(" ");
   if (e) {
     const c = e.split(`
 `).map((d) => d.trim()).find((d) => d && !d.startsWith("[") && !d.startsWith("(") && d.split(/\s+/).length >= 3);
@@ -3616,8 +3616,8 @@ const Yt = async (e, a) => {
     e.instrumentation.vocal_processing?.length && (d += ` with ${e.instrumentation.vocal_processing.map(Z).join(" + ")}`), a.push(d);
   }
   e.instrumentation?.language_iso639_1 && a.push(`Language: ${e.instrumentation.language_iso639_1}`);
-  const o = [];
-  e.dynamics?.overall_dynamic_range && o.push(`${e.dynamics.overall_dynamic_range} dynamics`), e.dynamics?.crescendo_shape && e.dynamics.crescendo_shape !== "none" && o.push(`${e.dynamics.crescendo_shape} crescendo`), e.dynamics?.has_big_drops && o.push("big drops"), o.length && a.push(o.join(", ")), e.mood?.primary_moods?.length && a.push(`Mood: ${e.mood.primary_moods.join(", ")}`), e.mood?.emotional_intensity && a.push(`${e.mood.emotional_intensity} intensity`), e.mood?.occasion_tags?.length && a.push(`For: ${e.mood.occasion_tags.map(Z).join(", ")}`);
+  const i = [];
+  e.dynamics?.overall_dynamic_range && i.push(`${e.dynamics.overall_dynamic_range} dynamics`), e.dynamics?.crescendo_shape && e.dynamics.crescendo_shape !== "none" && i.push(`${e.dynamics.crescendo_shape} crescendo`), e.dynamics?.has_big_drops && i.push("big drops"), i.length && a.push(i.join(", ")), e.mood?.primary_moods?.length && a.push(`Mood: ${e.mood.primary_moods.join(", ")}`), e.mood?.emotional_intensity && a.push(`${e.mood.emotional_intensity} intensity`), e.mood?.occasion_tags?.length && a.push(`For: ${e.mood.occasion_tags.map(Z).join(", ")}`);
   const s = [];
   return e.context?.era_reference && s.push(`${e.context.era_reference} era`), e.context?.cultural_region && e.context.cultural_region !== "global" && s.push(`${Z(e.context.cultural_region)} scene`), e.context?.intended_use?.length && s.push(`use: ${e.context.intended_use.map(Z).join("/")}`), e.context?.explicit_lyrics && s.push("explicit lyrics"), s.length && a.push(s.join(", ")), a.join(". ");
 }, sd = [
@@ -3743,11 +3743,11 @@ const Yt = async (e, a) => {
     prompt: "Use the hook-loop trap form: [Hook] 4 short, repeatable lines (this is the heart — written FIRST, designed to loop), [Verse 1] 12-16 lines with internal rhyme and triplet flow, [Hook] (identical repeat), [Verse 2] 12-16 lines escalating energy or content, [Hook] (identical repeat), [Post-Hook / Outro] 2-4 lines — sometimes ad-libs or a tag. Verses should rhyme densely (multisyllabic, internal). Keep the Hook 4 lines max — repetition is the engine."
   }
 ], ei = "tytus.music-creator.gallery", ti = "tytus.music-creator", Mr = "gallery", Ft = 3500, ld = 2e3, De = (e) => {
-  const a = Math.floor(e / 1e3), r = Math.floor(a / 60), o = a % 60;
-  return `${r}:${o.toString().padStart(2, "0")}`;
+  const a = Math.floor(e / 1e3), r = Math.floor(a / 60), i = a % 60;
+  return `${r}:${i.toString().padStart(2, "0")}`;
 }, Wi = (e) => e.source === "youtube" && !!e.externalId, ve = (e) => !!e.audioDataUrl || Wi(e), tr = (e) => e.coverDataUrl || e.thumbnailUrl || (e.externalId ? Xa(e.externalId) : ""), Xa = (e) => e ? `https://i.ytimg.com/vi/${encodeURIComponent(e)}/hqdefault.jpg` : "", qi = (e, a) => {
-  const r = (e || "").replace(/\s*\[(official|hd|hq|lyrics?|audio|video|music video)[^\]]*\]\s*/ig, " ").replace(/\s+/g, " ").trim(), o = r.match(/^(.{2,80}?)\s+[-–—]\s+(.{2,160})$/);
-  return o ? { artist: o[1].trim(), song: o[2].trim() } : { artist: (a || "").trim(), song: r || "Untitled" };
+  const r = (e || "").replace(/\s*\[(official|hd|hq|lyrics?|audio|video|music video)[^\]]*\]\s*/ig, " ").replace(/\s+/g, " ").trim(), i = r.match(/^(.{2,80}?)\s+[-–—]\s+(.{2,160})$/);
+  return i ? { artist: i[1].trim(), song: i[2].trim() } : { artist: (a || "").trim(), song: r || "Untitled" };
 }, ma = (e) => `youtube:${e}`, cd = async () => {
   const e = (a) => ({
     id: a.id ?? `t_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
@@ -3776,9 +3776,9 @@ const Yt = async (e, a) => {
     if (a) {
       const r = JSON.parse(a);
       if (Array.isArray(r))
-        for (const o of r)
+        for (const i of r)
           try {
-            await Ka(e(o));
+            await Ka(e(i));
           } catch {
           }
       localStorage.removeItem(ei);
@@ -3788,9 +3788,9 @@ const Yt = async (e, a) => {
   }
   try {
     const a = await new Promise((r) => {
-      const o = indexedDB.open(ti);
-      o.onsuccess = () => {
-        const s = o.result;
+      const i = indexedDB.open(ti);
+      i.onsuccess = () => {
+        const s = i.result;
         if (!s.objectStoreNames.contains(Mr)) {
           s.close(), r([]);
           return;
@@ -3801,7 +3801,7 @@ const Yt = async (e, a) => {
         }, d.onerror = () => {
           s.close(), r([]);
         };
-      }, o.onerror = () => r([]);
+      }, i.onerror = () => r([]);
     });
     for (const r of a)
       try {
@@ -3821,13 +3821,13 @@ const Yt = async (e, a) => {
   allIds: []
 }, dd = (e, a) => {
   const r = [];
-  for (const o of a)
-    o.endpoint && o.user_key && r.push({
-      url: `${o.endpoint.replace(/\/$/, "")}/v1`,
-      apiKey: fc(o.user_key),
-      podId: o.pod_id,
+  for (const i of a)
+    i.endpoint && i.user_key && r.push({
+      url: `${i.endpoint.replace(/\/$/, "")}/v1`,
+      apiKey: fc(i.user_key),
+      podId: i.pod_id,
       source: "included",
-      label: `AIL gateway ${o.pod_id}`,
+      label: `AIL gateway ${i.pod_id}`,
       models: Wt
     });
   return r.push({
@@ -3851,7 +3851,7 @@ const Yt = async (e, a) => {
     /(^|[/:])ail-music-cover$/,
     /music[-_:]cover/,
     /cover.*music/
-  ]), o = a(e, [
+  ]), i = a(e, [
     /(^|[/:])minimax:music-lyrics$/,
     /(^|[/:])ail-music-lyrics$/,
     /music[-_:]lyrics/,
@@ -3861,7 +3861,7 @@ const Yt = async (e, a) => {
     /(^|[/:])lyrics$/,
     /lyric/i
     // last-resort: anything containing "lyric"
-  ]), s = new Set([r, o].filter((u) => !!u)), c = e.filter((u) => !s.has(u)), d = a(c, [
+  ]), s = new Set([r, i].filter((u) => !!u)), c = e.filter((u) => !s.has(u)), d = a(c, [
     /(^|[/:])minimax:music-2\.6$/,
     /(^|[/:])ail-music$/,
     /(^|[/:])music-2\.6$/,
@@ -3894,7 +3894,7 @@ const Yt = async (e, a) => {
     /image/i,
     /diffusion/i
   ]);
-  return { music: d, cover: r, lyrics: o, lyricsBackup: h, image: w, allIds: e };
+  return { music: d, cover: r, lyrics: i, lyricsBackup: h, image: w, allIds: e };
 }, pd = 6e4, Rr = /* @__PURE__ */ new Map(), md = async (e, a) => {
   const r = Rr.get(e.url);
   if (r !== void 0) {
@@ -3902,11 +3902,11 @@ const Yt = async (e, a) => {
       return { ok: !1, models: Wt };
     Rr.delete(e.url);
   }
-  const o = Gt(a, gd);
+  const i = Gt(a, gd);
   try {
     const s = await fetch(`${e.url}/models`, {
       method: "GET",
-      signal: o.signal,
+      signal: i.signal,
       headers: { Authorization: `Bearer ${e.apiKey}` }
     });
     if (s.status >= 500) return { ok: !1, models: Wt };
@@ -3916,18 +3916,18 @@ const Yt = async (e, a) => {
   } catch (s) {
     return (s?.name ?? "") === "TypeError" && Rr.set(e.url, Date.now() + pd), { ok: !1, models: Wt };
   } finally {
-    o.dispose();
+    i.dispose();
   }
 }, hd = async (e, a) => (await Promise.all(
-  e.map(async (o) => {
+  e.map(async (i) => {
     if (a.aborted) return null;
-    const { ok: s, models: c } = await md(o, a);
-    return s ? { ...o, models: c } : null;
+    const { ok: s, models: c } = await md(i, a);
+    return s ? { ...i, models: c } : null;
   })
-)).filter((o) => o !== null), Fa = 6e4, ai = 3e5, gd = 8e3, Gt = (e, a) => {
-  const r = AbortSignal.any, o = AbortSignal.timeout;
-  if (r && o) {
-    const d = o(a);
+)).filter((i) => i !== null), Fa = 6e4, ai = 3e5, gd = 8e3, Gt = (e, a) => {
+  const r = AbortSignal.any, i = AbortSignal.timeout;
+  if (r && i) {
+    const d = i(a);
     return { signal: e ? r([e, d]) : d, dispose: () => {
     } };
   }
@@ -3939,17 +3939,17 @@ const Yt = async (e, a) => {
 class _e extends Error {
   status;
   body;
-  constructor(a, r, o) {
-    super(o ?? `HTTP ${a}: ${r.slice(0, 200)}`), this.name = "GatewayError", this.status = a, this.body = r;
+  constructor(a, r, i) {
+    super(i ?? `HTTP ${a}: ${r.slice(0, 200)}`), this.name = "GatewayError", this.status = a, this.body = r;
   }
 }
 function Ji(e) {
   const a = e.indexOf("{");
   if (a === -1) return null;
-  let r = 0, o = !1, s = !1;
+  let r = 0, i = !1, s = !1;
   for (let c = a; c < e.length; c++) {
     const d = e[c];
-    if (o) {
+    if (i) {
       if (s) {
         s = !1;
         continue;
@@ -3958,11 +3958,11 @@ function Ji(e) {
         s = !0;
         continue;
       }
-      d === '"' && (o = !1);
+      d === '"' && (i = !1);
       continue;
     }
     if (d === '"') {
-      o = !0;
+      i = !0;
       continue;
     }
     if (d === "{") r++;
@@ -3974,7 +3974,7 @@ function Ji(e) {
 const ar = async (e, a, r) => {
   if (e.length === 0)
     throw new Error(`No ${r}-capable models available on this endpoint.`);
-  let o = null;
+  let i = null;
   for (const c of e)
     try {
       return await a(c);
@@ -3982,19 +3982,19 @@ const ar = async (e, a, r) => {
       if (d.name === "AbortError" || d.name === "TimeoutError")
         throw d;
       if (d instanceof TypeError) {
-        o = d;
+        i = d;
         continue;
       }
       if (d instanceof _e && yd.has(d.status)) {
-        o = d;
+        i = d;
         continue;
       }
       throw d;
     }
-  const s = o?.message ?? "unknown";
+  const s = i?.message ?? "unknown";
   throw new Error(`All ${r} models exhausted. Last error: ${s}. Wait for the rate limit to reset, or pick a different endpoint in Settings.`);
 }, fd = /* @__PURE__ */ new Set([408, 425, 429, 500, 502, 503, 504]), bd = async (e, a, r) => {
-  let o = 0, s = "";
+  let i = 0, s = "";
   const c = Gt(r, Fa);
   try {
     const y = { prompt: a, mode: "write_full_song" };
@@ -4014,7 +4014,7 @@ const ar = async (e, a, r) => {
         throw new Error("Lyrics endpoint returned 200 but no lyrics text.");
       return { ...S, usedFallback: !1 };
     }
-    o = v.status, s = await v.text().catch(() => "");
+    i = v.status, s = await v.text().catch(() => "");
   } catch (y) {
     const v = y.name;
     if (v === "AbortError" && r?.aborted) throw y;
@@ -4024,11 +4024,11 @@ const ar = async (e, a, r) => {
   } finally {
     c.dispose();
   }
-  if (o !== 0 && !fd.has(o)) {
+  if (i !== 0 && !fd.has(i)) {
     const y = s.length > 300 ? `${s.slice(0, 300)}…` : s;
-    throw new Error(`Lyrics HTTP ${o}: ${y || "no body"}`);
+    throw new Error(`Lyrics HTTP ${i}: ${y || "no body"}`);
   }
-  o !== 0 && console.warn(`Lyrics primary HTTP ${o} (retryable), falling back to chat:`, s);
+  i !== 0 && console.warn(`Lyrics primary HTTP ${i} (retryable), falling back to chat:`, s);
   const d = (y) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(y), f = /* @__PURE__ */ new Set(), m = [], h = (y) => {
     y && !f.has(y) && (f.add(y), m.push(y));
   };
@@ -4103,19 +4103,19 @@ Respond with VALID JSON ONLY in exactly this shape, nothing else:
     usedFallback: !0
   };
 }, vd = async (e, a, r) => {
-  const o = !!a.refAudioBase64, s = (h) => /music/i.test(h) && !/cover/i.test(h), c = (h) => /cover/i.test(h), d = /* @__PURE__ */ new Set(), f = (h, w) => {
+  const i = !!a.refAudioBase64, s = (h) => /music/i.test(h) && !/cover/i.test(h), c = (h) => /cover/i.test(h), d = /* @__PURE__ */ new Set(), f = (h, w) => {
     w && !d.has(w) && (d.add(w), h.push(w));
   }, m = [];
-  if (o ? (f(m, e.models.cover), e.models.allIds.filter(c).forEach((h) => f(m, h)), f(m, e.models.music)) : (f(m, e.models.music), e.models.allIds.filter(s).forEach((h) => f(m, h))), m.length === 0)
+  if (i ? (f(m, e.models.cover), e.models.allIds.filter(c).forEach((h) => f(m, h)), f(m, e.models.music)) : (f(m, e.models.music), e.models.allIds.filter(s).forEach((h) => f(m, h))), m.length === 0)
     throw new Error(
-      o ? `This endpoint (${e.label}) doesn't expose a music-cover model. Try a different connection.` : `This endpoint (${e.label}) doesn't expose a music model. Try a different connection.`
+      i ? `This endpoint (${e.label}) doesn't expose a music-cover model. Try a different connection.` : `This endpoint (${e.label}) doesn't expose a music model. Try a different connection.`
     );
   return ar(m, async (h) => {
     const w = {
       model: h,
       lyrics: a.lyrics
     };
-    a.prompt && (w.prompt = a.prompt), a.instrumental && (w.instrumental = !0), o && (w.audio_base64 = a.refAudioBase64);
+    a.prompt && (w.prompt = a.prompt), a.instrumental && (w.instrumental = !0), i && (w.audio_base64 = a.refAudioBase64);
     const u = Gt(r, ai);
     let y;
     try {
@@ -4141,17 +4141,17 @@ Respond with VALID JSON ONLY in exactly this shape, nothing else:
     if (!v?.data?.audio || typeof v.data.audio != "string" || v.data.audio.length < 100)
       throw new _e(502, "", "Music gen returned no audio data — gateway accepted the call but upstream returned nothing.");
     return v;
-  }, o ? "music-cover" : "music");
+  }, i ? "music-cover" : "music");
 }, ri = 6e4, Ja = (e, a, r) => {
-  const o = e.trim().replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "a song", s = r.trim().split(/[,;\n]/).slice(0, 3).join(", ").trim(), c = a.trim().split(/[.!?\n]/)[0]?.slice(0, 140).trim() ?? "", d = [
-    `Square album cover art for a song titled "${o}".`
+  const i = e.trim().replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "a song", s = r.trim().split(/[,;\n]/).slice(0, 3).join(", ").trim(), c = a.trim().split(/[.!?\n]/)[0]?.slice(0, 140).trim() ?? "", d = [
+    `Square album cover art for a song titled "${i}".`
   ];
   return s && d.push(`Genre: ${s}.`), c && d.push(`Mood: ${c}.`), d.push("Editorial, expressive, vivid colors, no text, no words, no logos, no lyrics overlay."), d.join(" ");
 }, Br = async (e, a, r) => {
-  const o = (f) => /image|diffusion|dall-?e|flux|sdxl/i.test(f), s = /* @__PURE__ */ new Set(), c = [], d = (f) => {
+  const i = (f) => /image|diffusion|dall-?e|flux|sdxl/i.test(f), s = /* @__PURE__ */ new Set(), c = [], d = (f) => {
     f && !s.has(f) && (s.add(f), c.push(f));
   };
-  if (d(e.models.image), e.models.allIds.filter(o).forEach(d), c.length === 0)
+  if (d(e.models.image), e.models.allIds.filter(i).forEach(d), c.length === 0)
     throw new Error(`This endpoint (${e.label}) doesn't expose an image-generation model. Pick one in JULI3TA Settings → Cover art, or upload your own image.`);
   return ar(c, async (f) => {
     const m = Gt(r, ri), w = /minimax|ail-image|image-01/i.test(f) ? {
@@ -4232,7 +4232,7 @@ Respond with VALID JSON ONLY in exactly this shape, nothing else:
   "🎧  Almost there — last touches…"
 ];
 function xd(e, a, r) {
-  const [o, s] = T(() => {
+  const [i, s] = T(() => {
     let k = "off";
     try {
       const z = localStorage.getItem("juli3ta:repeatMode");
@@ -4248,8 +4248,8 @@ function xd(e, a, r) {
     try {
       const z = localStorage.getItem("juli3ta:volume");
       if (z !== null) {
-        const H = Number.parseFloat(z);
-        Number.isFinite(H) && (A = Math.max(0, Math.min(1, H)));
+        const $ = Number.parseFloat(z);
+        Number.isFinite($) && (A = Math.max(0, Math.min(1, $)));
       }
     } catch {
     }
@@ -4286,7 +4286,7 @@ function xd(e, a, r) {
         s((z) => ({ ...z, loadingTrackId: null }));
         return;
       }
-      o.trackId !== k.id || A.src !== N ? (A.src = N, A.preload = "auto", A.load(), A.pause(), s((z) => ({
+      i.trackId !== k.id || A.src !== N ? (A.src = N, A.preload = "auto", A.load(), A.pause(), s((z) => ({
         ...z,
         trackId: k.id,
         playing: !1,
@@ -4295,11 +4295,11 @@ function xd(e, a, r) {
         durationMs: k.durationMs || 0
       }))) : s((z) => ({ ...z, loadingTrackId: null }));
     })();
-  }, [o.trackId, a, r]), u = I((k) => {
+  }, [i.trackId, a, r]), u = I((k) => {
     (async () => {
-      if (c.current = null, o.trackId && o.trackId !== k.id && !f.current) {
+      if (c.current = null, i.trackId && i.trackId !== k.id && !f.current) {
         const z = d.current;
-        z[z.length - 1] !== o.trackId && (z.push(o.trackId), z.length > 50 && z.splice(0, z.length - 50));
+        z[z.length - 1] !== i.trackId && (z.push(i.trackId), z.length > 50 && z.splice(0, z.length - 50));
       }
       f.current = !1, s((z) => ({
         ...z,
@@ -4317,24 +4317,24 @@ function xd(e, a, r) {
         s((z) => ({ ...z, loadingTrackId: null, playing: !1 }));
         return;
       }
-      (o.trackId !== k.id || A.src !== N) && (A.src = N, A.preload = "auto", s((z) => ({ ...z, trackId: k.id, positionMs: 0, durationMs: k.durationMs || 0 }))), A.play().then(() => s((z) => ({ ...z, loadingTrackId: null, playing: !0 }))).catch(() => s((z) => ({ ...z, loadingTrackId: null, playing: !1 })));
+      (i.trackId !== k.id || A.src !== N) && (A.src = N, A.preload = "auto", s((z) => ({ ...z, trackId: k.id, positionMs: 0, durationMs: k.durationMs || 0 }))), A.play().then(() => s((z) => ({ ...z, loadingTrackId: null, playing: !0 }))).catch(() => s((z) => ({ ...z, loadingTrackId: null, playing: !1 })));
     })();
-  }, [o.trackId, a, r]), y = I(() => {
+  }, [i.trackId, a, r]), y = I(() => {
     a.current?.pause(), s((k) => ({ ...k, playing: !1, loadingTrackId: null }));
   }, [a]), v = I((k) => {
-    if (o.loadingTrackId) return;
+    if (i.loadingTrackId) return;
     if (k) {
-      o.trackId === k.id && o.playing ? y() : u(k);
+      i.trackId === k.id && i.playing ? y() : u(k);
       return;
     }
-    if (o.playing) {
+    if (i.playing) {
       y();
       return;
     }
-    const N = o.trackId ? e.find((A) => A.id === o.trackId) : null;
+    const N = i.trackId ? e.find((A) => A.id === i.trackId) : null;
     N ? u(N) : a.current?.src && a.current.play().catch(() => {
     });
-  }, [o.trackId, o.playing, o.loadingTrackId, e, u, y, a]), S = I((k) => {
+  }, [i.trackId, i.playing, i.loadingTrackId, e, u, y, a]), S = I((k) => {
     const N = a.current;
     N && (N.currentTime = Math.max(0, k / 1e3));
   }, [a]), E = I((k) => {
@@ -4345,35 +4345,35 @@ function xd(e, a, r) {
     } catch {
     }
   }, [a]);
-  B(() => {
-    a.current && (a.current.volume = o.volume);
+  W(() => {
+    a.current && (a.current.volume = i.volume);
   }, []);
   const b = ge(() => e.filter(ve), [e]), P = I(() => {
     if (b.length === 0) return null;
     if (b.length === 1) return b[0];
-    const k = b.filter((N) => N.id !== o.trackId);
+    const k = b.filter((N) => N.id !== i.trackId);
     return k[Math.floor(Math.random() * k.length)];
-  }, [b, o.trackId]), M = I(() => {
-    if (!o.trackId || b.length === 0) return;
-    if (o.shuffle) {
+  }, [b, i.trackId]), M = I(() => {
+    if (!i.trackId || b.length === 0) return;
+    if (i.shuffle) {
       const A = P();
       A && u(A);
       return;
     }
-    const k = b.findIndex((A) => A.id === o.trackId);
+    const k = b.findIndex((A) => A.id === i.trackId);
     if (k < 0) return;
     const N = b[(k + 1) % b.length];
     N && u(N);
-  }, [o.trackId, o.shuffle, b, u, P]), C = I(() => {
-    if (!o.trackId || b.length === 0) return;
-    if (o.shuffle) {
+  }, [i.trackId, i.shuffle, b, u, P]), C = I(() => {
+    if (!i.trackId || b.length === 0) return;
+    if (i.shuffle) {
       const A = d.current;
       for (; A.length > 0; ) {
-        const H = A.pop();
-        if (!H || H === o.trackId) continue;
-        const q = b.find((K) => K.id === H);
-        if (q) {
-          f.current = !0, u(q);
+        const $ = A.pop();
+        if (!$ || $ === i.trackId) continue;
+        const J = b.find((X) => X.id === $);
+        if (J) {
+          f.current = !0, u(J);
           return;
         }
       }
@@ -4381,19 +4381,19 @@ function xd(e, a, r) {
       z && u(z);
       return;
     }
-    const k = b.findIndex((A) => A.id === o.trackId);
+    const k = b.findIndex((A) => A.id === i.trackId);
     if (k < 0) return;
     const N = b[(k - 1 + b.length) % b.length];
     N && u(N);
-  }, [o.trackId, o.shuffle, b, u, P]);
-  return B(() => {
+  }, [i.trackId, i.shuffle, b, u, P]);
+  return W(() => {
     const k = a.current;
     if (!k) return;
     const N = () => s((U) => ({ ...U, positionMs: k.currentTime * 1e3 })), A = () => s((U) => ({
       ...U,
       durationMs: Number.isFinite(k.duration) ? k.duration * 1e3 : U.durationMs
-    })), z = () => s((U) => ({ ...U, playing: !0, loadingTrackId: null })), H = () => s((U) => ({ ...U, playing: !1, loadingTrackId: null })), q = () => s((U) => ({ ...U, loadingTrackId: null })), K = () => {
-      const U = o.trackId ? b.find((R) => R.id === o.trackId) : null;
+    })), z = () => s((U) => ({ ...U, playing: !0, loadingTrackId: null })), $ = () => s((U) => ({ ...U, playing: !1, loadingTrackId: null })), J = () => s((U) => ({ ...U, loadingTrackId: null })), X = () => {
+      const U = i.trackId ? b.find((R) => R.id === i.trackId) : null;
       if (!U || U.audioDataUrl || !r || c.current === U.id) {
         s((R) => ({ ...R, playing: !1, loadingTrackId: null }));
         return;
@@ -4403,54 +4403,54 @@ function xd(e, a, r) {
         return k.src = R, k.preload = "auto", k.play();
       }).then(() => s((R) => ({ ...R, playing: !0, loadingTrackId: null }))).catch(() => s((R) => ({ ...R, playing: !1, loadingTrackId: null })));
     }, se = () => {
-      if (o.repeatMode === "one" && o.trackId) {
-        const U = b.find((R) => R.id === o.trackId);
+      if (i.repeatMode === "one" && i.trackId) {
+        const U = b.find((R) => R.id === i.trackId);
         if (U) {
           u(U);
           return;
         }
       }
-      if (o.shuffle && b.length >= 1)
+      if (i.shuffle && b.length >= 1)
         if (b.length === 1) {
-          if (o.repeatMode === "all") {
+          if (i.repeatMode === "all") {
             u(b[0]);
             return;
           }
         } else {
-          const U = b.filter((ie) => ie.id !== o.trackId), R = U[Math.floor(Math.random() * U.length)];
+          const U = b.filter((ie) => ie.id !== i.trackId), R = U[Math.floor(Math.random() * U.length)];
           if (R) {
             u(R);
             return;
           }
         }
       if (b.length >= 2) {
-        const U = b.findIndex((R) => R.id === o.trackId);
+        const U = b.findIndex((R) => R.id === i.trackId);
         if (U >= 0 && U + 1 < b.length) {
           u(b[U + 1]);
           return;
         }
-        if (U >= 0 && o.repeatMode === "all") {
+        if (U >= 0 && i.repeatMode === "all") {
           u(b[0]);
           return;
         }
       }
       s((U) => ({ ...U, playing: !1, positionMs: 0 }));
     };
-    return k.addEventListener("timeupdate", N), k.addEventListener("loadedmetadata", A), k.addEventListener("play", z), k.addEventListener("pause", H), k.addEventListener("canplay", q), k.addEventListener("error", K), k.addEventListener("ended", se), () => {
-      k.removeEventListener("timeupdate", N), k.removeEventListener("loadedmetadata", A), k.removeEventListener("play", z), k.removeEventListener("pause", H), k.removeEventListener("canplay", q), k.removeEventListener("error", K), k.removeEventListener("ended", se);
+    return k.addEventListener("timeupdate", N), k.addEventListener("loadedmetadata", A), k.addEventListener("play", z), k.addEventListener("pause", $), k.addEventListener("canplay", J), k.addEventListener("error", X), k.addEventListener("ended", se), () => {
+      k.removeEventListener("timeupdate", N), k.removeEventListener("loadedmetadata", A), k.removeEventListener("play", z), k.removeEventListener("pause", $), k.removeEventListener("canplay", J), k.removeEventListener("error", X), k.removeEventListener("ended", se);
     };
-  }, [b, o.trackId, o.repeatMode, o.shuffle, u, a, r]), { state: o, queue: e, play: u, pause: y, toggle: v, select: w, seek: S, setVolume: E, setRepeatMode: m, setShuffle: h, next: M, prev: C };
+  }, [b, i.trackId, i.repeatMode, i.shuffle, u, a, r]), { state: i, queue: e, play: u, pause: y, toggle: v, select: w, seek: S, setVolume: E, setRepeatMode: m, setShuffle: h, next: M, prev: C };
 }
 function ni({
   checked: e,
   onChange: a,
   disabled: r,
-  id: o
+  id: i
 }) {
   return /* @__PURE__ */ t(
     "button",
     {
-      id: o,
+      id: i,
       type: "button",
       role: "switch",
       "aria-checked": e,
@@ -4486,7 +4486,7 @@ function jr({
   label: e,
   tooltip: a,
   onClick: r,
-  busy: o,
+  busy: i,
   disabled: s
 }) {
   return /* @__PURE__ */ n(
@@ -4505,17 +4505,17 @@ function jr({
       },
       title: a,
       children: [
-        o ? /* @__PURE__ */ t(te, { size: 10, className: "animate-spin" }) : /* @__PURE__ */ t(Oe, { size: 10 }),
-        o ? "…" : e
+        i ? /* @__PURE__ */ t(te, { size: 10, className: "animate-spin" }) : /* @__PURE__ */ t(He, { size: 10 }),
+        i ? "…" : e
       ]
     }
   );
 }
-function Ye({
+function Ke({
   track: e,
   size: a,
   iconSize: r,
-  radius: o
+  radius: i
 }) {
   const s = tr(e);
   return s ? /* @__PURE__ */ t(
@@ -4527,7 +4527,7 @@ function Ye({
       style: {
         width: a,
         height: a,
-        borderRadius: o <= 6 ? "var(--radius-md)" : "var(--radius-xl)",
+        borderRadius: i <= 6 ? "var(--radius-md)" : "var(--radius-xl)",
         objectFit: "cover"
       }
     }
@@ -4538,7 +4538,7 @@ function Ye({
       style: {
         width: a,
         height: a,
-        borderRadius: o <= 6 ? "var(--radius-md)" : "var(--radius-xl)",
+        borderRadius: i <= 6 ? "var(--radius-md)" : "var(--radius-xl)",
         background: "linear-gradient(135deg, #7B43C9 0%, #C8377E 55%, #F08A4B 100%)"
       },
       children: /* @__PURE__ */ t(
@@ -4562,7 +4562,7 @@ function Ye({
   );
 }
 function wd({ player: e, allTracks: a }) {
-  const { state: r, toggle: o, next: s, prev: c, seek: d, setVolume: f, queue: m } = e, h = m.find((E) => E.id === r.trackId) ?? a.find((E) => E.id === r.trackId) ?? null;
+  const { state: r, toggle: i, next: s, prev: c, seek: d, setVolume: f, queue: m } = e, h = m.find((E) => E.id === r.trackId) ?? a.find((E) => E.id === r.trackId) ?? null;
   if (!h) return null;
   const w = r.durationMs > 0 ? r.durationMs : h.durationMs, u = Math.min(r.positionMs, w || 0), y = w > 0 ? u / w * 100 : 0, v = r.loadingTrackId === h.id, S = (E) => {
     if (!w) return;
@@ -4579,7 +4579,7 @@ function wd({ player: e, allTracks: a }) {
         background: "var(--bg-titlebar)"
       },
       children: [
-        /* @__PURE__ */ t(Ye, { track: h, size: 40, iconSize: 18, radius: 6 }),
+        /* @__PURE__ */ t(Ke, { track: h, size: 40, iconSize: 18, radius: 6 }),
         /* @__PURE__ */ n("div", { className: "flex flex-col min-w-0", style: { width: 180 }, children: [
           /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }, children: h.title }),
           /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)" }, children: h.styleTags && h.styleTags !== "—" ? h.styleTags : "—" })
@@ -4612,7 +4612,7 @@ function wd({ player: e, allTracks: a }) {
           /* @__PURE__ */ t(
             "button",
             {
-              onClick: () => o(),
+              onClick: () => i(),
               className: "flex items-center justify-center rounded-full transition-transform hover:scale-105",
               style: {
                 width: 32,
@@ -4710,24 +4710,24 @@ function kd({
   setVolume: a
 }) {
   const r = ee(e > 0 ? e : 1);
-  B(() => {
+  W(() => {
     e > 0 && (r.current = e);
   }, [e]);
-  const o = e === 0;
+  const i = e === 0;
   return /* @__PURE__ */ t(
     "button",
     {
       onClick: () => {
-        a(o ? r.current || 1 : 0);
+        a(i ? r.current || 1 : 0);
       },
       className: "flex items-center justify-center flex-shrink-0 transition-all hover:bg-[var(--bg-hover)] rounded-md",
       style: {
         width: 18,
         height: 18,
-        color: o ? "var(--accent-primary)" : "var(--text-disabled)"
+        color: i ? "var(--accent-primary)" : "var(--text-disabled)"
       },
-      title: o ? "Unmute" : "Mute",
-      children: o ? /* @__PURE__ */ t(vl, { size: 12 }) : /* @__PURE__ */ t(fl, { size: 12 })
+      title: i ? "Unmute" : "Mute",
+      children: i ? /* @__PURE__ */ t(vl, { size: 12 }) : /* @__PURE__ */ t(fl, { size: 12 })
     }
   );
 }
@@ -4785,7 +4785,7 @@ function Sd({ retrying: e, onRetry: a }) {
             boxShadow: "0 4px 16px rgba(124, 77, 255, 0.3)"
           },
           children: [
-            e ? /* @__PURE__ */ t(te, { size: 14, className: "animate-spin" }) : /* @__PURE__ */ t(Oe, { size: 14 }),
+            e ? /* @__PURE__ */ t(te, { size: 14, className: "animate-spin" }) : /* @__PURE__ */ t(He, { size: 14 }),
             e ? "Looking for a stage…" : "Try again"
           ]
         }
@@ -4831,7 +4831,7 @@ function Sd({ retrying: e, onRetry: a }) {
     )
   ] });
 }
-function ha({ label: e, hint: a, counter: r, counterDanger: o, className: s, headerExtra: c, children: d }) {
+function ha({ label: e, hint: a, counter: r, counterDanger: i, className: s, headerExtra: c, children: d }) {
   return /* @__PURE__ */ n("div", { className: s, children: [
     /* @__PURE__ */ n("div", { className: "flex items-center justify-between mb-2", children: [
       /* @__PURE__ */ t(
@@ -4854,7 +4854,7 @@ function ha({ label: e, hint: a, counter: r, counterDanger: o, className: s, hea
           {
             style: {
               fontSize: 10,
-              color: o ? "#ff5252" : "var(--text-disabled)",
+              color: i ? "#ff5252" : "var(--text-disabled)",
               fontVariantNumeric: "tabular-nums"
             },
             children: r
@@ -4867,7 +4867,7 @@ function ha({ label: e, hint: a, counter: r, counterDanger: o, className: s, hea
   ] });
 }
 function Td({ onPick: e, disabled: a }) {
-  const [r, o] = T(!1), [s, c] = T(Nt[0].label), [d, f] = T(""), m = d.trim().toLowerCase(), h = m.length > 0, w = ge(() => {
+  const [r, i] = T(!1), [s, c] = T(Nt[0].label), [d, f] = T(""), m = d.trim().toLowerCase(), h = m.length > 0, w = ge(() => {
     if (!h) return [];
     const u = [];
     for (const y of Nt)
@@ -4938,7 +4938,7 @@ function Td({ onPick: e, disabled: a }) {
             /* @__PURE__ */ t(
               "button",
               {
-                onClick: () => o((u) => !u),
+                onClick: () => i((u) => !u),
                 className: "px-2 rounded-md transition-all hover:bg-[var(--bg-hover)]",
                 style: {
                   height: 24,
@@ -5016,13 +5016,13 @@ function Pr({
   chip: e,
   family: a,
   onPick: r,
-  disabled: o
+  disabled: i
 }) {
   return /* @__PURE__ */ n(
     "button",
     {
       onClick: () => r(e),
-      disabled: o,
+      disabled: i,
       className: "flex items-center gap-1 px-2 py-1 rounded-full transition-all hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] disabled:opacity-40",
       style: {
         fontSize: 10,
@@ -5042,7 +5042,7 @@ function Pr({
     }
   );
 }
-function _d({ specs: e, onChange: a, disabled: r, onOptimize: o, optimizing: s }) {
+function _d({ specs: e, onChange: a, disabled: r, onOptimize: i, optimizing: s }) {
   const [c, d] = T(!1), f = ge(() => Yr(e), [e]), m = f.length > 0, h = I(
     (u, y) => {
       const v = { ...e };
@@ -5087,12 +5087,12 @@ function _d({ specs: e, onChange: a, disabled: r, onOptimize: o, optimizing: s }
             }
           ),
           /* @__PURE__ */ n("div", { className: "flex items-center gap-2", children: [
-            o && /* @__PURE__ */ n(
+            i && /* @__PURE__ */ n(
               "button",
               {
                 type: "button",
                 onClick: (u) => {
-                  u.stopPropagation(), o(), c || d(!0);
+                  u.stopPropagation(), i(), c || d(!0);
                 },
                 disabled: r || s,
                 className: "flex items-center gap-1 px-2 py-1 rounded-md transition-all disabled:opacity-40 hover:scale-105",
@@ -5105,7 +5105,7 @@ function _d({ specs: e, onChange: a, disabled: r, onOptimize: o, optimizing: s }
                 },
                 title: "Use AI to fill optimal specs from your theme + style + lyrics",
                 children: [
-                  s ? /* @__PURE__ */ t(te, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(Oe, { size: 11 }),
+                  s ? /* @__PURE__ */ t(te, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(He, { size: 11 }),
                   s ? "Optimizing…" : "AI Optimize"
                 ]
               }
@@ -5466,14 +5466,14 @@ function Ae({
   value: e,
   options: a,
   onChange: r,
-  disabled: o
+  disabled: i
 }) {
   return /* @__PURE__ */ n(
     "select",
     {
       value: e ?? "",
       onChange: (s) => r(s.target.value === "" ? void 0 : s.target.value),
-      disabled: o,
+      disabled: i,
       className: "w-full px-2 py-1 rounded-md focus:outline-none disabled:opacity-50",
       style: {
         fontSize: 10,
@@ -5492,7 +5492,7 @@ function si({
   value: e,
   onChange: a,
   min: r,
-  max: o,
+  max: i,
   placeholder: s,
   disabled: c
 }) {
@@ -5502,7 +5502,7 @@ function si({
       type: "number",
       value: e ?? "",
       min: r,
-      max: o,
+      max: i,
       placeholder: s,
       className: "w-full px-2 py-1 rounded-md focus:outline-none disabled:opacity-50",
       onChange: (d) => {
@@ -5528,7 +5528,7 @@ function Nd({
   value: e,
   onChange: a,
   placeholder: r,
-  maxLength: o,
+  maxLength: i,
   disabled: s
 }) {
   return /* @__PURE__ */ t(
@@ -5537,7 +5537,7 @@ function Nd({
       type: "text",
       value: e,
       placeholder: r,
-      maxLength: o,
+      maxLength: i,
       onChange: (c) => a(c.target.value),
       disabled: s,
       className: "w-full px-2 py-1 rounded-md focus:outline-none disabled:opacity-50",
@@ -5560,7 +5560,7 @@ function li({
     {
       type: "checkbox",
       checked: !!e,
-      onChange: (o) => a(o.target.checked ? !0 : void 0),
+      onChange: (i) => a(i.target.checked ? !0 : void 0),
       disabled: r,
       style: { cursor: r ? "not-allowed" : "pointer" }
     }
@@ -5571,12 +5571,12 @@ function Cd({
   onChange: a,
   disabled: r
 }) {
-  const o = e === void 0 ? !0 : e === !0 ? !1 : void 0;
+  const i = e === void 0 ? !0 : e === !0 ? !1 : void 0;
   return /* @__PURE__ */ t(
     "button",
     {
       type: "button",
-      onClick: () => a(o),
+      onClick: () => a(i),
       disabled: r,
       className: "px-2 py-0.5 rounded-full",
       style: {
@@ -5594,11 +5594,11 @@ function Bt({
   label: e,
   options: a,
   selected: r,
-  onChange: o,
+  onChange: i,
   disabled: s
 }) {
   const c = (d) => {
-    r.includes(d) ? o(r.filter((f) => f !== d)) : o([...r, d]);
+    r.includes(d) ? i(r.filter((f) => f !== d)) : i([...r, d]);
   };
   return /* @__PURE__ */ n("div", { className: "flex flex-col gap-1.5", children: [
     /* @__PURE__ */ n(
@@ -5648,35 +5648,35 @@ function Bt({
 }
 function qt(e) {
   const { intent: a, ...r } = e;
-  let o = 0;
+  let i = 0;
   const s = (c) => {
     if (!(!c || typeof c != "object")) {
       for (const d of Object.values(c))
         if (d != null) {
           if (Array.isArray(d)) {
-            d.length && (o += 1);
+            d.length && (i += 1);
             continue;
           }
           if (typeof d == "object") {
             s(d);
             continue;
           }
-          d === "" || d === !1 || (o += 1);
+          d === "" || d === !1 || (i += 1);
         }
     }
   };
-  return s(r), o;
+  return s(r), i;
 }
 const Ed = "#4ade80", Ad = "#fbbf24", Qa = (e) => e.models.music || e.models.cover ? Ed : Ad;
 function zd({ endpoint: e, endpoints: a, onSwitch: r }) {
-  const [o, s] = T(!1), c = ee(null), d = a.length > 1;
-  B(() => {
-    if (!o) return;
+  const [i, s] = T(!1), c = ee(null), d = a.length > 1;
+  W(() => {
+    if (!i) return;
     const m = (h) => {
       c.current && !c.current.contains(h.target) && s(!1);
     };
     return document.addEventListener("mousedown", m), () => document.removeEventListener("mousedown", m);
-  }, [o]);
+  }, [i]);
   const f = (m) => /* @__PURE__ */ t(
     "span",
     {
@@ -5712,13 +5712,13 @@ function zd({ endpoint: e, endpoints: a, onSwitch: r }) {
             hi,
             {
               size: 12,
-              style: { color: "var(--text-secondary)", transform: o ? "rotate(180deg)" : "none", transition: "transform 0.15s" }
+              style: { color: "var(--text-secondary)", transform: i ? "rotate(180deg)" : "none", transition: "transform 0.15s" }
             }
           )
         ]
       }
     ),
-    d && o && /* @__PURE__ */ t(
+    d && i && /* @__PURE__ */ t(
       "div",
       {
         className: "absolute right-0 top-full mt-1 rounded-lg overflow-hidden z-50",
@@ -5764,14 +5764,14 @@ function zd({ endpoint: e, endpoints: a, onSwitch: r }) {
     )
   ] });
 }
-const Se = ({ icon: e, label: a, onClick: r, danger: o }) => /* @__PURE__ */ n(
+const Se = ({ icon: e, label: a, onClick: r, danger: i }) => /* @__PURE__ */ n(
   "button",
   {
     type: "button",
     onClick: r,
     className: "w-full flex items-center gap-2.5 px-3 h-8 text-sm transition-colors",
     style: {
-      color: o ? "var(--accent-error, #ff6b6b)" : "var(--text-primary)",
+      color: i ? "var(--accent-error, #ff6b6b)" : "var(--text-primary)",
       borderRadius: "var(--radius-sm)",
       margin: "0 4px",
       width: "calc(100% - 8px)",
@@ -5790,7 +5790,7 @@ const Se = ({ icon: e, label: a, onClick: r, danger: o }) => /* @__PURE__ */ n(
     ]
   }
 );
-function Ld({ tracks: e, player: a, onLoad: r, onOpenLyrics: o, onDelete: s, onRename: c }) {
+function Ld({ tracks: e, player: a, onLoad: r, onOpenLyrics: i, onDelete: s, onRename: c }) {
   const { t: d } = It();
   return /* @__PURE__ */ n("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: [
     /* @__PURE__ */ n(
@@ -5823,7 +5823,7 @@ function Ld({ tracks: e, player: a, onLoad: r, onOpenLyrics: o, onDelete: s, onR
         track: f,
         player: a,
         onLoad: r,
-        onOpenLyrics: o,
+        onOpenLyrics: i,
         onDelete: s,
         onRename: c,
         translate: d
@@ -5836,7 +5836,7 @@ function Id({
   track: e,
   player: a,
   onLoad: r,
-  onOpenLyrics: o,
+  onOpenLyrics: i,
   onDelete: s,
   onRename: c,
   translate: d
@@ -5866,7 +5866,7 @@ function Id({
         };
         b.dataTransfer.setData(ya, JSON.stringify(P)), e.lyricsPreview && b.dataTransfer.setData("text/plain", e.lyricsPreview), b.dataTransfer.effectAllowed = "copyMove";
       },
-      onClick: () => ve(e) ? a.toggle(e) : o(e),
+      onClick: () => ve(e) ? a.toggle(e) : i(e),
       className: "grid items-center gap-2 px-2 cursor-pointer transition-colors",
       style: {
         gridTemplateColumns: "20px 1fr 60px 56px 18px",
@@ -5927,7 +5927,7 @@ function Id({
           "button",
           {
             onClick: (b) => {
-              b.stopPropagation(), b.shiftKey ? o(e) : b.altKey ? s(e.id) : r(e);
+              b.stopPropagation(), b.shiftKey ? i(e) : b.altKey ? s(e.id) : r(e);
             },
             className: "flex items-center justify-center rounded-md transition-colors hover:bg-[var(--bg-selected)]",
             style: { width: 18, height: 18, color: "var(--text-disabled)" },
@@ -5943,7 +5943,7 @@ function Md({
   track: e,
   onDelete: a,
   onLoad: r,
-  onOpenLyrics: o,
+  onOpenLyrics: i,
   onSaveSongToDesktop: s,
   onSaveLyricsToDesktop: c,
   onPlayInPlayer: d,
@@ -5958,24 +5958,24 @@ function Md({
     const R = M.trim();
     C(null), R && R !== e.title && f(e.id, R);
   }, N = u.state.trackId === e.id, A = N && u.state.playing, z = N && u.state.durationMs > 0 ? u.state.positionMs / u.state.durationMs : 0;
-  B(() => {
+  W(() => {
     if (!b) return;
-    const R = (Ke) => {
-      const ze = Ke.target;
+    const R = (Xe) => {
+      const ze = Xe.target;
       v.current && ze && v.current.contains(ze) || ze && ze.closest?.("[data-track-menu]") || P(null);
     }, ie = () => P(null);
     return setTimeout(() => window.addEventListener("mousedown", R), 0), window.addEventListener("scroll", ie, !0), window.addEventListener("resize", ie), () => {
       window.removeEventListener("mousedown", R), window.removeEventListener("scroll", ie, !0), window.removeEventListener("resize", ie);
     };
   }, [b]);
-  const H = () => {
+  const $ = () => {
     const R = v.current?.getBoundingClientRect();
     if (!R) return;
-    const ie = 220, Ke = Math.min(R.right - ie, window.innerWidth - ie - 8), ze = R.bottom + 4;
-    P({ x: Math.max(8, Ke), y: ze });
-  }, q = (R) => () => {
+    const ie = 220, Xe = Math.min(R.right - ie, window.innerWidth - ie - 8), ze = R.bottom + 4;
+    P({ x: Math.max(8, Xe), y: ze });
+  }, J = (R) => () => {
     P(null), R();
-  }, K = () => u.toggle(e), se = () => {
+  }, X = () => u.toggle(e), se = () => {
     const R = document.createElement("a");
     R.href = e.audioDataUrl, R.download = `${e.title || "track"}.mp3`, R.click();
   };
@@ -6009,12 +6009,12 @@ function Md({
           ve(e) ? /* @__PURE__ */ n(
             "button",
             {
-              onClick: K,
+              onClick: X,
               className: "relative flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 group",
               style: { width: 36, height: 36 },
               title: A ? "Pause" : "Play",
               children: [
-                /* @__PURE__ */ t(Ye, { track: e, size: 36, iconSize: 14, radius: 6 }),
+                /* @__PURE__ */ t(Ke, { track: e, size: 36, iconSize: 14, radius: 6 }),
                 /* @__PURE__ */ t(
                   "span",
                   {
@@ -6090,7 +6090,7 @@ function Md({
             {
               ref: v,
               onClick: (R) => {
-                R.stopPropagation(), b ? P(null) : H();
+                R.stopPropagation(), b ? P(null) : $();
               },
               className: "flex items-center justify-center rounded-md flex-shrink-0 transition-all hover:bg-[var(--bg-selected)]",
               style: {
@@ -6122,21 +6122,21 @@ function Md({
               children: [
                 ve(e) && /* @__PURE__ */ n(ue, { children: [
                   /* @__PURE__ */ t("div", { style: { padding: "4px 12px 2px", fontSize: 9, fontWeight: 600, color: "var(--text-disabled)", textTransform: "uppercase", letterSpacing: 0.5 }, children: y("musiccreator.track.section.song") }),
-                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(va, { size: 14 }), label: y("musiccreator.track.playInPlayer"), onClick: q(() => d(e)) }),
-                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Wo, { size: 14 }), label: y("musiccreator.track.saveSongToDesktop"), onClick: q(() => s(e)) }),
-                  e.audioDataUrl && /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(yi, { size: 14 }), label: y("musiccreator.track.download"), onClick: q(se) })
+                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(va, { size: 14 }), label: y("musiccreator.track.playInPlayer"), onClick: J(() => d(e)) }),
+                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Wo, { size: 14 }), label: y("musiccreator.track.saveSongToDesktop"), onClick: J(() => s(e)) }),
+                  e.audioDataUrl && /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(yi, { size: 14 }), label: y("musiccreator.track.download"), onClick: J(se) })
                 ] }),
                 e.lyricsPreview && /* @__PURE__ */ n(ue, { children: [
                   ve(e) && /* @__PURE__ */ t("div", { style: { height: 1, background: "var(--border-subtle)", margin: "4px 6px" } }),
                   /* @__PURE__ */ t("div", { style: { padding: "4px 12px 2px", fontSize: 9, fontWeight: 600, color: "var(--text-disabled)", textTransform: "uppercase", letterSpacing: 0.5 }, children: y("musiccreator.track.section.lyrics") }),
-                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Va, { size: 14 }), label: y("musiccreator.track.openInEditor"), onClick: q(() => o(e)) }),
-                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Wo, { size: 14 }), label: y("musiccreator.track.saveLyricsToDesktop"), onClick: q(() => c(e)) })
+                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Va, { size: 14 }), label: y("musiccreator.track.openInEditor"), onClick: J(() => i(e)) }),
+                  /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Wo, { size: 14 }), label: y("musiccreator.track.saveLyricsToDesktop"), onClick: J(() => c(e)) })
                 ] }),
                 /* @__PURE__ */ t("div", { style: { height: 1, background: "var(--border-subtle)", margin: "4px 6px" } }),
-                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(bi, { size: 14 }), label: "Rename", onClick: q(() => C(e.title)) }),
-                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(ba, { size: 14 }), label: "Edit cover art", onClick: q(() => m(e)) }),
-                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Et, { size: 14 }), label: y("musiccreator.track.loadIntoForm"), onClick: q(() => r(e)) }),
-                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(At, { size: 14 }), label: y("musiccreator.track.delete"), onClick: q(() => a(e.id)), danger: !0 })
+                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(bi, { size: 14 }), label: "Rename", onClick: J(() => C(e.title)) }),
+                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(ba, { size: 14 }), label: "Edit cover art", onClick: J(() => m(e)) }),
+                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(Et, { size: 14 }), label: y("musiccreator.track.loadIntoForm"), onClick: J(() => r(e)) }),
+                /* @__PURE__ */ t(Se, { icon: /* @__PURE__ */ t(At, { size: 14 }), label: y("musiccreator.track.delete"), onClick: J(() => a(e.id)), danger: !0 })
               ]
             }
           ),
@@ -6168,7 +6168,7 @@ function Rd({
   trackIds: e,
   allTracks: a,
   player: r,
-  onSelect: o
+  onSelect: i
 }) {
   const s = e.map((c) => a.find((d) => d.id === c)).filter((c) => !!c).slice(0, 6);
   return s.length === 0 ? null : /* @__PURE__ */ n("div", { className: "mb-2", children: [
@@ -6191,7 +6191,7 @@ function Rd({
       return /* @__PURE__ */ n(
         "button",
         {
-          onClick: () => o(c),
+          onClick: () => i(c),
           className: "flex flex-col items-start flex-shrink-0 rounded-lg p-1.5 transition-all hover:bg-[var(--bg-hover)]",
           style: {
             width: 84,
@@ -6200,7 +6200,7 @@ function Rd({
           },
           title: c.title || "Untitled",
           children: [
-            /* @__PURE__ */ t(Ye, { track: c, size: 68, iconSize: 20, radius: 6 }),
+            /* @__PURE__ */ t(Ke, { track: c, size: 68, iconSize: 20, radius: 6 }),
             /* @__PURE__ */ t(
               "div",
               {
@@ -6220,7 +6220,7 @@ function jd({
   track: e,
   player: a,
   selected: r,
-  isFavorite: o,
+  isFavorite: i,
   onOpenInPlayer: s,
   onRemix: c,
   onToggleFavorite: d,
@@ -6230,23 +6230,23 @@ function jd({
   onToggleCheck: w
 }) {
   const u = ee(null), [y, v] = T(!1), [S, E] = T(null), b = a.state.trackId === e.id, P = b && a.state.loadingTrackId === e.id, M = b && a.state.playing, C = b && a.state.durationMs > 0 ? a.state.positionMs / a.state.durationMs : 0;
-  B(() => {
+  W(() => {
     if (!S) return;
-    const H = (K) => {
-      const se = K.target;
+    const $ = (X) => {
+      const se = X.target;
       u.current && se && u.current.contains(se) || se && se.closest?.("[data-track-menu]") || E(null);
-    }, q = () => E(null);
-    return setTimeout(() => window.addEventListener("mousedown", H), 0), window.addEventListener("scroll", q, !0), window.addEventListener("resize", q), () => {
-      window.removeEventListener("mousedown", H), window.removeEventListener("scroll", q, !0), window.removeEventListener("resize", q);
+    }, J = () => E(null);
+    return setTimeout(() => window.addEventListener("mousedown", $), 0), window.addEventListener("scroll", J, !0), window.addEventListener("resize", J), () => {
+      window.removeEventListener("mousedown", $), window.removeEventListener("scroll", J, !0), window.removeEventListener("resize", J);
     };
   }, [S]);
   const k = () => {
-    const H = u.current?.getBoundingClientRect();
-    if (!H) return;
-    const q = 220, K = Math.min(H.right - q, window.innerWidth - q - 8), se = H.bottom + 4;
-    E({ x: K, y: se });
-  }, N = (H) => () => {
-    E(null), H();
+    const $ = u.current?.getBoundingClientRect();
+    if (!$) return;
+    const J = 220, X = Math.min($.right - J, window.innerWidth - J - 8), se = $.bottom + 4;
+    E({ x: X, y: se });
+  }, N = ($) => () => {
+    E(null), $();
   }, A = e.externalUrl;
   return /* @__PURE__ */ n(
     "div",
@@ -6280,14 +6280,14 @@ function jd({
           ) : /* @__PURE__ */ n(
             "button",
             {
-              onClick: (H) => {
-                H.stopPropagation(), a.toggle(e);
+              onClick: ($) => {
+                $.stopPropagation(), a.toggle(e);
               },
               className: "relative flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105",
               style: { width: 36, height: 36 },
               title: M ? "Pause" : "Play",
               children: [
-                /* @__PURE__ */ t(Ye, { track: e, size: 36, iconSize: 14, radius: 6 }),
+                /* @__PURE__ */ t(Ke, { track: e, size: 36, iconSize: 14, radius: 6 }),
                 /* @__PURE__ */ t(
                   "span",
                   {
@@ -6341,8 +6341,8 @@ function jd({
             "button",
             {
               ref: u,
-              onClick: (H) => {
-                H.stopPropagation(), S ? E(null) : k();
+              onClick: ($) => {
+                $.stopPropagation(), S ? E(null) : k();
               },
               className: "flex items-center justify-center rounded-md flex-shrink-0 transition-all hover:bg-[var(--bg-selected)]",
               style: {
@@ -6400,8 +6400,8 @@ function jd({
                 /* @__PURE__ */ t(
                   Se,
                   {
-                    icon: /* @__PURE__ */ t(Ga, { size: 14, fill: o ? "currentColor" : "none" }),
-                    label: o ? "Remove favorite" : "Add to favorites",
+                    icon: /* @__PURE__ */ t(Ga, { size: 14, fill: i ? "currentColor" : "none" }),
+                    label: i ? "Remove favorite" : "Add to favorites",
                     onClick: N(() => d(e))
                   }
                 ),
@@ -6454,15 +6454,15 @@ function Pd({
   track: e,
   endpoint: a,
   onSave: r,
-  onClose: o
+  onClose: i
 }) {
   const [s, c] = T(e.coverDataUrl), [d, f] = T(""), [m, h] = T(!1), [w, u] = T(null), y = ee(null), v = ee(null), S = e.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""), E = Ja(S, "", e.styleTags || "");
-  B(() => {
+  W(() => {
     const M = (C) => {
-      C.key === "Escape" && (C.stopPropagation(), o());
+      C.key === "Escape" && (C.stopPropagation(), i());
     };
     return document.addEventListener("keydown", M), () => document.removeEventListener("keydown", M);
-  }, [o]), B(() => () => v.current?.abort(), []);
+  }, [i]), W(() => () => v.current?.abort(), []);
   const b = async () => {
     if (!a) {
       u("Connect to a pod to generate cover art.");
@@ -6507,7 +6507,7 @@ function Pd({
       {
         className: "fixed inset-0 z-[4000] flex items-center justify-center",
         style: { background: "rgba(0,0,0,0.55)" },
-        onClick: o,
+        onClick: i,
         children: /* @__PURE__ */ n(
           "div",
           {
@@ -6534,7 +6534,7 @@ function Pd({
                     /* @__PURE__ */ t(
                       "button",
                       {
-                        onClick: o,
+                        onClick: i,
                         className: "ml-auto rounded-md hover:bg-[var(--bg-hover)] flex items-center justify-center",
                         style: { width: 24, height: 24, color: "var(--text-secondary)" },
                         title: "Close",
@@ -6667,7 +6667,7 @@ function Pd({
                     /* @__PURE__ */ t(
                       "button",
                       {
-                        onClick: o,
+                        onClick: i,
                         disabled: m,
                         className: "px-3 py-1.5 rounded-lg ml-auto disabled:opacity-40 hover:bg-[var(--bg-hover)]",
                         style: {
@@ -6683,7 +6683,7 @@ function Pd({
                       "button",
                       {
                         onClick: () => {
-                          r(e.id, s), o();
+                          r(e.id, s), i();
                         },
                         disabled: m,
                         className: "px-3 py-1.5 rounded-lg disabled:opacity-40",
@@ -6744,7 +6744,7 @@ function Dd({
   songName: e,
   mode: a,
   theme: r,
-  style: o,
+  style: i,
   intent: s,
   lyrics: c,
   specs: d,
@@ -6757,7 +6757,7 @@ function Dd({
   onClose: v
 }) {
   const S = ee(null), E = ge(() => Yr(d), [d]), b = ge(() => qt(d), [d]);
-  B(() => {
+  W(() => {
     const C = (k) => {
       k.key === "Escape" && (k.stopPropagation(), v());
     };
@@ -6839,7 +6839,7 @@ function Dd({
                 /* @__PURE__ */ n("div", { className: "flex-1 min-w-0 flex flex-col gap-3", children: [
                   /* @__PURE__ */ n("div", { children: [
                     /* @__PURE__ */ t("div", { style: { fontSize: 18, fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.2 }, children: M }),
-                    o.trim() && /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 4 }, children: o.trim() })
+                    i.trim() && /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 4 }, children: i.trim() })
                   ] }),
                   /* @__PURE__ */ n("div", { className: "flex flex-wrap items-center gap-2", children: [
                     /* @__PURE__ */ n(
@@ -6859,7 +6859,7 @@ function Dd({
                         },
                         title: m?.models.image ? "Generate cover art" : "No image model available",
                         children: [
-                          h ? /* @__PURE__ */ t(te, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(Oe, { size: 11 }),
+                          h ? /* @__PURE__ */ t(te, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(He, { size: 11 }),
                           f ? "Regenerate" : "Generate"
                         ]
                       }
@@ -6969,8 +6969,8 @@ function $d(e) {
 function Fd(e) {
   const a = [], r = [];
   e.structure?.tempo_bpm ? r.push({ label: "Tempo", value: `${e.structure.tempo_bpm} BPM` }) : e.structure?.tempo_class && r.push({ label: "Tempo", value: Z(e.structure.tempo_class) }), e.structure?.time_signature && e.structure.time_signature !== "other" && r.push({ label: "Time", value: e.structure.time_signature }), e.structure?.rhythm_feel && r.push({ label: "Feel", value: Z(e.structure.rhythm_feel) }), e.structure?.groove_pattern && r.push({ label: "Groove", value: Z(e.structure.groove_pattern) }), e.structure?.song_form && r.push({ label: "Form", value: Z(e.structure.song_form) }), e.structure?.length_seconds && r.push({ label: "Length", value: `~${e.structure.length_seconds}s` }), r.length && a.push({ label: "Structure", rows: r });
-  const o = [];
-  e.tonal?.key && o.push({ label: "Key", value: e.tonal.key }), e.tonal?.mode && o.push({ label: "Mode", value: Z(e.tonal.mode) }), o.length && a.push({ label: "Tonal", rows: o });
+  const i = [];
+  e.tonal?.key && i.push({ label: "Key", value: e.tonal.key }), e.tonal?.mode && i.push({ label: "Mode", value: Z(e.tonal.mode) }), i.length && a.push({ label: "Tonal", rows: i });
   const s = [];
   if (e.instrumentation?.primary_instruments?.length && s.push({ label: "Instruments", value: e.instrumentation.primary_instruments.map(Z).join(", ") }), e.instrumentation?.has_vocals === !1)
     s.push({ label: "Vocals", value: "Instrumental" });
@@ -6986,7 +6986,7 @@ function Fd(e) {
   const f = [];
   return e.context?.era_reference && f.push({ label: "Era", value: Z(e.context.era_reference) }), e.context?.cultural_region && e.context.cultural_region !== "global" && f.push({ label: "Region", value: Z(e.context.cultural_region) }), e.context?.intended_use?.length && f.push({ label: "Use", value: e.context.intended_use.map(Z).join("/") }), e.context?.explicit_lyrics && f.push({ label: "Explicit", value: "Yes" }), f.length && a.push({ label: "Context", rows: f }), a;
 }
-function Ge({ label: e, value: a }) {
+function Ve({ label: e, value: a }) {
   return /* @__PURE__ */ n("div", { className: "flex items-baseline", style: { fontSize: 13, gap: 14 }, children: [
     /* @__PURE__ */ t("span", { style: {
       color: "var(--text-disabled)",
@@ -7082,14 +7082,14 @@ function Bd({
     }
   );
 }
-function Wd(e, a, r, o) {
+function Wd(e, a, r, i) {
   if (!e || a.length === 0) return null;
-  if (o === "one") return { kind: "repeating" };
+  if (i === "one") return { kind: "repeating" };
   const s = a.filter(ve);
   if (s.length === 0) return null;
   if (r) return { kind: "random" };
   const c = s.findIndex((d) => d.id === e);
-  return c < 0 ? null : c + 1 < s.length ? { kind: "track", track: s[c + 1] } : o === "all" ? { kind: "track", track: s[0] } : { kind: "end" };
+  return c < 0 ? null : c + 1 < s.length ? { kind: "track", track: s[c + 1] } : i === "all" ? { kind: "track", track: s[0] } : { kind: "end" };
 }
 function qd({ text: e }) {
   const [a, r] = T(!1);
@@ -7126,7 +7126,7 @@ const Jd = /^\s*\[([^\]]+)\]\s*$/;
 function Gd({ text: e }) {
   const a = e.split(`
 `);
-  return /* @__PURE__ */ t("div", { style: { fontSize: 14, lineHeight: 1.85, color: "var(--text-primary)" }, children: a.map((r, o) => {
+  return /* @__PURE__ */ t("div", { style: { fontSize: 14, lineHeight: 1.85, color: "var(--text-primary)" }, children: a.map((r, i) => {
     const s = r.match(Jd);
     return s ? /* @__PURE__ */ t(
       "div",
@@ -7134,7 +7134,7 @@ function Gd({ text: e }) {
         style: {
           display: "inline-flex",
           alignItems: "center",
-          marginTop: o === 0 ? 0 : 18,
+          marginTop: i === 0 ? 0 : 18,
           marginBottom: 6,
           padding: "4px 10px",
           fontSize: 10,
@@ -7148,11 +7148,11 @@ function Gd({ text: e }) {
         },
         children: s[1].trim()
       },
-      o
-    ) : r.trim() === "" ? /* @__PURE__ */ t("div", { style: { height: 8 } }, o) : /* @__PURE__ */ t("div", { style: { whiteSpace: "pre-wrap" }, children: r }, o);
+      i
+    ) : r.trim() === "" ? /* @__PURE__ */ t("div", { style: { height: 8 } }, i) : /* @__PURE__ */ t("div", { style: { whiteSpace: "pre-wrap" }, children: r }, i);
   }) });
 }
-function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: o, onSwitchToCreator: s, onSearchMusic: c }) {
+function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: i, onSwitchToCreator: s, onSearchMusic: c }) {
   const { t: d } = It(), f = e?.specsJson ?? "", m = ge(() => {
     if (!f) return {};
     try {
@@ -7198,7 +7198,7 @@ function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: o, onSwi
             boxShadow: "var(--shadow-md)"
           },
           children: [
-            /* @__PURE__ */ t(Oe, { size: 13 }),
+            /* @__PURE__ */ t(He, { size: 13 }),
             d("musiccreator.player.empty.openCreator")
           ]
         }
@@ -7405,7 +7405,7 @@ function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: o, onSwi
             /* @__PURE__ */ n(
               "button",
               {
-                onClick: () => o(e),
+                onClick: () => i(e),
                 className: "flex items-center gap-1.5 px-4 rounded-full transition-all",
                 style: {
                   height: 38,
@@ -7556,7 +7556,7 @@ function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: o, onSwi
           );
           return N ? /* @__PURE__ */ n(Tt, { label: "Up next", children: [
             N.kind === "track" && /* @__PURE__ */ n("div", { className: "flex items-center gap-2.5", children: [
-              /* @__PURE__ */ t(Ye, { track: N.track, size: 32, iconSize: 14, radius: 8 }),
+              /* @__PURE__ */ t(Ke, { track: N.track, size: 32, iconSize: 14, radius: 8 }),
               /* @__PURE__ */ n("div", { className: "flex-1 min-w-0", children: [
                 /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }, children: N.track.title }),
                 /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }, children: N.track.artist || (N.track.styleTags && N.track.styleTags !== "—" ? N.track.styleTags : "JULI3TA") })
@@ -7575,7 +7575,7 @@ function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: o, onSwi
         })(),
         e.theme.trim() && /* @__PURE__ */ t(Tt, { label: d("musiccreator.player.theme"), children: /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-primary)", whiteSpace: "pre-wrap", lineHeight: 1.55 }, children: e.theme.trim() }) }),
         h && /* @__PURE__ */ t(Tt, { label: d("musiccreator.player.lyricsDirection"), children: /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-primary)", whiteSpace: "pre-wrap", lineHeight: 1.55 }, children: h }) }),
-        w.map((N) => /* @__PURE__ */ t(Tt, { label: N.label, children: /* @__PURE__ */ t("div", { className: "flex flex-col gap-1.5", children: N.rows.map((A) => /* @__PURE__ */ t(Ge, { label: A.label, value: A.value }, `${N.label}-${A.label}`)) }) }, N.label)),
+        w.map((N) => /* @__PURE__ */ t(Tt, { label: N.label, children: /* @__PURE__ */ t("div", { className: "flex flex-col gap-1.5", children: N.rows.map((A) => /* @__PURE__ */ t(Ve, { label: A.label, value: A.value }, `${N.label}-${A.label}`)) }) }, N.label)),
         C && /* @__PURE__ */ t(Tt, { label: "Artist / Source", children: /* @__PURE__ */ n("div", { className: "flex items-start gap-3", children: [
           /* @__PURE__ */ t("div", { className: "flex items-center justify-center rounded-xl", style: { width: 48, height: 48, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" }, children: /* @__PURE__ */ t(gl, { size: 20 }) }),
           /* @__PURE__ */ n("div", { className: "min-w-0", children: [
@@ -7592,7 +7592,7 @@ function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: o, onSwi
             className: "flex items-center gap-2 rounded-lg p-2 text-left transition-all hover:bg-[var(--bg-hover)]",
             style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
             children: [
-              /* @__PURE__ */ t(Ye, { track: N, size: 34, iconSize: 14, radius: 8 }),
+              /* @__PURE__ */ t(Ke, { track: N, size: 34, iconSize: 14, radius: 8 }),
               /* @__PURE__ */ n("div", { className: "min-w-0 flex-1", children: [
                 /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 12, fontWeight: 800, color: "var(--text-primary)" }, children: N.title }),
                 /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)" }, children: N.durationMs ? De(N.durationMs) : "Streamed" })
@@ -7602,15 +7602,15 @@ function Vd({ track: e, player: a, restyleOriginal: r, onEditInCreator: o, onSwi
           N.id
         )) }) }),
         /* @__PURE__ */ t(Tt, { label: d("musiccreator.player.about"), children: /* @__PURE__ */ n("div", { className: "flex flex-col gap-1.5", children: [
-          /* @__PURE__ */ t(Ge, { label: d("musiccreator.player.about.created"), value: $d(e.createdAt) }),
-          e.source === "youtube" && e.artist && /* @__PURE__ */ t(Ge, { label: "Artist", value: e.artist }),
-          e.source === "youtube" && e.album && e.album !== e.artist && /* @__PURE__ */ t(Ge, { label: "Channel", value: e.album }),
-          y && e.durationMs > 0 && /* @__PURE__ */ t(Ge, { label: d("musiccreator.player.about.duration"), value: De(e.durationMs) }),
-          e.source !== "youtube" && y && e.bitrate > 0 && /* @__PURE__ */ t(Ge, { label: d("musiccreator.player.about.bitrate"), value: Od(e.bitrate) }),
-          e.source !== "youtube" && y && e.sampleRate > 0 && /* @__PURE__ */ t(Ge, { label: d("musiccreator.player.about.sampleRate"), value: Hd(e.sampleRate) }),
-          e.source !== "youtube" && y && e.sizeBytes > 0 && /* @__PURE__ */ t(Ge, { label: d("musiccreator.player.about.size"), value: Ud(e.sizeBytes) }),
-          E && /* @__PURE__ */ t(Ge, { label: d("musiccreator.player.about.style"), value: E }),
-          /* @__PURE__ */ t(Ge, { label: d("musiccreator.player.about.format"), value: e.source === "youtube" ? "Streamed audio" : d(y ? "musiccreator.player.about.format.mp3" : "musiccreator.player.about.format.lyricSheet") })
+          /* @__PURE__ */ t(Ve, { label: d("musiccreator.player.about.created"), value: $d(e.createdAt) }),
+          e.source === "youtube" && e.artist && /* @__PURE__ */ t(Ve, { label: "Artist", value: e.artist }),
+          e.source === "youtube" && e.album && e.album !== e.artist && /* @__PURE__ */ t(Ve, { label: "Channel", value: e.album }),
+          y && e.durationMs > 0 && /* @__PURE__ */ t(Ve, { label: d("musiccreator.player.about.duration"), value: De(e.durationMs) }),
+          e.source !== "youtube" && y && e.bitrate > 0 && /* @__PURE__ */ t(Ve, { label: d("musiccreator.player.about.bitrate"), value: Od(e.bitrate) }),
+          e.source !== "youtube" && y && e.sampleRate > 0 && /* @__PURE__ */ t(Ve, { label: d("musiccreator.player.about.sampleRate"), value: Hd(e.sampleRate) }),
+          e.source !== "youtube" && y && e.sizeBytes > 0 && /* @__PURE__ */ t(Ve, { label: d("musiccreator.player.about.size"), value: Ud(e.sizeBytes) }),
+          E && /* @__PURE__ */ t(Ve, { label: d("musiccreator.player.about.style"), value: E }),
+          /* @__PURE__ */ t(Ve, { label: d("musiccreator.player.about.format"), value: e.source === "youtube" ? "Streamed audio" : d(y ? "musiccreator.player.about.format.mp3" : "musiccreator.player.about.format.lyricSheet") })
         ] }) })
       ] })
     ] }) })
@@ -7620,7 +7620,7 @@ function Yd({
   tab: e,
   onTabChange: a,
   query: r,
-  onQueryChange: o,
+  onQueryChange: i,
   searchHistory: s,
   onClearSearchHistory: c,
   resultType: d,
@@ -7641,23 +7641,23 @@ function Yd({
   addBusyId: N,
   savedYoutubeIds: A,
   player: z,
-  onPreview: H,
-  onAdd: q,
-  onOpenTrack: K,
+  onPreview: $,
+  onAdd: J,
+  onOpenTrack: X,
   onToggleFavorite: se,
   onRemoveLibraryTrack: U,
   onPlaylistNameDraftChange: R,
   onCreatePlaylist: ie,
-  onAddTrackToPlaylist: Ke,
+  onAddTrackToPlaylist: Xe,
   onRemoveTrackFromPlaylist: ze,
   onPlayPlaylist: rr,
-  onDeletePlaylist: Xe,
+  onDeletePlaylist: Qe,
   onConfigureConnector: Kt,
   onDisconnectConnector: xe,
   onClose: xa
 }) {
-  const [Y, Le] = T(null), [wa, bt] = T({}), [Qe, Ie] = T(!1), [He, Te] = T(null), [Mt, Ne] = T(null), [we, ct] = T(null);
-  B(() => {
+  const [K, Le] = T(null), [wa, bt] = T({}), [Ze, Ie] = T(!1), [$e, Te] = T(null), [Mt, Ne] = T(null), [we, ct] = T(null);
+  W(() => {
     Ne(null), ct(null);
   }, [e]);
   const or = [
@@ -7667,15 +7667,15 @@ function Yd({
     { id: "playlists", label: "Playlists", count: E.length },
     { id: "sources", label: "Sources", count: y.length || 4 }
   ], dt = (g) => {
-    const j = z.state.trackId === g.id, $ = j && z.state.loadingTrackId === g.id, le = j && z.state.playing;
+    const j = z.state.trackId === g.id, F = j && z.state.loadingTrackId === g.id, le = j && z.state.playing;
     return /* @__PURE__ */ n(
       "div",
       {
         className: "flex items-center gap-3 rounded-xl px-3 py-2 transition-all hover:bg-[var(--bg-hover)]",
         style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
         children: [
-          /* @__PURE__ */ t(Ye, { track: g, size: 48, iconSize: 20, radius: 10 }),
-          /* @__PURE__ */ n("button", { type: "button", onClick: () => K(g), className: "flex-1 min-w-0 text-left", children: [
+          /* @__PURE__ */ t(Ke, { track: g, size: 48, iconSize: 20, radius: 10 }),
+          /* @__PURE__ */ n("button", { type: "button", onClick: () => X(g), className: "flex-1 min-w-0 text-left", children: [
             /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, fontWeight: 800, color: "var(--text-primary)" }, children: g.title }),
             /* @__PURE__ */ n("div", { className: "truncate", style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }, children: [
               g.artist || "Unknown",
@@ -7714,8 +7714,8 @@ function Yd({
                 background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
               },
               children: [
-                $ ? /* @__PURE__ */ t(te, { size: 12, className: "animate-spin" }) : le ? /* @__PURE__ */ t(ft, { size: 12 }) : /* @__PURE__ */ t(ye, { size: 12 }),
-                $ ? "Loading" : le ? "Pause" : "Play"
+                F ? /* @__PURE__ */ t(te, { size: 12, className: "animate-spin" }) : le ? /* @__PURE__ */ t(ft, { size: 12 }) : /* @__PURE__ */ t(ye, { size: 12 }),
+                F ? "Loading" : le ? "Pause" : "Play"
               ]
             }
           ),
@@ -7736,23 +7736,23 @@ function Yd({
     );
   }, Xt = Array.from(
     S.reduce((g, j) => {
-      const $ = (j.artist || "Unknown artist").trim();
-      return g.set($, [...g.get($) ?? [], j]), g;
+      const F = (j.artist || "Unknown artist").trim();
+      return g.set(F, [...g.get(F) ?? [], j]), g;
     }, /* @__PURE__ */ new Map())
   ).sort((g, j) => g[0].localeCompare(j[0])), ut = Array.from(
     S.reduce((g, j) => {
-      const $ = (j.album || j.artist || "YouTube collection").trim();
-      return g.set($, [...g.get($) ?? [], j]), g;
+      const F = (j.album || j.artist || "YouTube collection").trim();
+      return g.set(F, [...g.get(F) ?? [], j]), g;
     }, /* @__PURE__ */ new Map())
   ).sort((g, j) => g[0].localeCompare(j[0])), Qt = y.length > 0 ? y.map((g) => {
-    const j = v.find((pt) => pt.provider === g.id), $ = j?.connected ?? g.configured, le = j?.oauthRequired ?? g.state === "oauth_required";
+    const j = v.find((pt) => pt.provider === g.id), F = j?.connected ?? g.configured, le = j?.oauthRequired ?? g.state === "oauth_required";
     return {
       id: g.id,
       name: g.name,
-      state: $ ? "Connected" : le ? "OAuth required" : g.state.replace(/_/g, " "),
+      state: F ? "Connected" : le ? "OAuth required" : g.state.replace(/_/g, " "),
       body: j?.message ?? g.message,
-      action: $ ? "Manage" : le ? "Coming soon" : "Configure",
-      enabled: $,
+      action: F ? "Manage" : le ? "Coming soon" : "Configure",
+      enabled: F,
       needs: g.needs,
       kind: g.kind,
       connector: j,
@@ -7878,7 +7878,7 @@ function Yd({
           "input",
           {
             value: r,
-            onChange: (g) => o(g.target.value),
+            onChange: (g) => i(g.target.value),
             placeholder: "Search music, artists, albums…",
             className: "flex-1 bg-transparent outline-none",
             style: { color: "var(--text-primary)", fontSize: 14, fontWeight: 600 },
@@ -7886,7 +7886,7 @@ function Yd({
           }
         ),
         h && /* @__PURE__ */ t(te, { size: 16, className: "animate-spin", style: { color: "var(--accent-primary)" } }),
-        r && /* @__PURE__ */ t("button", { type: "button", onClick: () => o(""), style: { color: "var(--text-secondary)" }, children: /* @__PURE__ */ t(fe, { size: 16 }) })
+        r && /* @__PURE__ */ t("button", { type: "button", onClick: () => i(""), style: { color: "var(--text-secondary)" }, children: /* @__PURE__ */ t(fe, { size: 16 }) })
       ] }),
       e === "search" && /* @__PURE__ */ t("div", { className: "mt-3 flex items-center justify-between gap-3 flex-wrap", children: /* @__PURE__ */ t("div", { className: "flex items-center gap-2", children: ["tracks", "playlists"].map((g) => /* @__PURE__ */ t(
         "button",
@@ -7913,7 +7913,7 @@ function Yd({
           "button",
           {
             type: "button",
-            onClick: () => o(g),
+            onClick: () => i(g),
             className: "rounded-lg px-3 transition-all hover:bg-[var(--bg-hover)]",
             style: {
               height: 26,
@@ -7969,7 +7969,7 @@ function Yd({
           `music-search-skeleton-${j}`
         )),
         m.map((g) => {
-          const j = qi(g.title, g.channel), $ = A.has(g.id), le = k === g.id, pt = N === g.id, Me = C.has(g.id);
+          const j = qi(g.title, g.channel), F = A.has(g.id), le = k === g.id, pt = N === g.id, Me = C.has(g.id);
           return /* @__PURE__ */ n(
             "div",
             {
@@ -7993,7 +7993,7 @@ function Yd({
                   "button",
                   {
                     type: "button",
-                    onClick: () => H(g),
+                    onClick: () => $(g),
                     disabled: le,
                     className: "flex items-center gap-1 rounded-md px-3 disabled:opacity-60",
                     style: { height: 32, fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", border: "1px solid var(--border-subtle)", background: "var(--bg-window)" },
@@ -8007,13 +8007,13 @@ function Yd({
                   "button",
                   {
                     type: "button",
-                    onClick: () => q(g),
-                    disabled: $ || pt,
+                    onClick: () => J(g),
+                    disabled: F || pt,
                     className: "flex items-center gap-1 rounded-md px-3 disabled:opacity-60",
-                    style: { height: 32, fontSize: 11, fontWeight: 800, color: $ ? "var(--text-disabled)" : "white", background: $ ? "transparent" : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))", border: "1px solid var(--border-subtle)" },
+                    style: { height: 32, fontSize: 11, fontWeight: 800, color: F ? "var(--text-disabled)" : "white", background: F ? "transparent" : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))", border: "1px solid var(--border-subtle)" },
                     children: [
-                      pt ? /* @__PURE__ */ t(te, { size: 12, className: "animate-spin" }) : $ ? /* @__PURE__ */ t(Jt, { size: 12 }) : /* @__PURE__ */ t(Or, { size: 12 }),
-                      pt ? "Adding" : $ ? "Saved" : "Add"
+                      pt ? /* @__PURE__ */ t(te, { size: 12, className: "animate-spin" }) : F ? /* @__PURE__ */ t(Jt, { size: 12 }) : /* @__PURE__ */ t(Or, { size: 12 }),
+                      pt ? "Adding" : F ? "Saved" : "Add"
                     ]
                   }
                 )
@@ -8061,7 +8061,7 @@ function Yd({
               "button",
               {
                 type: "button",
-                onClick: () => K(g[0]),
+                onClick: () => X(g[0]),
                 className: "flex items-center gap-1.5 rounded-lg px-3",
                 style: {
                   height: 32,
@@ -8102,7 +8102,7 @@ function Yd({
         ))
       ] })),
       e === "albums" && (we !== null ? (() => {
-        const j = ut.find(([le]) => le === we)?.[1] ?? [], $ = j[0];
+        const j = ut.find(([le]) => le === we)?.[1] ?? [], F = j[0];
         return /* @__PURE__ */ n("div", { className: "flex flex-col gap-3", children: [
           /* @__PURE__ */ n("div", { className: "flex items-center gap-3", children: [
             /* @__PURE__ */ n(
@@ -8126,22 +8126,22 @@ function Yd({
                 ]
               }
             ),
-            $ && /* @__PURE__ */ t(Ye, { track: $, size: 64, iconSize: 24, radius: 14 }),
+            F && /* @__PURE__ */ t(Ke, { track: F, size: 64, iconSize: 24, radius: 14 }),
             /* @__PURE__ */ n("div", { className: "min-w-0 flex-1", children: [
               /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 22, fontWeight: 900, color: "var(--text-primary)", letterSpacing: "-0.02em" }, children: we }),
               /* @__PURE__ */ n("div", { className: "truncate", style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 2 }, children: [
-                $?.artist || "Mixed artists",
+                F?.artist || "Mixed artists",
                 " · ",
                 j.length,
                 " track",
                 j.length === 1 ? "" : "s"
               ] })
             ] }),
-            $ && /* @__PURE__ */ n(
+            F && /* @__PURE__ */ n(
               "button",
               {
                 type: "button",
-                onClick: () => K($),
+                onClick: () => X(F),
                 className: "flex items-center gap-1.5 rounded-lg px-3",
                 style: {
                   height: 32,
@@ -8162,7 +8162,7 @@ function Yd({
       })() : /* @__PURE__ */ n("div", { className: "grid gap-3", style: { gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }, children: [
         ut.length === 0 && /* @__PURE__ */ t("div", { className: "rounded-2xl p-8 text-center", style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }, children: "No albums or source collections yet." }),
         ut.map(([g, j]) => {
-          const $ = j[0];
+          const F = j[0];
           return /* @__PURE__ */ t(
             "button",
             {
@@ -8172,11 +8172,11 @@ function Yd({
               style: { background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" },
               title: `Open ${g}`,
               children: /* @__PURE__ */ n("div", { className: "flex items-center gap-3", children: [
-                $ && /* @__PURE__ */ t(Ye, { track: $, size: 64, iconSize: 24, radius: 14 }),
+                F && /* @__PURE__ */ t(Ke, { track: F, size: 64, iconSize: 24, radius: 14 }),
                 /* @__PURE__ */ n("div", { className: "min-w-0", children: [
                   /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 16, fontWeight: 900, color: "var(--text-primary)" }, children: g }),
                   /* @__PURE__ */ n("div", { className: "truncate", style: { fontSize: 12, color: "var(--text-secondary)", marginTop: 6 }, children: [
-                    $?.artist || "Mixed artists",
+                    F?.artist || "Mixed artists",
                     " · ",
                     j.length,
                     " track",
@@ -8253,7 +8253,7 @@ function Yd({
                 "button",
                 {
                   type: "button",
-                  onClick: () => Xe(g.id),
+                  onClick: () => Qe(g.id),
                   className: "flex items-center justify-center rounded-lg",
                   style: { width: 30, height: 30, color: "var(--text-disabled)", background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
                   title: "Delete playlist",
@@ -8263,8 +8263,8 @@ function Yd({
             ] })
           ] }),
           /* @__PURE__ */ t("div", { className: "flex flex-col gap-2", children: g.items.length === 0 ? /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)" }, children: "Empty. Add tracks from Library." }) : g.items.map((j) => /* @__PURE__ */ n("div", { className: "flex items-center gap-2 rounded-lg p-2", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
-            /* @__PURE__ */ t(Ye, { track: j, size: 34, iconSize: 14, radius: 8 }),
-            /* @__PURE__ */ n("button", { type: "button", onClick: () => K(j), className: "min-w-0 flex-1 text-left", children: [
+            /* @__PURE__ */ t(Ke, { track: j, size: 34, iconSize: 14, radius: 8 }),
+            /* @__PURE__ */ n("button", { type: "button", onClick: () => X(j), className: "min-w-0 flex-1 text-left", children: [
               /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 12, fontWeight: 800, color: "var(--text-primary)" }, children: j.title }),
               /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 10, color: "var(--text-disabled)" }, children: j.artist || "Unknown" })
             ] }),
@@ -8280,11 +8280,11 @@ function Yd({
               }
             )
           ] }, `${g.id}-${j.id}`)) }),
-          S.length > 0 && /* @__PURE__ */ t("div", { className: "mt-3 flex flex-wrap gap-2", children: S.slice(0, 8).filter((j) => !g.items.some(($) => $.id === j.id)).map((j) => /* @__PURE__ */ n(
+          S.length > 0 && /* @__PURE__ */ t("div", { className: "mt-3 flex flex-wrap gap-2", children: S.slice(0, 8).filter((j) => !g.items.some((F) => F.id === j.id)).map((j) => /* @__PURE__ */ n(
             "button",
             {
               type: "button",
-              onClick: () => Ke(g.id, j),
+              onClick: () => Xe(g.id, j),
               className: "rounded-full px-3",
               style: { height: 28, fontSize: 11, fontWeight: 800, color: "var(--text-secondary)", background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
               children: [
@@ -8324,7 +8324,7 @@ function Yd({
                   {
                     type: "button",
                     onClick: () => {
-                      const j = g.connector?.credentialSpecs ?? g.needs.map(($) => ({ name: $, label: $, secret: !0, required: !0 }));
+                      const j = g.connector?.credentialSpecs ?? g.needs.map((F) => ({ name: F, label: F, secret: !0, required: !0 }));
                       bt({}), Te(null), Le({
                         id: g.id,
                         name: g.name,
@@ -8349,19 +8349,19 @@ function Yd({
           },
           g.name
         )),
-        Y && /* @__PURE__ */ n("div", { className: "rounded-2xl p-5", style: { gridColumn: "1 / -1", background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" }, children: [
+        K && /* @__PURE__ */ n("div", { className: "rounded-2xl p-5", style: { gridColumn: "1 / -1", background: "var(--bg-titlebar)", border: "1px solid var(--border-subtle)" }, children: [
           /* @__PURE__ */ n("div", { className: "flex items-start justify-between gap-3", children: [
             /* @__PURE__ */ n("div", { children: [
               /* @__PURE__ */ n("div", { style: { fontSize: 17, fontWeight: 900, color: "var(--text-primary)" }, children: [
                 "Configure ",
-                Y.name
+                K.name
               ] }),
-              /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5, marginTop: 8 }, children: Y.body })
+              /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5, marginTop: 8 }, children: K.body })
             ] }),
             /* @__PURE__ */ t("button", { type: "button", onClick: () => Le(null), style: { color: "var(--text-secondary)" }, children: /* @__PURE__ */ t(fe, { size: 16 }) })
           ] }),
-          Y.oauthRequired ? /* @__PURE__ */ t("div", { className: "mt-4 rounded-xl p-3", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", fontSize: 12, lineHeight: 1.5 }, children: "Spotify needs a real OAuth PKCE browser flow. JULI3TA does not fake token-paste connection; this remains visible as a follow-up connector." }) : /* @__PURE__ */ n(ue, { children: [
-            /* @__PURE__ */ t("div", { className: "mt-4 grid gap-3", style: { gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }, children: Y.specs.map((g) => /* @__PURE__ */ n("label", { className: "rounded-xl px-3 py-2", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
+          K.oauthRequired ? /* @__PURE__ */ t("div", { className: "mt-4 rounded-xl p-3", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", fontSize: 12, lineHeight: 1.5 }, children: "Spotify needs a real OAuth PKCE browser flow. JULI3TA does not fake token-paste connection; this remains visible as a follow-up connector." }) : /* @__PURE__ */ n(ue, { children: [
+            /* @__PURE__ */ t("div", { className: "mt-4 grid gap-3", style: { gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }, children: K.specs.map((g) => /* @__PURE__ */ n("label", { className: "rounded-xl px-3 py-2", style: { background: "var(--bg-window)", border: "1px solid var(--border-subtle)" }, children: [
               /* @__PURE__ */ t("div", { style: { fontSize: 10, fontWeight: 800, letterSpacing: 0.8, textTransform: "uppercase", color: "var(--text-disabled)" }, children: g.required ? "Required" : "Optional" }),
               /* @__PURE__ */ t("div", { style: { marginTop: 4, fontSize: 12, fontWeight: 800, color: "var(--text-primary)" }, children: g.label || g.name }),
               /* @__PURE__ */ t(
@@ -8369,40 +8369,40 @@ function Yd({
                 {
                   value: wa[g.name] ?? "",
                   type: g.secret ? "password" : "text",
-                  onChange: (j) => bt(($) => ({ ...$, [g.name]: j.target.value })),
+                  onChange: (j) => bt((F) => ({ ...F, [g.name]: j.target.value })),
                   className: "mt-2 w-full rounded-lg bg-transparent outline-none px-3",
                   style: { height: 34, color: "var(--text-primary)", border: "1px solid var(--border-subtle)", background: "var(--bg-titlebar)", fontSize: 12 },
                   placeholder: g.name
                 }
               )
             ] }, g.name)) }),
-            He && /* @__PURE__ */ t("div", { className: "mt-3", style: { color: "var(--status-danger)", fontSize: 12 }, children: He }),
+            $e && /* @__PURE__ */ t("div", { className: "mt-3", style: { color: "var(--status-danger)", fontSize: 12 }, children: $e }),
             /* @__PURE__ */ n("div", { className: "mt-4 flex items-center gap-2 flex-wrap", children: [
               /* @__PURE__ */ n(
                 "button",
                 {
                   type: "button",
-                  disabled: Qe || !Y.configurable,
+                  disabled: Ze || !K.configurable,
                   onClick: () => {
-                    Ie(!0), Te(null), Kt(Y.id, wa).then(() => {
+                    Ie(!0), Te(null), Kt(K.id, wa).then(() => {
                       bt({}), Le(null);
                     }).catch((g) => Te(g.message || "Connector setup failed.")).finally(() => Ie(!1));
                   },
                   className: "flex items-center gap-1.5 rounded-lg px-3 disabled:opacity-50",
                   style: { height: 32, fontSize: 11, fontWeight: 900, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" },
                   children: [
-                    Qe ? /* @__PURE__ */ t(te, { size: 12, className: "animate-spin" }) : /* @__PURE__ */ t(Jt, { size: 12 }),
+                    Ze ? /* @__PURE__ */ t(te, { size: 12, className: "animate-spin" }) : /* @__PURE__ */ t(Jt, { size: 12 }),
                     "Verify + Save"
                   ]
                 }
               ),
-              Y.connected && /* @__PURE__ */ t(
+              K.connected && /* @__PURE__ */ t(
                 "button",
                 {
                   type: "button",
-                  disabled: Qe,
+                  disabled: Ze,
                   onClick: () => {
-                    Ie(!0), Te(null), xe(Y.id).then(() => Le(null)).catch((g) => Te(g.message || "Disconnect failed.")).finally(() => Ie(!1));
+                    Ie(!0), Te(null), xe(K.id).then(() => Le(null)).catch((g) => Te(g.message || "Disconnect failed.")).finally(() => Ie(!1));
                   },
                   className: "rounded-lg px-3 disabled:opacity-50",
                   style: { height: 32, fontSize: 11, fontWeight: 800, color: "var(--text-secondary)", background: "var(--bg-window)", border: "1px solid var(--border-subtle)" },
@@ -8418,21 +8418,21 @@ function Yd({
   ] });
 }
 function Kd() {
-  const e = zl(), { t: a } = It(), r = Il(), o = Pl(), { state: s, dispatch: c } = _i(), { addNotification: d } = Ol(), f = s.theme.mode, [m, h] = T("compose"), [w, u] = T(!1), [y, v] = T("creator"), [S, E] = T(() => {
+  const e = zl(), { t: a } = It(), r = Il(), i = Pl(), { state: s, dispatch: c } = _i(), { addNotification: d } = Ol(), f = s.theme.mode, [m, h] = T("compose"), [w, u] = T(!1), [y, v] = T("creator"), [S, E] = T(() => {
     try {
-      const i = localStorage.getItem("juli3ta:selectedPlayerTrackId");
-      return i && i.length > 0 ? i : null;
+      const o = localStorage.getItem("juli3ta:selectedPlayerTrackId");
+      return o && o.length > 0 ? o : null;
     } catch {
       return null;
     }
   });
-  B(() => {
+  W(() => {
     try {
       S ? localStorage.setItem("juli3ta:selectedPlayerTrackId", S) : localStorage.removeItem("juli3ta:selectedPlayerTrackId");
     } catch {
     }
   }, [S]);
-  const [b, P] = T(""), [M, C] = T(""), [k, N] = T(null), [A, z] = T(""), [H, q] = T(""), [K, se] = T(!1), [U, R] = T(""), [ie, Ke] = T(""), [ze, rr] = T(!0), [Xe, Kt] = T(!1), [xe, xa] = T(null), [Y, Le] = T({}), [wa, bt] = T(!1), [Qe, Ie] = T(null), [He, Te] = T(null), [Mt, Ne] = T(null), [we, ct] = T(!1), [or, dt] = T(!1), [Xt, ut] = T(!1), [Qt, g] = T([]), j = ee(null), $ = ee(null), [le, pt] = T(!1), [Me, Kr] = T("best"), [Gi, Vi] = T(null), [Yi, ka] = T(!1), [Ze, Xr] = T("mic"), [$e, ir] = T(!1), [Qr, Zr] = T(0), [eo, Zt] = T(null), to = ee(null), Sa = ee([]), Rt = ee(null), nr = ee(0), ea = ee(null), [jt, Fe] = T("idle"), [ta, G] = T(null), [Ki, Pt] = T(0), [ao, ro] = T(0), [vt, Re] = T([]), [Dt, re] = T(null), [Ce, oo] = T(""), [aa, io] = T("cards"), [pe, no] = T(() => {
+  const [b, P] = T(""), [M, C] = T(""), [k, N] = T(null), [A, z] = T(""), [$, J] = T(""), [X, se] = T(!1), [U, R] = T(""), [ie, Xe] = T(""), [ze, rr] = T(!0), [Qe, Kt] = T(!1), [xe, xa] = T(null), [K, Le] = T({}), [wa, bt] = T(!1), [Ze, Ie] = T(null), [$e, Te] = T(null), [Mt, Ne] = T(null), [we, ct] = T(!1), [or, dt] = T(!1), [Xt, ut] = T(!1), [Qt, g] = T([]), j = ee(null), F = ee(null), [le, pt] = T(!1), [Me, Kr] = T("best"), [Gi, Vi] = T(null), [Yi, ka] = T(!1), [et, Xr] = T("mic"), [Fe, ir] = T(!1), [Qr, Zr] = T(0), [eo, Zt] = T(null), to = ee(null), Sa = ee([]), Rt = ee(null), nr = ee(0), ea = ee(null), [jt, Be] = T("idle"), [ta, V] = T(null), [Ki, Pt] = T(0), [ao, ro] = T(0), [vt, Re] = T([]), [Dt, re] = T(null), [Ce, oo] = T(""), [aa, io] = T("cards"), [pe, no] = T(() => {
     try {
       return localStorage.getItem("juli3ta:sidebarTab") === "library" ? "library" : "mywork";
     } catch {
@@ -8440,57 +8440,57 @@ function Kd() {
     }
   }), [je, Xi] = T(() => {
     try {
-      const i = localStorage.getItem("juli3ta:myWorkChip");
-      if (i === "all" || i === "songs" || i === "restyles" || i === "lyrics") return i;
+      const o = localStorage.getItem("juli3ta:myWorkChip");
+      if (o === "all" || o === "songs" || o === "restyles" || o === "lyrics") return o;
     } catch {
     }
     return "all";
-  }), [et, so] = T(() => {
+  }), [tt, so] = T(() => {
     try {
       return localStorage.getItem("juli3ta:libraryChip") === "favorites" ? "favorites" : "all";
     } catch {
       return "all";
     }
   });
-  B(() => {
+  W(() => {
     try {
       localStorage.setItem("juli3ta:sidebarTab", pe);
     } catch {
     }
-  }, [pe]), B(() => {
+  }, [pe]), W(() => {
     try {
       localStorage.setItem("juli3ta:myWorkChip", je);
     } catch {
     }
-  }, [je]), B(() => {
+  }, [je]), W(() => {
     try {
-      localStorage.setItem("juli3ta:libraryChip", et);
+      localStorage.setItem("juli3ta:libraryChip", tt);
     } catch {
     }
-  }, [et]);
+  }, [tt]);
   const [Ta, Qi] = T(() => {
     try {
-      const i = localStorage.getItem("juli3ta:recentlyPlayedIds"), l = i ? JSON.parse(i) : null;
+      const o = localStorage.getItem("juli3ta:recentlyPlayedIds"), l = o ? JSON.parse(o) : null;
       return Array.isArray(l) ? l.filter((p) => typeof p == "string").slice(0, 8) : [];
     } catch {
       return [];
     }
   });
-  B(() => {
+  W(() => {
     try {
       localStorage.setItem("juli3ta:recentlyPlayedIds", JSON.stringify(Ta));
     } catch {
     }
   }, [Ta]);
-  const [xt, sr] = T(!1), [tt, _a] = T(() => /* @__PURE__ */ new Set()), [at, Ue] = T(!1), [Zi, ra] = T("search"), [lr, en] = T(""), [tn, lo] = T(() => {
+  const [xt, sr] = T(!1), [at, _a] = T(() => /* @__PURE__ */ new Set()), [rt, Ue] = T(!1), [Zi, ra] = T("search"), [lr, en] = T(""), [tn, lo] = T(() => {
     try {
-      const i = localStorage.getItem("juli3ta:searchHistory"), l = i ? JSON.parse(i) : null;
+      const o = localStorage.getItem("juli3ta:searchHistory"), l = o ? JSON.parse(o) : null;
       return Array.isArray(l) ? l.filter((p) => typeof p == "string").slice(0, 5) : [];
     } catch {
       return [];
     }
-  }), co = I((i) => {
-    const l = i.trim();
+  }), co = I((o) => {
+    const l = o.trim();
     l.length < 2 || lo((p) => {
       const x = [l, ...p.filter((_) => _.toLowerCase() !== l.toLowerCase())].slice(0, 5);
       try {
@@ -8499,22 +8499,22 @@ function Kd() {
       }
       return x;
     });
-  }, []), [oa, an] = T("tracks"), [rn, cr] = T([]), [on, Na] = T(!1), [nn, rt] = T(null), [sn, uo] = T(null), [ln, po] = T([]), [cn, mo] = T([]), [ot, ho] = T({}), [dn, go] = T(() => /* @__PURE__ */ new Set()), [un, yo] = T(null), [pn, fo] = T(null), [bo, vo] = T([]), [be, dr] = T([]), [Ca, ur] = T(() => /* @__PURE__ */ new Set()), [pr, Ut] = T([]), [mr, xo] = T(""), [mn, wo] = T(!1), ko = ee(/* @__PURE__ */ new Map()), hr = ee(/* @__PURE__ */ new Map()), gr = ee(/* @__PURE__ */ new Set()), [Ea, ia] = T(null), [Aa, So] = T(!1), [yr, To] = T(zi), [hn, fr] = T(!1);
-  B(() => {
-    let i = !1;
+  }, []), [oa, an] = T("tracks"), [rn, cr] = T([]), [on, Na] = T(!1), [nn, ot] = T(null), [sn, uo] = T(null), [ln, po] = T([]), [cn, mo] = T([]), [it, ho] = T({}), [dn, go] = T(() => /* @__PURE__ */ new Set()), [un, yo] = T(null), [pn, fo] = T(null), [bo, vo] = T([]), [be, dr] = T([]), [Ca, ur] = T(() => /* @__PURE__ */ new Set()), [pr, Ut] = T([]), [mr, xo] = T(""), [mn, wo] = T(!1), ko = ee(/* @__PURE__ */ new Map()), hr = ee(/* @__PURE__ */ new Map()), gr = ee(/* @__PURE__ */ new Set()), [Ea, ia] = T(null), [Aa, So] = T(!1), [yr, To] = T(zi), [hn, fr] = T(!1);
+  W(() => {
+    let o = !1;
     return (async () => {
       try {
         await Promise.all([
           cd(),
           yc()
         ]);
-      } catch (F) {
-        console.warn("[Juli3ta] Legacy migration failed (non-fatal):", F);
+      } catch (B) {
+        console.warn("[Juli3ta] Legacy migration failed (non-fatal):", B);
       }
-      await lc().catch((F) => {
-        console.warn("[Juli3ta] music library bridge migration failed (non-fatal):", F);
+      await lc().catch((B) => {
+        console.warn("[Juli3ta] music library bridge migration failed (non-fatal):", B);
       });
-      const [l, p, x, _, L, O, Q] = await Promise.allSettled([
+      const [l, p, x, _, L, H, Q] = await Promise.allSettled([
         Wl(),
         Ir(),
         tc(),
@@ -8523,16 +8523,16 @@ function Kd() {
         cc("track"),
         ua()
       ]);
-      if (i) return;
-      const ke = l.status === "fulfilled" ? l.value : [], We = p.status === "fulfilled" ? p.value.tracks.map((F) => ({ ...F, source: "juli3ta" })) : [];
-      p.status === "fulfilled" && (ia(p.value.rootPath), re((F) => F?.startsWith("Real file library unavailable") ? null : F)), l.status === "fulfilled" ? Re(pa(We, ke)) : (console.error("[Juli3ta] listTracks failed:", l.reason), Re(pa(We)), re("Could not load the browser cache — using the real files from ~/Music/JULI3TA.")), p.status === "rejected" && (console.warn("[Juli3ta] host file library unavailable:", p.reason), re("Real file library unavailable — generated songs will not be shared across browsers until the tray endpoint is back."));
-      const kt = new Set(We.map((F) => F.id)), qe = new Set(ke.map((F) => F.id)), he = ke.filter((F) => !kt.has(F.id) && Dc(F)), Ee = We.filter((F) => !qe.has(F.id));
+      if (o) return;
+      const ke = l.status === "fulfilled" ? l.value : [], qe = p.status === "fulfilled" ? p.value.tracks.map((B) => ({ ...B, source: "juli3ta" })) : [];
+      p.status === "fulfilled" && (ia(p.value.rootPath), re((B) => B?.startsWith("Real file library unavailable") ? null : B)), l.status === "fulfilled" ? Re(pa(qe, ke)) : (console.error("[Juli3ta] listTracks failed:", l.reason), Re(pa(qe)), re("Could not load the browser cache — using the real files from ~/Music/JULI3TA.")), p.status === "rejected" && (console.warn("[Juli3ta] host file library unavailable:", p.reason), re("Real file library unavailable — generated songs will not be shared across browsers until the tray endpoint is back."));
+      const kt = new Set(qe.map((B) => B.id)), Je = new Set(ke.map((B) => B.id)), he = ke.filter((B) => !kt.has(B.id) && Dc(B)), Ee = qe.filter((B) => !Je.has(B.id));
       (he.length > 0 || Ee.length > 0) && (async () => {
-        const F = [];
+        const B = [];
         for (const ce of he)
           try {
             const oe = await Zo({ ...ce, source: "juli3ta" });
-            F.push({ ...ce, ...oe, source: "juli3ta" });
+            B.push({ ...ce, ...oe, source: "juli3ta" });
           } catch (oe) {
             console.warn("[Juli3ta] host file backfill failed:", ce.id, oe);
           }
@@ -8542,39 +8542,39 @@ function Kd() {
           } catch (oe) {
             console.warn("[Juli3ta] standalone cache backfill failed:", ce.id, oe);
           }
-        !i && (F.length > 0 || Ee.length > 0) && (Re((ce) => pa(F, Ee, ce)), Ir().then((ce) => ia(ce.rootPath)).catch(() => {
+        !o && (B.length > 0 || Ee.length > 0) && (Re((ce) => pa(B, Ee, ce)), Ir().then((ce) => ia(ce.rootPath)).catch(() => {
         }));
-      })(), x.status === "fulfilled" && To(x.value), _.status === "fulfilled" && g(_.value), L.status === "fulfilled" && dr(L.value), O.status === "fulfilled" && ur(new Set(O.value.map((F) => F.entityId))), Q.status === "fulfilled" && Ut(Q.value);
+      })(), x.status === "fulfilled" && To(x.value), _.status === "fulfilled" && g(_.value), L.status === "fulfilled" && dr(L.value), H.status === "fulfilled" && ur(new Set(H.value.map((B) => B.entityId))), Q.status === "fulfilled" && Ut(Q.value);
     })(), () => {
-      i = !0;
+      o = !0;
     };
-  }, []), B(() => {
+  }, []), W(() => {
     if (!Dt?.startsWith("Real file library unavailable")) return;
-    let i = !1;
+    let o = !1;
     const l = async () => {
       try {
         const x = await Ir();
-        if (i) return;
+        if (o) return;
         ia(x.rootPath), Re((_) => pa(x.tracks.map((L) => ({ ...L, source: "juli3ta" })), _)), re((_) => _?.startsWith("Real file library unavailable") ? null : _);
       } catch {
       }
     }, p = window.setInterval(l, 4e3);
     return l(), () => {
-      i = !0, window.clearInterval(p);
+      o = !0, window.clearInterval(p);
     };
   }, [Dt]);
-  const br = I(async (i) => {
+  const br = I(async (o) => {
     try {
-      const l = await Zo({ ...i, source: "juli3ta" }), p = { ...i, ...l, source: "juli3ta" };
+      const l = await Zo({ ...o, source: "juli3ta" }), p = { ...o, ...l, source: "juli3ta" };
       return await Ka(p), ia(l.folderPath?.split("/").slice(0, -1).join("/") || Ea), re(null), Re((x) => pa([p], x)), !0;
     } catch (l) {
       const p = l.message || "Real file save failed";
-      return re(`Couldn't save "${i.title}" as a real file — ${p}.`), !1;
+      return re(`Couldn't save "${o.title}" as a real file — ${p}.`), !1;
     }
-  }, [Ea]), gn = I(async (i) => {
-    To(i);
+  }, [Ea]), gn = I(async (o) => {
+    To(o);
     try {
-      await ac(i);
+      await ac(o);
     } catch (l) {
       console.warn("Settings save failed:", l);
     }
@@ -8587,32 +8587,32 @@ function Kd() {
     } catch {
       return null;
     }
-  }), [vn, _o] = T(!0), J = La.find((i) => i.podId === fn) ?? La[0] ?? null, vr = I(async () => {
+  }), [vn, _o] = T(!0), G = La.find((o) => o.podId === fn) ?? La[0] ?? null, vr = I(async () => {
     _o(!0);
-    const i = new AbortController(), l = await hd(za, i.signal);
+    const o = new AbortController(), l = await hd(za, o.signal);
     yn(l), _o(!1);
   }, [za]);
-  B(() => {
+  W(() => {
     za.length !== 0 && queueMicrotask(() => void vr());
   }, [za, vr]);
-  const xn = I((i) => {
-    bn(i);
+  const xn = I((o) => {
+    bn(o);
     try {
-      localStorage.setItem("tytus.music-creator.preferred-pod", i);
+      localStorage.setItem("tytus.music-creator.preferred-pod", o);
     } catch {
     }
   }, []), na = ee(null), me = ee(null), sa = ee(null), Ia = ee(!1);
-  B(() => () => {
+  W(() => () => {
     na.current?.abort(), me.current?.abort();
-  }, []), B(() => {
+  }, []), W(() => {
     if (jt === "idle") {
       queueMicrotask(() => {
         Pt(0), ro(0);
       });
       return;
     }
-    const i = Date.now(), l = () => {
-      const _ = (Date.now() - i) / 1e3, L = jt === "lyrics" ? Math.min(0.95, _ / 5) : Math.min(0.95, 1 - Math.exp(-_ / 35));
+    const o = Date.now(), l = () => {
+      const _ = (Date.now() - o) / 1e3, L = jt === "lyrics" ? Math.min(0.95, _ / 5) : Math.min(0.95, 1 - Math.exp(-_ / 35));
       Pt(L);
     };
     l();
@@ -8621,77 +8621,77 @@ function Kd() {
       clearInterval(p), clearInterval(x);
     };
   }, [jt]);
-  const la = I((i) => {
-    if (!i.lyricsPreview) return null;
-    const l = o.ensureUserFolder("Music");
+  const la = I((o) => {
+    if (!o.lyricsPreview) return null;
+    const l = i.ensureUserFolder("Music");
     if (!l) return null;
-    const p = `${$a(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""))}.lyrics.txt`, x = o.findChildByName(l, p);
-    return x ? (o.writeFile(x.id, i.lyricsPreview), x.id) : o.createFile(l, p, i.lyricsPreview, {
+    const p = `${$a(o.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""))}.lyrics.txt`, x = i.findChildByName(l, p);
+    return x ? (i.writeFile(x.id, o.lyricsPreview), x.id) : i.createFile(l, p, o.lyricsPreview, {
       mimeType: "text/plain"
     });
-  }, [o]), No = I((i) => {
-    if (!i.audioDataUrl) return null;
-    const l = o.ensureUserFolder("Music");
+  }, [i]), No = I((o) => {
+    if (!o.audioDataUrl) return null;
+    const l = i.ensureUserFolder("Music");
     if (!l) return null;
-    const p = `${$a(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""))}.mp3`, x = o.findChildByName(l, p);
-    return x ? x.id : o.createFile(l, p, "", {
+    const p = `${$a(o.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""))}.mp3`, x = i.findChildByName(l, p);
+    return x ? x.id : i.createFile(l, p, "", {
       mimeType: "audio/mpeg",
-      refTrackId: i.id
+      refTrackId: o.id
     });
-  }, [o]), wn = I(async () => {
-    if (!J) {
-      G(a("musiccreator.error.noPod"));
+  }, [i]), wn = I(async () => {
+    if (!G) {
+      V(a("musiccreator.error.noPod"));
       return;
     }
-    if (m === "restyle" && !He) {
-      G(we ? "Still analyzing the reference audio — try again in a moment." : "Restyle needs a reference audio file. Drop one in below.");
+    if (m === "restyle" && !$e) {
+      V(we ? "Still analyzing the reference audio — try again in a moment." : "Restyle needs a reference audio file. Drop one in below.");
       return;
     }
     if (Ia.current) return;
-    Ia.current = !0, G(null), na.current?.abort();
-    const i = new AbortController();
-    na.current = i;
+    Ia.current = !0, V(null), na.current?.abort();
+    const o = new AbortController();
+    na.current = o;
     try {
-      const l = yr.overridesByEndpoint[J.url] ?? {}, p = {
-        ...J,
+      const l = yr.overridesByEndpoint[G.url] ?? {}, p = {
+        ...G,
         models: {
-          music: l.music || J.models.music,
-          cover: l.cover || J.models.cover,
-          lyrics: l.lyrics || J.models.lyrics,
-          lyricsBackup: l.lyricsBackup || J.models.lyricsBackup,
-          image: l.image || J.models.image,
-          allIds: J.models.allIds
+          music: l.music || G.models.music,
+          cover: l.cover || G.models.cover,
+          lyrics: l.lyrics || G.models.lyrics,
+          lyricsBackup: l.lyricsBackup || G.models.lyricsBackup,
+          image: l.image || G.models.image,
+          allIds: G.models.allIds
         }
-      }, x = Yr(Y);
-      let _ = M.trim(), L = H.trim(), O = A.trim(), Q = null;
-      if (!_ && !K) {
-        if (!b.trim() && !(Y.intent ?? "").trim()) {
-          G(a("musiccreator.error.noInput"));
+      }, x = Yr(K);
+      let _ = M.trim(), L = $.trim(), H = A.trim(), Q = null;
+      if (!_ && !X) {
+        if (!b.trim() && !(K.intent ?? "").trim()) {
+          V(a("musiccreator.error.noInput"));
           return;
         }
-        Fe("lyrics");
+        Be("lyrics");
         const de = [];
         b.trim() && de.push(b.trim());
-        const _r = (Y.intent ?? "").trim();
+        const _r = (K.intent ?? "").trim();
         _r && de.push(`User intent (must respect): ${_r}`), x && de.push(`Musical context: ${x}`), k && de.push(`Structure: ${k.prompt}`);
         const ds = de.join(`
 
 `);
-        Q = await bd(p, ds, i.signal), _ = Q.lyrics, L || (L = Q.song_title), O || (O = Q.style_tags);
-      } else !_ && K && (_ = `[Intro]
+        Q = await bd(p, ds, o.signal), _ = Q.lyrics, L || (L = Q.song_title), H || (H = Q.style_tags);
+      } else !_ && X && (_ = `[Intro]
 [Instrumental]
 [Outro]`);
-      if (Q && (C(Q.lyrics), L === "Untitled" && (L = ""), L && !H.trim() && q(L), O && !A.trim() && z(O), Q.usedFallback && re(
+      if (Q && (C(Q.lyrics), L === "Untitled" && (L = ""), L && !$.trim() && J(L), H && !A.trim() && z(H), Q.usedFallback && re(
         `Primary lyrics model errored — used backup chat model "${p.models.lyricsBackup ?? "unknown"}" instead.`
       )), _.length > Ft) {
-        G(a("musiccreator.error.lyricsTooLong", { count: _.length, max: Ft })), Fe("idle");
+        V(a("musiccreator.error.lyricsTooLong", { count: _.length, max: Ft })), Be("idle");
         return;
       }
-      if (L.trim() || (L = nd(_, b, O || A), L && L !== "Untitled" && !H.trim() && q(L)), m === "lyricsOnly") {
+      if (L.trim() || (L = nd(_, b, H || A), L && L !== "Untitled" && !$.trim() && J(L)), m === "lyricsOnly") {
         const de = {
           id: `t_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
           title: (L || a("musiccreator.track.untitled")) + " (lyrics)",
-          styleTags: O || "—",
+          styleTags: H || "—",
           lyricsPreview: _,
           // store the full text — used by Load
           durationMs: 0,
@@ -8701,41 +8701,41 @@ function Kd() {
           createdAt: Date.now(),
           audioDataUrl: "",
           // no audio
-          specsJson: qt(Y) > 0 ? JSON.stringify(Y) : "",
+          specsJson: qt(K) > 0 ? JSON.stringify(K) : "",
           // Lyric sheets keep whatever cover art the user attached in
           // the form (uploaded or pre-generated) — image autogen during
           // Write Lyrics is skipped to keep the call cheap.
           coverDataUrl: U,
           theme: b
         };
-        await br(de) && la(de), Fe("idle"), Pt(0);
+        await br(de) && la(de), Be("idle"), Pt(0);
         return;
       }
-      if (m === "restyle" && !He) {
-        G(we ? "Still analyzing the reference audio — try again in a moment." : "Restyle needs a reference audio file. Drop one in below."), Fe("idle");
+      if (m === "restyle" && !$e) {
+        V(we ? "Still analyzing the reference audio — try again in a moment." : "Restyle needs a reference audio file. Drop one in below."), Be("idle");
         return;
       }
-      Fe("song");
-      const ke = [O, x].filter((de) => de && de.length > 0).join(". "), We = vd(
+      Be("song");
+      const ke = [H, x].filter((de) => de && de.length > 0).join(". "), qe = vd(
         p,
         {
           lyrics: _,
           prompt: ke || void 0,
-          instrumental: K,
-          refAudioBase64: m === "restyle" ? He ?? void 0 : void 0
+          instrumental: X,
+          refAudioBase64: m === "restyle" ? $e ?? void 0 : void 0
         },
-        i.signal
-      ), kt = ze && !U && !!p.models.image, qe = U, he = kt ? Br(
+        o.signal
+      ), kt = ze && !U && !!p.models.image, Je = U, he = kt ? Br(
         p,
-        (ie.trim() || Ja(L, b, O || A)).slice(0, 1500),
-        i.signal
+        (ie.trim() || Ja(L, b, H || A)).slice(0, 1500),
+        o.signal
       ).catch((de) => {
         if (de.name === "AbortError") throw de;
-        return console.warn("[Juli3ta] Cover-art generation failed:", de), re(`Cover-art skipped: ${de.message}`), qe;
-      }) : Promise.resolve(qe), Ee = await Promise.allSettled([We, he]), F = Ee[0], ce = Ee[1];
-      if (F.status === "rejected")
-        throw i.abort(), F.reason;
-      const oe = F.value, yt = ce.status === "fulfilled" ? ce.value : qe;
+        return console.warn("[Juli3ta] Cover-art generation failed:", de), re(`Cover-art skipped: ${de.message}`), Je;
+      }) : Promise.resolve(Je), Ee = await Promise.allSettled([qe, he]), B = Ee[0], ce = Ee[1];
+      if (B.status === "rejected")
+        throw o.abort(), B.reason;
+      const oe = B.value, yt = ce.status === "fulfilled" ? ce.value : Je;
       if (!oe?.data?.audio || typeof oe.data.audio != "string" || oe.data.audio.length < 100) {
         const de = oe?.trace_id ? ` (trace ${oe.trace_id})` : "";
         throw new Error(`Music gen returned no audio data${de}. Try again or pick a different model in Settings.`);
@@ -8743,7 +8743,7 @@ function Kd() {
       const ls = `data:audio/mpeg;base64,${oe.data.audio}`, cs = m === "restyle" ? " (restyle)" : "", st = {
         id: `t_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
         title: (L || a("musiccreator.track.untitled")) + cs,
-        styleTags: O || "—",
+        styleTags: H || "—",
         lyricsPreview: _,
         // store the full text — used by Load
         durationMs: oe.data.duration_ms ?? 0,
@@ -8752,14 +8752,14 @@ function Kd() {
         sizeBytes: oe.data.size_bytes ?? 0,
         createdAt: Date.now(),
         audioDataUrl: ls,
-        specsJson: qt(Y) > 0 ? JSON.stringify(Y) : "",
+        specsJson: qt(K) > 0 ? JSON.stringify(K) : "",
         coverDataUrl: yt,
         theme: b
       };
-      R(yt), console.info("[Juli3ta] Saving generated song:", { id: st.id, title: st.title, durationMs: st.durationMs, sizeBytes: st.sizeBytes }), await br(st) && (No(st), la(st), m === "restyle" && He && Vi({
+      R(yt), console.info("[Juli3ta] Saving generated song:", { id: st.id, title: st.title, durationMs: st.durationMs, sizeBytes: st.sizeBytes }), await br(st) && (No(st), la(st), m === "restyle" && $e && Vi({
         trackId: st.id,
-        audioSrc: `data:audio/wav;base64,${He}`,
-        sourceLabel: Qe || "Original"
+        audioSrc: `data:audio/wav;base64,${$e}`,
+        sourceLabel: Ze || "Original"
       }), d({
         appId: "musiccreator",
         appName: "JULI3TA",
@@ -8767,28 +8767,28 @@ function Kd() {
         title: a("musiccreator.notify.songReadyTitle"),
         message: a("musiccreator.notify.songReadyBody", { title: st.title }),
         isRead: !1
-      })), Fe("idle"), Pt(0);
+      })), Be("idle"), Pt(0);
     } catch (l) {
       if (l.name === "AbortError") {
-        Fe("idle");
+        Be("idle");
         return;
       }
-      console.error("[Juli3ta] Generate failed:", l), G(l.message || "Generation failed — check the console for details."), Fe("idle"), Pt(0);
+      console.error("[Juli3ta] Generate failed:", l), V(l.message || "Generation failed — check the console for details."), Be("idle"), Pt(0);
     } finally {
       Ia.current = !1;
     }
   }, [
-    J,
+    G,
     b,
     M,
-    H,
+    $,
     A,
-    Y,
-    k,
     K,
+    k,
+    X,
     m,
-    He,
-    Qe,
+    $e,
+    Ze,
     a,
     br,
     yr,
@@ -8798,59 +8798,59 @@ function Kd() {
     ze,
     U,
     ie
-  ]), kn = () => j.current?.click(), Co = ee(0), mt = I(async (i, l) => {
+  ]), kn = () => j.current?.click(), Co = ee(0), mt = I(async (o, l) => {
     const p = ++Co.current, x = () => Co.current === p;
-    G(null), ct(!0), Te(null), Ie(l), Ne(null);
+    V(null), ct(!0), Te(null), Ie(l), Ne(null);
     try {
       if (Me === "mix") {
-        const _ = await Ac(i);
+        const _ = await Ac(o);
         if (!x()) return;
         Te(_.base64);
         const L = _.sourceDurationSec / 60;
         if (_.segments.length > 1) {
-          const O = _.segments.map((Q) => `${Math.floor(Q.startSec / 60)}:${Math.floor(Q.startSec % 60).toString().padStart(2, "0")}`).join(" + ");
+          const H = _.segments.map((Q) => `${Math.floor(Q.startSec / 60)}:${Math.floor(Q.startSec % 60).toString().padStart(2, "0")}`).join(" + ");
           Ne(
-            `Mixed ${_.segments.length} iconic moments (${_.durationSec.toFixed(0)} s) from ${L.toFixed(1)} min — at ${O}`
+            `Mixed ${_.segments.length} iconic moments (${_.durationSec.toFixed(0)} s) from ${L.toFixed(1)} min — at ${H}`
           );
         } else
           Ne(`Using whole clip (${_.durationSec.toFixed(0)} s)`);
       } else {
-        const _ = await Hi(i);
+        const _ = await Hi(o);
         if (!x()) return;
         Te(_.base64);
-        const L = _.sourceDurationSec / 60, O = _.startSec / 60, Q = _.startSec < 60 ? `${_.startSec.toFixed(1)} s` : `${Math.floor(O)}:${Math.floor(_.startSec % 60).toString().padStart(2, "0")}`;
+        const L = _.sourceDurationSec / 60, H = _.startSec / 60, Q = _.startSec < 60 ? `${_.startSec.toFixed(1)} s` : `${Math.floor(H)}:${Math.floor(_.startSec % 60).toString().padStart(2, "0")}`;
         Ne(
           _.sourceDurationSec <= _.durationSec + 0.5 ? `Using whole clip (${_.durationSec.toFixed(0)} s)` : `Auto-picked best ${_.durationSec.toFixed(0)} s starting at ${Q} of ${L.toFixed(1)} min`
         );
       }
     } catch (_) {
       if (!x()) return;
-      G(_.message || "Could not analyze that audio."), Ie(null);
+      V(_.message || "Could not analyze that audio."), Ie(null);
     } finally {
       x() && ct(!1);
     }
   }, [Me]), Sn = async () => {
     Zt(null);
     try {
-      let i;
-      if (Ze === "tab") {
+      let o;
+      if (et === "tab") {
         const _ = navigator.mediaDevices;
         if (!_.getDisplayMedia)
           throw new Error("Tab audio capture is not supported in this browser. Use mic instead.");
-        i = await _.getDisplayMedia({ video: !0, audio: !0 });
-        for (const L of i.getVideoTracks())
-          L.stop(), i.removeTrack(L);
-        if (i.getAudioTracks().length === 0)
+        o = await _.getDisplayMedia({ video: !0, audio: !0 });
+        for (const L of o.getVideoTracks())
+          L.stop(), o.removeTrack(L);
+        if (o.getAudioTracks().length === 0)
           throw new Error('No audio in the selected tab. In the share dialog, tick "Share tab audio".');
       } else
-        i = await navigator.mediaDevices.getUserMedia({ audio: !0 });
-      Rt.current = i;
+        o = await navigator.mediaDevices.getUserMedia({ audio: !0 });
+      Rt.current = o;
       const p = [
         "audio/webm;codecs=opus",
         "audio/webm",
         "audio/mp4",
         "audio/ogg;codecs=opus"
-      ].find((_) => MediaRecorder.isTypeSupported(_)) || "", x = new MediaRecorder(i, p ? { mimeType: p } : void 0);
+      ].find((_) => MediaRecorder.isTypeSupported(_)) || "", x = new MediaRecorder(o, p ? { mimeType: p } : void 0);
       Sa.current = [], x.ondataavailable = (_) => {
         _.data && _.data.size > 0 && Sa.current.push(_.data);
       }, x.onstop = async () => {
@@ -8864,12 +8864,12 @@ function Kd() {
           }
           const L = new FileReader();
           L.onerror = () => Zt("Could not read the recording."), L.onload = () => {
-            const O = typeof L.result == "string" ? L.result : "", Q = {
+            const H = typeof L.result == "string" ? L.result : "", Q = {
               id: `r_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-              name: `${Ze === "tab" ? "Tab audio" : "Recording"} ${(/* @__PURE__ */ new Date()).toLocaleTimeString()}`,
+              name: `${et === "tab" ? "Tab audio" : "Recording"} ${(/* @__PURE__ */ new Date()).toLocaleTimeString()}`,
               durationMs: Date.now() - nr.current,
               mimeType: _.type || p || "audio/webm",
-              audioDataUrl: O,
+              audioDataUrl: H,
               createdAt: Date.now()
             };
             (async () => {
@@ -8886,96 +8886,96 @@ function Kd() {
       }, x.start(250), to.current = x, nr.current = Date.now(), Zr(0), ir(!0), ea.current = setInterval(() => {
         Zr(Date.now() - nr.current);
       }, 100);
-    } catch (i) {
-      Zt(i.message || "Could not start recording."), Rt.current?.getTracks().forEach((l) => l.stop()), Rt.current = null, ir(!1);
+    } catch (o) {
+      Zt(o.message || "Could not start recording."), Rt.current?.getTracks().forEach((l) => l.stop()), Rt.current = null, ir(!1);
     }
   }, Tn = () => {
-    const i = to.current;
-    i && i.state !== "inactive" && i.stop(), ea.current && clearInterval(ea.current), ir(!1);
+    const o = to.current;
+    o && o.state !== "inactive" && o.stop(), ea.current && clearInterval(ea.current), ir(!1);
   };
-  B(() => () => {
-    Rt.current?.getTracks().forEach((i) => i.stop()), ea.current && clearInterval(ea.current);
+  W(() => () => {
+    Rt.current?.getTracks().forEach((o) => o.stop()), ea.current && clearInterval(ea.current);
   }, []);
-  const _n = (i) => {
-    const l = i.target.files?.[0];
-    if (i.target.value = "", !!l) {
+  const _n = (o) => {
+    const l = o.target.files?.[0];
+    if (o.target.value = "", !!l) {
       if (l.size > 50 * 1024 * 1024) {
-        G("Reference audio is too big. Max 50 MB.");
+        V("Reference audio is too big. Max 50 MB.");
         return;
       }
       mt(l, l.name);
     }
-  }, Nn = (i) => {
-    dt(!1), mt(i.audioDataUrl, i.name);
+  }, Nn = (o) => {
+    dt(!1), mt(o.audioDataUrl, o.name);
   }, Cn = () => {
-    dt(!0), Yo().then((i) => g(i)).catch(() => {
+    dt(!0), Yo().then((o) => g(o)).catch(() => {
     });
-  }, En = () => ut(!0), An = (i) => {
-    if (ut(!1), !i.audioDataUrl) return;
-    const l = i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "Untitled";
-    mt(i.audioDataUrl, `${l}.mp3`);
+  }, En = () => ut(!0), An = (o) => {
+    if (ut(!1), !o.audioDataUrl) return;
+    const l = o.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "Untitled";
+    mt(o.audioDataUrl, `${l}.mp3`);
   }, zn = () => {
     Te(null), Ie(null), Ne(null);
   }, Ln = () => {
-    na.current?.abort(), Fe("idle");
-  }, ht = I(async (i, l, p) => {
-    if (!J) throw new Error("No endpoint connected");
+    na.current?.abort(), Be("idle");
+  }, ht = I(async (o, l, p) => {
+    if (!G) throw new Error("No endpoint connected");
     const x = (he) => {
-      const Ee = he, F = Ee.choices?.[0], ce = [
-        F?.message?.content,
-        F?.delta?.content,
-        F?.text,
+      const Ee = he, B = Ee.choices?.[0], ce = [
+        B?.message?.content,
+        B?.delta?.content,
+        B?.text,
         Ee.output_text
       ];
       for (const oe of ce)
         if (typeof oe == "string" && oe.trim().length > 0) return oe.trim();
       return "";
-    }, _ = (he) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(he), L = /* @__PURE__ */ new Set(), O = [], Q = (he) => {
-      he && !L.has(he) && (L.add(he), O.push(he));
+    }, _ = (he) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(he), L = /* @__PURE__ */ new Set(), H = [], Q = (he) => {
+      he && !L.has(he) && (L.add(he), H.push(he));
     };
-    if (Q(J.models.lyricsBackup), J.models.allIds.filter(_).forEach(Q), O.length === 0)
+    if (Q(G.models.lyricsBackup), G.models.allIds.filter(_).forEach(Q), H.length === 0)
       throw new Error("No chat model available on this endpoint. Pick a different connection in Settings.");
-    const ke = typeof l == "string" ? l : JSON.stringify(l), We = p?.temperature ?? 0.5, kt = Math.max(p?.maxTokens ?? 800, 400), qe = 45e3;
-    return ar(O, async (he) => {
-      const Ee = Gt(p?.signal, qe);
-      let F;
+    const ke = typeof l == "string" ? l : JSON.stringify(l), qe = p?.temperature ?? 0.5, kt = Math.max(p?.maxTokens ?? 800, 400), Je = 45e3;
+    return ar(H, async (he) => {
+      const Ee = Gt(p?.signal, Je);
+      let B;
       try {
-        F = await fetch(`${J.url}/chat/completions`, {
+        B = await fetch(`${G.url}/chat/completions`, {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${J.apiKey}`,
+            Authorization: `Bearer ${G.apiKey}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
             model: he,
             messages: [
-              { role: "system", content: i },
+              { role: "system", content: o },
               { role: "user", content: ke }
             ],
-            temperature: We,
+            temperature: qe,
             max_tokens: kt
           }),
           signal: Ee.signal
         });
       } catch (yt) {
-        throw yt.name === "TimeoutError" ? new Error(`AI assist timed out after ${qe / 1e3}s.`) : yt;
+        throw yt.name === "TimeoutError" ? new Error(`AI assist timed out after ${Je / 1e3}s.`) : yt;
       } finally {
         Ee.dispose();
       }
-      if (!F.ok) {
-        const yt = await F.text().catch(() => "");
-        throw new _e(F.status, yt, `AI assist HTTP ${F.status}: ${yt.slice(0, 200)}`);
+      if (!B.ok) {
+        const yt = await B.text().catch(() => "");
+        throw new _e(B.status, yt, `AI assist HTTP ${B.status}: ${yt.slice(0, 200)}`);
       }
-      const ce = await F.json(), oe = x(ce);
+      const ce = await B.json(), oe = x(ce);
       if (!oe)
         throw console.warn("[Juli3ta] empty AI assist content from", he, ce), new _e(502, "", `Model "${he}" returned empty content`);
       return oe.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
     }, "chat-assist");
-  }, [J]), In = I(async () => {
-    if (J) {
-      bt(!0), G(null);
+  }, [G]), In = I(async () => {
+    if (G) {
+      bt(!0), V(null);
       try {
-        const i = `You are a music-production assistant. Given a theme, style, and (optionally) lyrics, return ONE JSON object that fills in optimal Track Specs for the song.
+        const o = `You are a music-production assistant. Given a theme, style, and (optionally) lyrics, return ONE JSON object that fills in optimal Track Specs for the song.
 
 Output schema (every field optional, OMIT fields you can't infer confidently):
 {
@@ -9017,11 +9017,11 @@ Output schema (every field optional, OMIT fields you can't infer confidently):
 
 Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         me.current?.abort(), me.current = new AbortController();
-        const l = await ht(i, {
+        const l = await ht(o, {
           theme: b || null,
           style: A || null,
           lyrics: M ? M.slice(0, 1500) : null,
-          existing_specs: qt(Y) > 0 ? Y : null
+          existing_specs: qt(K) > 0 ? K : null
         }, {
           temperature: 0.4,
           // The full schema is ~6 sections × multiple fields. 800 tokens
@@ -9037,76 +9037,76 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
           throw new Error(`Optimize returned non-JSON: ${l.slice(0, 160)}`);
         }
         Le((_) => ({ ...x, intent: _.intent }));
-      } catch (i) {
-        G(i.message || "Optimize failed.");
+      } catch (o) {
+        V(o.message || "Optimize failed.");
       } finally {
         bt(!1);
       }
     }
-  }, [J, b, A, M, Y, ht]), [Pe, wt] = T(null), Eo = I(async () => {
-    if (!J) return;
-    if (!J.models.image) {
-      G(`This endpoint (${J.label}) doesn't expose an image model. Pick one in Settings → Cover art, or upload your own image.`);
+  }, [G, b, A, M, K, ht]), [Pe, wt] = T(null), Eo = I(async () => {
+    if (!G) return;
+    if (!G.models.image) {
+      V(`This endpoint (${G.label}) doesn't expose an image model. Pick one in Settings → Cover art, or upload your own image.`);
       return;
     }
-    if (Xe) return;
+    if (Qe) return;
     me.current?.abort(), me.current = new AbortController();
-    const i = me.current.signal;
-    Kt(!0), G(null);
+    const o = me.current.signal;
+    Kt(!0), V(null);
     try {
-      const l = (ie.trim() || Ja(H, b, A)).slice(0, 1500), p = await Br(J, l, i);
-      if (i.aborted) return;
+      const l = (ie.trim() || Ja($, b, A)).slice(0, 1500), p = await Br(G, l, o);
+      if (o.aborted) return;
       R(p), xe && sa.current?.(xe, p);
     } catch (l) {
       if (l.name === "AbortError") return;
-      G(l.message || "Cover-art generation failed.");
+      V(l.message || "Cover-art generation failed.");
     } finally {
       Kt(!1);
     }
-  }, [J, ie, H, b, A, Xe, xe]), Ao = I((i) => {
-    if (!i.type.startsWith("image/")) {
-      G("That file is not an image. Pick a PNG/JPG/WebP.");
+  }, [G, ie, $, b, A, Qe, xe]), Ao = I((o) => {
+    if (!o.type.startsWith("image/")) {
+      V("That file is not an image. Pick a PNG/JPG/WebP.");
       return;
     }
-    if (i.size > 4 * 1024 * 1024) {
-      G("Cover image is too big (limit 4 MB). Try a smaller file.");
+    if (o.size > 4 * 1024 * 1024) {
+      V("Cover image is too big (limit 4 MB). Try a smaller file.");
       return;
     }
     const l = new FileReader();
-    l.onerror = () => G("Could not read that image file."), l.onload = () => {
+    l.onerror = () => V("Could not read that image file."), l.onload = () => {
       const p = l.result;
       typeof p == "string" && p.startsWith("data:image/") && (R(p), xe && sa.current?.(xe, p));
-    }, l.readAsDataURL(i);
+    }, l.readAsDataURL(o);
   }, [xe]), Mn = I(async () => {
     if (!Pe) {
-      wt("theme"), G(null);
+      wt("theme"), V(null);
       try {
-        const i = "You are a creative songwriter. Given a Style description (genre, mood, instrumentation hints), write a vivid one-paragraph THEME for the song — a setting, a story arc, an emotional core. Keep it 2-4 sentences, evocative but specific. Plain prose only, no headers, no markdown, no quotes.";
+        const o = "You are a creative songwriter. Given a Style description (genre, mood, instrumentation hints), write a vivid one-paragraph THEME for the song — a setting, a story arc, an emotional core. Keep it 2-4 sentences, evocative but specific. Plain prose only, no headers, no markdown, no quotes.";
         me.current?.abort(), me.current = new AbortController();
-        const l = await ht(i, {
+        const l = await ht(o, {
           style: A || "pop",
           existing_theme: b || null
         }, { temperature: 0.85, maxTokens: 200, signal: me.current.signal });
         P(l);
-      } catch (i) {
-        G(i.message || "Theme inspiration failed.");
+      } catch (o) {
+        V(o.message || "Theme inspiration failed.");
       } finally {
         wt(null);
       }
     }
   }, [Pe, ht, A, b]), Rn = I(async () => {
     if (!Pe) {
-      wt("style"), G(null);
+      wt("style"), V(null);
       try {
-        const i = 'You are a music-production assistant. Given a song THEME, propose a Style description: a comma-separated list of genre + mood + tempo + instrument cues (8-12 tags). Plain text, lowercase, comma-separated, no headers, no markdown, no surrounding prose. Example: "indie folk, acoustic, melancholic, 80 bpm, fingerpicked guitar, soft female vocals, reverb-heavy".';
+        const o = 'You are a music-production assistant. Given a song THEME, propose a Style description: a comma-separated list of genre + mood + tempo + instrument cues (8-12 tags). Plain text, lowercase, comma-separated, no headers, no markdown, no surrounding prose. Example: "indie folk, acoustic, melancholic, 80 bpm, fingerpicked guitar, soft female vocals, reverb-heavy".';
         me.current?.abort(), me.current = new AbortController();
-        const l = await ht(i, {
+        const l = await ht(o, {
           theme: b || "a quiet evening",
           existing_style: A || null
         }, { temperature: 0.7, maxTokens: 120, signal: me.current.signal });
         z(l.replace(/^["']|["']$/g, ""));
-      } catch (i) {
-        G(i.message || "Style suggestion failed.");
+      } catch (o) {
+        V(o.message || "Style suggestion failed.");
       } finally {
         wt(null);
       }
@@ -9114,32 +9114,32 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
   }, [Pe, ht, b, A]), jn = I(async () => {
     if (!Pe) {
       if (!M.trim()) {
-        G("Nothing to polish — write some lyrics first.");
+        V("Nothing to polish — write some lyrics first.");
         return;
       }
-      wt("lyrics"), G(null);
+      wt("lyrics"), V(null);
       try {
-        const i = "You are a senior songwriter. Polish the user's lyrics for flow, rhyme, imagery, and structural balance. Preserve the user's intent and language. Keep [Verse], [Chorus], [Bridge], [Intro], [Outro], [Inst] section markers if present (or add appropriate ones). Return ONLY the polished lyrics — no commentary, no markdown, no quotes.";
+        const o = "You are a senior songwriter. Polish the user's lyrics for flow, rhyme, imagery, and structural balance. Preserve the user's intent and language. Keep [Verse], [Chorus], [Bridge], [Intro], [Outro], [Inst] section markers if present (or add appropriate ones). Return ONLY the polished lyrics — no commentary, no markdown, no quotes.";
         me.current?.abort(), me.current = new AbortController();
-        const l = await ht(i, {
+        const l = await ht(o, {
           style: A || null,
           lyrics: M
         }, { temperature: 0.6, maxTokens: 1200, signal: me.current.signal });
         if (l.length > Ft) {
-          G(`Polished lyrics exceeded ${Ft} chars (${l.length}). Trimming the original first might help.`);
+          V(`Polished lyrics exceeded ${Ft} chars (${l.length}). Trimming the original first might help.`);
           return;
         }
         C(l);
-      } catch (i) {
-        G(i.message || "Lyrics polish failed.");
+      } catch (o) {
+        V(o.message || "Lyrics polish failed.");
       } finally {
         wt(null);
       }
     }
-  }, [Pe, ht, A, M]), Pn = (i) => {
-    z((l) => l ? `${l}, ${i.toLowerCase()}` : i.toLowerCase());
+  }, [Pe, ht, A, M]), Pn = (o) => {
+    z((l) => l ? `${l}, ${o.toLowerCase()}` : o.toLowerCase());
   }, xr = () => {
-    const i = [
+    const o = [
       "Late-night coding session, neon city skyline, focus and flow.",
       "Sunday-morning coffee, soft rain, lo-fi piano.",
       "Synthwave anthem about shipping on Friday evening.",
@@ -9148,118 +9148,118 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       "Cinematic orchestral piece for a heroic underdog scene.",
       "Upbeat pop anthem about finishing a hard project."
     ];
-    P(i[Math.floor(Math.random() * i.length)]);
+    P(o[Math.floor(Math.random() * o.length)]);
   }, Dn = () => {
-    const i = S ?? X.state.trackId ?? gt[0]?.id ?? be[0]?.id ?? null, l = i ? nt.find((p) => p.id === i) ?? null : null;
+    const o = S ?? O.state.trackId ?? gt[0]?.id ?? be[0]?.id ?? null, l = o ? Oe.find((p) => p.id === o) ?? null : null;
     l && Ot(l), v("creator"), xr();
-  }, zo = I((i) => {
-    Re((l) => l.filter((p) => p.id !== i)), Jl(i).catch((l) => console.warn("Track cache delete failed:", l)), jc(i).catch((l) => console.warn("Track file delete failed:", l));
+  }, zo = I((o) => {
+    Re((l) => l.filter((p) => p.id !== o)), Jl(o).catch((l) => console.warn("Track cache delete failed:", l)), jc(o).catch((l) => console.warn("Track file delete failed:", l));
   }, []), Un = I(async () => {
     if (!Aa) {
       So(!0);
       try {
-        const i = await Pc();
-        ia(i), d({
+        const o = await Pc();
+        ia(o), d({
           appId: "musiccreator",
           appName: "JULI3TA",
           appIcon: "FolderOpen",
           title: "JULI3TA folder opened",
-          message: i,
+          message: o,
           isRead: !1
         });
-      } catch (i) {
-        re(`Could not open JULI3TA folder — ${i.message || i}`);
+      } catch (o) {
+        re(`Could not open JULI3TA folder — ${o.message || o}`);
       } finally {
         So(!1);
       }
     }
-  }, [d, Aa]), Ma = I(async (i, l) => {
+  }, [d, Aa]), Ma = I(async (o, l) => {
     const p = l.trim().slice(0, 200) || "Untitled";
-    Re((x) => x.map((_) => _.id === i ? { ..._, title: p } : _));
+    Re((x) => x.map((_) => _.id === o ? { ..._, title: p } : _));
     try {
-      await Gl(i, p), re(null);
+      await Gl(o, p), re(null);
     } catch (x) {
       const _ = x.message || "Database write failed";
       re(`Couldn't rename track — ${_}.`);
     }
-  }, []), wr = I(async (i, l) => {
-    Re((p) => p.map((x) => x.id === i ? { ...x, coverDataUrl: l } : x));
+  }, []), wr = I(async (o, l) => {
+    Re((p) => p.map((x) => x.id === o ? { ...x, coverDataUrl: l } : x));
     try {
-      await Vl(i, l), re(null);
+      await Vl(o, l), re(null);
     } catch (p) {
       const x = p.message || "Database write failed";
       re(`Couldn't save cover art — ${x}.`);
     }
   }, []);
-  B(() => {
+  W(() => {
     sa.current = wr;
   }, [wr]);
-  const Lo = I(async (i, l) => {
-    Re((p) => p.map((x) => x.id === i ? { ...x, styleTags: l || "—" } : x));
+  const Lo = I(async (o, l) => {
+    Re((p) => p.map((x) => x.id === o ? { ...x, styleTags: l || "—" } : x));
     try {
-      await Yl(i, l), re(null);
+      await Yl(o, l), re(null);
     } catch (p) {
       const x = p.message || "Database write failed";
       re(`Couldn't save style — ${x}.`);
     }
-  }, []), Io = I(async (i, l) => {
-    Re((p) => p.map((x) => x.id === i ? { ...x, lyricsPreview: l } : x));
+  }, []), Io = I(async (o, l) => {
+    Re((p) => p.map((x) => x.id === o ? { ...x, lyricsPreview: l } : x));
     try {
-      await Kl(i, l), re(null);
+      await Kl(o, l), re(null);
     } catch (p) {
       const x = p.message || "Database write failed";
       re(`Couldn't save lyrics — ${x}.`);
     }
-  }, []), Mo = I(async (i, l) => {
-    Re((p) => p.map((x) => x.id === i ? { ...x, specsJson: l } : x));
+  }, []), Mo = I(async (o, l) => {
+    Re((p) => p.map((x) => x.id === o ? { ...x, specsJson: l } : x));
     try {
-      await Xl(i, l), re(null);
+      await Xl(o, l), re(null);
     } catch (p) {
       const x = p.message || "Database write failed";
       re(`Couldn't save specs — ${x}.`);
     }
-  }, []), Ro = I(async (i, l) => {
-    Re((p) => p.map((x) => x.id === i ? { ...x, theme: l } : x));
+  }, []), Ro = I(async (o, l) => {
+    Re((p) => p.map((x) => x.id === o ? { ...x, theme: l } : x));
     try {
-      await Ql(i, l), re(null);
+      await Ql(o, l), re(null);
     } catch (p) {
       const x = p.message || "Database write failed";
       re(`Couldn't save theme — ${x}.`);
     }
   }, []);
-  B(() => {
+  W(() => {
     if (!xe) return;
-    const i = xe, l = setTimeout(() => {
-      const p = vt.find((ke) => ke.id === i);
+    const o = xe, l = setTimeout(() => {
+      const p = vt.find((ke) => ke.id === o);
       if (!p) return;
-      const x = H.trim() || p.title, _ = A.trim(), L = b, O = qt(Y) > 0 ? JSON.stringify(Y) : "", Q = p.styleTags === "—" ? "" : p.styleTags || "";
-      p.title !== x && Ma(i, x), Q !== _ && Lo(i, _), (p.lyricsPreview || "") !== M && Io(i, M), (p.specsJson || "") !== O && Mo(i, O), (p.theme || "") !== L && Ro(i, L);
+      const x = $.trim() || p.title, _ = A.trim(), L = b, H = qt(K) > 0 ? JSON.stringify(K) : "", Q = p.styleTags === "—" ? "" : p.styleTags || "";
+      p.title !== x && Ma(o, x), Q !== _ && Lo(o, _), (p.lyricsPreview || "") !== M && Io(o, M), (p.specsJson || "") !== H && Mo(o, H), (p.theme || "") !== L && Ro(o, L);
     }, 600);
     return () => clearTimeout(l);
-  }, [xe, H, A, b, M, Y, vt, Ma, Lo, Io, Mo, Ro]);
-  const [jo, Po] = T(null), [On, Do] = T(!1), Ot = I((i) => {
-    C(i.lyricsPreview ?? ""), z(i.styleTags && i.styleTags !== "—" ? i.styleTags : ""), P(i.theme ?? "");
-    const l = i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "");
-    if (q(l), se(!1), i.specsJson)
+  }, [xe, $, A, b, M, K, vt, Ma, Lo, Io, Mo, Ro]);
+  const [jo, Po] = T(null), [On, Do] = T(!1), Ot = I((o) => {
+    C(o.lyricsPreview ?? ""), z(o.styleTags && o.styleTags !== "—" ? o.styleTags : ""), P(o.theme ?? "");
+    const l = o.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "");
+    if (J(l), se(!1), o.specsJson)
       try {
-        Le(JSON.parse(i.specsJson));
+        Le(JSON.parse(o.specsJson));
       } catch {
         Le({});
       }
     else
       Le({});
-    R(i.coverDataUrl ?? ""), Ke(""), xa(i.id), G(null), N(null), se(!1), ve(i) ? i.source === "youtube" ? (h("restyle"), Te(null), Ie(`${l}.mp3`), Ne("Resolving streamed audio…"), ct(!0), (async () => {
+    R(o.coverDataUrl ?? ""), Xe(""), xa(o.id), V(null), N(null), se(!1), ve(o) ? o.source === "youtube" ? (h("restyle"), Te(null), Ie(`${l}.mp3`), Ne("Resolving streamed audio…"), ct(!0), (async () => {
       try {
-        const x = i.externalId || "";
+        const x = o.externalId || "";
         if (!x) throw new Error("Missing source identifier.");
-        const _ = ma(x), L = ot[_], O = L && Date.now() - L.resolvedAt < 5400 * 1e3 ? L.src : (await Lr(x)).proxyUrl;
-        await mt(O, `${l}.mp3`);
+        const _ = ma(x), L = it[_], H = L && Date.now() - L.resolvedAt < 5400 * 1e3 ? L.src : (await Lr(x)).proxyUrl;
+        await mt(H, `${l}.mp3`);
       } catch (x) {
-        ct(!1), Te(null), Ie(null), Ne(null), G(`Could not load streamed track for restyle: ${x.message || "unknown error"}`);
+        ct(!1), Te(null), Ie(null), Ne(null), V(`Could not load streamed track for restyle: ${x.message || "unknown error"}`);
       }
-    })()) : (h("restyle"), mt(i.audioDataUrl, `${l}.mp3`)) : (Te(null), Ie(null), Ne(null), h("lyricsOnly"));
-  }, [mt, ot]), Uo = I((i) => {
-    const l = la(i);
+    })()) : (h("restyle"), mt(o.audioDataUrl, `${l}.mp3`)) : (Te(null), Ie(null), Ne(null), h("lyricsOnly"));
+  }, [mt, it]), Uo = I((o) => {
+    const l = la(o);
     if (!l) {
       d({
         appId: "musiccreator",
@@ -9276,23 +9276,23 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       appId: "texteditor",
       args: { editor: { nodeId: l } }
     });
-  }, [la, c, d, a]), Ra = I((i, l, p, x) => {
-    const _ = o.ensureUserFolder("Desktop");
+  }, [la, c, d, a]), Ra = I((o, l, p, x) => {
+    const _ = i.ensureUserFolder("Desktop");
     if (!_) return;
-    const L = o.findChildByName(_, i);
-    let O;
+    const L = i.findChildByName(_, o);
+    let H;
     if (L)
-      p.refTrackId || o.writeFile(L.id, l), O = L.id;
+      p.refTrackId || i.writeFile(L.id, l), H = L.id;
     else {
-      O = o.createFile(_, i, l, p);
-      const Q = Array.from(x).reduce((kt, qe) => kt + qe.charCodeAt(0), 0), ke = Q % 6 + 1, We = Math.floor(Q / 6) % 4;
+      H = i.createFile(_, o, l, p);
+      const Q = Array.from(x).reduce((kt, Je) => kt + Je.charCodeAt(0), 0), ke = Q % 6 + 1, qe = Math.floor(Q / 6) % 4;
       c({
         type: "ADD_DESKTOP_ICON",
         icon: {
-          name: i,
-          icon: jl(i),
-          fileSystemNodeId: O,
-          position: { x: 16 + ke * 80, y: 16 + We * 90 },
+          name: o,
+          icon: jl(o),
+          fileSystemNodeId: H,
+          position: { x: 16 + ke * 80, y: 16 + qe * 90 },
           isSelected: !1
         }
       });
@@ -9302,51 +9302,51 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       appName: "JULI3TA",
       appIcon: "Sparkles",
       title: a("musiccreator.notify.savedToDesktopTitle"),
-      message: a("musiccreator.notify.savedToDesktopBody", { name: i }),
+      message: a("musiccreator.notify.savedToDesktopBody", { name: o }),
       isRead: !1
     });
-  }, [o, c, d, a]), Hn = I((i) => {
-    if (!i.audioDataUrl) return;
-    const l = $a(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""));
-    Ra(`${l}.mp3`, "", { mimeType: "audio/mpeg", refTrackId: i.id }, i.id);
-  }, [Ra]), $n = I((i) => {
-    if (!i.lyricsPreview) return;
-    const l = $a(i.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""));
-    Ra(`${l}.lyrics.txt`, i.lyricsPreview, { mimeType: "text/plain" }, `${i.id}-lyrics`);
-  }, [Ra]), Fn = I((i) => {
-    Ue(!1), v("player"), E(i.id);
-  }, []), it = I((i) => {
-    const l = i.dataTransfer.getData(ya);
+  }, [i, c, d, a]), Hn = I((o) => {
+    if (!o.audioDataUrl) return;
+    const l = $a(o.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""));
+    Ra(`${l}.mp3`, "", { mimeType: "audio/mpeg", refTrackId: o.id }, o.id);
+  }, [Ra]), $n = I((o) => {
+    if (!o.lyricsPreview) return;
+    const l = $a(o.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""));
+    Ra(`${l}.lyrics.txt`, o.lyricsPreview, { mimeType: "text/plain" }, `${o.id}-lyrics`);
+  }, [Ra]), Fn = I((o) => {
+    Ue(!1), v("player"), E(o.id);
+  }, []), nt = I((o) => {
+    const l = o.dataTransfer.getData(ya);
     if (!l) return null;
     try {
       return JSON.parse(l);
     } catch {
       return null;
     }
-  }, []), Bn = I((i) => {
-    const l = it(i);
+  }, []), Bn = I((o) => {
+    const l = nt(o);
     if (l && l.lyricsPreview) {
-      i.preventDefault(), C(l.lyricsPreview);
+      o.preventDefault(), C(l.lyricsPreview);
       const p = l.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "");
-      !H.trim() && p && q(p), !A.trim() && l.styleTags && l.styleTags !== "—" && z(l.styleTags);
+      !$.trim() && p && J(p), !A.trim() && l.styleTags && l.styleTags !== "—" && z(l.styleTags);
       return;
     }
-  }, [it, H, A]), Wn = I((i) => {
-    const l = it(i);
-    l && l.styleTags && l.styleTags !== "—" && (i.preventDefault(), z((p) => p ? `${p}, ${l.styleTags}` : l.styleTags));
-  }, [it]), qn = I((i) => {
-    const l = it(i);
+  }, [nt, $, A]), Wn = I((o) => {
+    const l = nt(o);
+    l && l.styleTags && l.styleTags !== "—" && (o.preventDefault(), z((p) => p ? `${p}, ${l.styleTags}` : l.styleTags));
+  }, [nt]), qn = I((o) => {
+    const l = nt(o);
     if (l) {
-      i.preventDefault();
+      o.preventDefault();
       const p = l.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, ""), x = l.styleTags && l.styleTags !== "—" ? `Inspired by "${p}" — ${l.styleTags}` : `Inspired by "${p}"`;
       P(x);
     }
-  }, [it]), Jn = I((i) => {
-    const l = it(i);
-    l && (i.preventDefault(), q(l.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "")));
-  }, [it]), ja = (i) => {
-    i.dataTransfer.types.includes(ya) && (i.preventDefault(), i.dataTransfer.dropEffect = "copy");
-  }, Oo = M.length, Gn = A.length, V = jt !== "idle", Vn = ge(() => ({
+  }, [nt]), Jn = I((o) => {
+    const l = nt(o);
+    l && (o.preventDefault(), J(l.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "")));
+  }, [nt]), ja = (o) => {
+    o.dataTransfer.types.includes(ya) && (o.preventDefault(), o.dataTransfer.dropEffect = "copy");
+  }, Oo = M.length, Gn = A.length, Y = jt !== "idle", Vn = ge(() => ({
     appLabel: "JULI3TA",
     groups: [
       {
@@ -9354,7 +9354,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         label: "Song",
         items: [
           { id: "new", label: "New Song", onSelect: () => {
-            na.current?.abort(), me.current?.abort(), Ia.current = !1, h("compose"), P(""), C(""), z(""), q(""), Le({}), N(null), se(!1), R(""), Ke(""), pt(!1), Te(null), Ie(null), Ne(null), G(null), re(null), Fe("idle"), Pt(0), wt(null), Kt(!1), bt(!1), xa(null);
+            na.current?.abort(), me.current?.abort(), Ia.current = !1, h("compose"), P(""), C(""), z(""), J(""), Le({}), N(null), se(!1), R(""), Xe(""), pt(!1), Te(null), Ie(null), Ne(null), V(null), re(null), Be("idle"), Pt(0), wt(null), Kt(!1), bt(!1), xa(null);
           } },
           { id: "surprise", label: "Surprise me…", onSelect: () => xr() },
           { id: "mode-restyle", label: "Restyle Mode", onSelect: () => h("restyle") },
@@ -9390,22 +9390,22 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     ]
   }), [r]);
   Ll(r?.id ?? null, Vn);
-  const Be = ge(
+  const We = ge(
     () => vt.filter(Bi),
     [vt]
   ), gt = ge(() => {
-    let i = Be;
-    je === "songs" ? i = i.filter((p) => ve(p) && !/\(restyle\)\s*$/i.test(p.title) && !/\(lyrics\)\s*$/i.test(p.title)) : je === "restyles" ? i = i.filter((p) => /\(restyle\)\s*$/i.test(p.title)) : je === "lyrics" && (i = i.filter((p) => !ve(p) || /\(lyrics\)\s*$/i.test(p.title)));
+    let o = We;
+    je === "songs" ? o = o.filter((p) => ve(p) && !/\(restyle\)\s*$/i.test(p.title) && !/\(lyrics\)\s*$/i.test(p.title)) : je === "restyles" ? o = o.filter((p) => /\(restyle\)\s*$/i.test(p.title)) : je === "lyrics" && (o = o.filter((p) => !ve(p) || /\(lyrics\)\s*$/i.test(p.title)));
     const l = Ce.trim().toLowerCase();
-    return l ? i.filter((p) => p.title.toLowerCase().includes(l) || p.styleTags.toLowerCase().includes(l)) : i;
-  }, [Be, Ce, je]), Ht = ge(() => {
-    let i = be;
-    et === "favorites" && (i = i.filter((p) => Ca.has(p.id)));
+    return l ? o.filter((p) => p.title.toLowerCase().includes(l) || p.styleTags.toLowerCase().includes(l)) : o;
+  }, [We, Ce, je]), Ht = ge(() => {
+    let o = be;
+    tt === "favorites" && (o = o.filter((p) => Ca.has(p.id)));
     const l = Ce.trim().toLowerCase();
-    return l ? i.filter((p) => p.title.toLowerCase().includes(l) || (p.artist || "").toLowerCase().includes(l) || (p.album || "").toLowerCase().includes(l)) : i;
-  }, [be, et, Ce, Ca]), ca = I((i) => {
-    i.slice(0, 4).forEach((l) => {
-      const p = ma(l.id), x = ot[p];
+    return l ? o.filter((p) => p.title.toLowerCase().includes(l) || (p.artist || "").toLowerCase().includes(l) || (p.album || "").toLowerCase().includes(l)) : o;
+  }, [be, tt, Ce, Ca]), ca = I((o) => {
+    o.slice(0, 4).forEach((l) => {
+      const p = ma(l.id), x = it[p];
       x && Date.now() - x.resolvedAt < 5400 * 1e3 || gr.current.has(l.id) || (gr.current.add(l.id), go((_) => new Set(_).add(l.id)), Lr(l.id).then((_) => {
         ho((L) => ({
           ...L,
@@ -9419,46 +9419,46 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         });
       }));
     });
-  }, [ot]);
-  B(() => {
-    if (!at) return;
-    const i = new AbortController();
+  }, [it]);
+  W(() => {
+    if (!rt) return;
+    const o = new AbortController();
     return Promise.allSettled([
-      zc(i.signal),
-      Xo(i.signal),
-      Qo(i.signal)
+      zc(o.signal),
+      Xo(o.signal),
+      Qo(o.signal)
     ]).then(([l, p, x]) => {
       l.status === "fulfilled" ? uo(l.value) : uo(null), p.status === "fulfilled" && po(p.value), x.status === "fulfilled" && mo(x.value);
-    }), () => i.abort();
-  }, [at]), B(() => {
-    if (!at) return;
-    const i = (l) => {
+    }), () => o.abort();
+  }, [rt]), W(() => {
+    if (!rt) return;
+    const o = (l) => {
       l.key === "Escape" && Ue(!1);
     };
-    return window.addEventListener("keydown", i), () => window.removeEventListener("keydown", i);
-  }, [at]), B(() => {
-    if (!at) return;
-    const i = lr.trim();
-    if (i.length < 2) {
+    return window.addEventListener("keydown", o), () => window.removeEventListener("keydown", o);
+  }, [rt]), W(() => {
+    if (!rt) return;
+    const o = lr.trim();
+    if (o.length < 2) {
       const L = window.setTimeout(() => {
-        cr([]), rt(null), Na(!1);
+        cr([]), ot(null), Na(!1);
       }, 0);
       return () => window.clearTimeout(L);
     }
-    const l = `${oa}:${i.toLowerCase()}`, p = ko.current.get(l);
+    const l = `${oa}:${o.toLowerCase()}`, p = ko.current.get(l);
     if (p) {
-      cr(p), Na(!1), rt(null), ca(p);
+      cr(p), Na(!1), ot(null), ca(p);
       return;
     }
     const x = new AbortController(), _ = setTimeout(() => {
-      Na(!0), rt(null);
+      Na(!0), ot(null);
       let L = hr.current.get(l);
-      L || (L = Rc(i, oa, 20, x.signal).then((O) => oa === "playlists" ? O.results.playlists : O.results.tracks).catch(() => Mc(i, 20, x.signal)).finally(() => {
+      L || (L = Rc(o, oa, 20, x.signal).then((H) => oa === "playlists" ? H.results.playlists : H.results.tracks).catch(() => Mc(o, 20, x.signal)).finally(() => {
         hr.current.delete(l);
-      }), hr.current.set(l, L)), L.then((O) => {
-        ko.current.set(l, O), cr(O), ca(O), O.length > 0 && co(i);
-      }).catch((O) => {
-        x.signal.aborted || rt(O.message || "Music search failed.");
+      }), hr.current.set(l, L)), L.then((H) => {
+        ko.current.set(l, H), cr(H), ca(H), H.length > 0 && co(o);
+      }).catch((H) => {
+        x.signal.aborted || ot(H.message || "Music search failed.");
       }).finally(() => {
         x.signal.aborted || Na(!1);
       });
@@ -9466,42 +9466,42 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     return () => {
       x.abort(), clearTimeout(_);
     };
-  }, [lr, oa, at, ca, co]);
+  }, [lr, oa, rt, ca, co]);
   const Pa = I(async () => {
-    const [i, l] = await Promise.allSettled([
+    const [o, l] = await Promise.allSettled([
       Xo(),
       Qo()
     ]);
-    i.status === "fulfilled" && po(i.value), l.status === "fulfilled" && mo(l.value);
-  }, []), Yn = I(async (i, l) => {
-    await Lc(i, l), await Pa(), d({
+    o.status === "fulfilled" && po(o.value), l.status === "fulfilled" && mo(l.value);
+  }, []), Yn = I(async (o, l) => {
+    await Lc(o, l), await Pa(), d({
       appId: "musiccreator",
       appName: "JULI3TA",
       appIcon: "Music",
       title: "Music source connected",
-      message: `${i} verified and saved to the OS keychain.`,
+      message: `${o} verified and saved to the OS keychain.`,
       isRead: !1
     });
-  }, [d, Pa]), Kn = I(async (i) => {
-    await Ic(i), await Pa(), d({
+  }, [d, Pa]), Kn = I(async (o) => {
+    await Ic(o), await Pa(), d({
       appId: "musiccreator",
       appName: "JULI3TA",
       appIcon: "Music",
       title: "Music source disconnected",
-      message: `${i} credentials removed from the OS keychain.`,
+      message: `${o} credentials removed from the OS keychain.`,
       isRead: !1
     });
   }, [d, Pa]), Xn = ge(
-    () => new Set(be.filter((i) => i.externalId).map((i) => i.externalId)),
+    () => new Set(be.filter((o) => o.externalId).map((o) => o.externalId)),
     [be]
-  ), Da = I((i, l) => {
-    const p = qi(i.title, i.channel);
+  ), Da = I((o, l) => {
+    const p = qi(o.title, o.channel);
     return {
-      id: l?.id ?? ma(i.id),
-      title: p.song || i.title || "Untitled",
+      id: l?.id ?? ma(o.id),
+      title: p.song || o.title || "Untitled",
       styleTags: "",
       lyricsPreview: "",
-      durationMs: i.durationMs ?? 0,
+      durationMs: o.durationMs ?? 0,
       bitrate: 0,
       sampleRate: 0,
       sizeBytes: 0,
@@ -9512,153 +9512,172 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       theme: "",
       source: "youtube",
       audioKind: "remote_stream",
-      externalId: i.id,
-      externalUrl: `https://www.youtube.com/watch?v=${i.id}`,
-      thumbnailUrl: i.thumbnailUrl || Xa(i.id),
-      artist: p.artist || i.channel || "Unknown",
-      album: i.channel ?? ""
+      externalId: o.id,
+      externalUrl: `https://www.youtube.com/watch?v=${o.id}`,
+      thumbnailUrl: o.thumbnailUrl || Xa(o.id),
+      artist: p.artist || o.channel || "Unknown",
+      album: o.channel ?? ""
     };
-  }, []), Qn = I(async (i, l) => {
-    if (i.audioDataUrl && !l?.force) return i.audioDataUrl;
-    if (!Wi(i) || !i.externalId) return i.audioDataUrl || null;
-    const p = ma(i.externalId), x = ot[p] ?? ot[i.id];
+  }, []), Qn = I(async (o, l) => {
+    if (o.audioDataUrl && !l?.force) return o.audioDataUrl;
+    if (!Wi(o) || !o.externalId) return o.audioDataUrl || null;
+    const p = ma(o.externalId), x = it[p] ?? it[o.id];
     if (!l?.force && x && Date.now() - x.resolvedAt < 5400 * 1e3) return x.src;
-    const _ = await Lr(i.externalId);
+    const _ = await Lr(o.externalId);
     return ho((L) => ({ ...L, [p]: { src: _.proxyUrl, resolvedAt: Date.now() } })), _.proxyUrl;
-  }, [ot]), nt = ge(
+  }, [it]), Oe = ge(
     () => [...bo, ...be, ...gt],
     [bo, be, gt]
   );
-  B(() => {
-    if (!S || nt.length === 0) return;
-    nt.some((l) => l.id === S) || E(null);
-  }, [S, nt]);
-  const Ho = ee(null), X = xd(nt, Ho, Qn);
-  B(() => {
-    const i = X.state.trackId;
-    i && Qi((l) => l[0] === i ? l : [i, ...l.filter((x) => x !== i)].slice(0, 8));
-  }, [X.state.trackId]), B(() => {
+  W(() => {
+    if (!S || Oe.length === 0) return;
+    Oe.some((l) => l.id === S) || E(null);
+  }, [S, Oe]);
+  const Ho = ee(null), O = xd(Oe, Ho, Qn);
+  W(() => {
+    const o = O.state.trackId;
+    o && Qi((l) => l[0] === o ? l : [o, ...l.filter((x) => x !== o)].slice(0, 8));
+  }, [O.state.trackId]), W(() => {
+    if (typeof navigator > "u" || !("mediaSession" in navigator)) return;
+    const o = navigator.mediaSession, l = O.state.trackId, p = l ? Oe.find((x) => x.id === l) : null;
+    if (!p) {
+      o.metadata = null, o.playbackState = "none";
+      return;
+    }
+    return o.metadata = new MediaMetadata({
+      title: p.title || "Untitled",
+      artist: p.artist || "JULI3TA",
+      album: p.album || (p.styleTags && p.styleTags !== "—" ? p.styleTags : ""),
+      artwork: p.coverDataUrl ? [{ src: p.coverDataUrl, sizes: "512x512", type: p.coverDataUrl.startsWith("data:image/png") ? "image/png" : "image/jpeg" }] : p.thumbnailUrl ? [{ src: p.thumbnailUrl, sizes: "256x256", type: "image/jpeg" }] : []
+    }), o.playbackState = O.state.playing ? "playing" : "paused", o.setActionHandler("play", () => O.toggle(p)), o.setActionHandler("pause", () => O.pause()), o.setActionHandler("previoustrack", () => O.prev()), o.setActionHandler("nexttrack", () => O.next()), o.setActionHandler("seekbackward", (x) => {
+      O.seek(Math.max(0, O.state.positionMs - (x.seekOffset ?? 10) * 1e3));
+    }), o.setActionHandler("seekforward", (x) => {
+      O.seek(Math.min(O.state.durationMs || 0, O.state.positionMs + (x.seekOffset ?? 10) * 1e3));
+    }), () => {
+      o.setActionHandler("play", null), o.setActionHandler("pause", null), o.setActionHandler("previoustrack", null), o.setActionHandler("nexttrack", null), o.setActionHandler("seekbackward", null), o.setActionHandler("seekforward", null);
+    };
+  }, [O, O.state.trackId, O.state.playing, Oe]), W(() => {
     if (y !== "player") return;
-    const i = (l) => {
+    const o = (l) => {
       const p = l.target;
       if (p) {
         const L = p.tagName;
         if (L === "INPUT" || L === "TEXTAREA" || L === "SELECT" || p.isContentEditable) return;
       }
-      const x = X.state.trackId;
+      const x = O.state.trackId;
       if (!x) return;
-      const _ = nt.find((L) => L.id === x);
+      const _ = Oe.find((L) => L.id === x);
       if (_)
         switch (l.key) {
           case " ":
-            l.preventDefault(), X.toggle(_);
+            l.preventDefault(), O.toggle(_);
             break;
           case "ArrowLeft":
-            l.preventDefault(), X.seek(Math.max(0, X.state.positionMs - 5e3));
+            l.preventDefault(), O.seek(Math.max(0, O.state.positionMs - 5e3));
             break;
           case "ArrowRight":
-            l.preventDefault(), X.seek(Math.min(X.state.durationMs || 0, X.state.positionMs + 5e3));
+            l.preventDefault(), O.seek(Math.min(O.state.durationMs || 0, O.state.positionMs + 5e3));
             break;
           case "ArrowUp":
-            l.preventDefault(), X.setVolume(Math.min(1, X.state.volume + 0.1));
+            l.preventDefault(), O.setVolume(Math.min(1, O.state.volume + 0.1));
             break;
           case "ArrowDown":
-            l.preventDefault(), X.setVolume(Math.max(0, X.state.volume - 0.1));
+            l.preventDefault(), O.setVolume(Math.max(0, O.state.volume - 0.1));
             break;
         }
     };
-    return window.addEventListener("keydown", i), () => window.removeEventListener("keydown", i);
-  }, [y, X, nt]);
-  const Zn = I((i) => {
-    const l = i.items.find(ve);
+    return window.addEventListener("keydown", o), () => window.removeEventListener("keydown", o);
+  }, [y, O, Oe]);
+  const Zn = I((o) => {
+    const l = o.items.find(ve);
     l && (vo((p) => [
-      ...i.items.filter((x) => !p.some((_) => _.id === x.id)),
+      ...o.items.filter((x) => !p.some((_) => _.id === x.id)),
       ...p
-    ]), E(l.id), Ue(!1), v("player"), X.play(l));
-  }, [X]), es = I(async (i) => {
-    await pc(i), Ut(await ua());
-  }, []), ts = I((i) => {
-    rt(null), yo(i.id);
-    const l = ma(i.id), p = ot[l], x = Da(
-      i,
+    ]), E(l.id), Ue(!1), v("player"), O.play(l));
+  }, [O]), es = I(async (o) => {
+    await pc(o), Ut(await ua());
+  }, []), ts = I((o) => {
+    ot(null), yo(o.id);
+    const l = ma(o.id), p = it[l], x = Da(
+      o,
       p ? { id: l, audioDataUrl: p.src } : void 0
     );
-    vo((_) => [x, ..._.filter((L) => L.id !== x.id)]), E(x.id), v("player"), X.play(x), yo(null);
-  }, [X, Da, ot]), as = I(async (i) => {
-    fo(i.id);
-    const l = Da(i);
+    vo((_) => [x, ..._.filter((L) => L.id !== x.id)]), E(x.id), v("player"), O.play(x), yo(null);
+  }, [O, Da, it]), as = I(async (o) => {
+    fo(o.id);
+    const l = Da(o);
     try {
-      await Ri(l), dr((p) => [l, ...p.filter((x) => x.id !== l.id)]), E(l.id), no("library"), so("all"), ca([i]), pr.length > 0;
+      await Ri(l), dr((p) => [l, ...p.filter((x) => x.id !== l.id)]), E(l.id), no("library"), so("all"), ca([o]), pr.length > 0;
     } catch (p) {
-      rt(p.message || "Could not save track.");
+      ot(p.message || "Could not save track.");
     } finally {
       fo(null);
     }
-  }, [Da, ca, pr.length]), kr = I((i) => {
+  }, [Da, ca, pr.length]), kr = I((o) => {
     ur((l) => {
       const p = new Set(l);
-      return p.has(i.id) ? p.delete(i.id) : p.add(i.id), p;
+      return p.has(o.id) ? p.delete(o.id) : p.add(o.id), p;
     }), dc({
       kind: "track",
-      entityId: i.id,
-      provider: i.source ?? "youtube",
-      title: i.title
+      entityId: o.id,
+      provider: o.source ?? "youtube",
+      title: o.title
     }).catch((l) => console.warn("Favorite toggle failed:", l));
   }, []), rs = I(async () => {
-    const i = mr.trim() || "New Playlist";
+    const o = mr.trim() || "New Playlist";
     wo(!0);
     try {
-      const l = await uc(i);
+      const l = await uc(o);
       Ut((p) => [l, ...p]), xo("");
     } catch (l) {
-      rt(l.message || "Could not create playlist.");
+      ot(l.message || "Could not create playlist.");
     } finally {
       wo(!1);
     }
-  }, [mr]), os = I(async (i, l) => {
+  }, [mr]), os = I(async (o, l) => {
     try {
-      await mc(i, l);
+      await mc(o, l);
       const p = await ua();
       Ut(p);
     } catch (p) {
-      rt(p.message || "Could not add to playlist.");
+      ot(p.message || "Could not add to playlist.");
     }
-  }, []), is = I(async (i, l) => {
+  }, []), is = I(async (o, l) => {
     try {
-      await hc(i, l);
+      await hc(o, l);
       const p = await ua();
       Ut(p);
     } catch (p) {
-      rt(p.message || "Could not remove from playlist.");
+      ot(p.message || "Could not remove from playlist.");
     }
-  }, []), Sr = I((i) => {
-    dr((l) => l.filter((p) => p.id !== i.id)), ur((l) => {
+  }, []), Sr = I((o) => {
+    dr((l) => l.filter((p) => p.id !== o.id)), ur((l) => {
       const p = new Set(l);
-      return p.delete(i.id), p;
-    }), sc(i.id).then(() => ua().then(Ut)).catch((l) => console.warn("Library track delete failed:", l));
-  }, []), ns = I((i) => {
+      return p.delete(o.id), p;
+    }), sc(o.id).then(() => ua().then(Ut)).catch((l) => console.warn("Library track delete failed:", l));
+  }, []), ns = I((o) => {
     _a((l) => {
       const p = new Set(l);
-      return p.has(i.id) ? p.delete(i.id) : p.add(i.id), p;
+      return p.has(o.id) ? p.delete(o.id) : p.add(o.id), p;
     });
   }, []), da = I(() => {
     sr(!1), _a(/* @__PURE__ */ new Set());
   }, []);
-  B(() => {
+  W(() => {
     if (!xt) return;
-    const i = (l) => {
+    const o = (l) => {
       l.key === "Escape" && da();
     };
-    return window.addEventListener("keydown", i), () => window.removeEventListener("keydown", i);
-  }, [xt, da]), B(() => {
-    pe !== "library" && (xt || tt.size > 0) && (sr(!1), _a(/* @__PURE__ */ new Set()));
-  }, [pe, xt, tt.size]);
-  const Tr = I((i) => {
-    E(i.id), Ue(!1), v("player");
-  }, []), ss = I((i) => {
-    Ot(i), Ue(!1), v("creator");
+    return window.addEventListener("keydown", o), () => window.removeEventListener("keydown", o);
+  }, [xt, da]), W(() => {
+    pe !== "library" && (xt || at.size > 0) && (sr(!1), _a(/* @__PURE__ */ new Set()));
+  }, [pe, xt, at.size]);
+  const Tr = I((o) => {
+    E(o.id), Ue(!1), v("player");
+  }, []), ss = I((o) => {
+    Ot(o), Ue(!1), v("creator");
   }, [Ot]);
-  return J ? /* @__PURE__ */ n("div", { className: "flex h-full overflow-hidden", style: { background: "var(--bg-window)" }, children: [
+  return G ? /* @__PURE__ */ n("div", { className: "flex h-full overflow-hidden", style: { background: "var(--bg-window)" }, children: [
     /* @__PURE__ */ n(
       "aside",
       {
@@ -9678,13 +9697,13 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 borderBottom: "1px solid var(--border-subtle)"
               },
               children: [
-                /* @__PURE__ */ t(Oe, { size: 13, style: { color: "var(--accent-primary)" } }),
+                /* @__PURE__ */ t(He, { size: 13, style: { color: "var(--accent-primary)" } }),
                 /* @__PURE__ */ t("div", { style: { fontSize: 12, fontWeight: 600, color: "var(--text-primary)" }, children: "JULI3TA" }),
                 /* @__PURE__ */ n("div", { className: "ml-auto flex items-center gap-2", children: [
-                  /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: pe === "mywork" ? Ce.trim() || je !== "all" ? `${gt.length} / ${Be.length}` : a(
-                    Be.length === 1 ? "musiccreator.gallery.count.one" : "musiccreator.gallery.count.other",
-                    { n: Be.length }
-                  ) : Ce.trim() || et !== "all" ? `${Ht.length} / ${be.length}` : `${be.length} saved` }),
+                  /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: pe === "mywork" ? Ce.trim() || je !== "all" ? `${gt.length} / ${We.length}` : a(
+                    We.length === 1 ? "musiccreator.gallery.count.one" : "musiccreator.gallery.count.other",
+                    { n: We.length }
+                  ) : Ce.trim() || tt !== "all" ? `${Ht.length} / ${be.length}` : `${be.length} saved` }),
                   pe === "mywork" && /* @__PURE__ */ n(ue, { children: [
                     /* @__PURE__ */ t(
                       "button",
@@ -9777,38 +9796,38 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 borderBottom: "1px solid var(--border-subtle)"
               },
               children: [
-                { id: "mywork", label: "My Work", count: Be.length },
+                { id: "mywork", label: "My Work", count: We.length },
                 { id: "library", label: "Library", count: be.length }
-              ].map((i) => /* @__PURE__ */ n(
+              ].map((o) => /* @__PURE__ */ n(
                 "button",
                 {
-                  onClick: () => no(i.id),
+                  onClick: () => no(o.id),
                   className: "flex-1 rounded-md transition-all",
                   style: {
                     height: 26,
                     fontSize: 11,
-                    fontWeight: pe === i.id ? 700 : 600,
-                    color: pe === i.id ? "white" : "var(--text-secondary)",
-                    background: pe === i.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "transparent",
+                    fontWeight: pe === o.id ? 700 : 600,
+                    color: pe === o.id ? "white" : "var(--text-secondary)",
+                    background: pe === o.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "transparent",
                     border: "none"
                   },
                   children: [
-                    i.label,
-                    i.count > 0 && /* @__PURE__ */ t(
+                    o.label,
+                    o.count > 0 && /* @__PURE__ */ t(
                       "span",
                       {
                         style: {
                           marginLeft: 6,
                           fontSize: 10,
                           fontWeight: 700,
-                          opacity: pe === i.id ? 0.85 : 0.55
+                          opacity: pe === o.id ? 0.85 : 0.55
                         },
-                        children: i.count
+                        children: o.count
                       }
                     )
                   ]
                 },
-                i.id
+                o.id
               ))
             }
           ),
@@ -9820,7 +9839,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 height: 32,
                 borderBottom: "1px solid var(--border-subtle)",
                 background: "var(--bg-window)",
-                opacity: pe === "mywork" ? Be.length === 0 ? 0.4 : 1 : be.length === 0 ? 0.4 : 1
+                opacity: pe === "mywork" ? We.length === 0 ? 0.4 : 1 : be.length === 0 ? 0.4 : 1
               },
               children: [
                 /* @__PURE__ */ t(lt, { size: 11, style: { color: "var(--text-disabled)", marginLeft: 4 } }),
@@ -9828,11 +9847,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   "input",
                   {
                     value: Ce,
-                    onChange: (i) => oo(i.target.value),
+                    onChange: (o) => oo(o.target.value),
                     placeholder: pe === "mywork" ? a("musiccreator.gallery.searchPlaceholder") : "Search Library…",
                     className: "flex-1 rounded-input bg-transparent outline-none px-1",
                     style: { fontSize: 11, color: "var(--text-primary)" },
-                    disabled: pe === "mywork" ? Be.length === 0 : be.length === 0
+                    disabled: pe === "mywork" ? We.length === 0 : be.length === 0
                   }
                 ),
                 Ce && /* @__PURE__ */ t(
@@ -9860,31 +9879,31 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 { id: "songs", label: "Songs" },
                 { id: "restyles", label: "Restyles" },
                 { id: "lyrics", label: "Lyrics" }
-              ].map((i) => /* @__PURE__ */ t(
+              ].map((o) => /* @__PURE__ */ t(
                 "button",
                 {
-                  onClick: () => Xi(i.id),
+                  onClick: () => Xi(o.id),
                   className: "rounded-full px-2.5 flex-shrink-0 transition-all",
                   style: {
                     height: 22,
                     fontSize: 10,
-                    fontWeight: je === i.id ? 800 : 600,
-                    color: je === i.id ? "white" : "var(--text-secondary)",
-                    background: je === i.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
+                    fontWeight: je === o.id ? 800 : 600,
+                    color: je === o.id ? "white" : "var(--text-secondary)",
+                    background: je === o.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
                     border: "1px solid var(--border-subtle)"
                   },
-                  children: i.label
+                  children: o.label
                 },
-                i.id
+                o.id
               )) : xt ? /* @__PURE__ */ n(ue, { children: [
                 /* @__PURE__ */ n("span", { style: { fontSize: 10, fontWeight: 800, color: "var(--text-primary)", flexShrink: 0 }, children: [
-                  tt.size,
+                  at.size,
                   " selected"
                 ] }),
                 /* @__PURE__ */ t(
                   "button",
                   {
-                    onClick: () => _a(new Set(Ht.map((i) => i.id))),
+                    onClick: () => _a(new Set(Ht.map((o) => o.id))),
                     className: "rounded-full px-2.5 flex-shrink-0 transition-all hover:bg-[var(--bg-hover)]",
                     style: {
                       height: 22,
@@ -9918,22 +9937,22 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 [
                   { id: "all", label: "All" },
                   { id: "favorites", label: "Favorites" }
-                ].map((i) => /* @__PURE__ */ t(
+                ].map((o) => /* @__PURE__ */ t(
                   "button",
                   {
-                    onClick: () => so(i.id),
+                    onClick: () => so(o.id),
                     className: "rounded-full px-2.5 flex-shrink-0 transition-all",
                     style: {
                       height: 22,
                       fontSize: 10,
-                      fontWeight: et === i.id ? 800 : 600,
-                      color: et === i.id ? "white" : "var(--text-secondary)",
-                      background: et === i.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
+                      fontWeight: tt === o.id ? 800 : 600,
+                      color: tt === o.id ? "white" : "var(--text-secondary)",
+                      background: tt === o.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
                       border: "1px solid var(--border-subtle)"
                     },
-                    children: i.label
+                    children: o.label
                   },
-                  i.id
+                  o.id
                 )),
                 be.length > 0 && /* @__PURE__ */ n(
                   "button",
@@ -9958,7 +9977,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               ] })
             }
           ),
-          pe === "mywork" ? Be.length === 0 ? /* @__PURE__ */ n("div", { className: "flex-1 flex flex-col items-center justify-center px-4 text-center", children: [
+          pe === "mywork" ? We.length === 0 ? /* @__PURE__ */ n("div", { className: "flex-1 flex flex-col items-center justify-center px-4 text-center", children: [
             /* @__PURE__ */ t(
               "div",
               {
@@ -9986,13 +10005,13 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
                 },
                 children: [
-                  /* @__PURE__ */ t(Oe, { size: 11 }),
+                  /* @__PURE__ */ t(He, { size: 11 }),
                   " Start a song"
                 ]
               }
             ),
             /* @__PURE__ */ n("div", { className: "flex items-center gap-1 mt-3", style: { fontSize: 9, color: "var(--text-disabled)" }, children: [
-              /* @__PURE__ */ t(Ve, { size: 10 }),
+              /* @__PURE__ */ t(Ye, { size: 10 }),
               a("musiccreator.gallery.empty.footer")
             ] })
           ] }) : gt.length === 0 ? /* @__PURE__ */ n("div", { className: "flex-1 flex flex-col items-center justify-center px-4 text-center", children: [
@@ -10003,8 +10022,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               Rd,
               {
                 trackIds: Ta,
-                allTracks: Be,
-                player: X,
+                allTracks: We,
+                player: O,
                 onSelect: Tr
               }
             ),
@@ -10012,16 +10031,16 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               Ld,
               {
                 tracks: gt,
-                player: X,
+                player: O,
                 onLoad: Ot,
                 onOpenLyrics: Uo,
                 onDelete: zo,
                 onRename: Ma
               }
-            ) : gt.map((i) => /* @__PURE__ */ t(
+            ) : gt.map((o) => /* @__PURE__ */ t(
               Md,
               {
-                track: i,
+                track: o,
                 onDelete: zo,
                 onLoad: Ot,
                 onOpenLyrics: Uo,
@@ -10031,10 +10050,10 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 onRename: Ma,
                 onEditCover: Po,
                 onSelect: Tr,
-                selected: y === "player" && S === i.id,
-                player: X
+                selected: y === "player" && S === o.id,
+                player: O
               },
-              i.id
+              o.id
             ))
           ] }) : (
             /* Library tab — flat slim list of saved streamed tracks. The
@@ -10074,26 +10093,26 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               )
             ] }) : Ht.length === 0 ? /* @__PURE__ */ n("div", { className: "flex-1 flex flex-col items-center justify-center px-4 text-center", children: [
               /* @__PURE__ */ t(lt, { size: 18, style: { color: "var(--text-disabled)", opacity: 0.5 } }),
-              /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 8 }, children: Ce ? `No matches for "${Ce}"` : `No ${et} yet.` })
-            ] }) : /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar p-1.5 flex flex-col gap-0.5", children: Ht.map((i) => /* @__PURE__ */ t(
+              /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 8 }, children: Ce ? `No matches for "${Ce}"` : `No ${tt} yet.` })
+            ] }) : /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar p-1.5 flex flex-col gap-0.5", children: Ht.map((o) => /* @__PURE__ */ t(
               jd,
               {
-                track: i,
-                player: X,
-                selected: y === "player" && S === i.id,
-                isFavorite: Ca.has(i.id),
+                track: o,
+                player: O,
+                selected: y === "player" && S === o.id,
+                isFavorite: Ca.has(o.id),
                 onOpenInPlayer: Tr,
                 onRemix: ss,
                 onToggleFavorite: kr,
                 onRemove: Sr,
                 selectMode: xt,
-                checked: tt.has(i.id),
+                checked: at.has(o.id),
                 onToggleCheck: ns
               },
-              i.id
+              o.id
             )) })
           ),
-          pe === "library" && xt && tt.size > 0 && /* @__PURE__ */ n(
+          pe === "library" && xt && at.size > 0 && /* @__PURE__ */ n(
             "div",
             {
               className: "flex-shrink-0 flex items-center gap-1.5 px-2",
@@ -10107,8 +10126,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   "button",
                   {
                     onClick: () => {
-                      const i = Ht.filter((l) => tt.has(l.id));
-                      for (const l of i) kr(l);
+                      const o = Ht.filter((l) => at.has(l.id));
+                      for (const l of o) kr(l);
                       da();
                     },
                     className: "flex items-center gap-1 rounded-lg px-2.5 transition-all hover:bg-[var(--bg-hover)]",
@@ -10120,7 +10139,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       background: "var(--bg-window)",
                       border: "1px solid var(--border-subtle)"
                     },
-                    title: `Toggle favorite on ${tt.size} track(s)`,
+                    title: `Toggle favorite on ${at.size} track(s)`,
                     children: [
                       /* @__PURE__ */ t(Ga, { size: 11 }),
                       " Toggle favorite"
@@ -10131,8 +10150,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   "button",
                   {
                     onClick: () => {
-                      const i = Ht.filter((l) => tt.has(l.id));
-                      for (const l of i) Sr(l);
+                      const o = Ht.filter((l) => at.has(l.id));
+                      for (const l of o) Sr(l);
                       da();
                     },
                     className: "flex items-center gap-1 rounded-lg px-2.5 transition-all hover:bg-[var(--bg-hover)]",
@@ -10144,7 +10163,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       background: "var(--status-danger)",
                       border: "1px solid var(--status-danger)"
                     },
-                    title: `Remove ${tt.size} track(s) from Library`,
+                    title: `Remove ${at.size} track(s) from Library`,
                     children: [
                       /* @__PURE__ */ t(At, { size: 11 }),
                       " Remove"
@@ -10197,28 +10216,28 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   border: "1px solid var(--border-subtle)"
                 },
                 children: [
-                  { id: "creator", icon: /* @__PURE__ */ t(Oe, { size: 12 }), label: a("musiccreator.view.creator"), tip: a("musiccreator.view.creator.tip") },
+                  { id: "creator", icon: /* @__PURE__ */ t(He, { size: 12 }), label: a("musiccreator.view.creator"), tip: a("musiccreator.view.creator.tip") },
                   { id: "player", icon: /* @__PURE__ */ t(ye, { size: 12 }), label: a("musiccreator.view.player"), tip: a("musiccreator.view.player.tip") }
-                ].map((i) => /* @__PURE__ */ n(
+                ].map((o) => /* @__PURE__ */ n(
                   "button",
                   {
-                    onClick: () => v(i.id),
-                    title: i.tip,
+                    onClick: () => v(o.id),
+                    title: o.tip,
                     className: "flex items-center gap-1.5 px-3 rounded-md transition-all",
                     style: {
                       height: 28,
                       fontSize: 11,
-                      fontWeight: y === i.id ? 600 : 500,
-                      color: y === i.id ? "white" : "var(--text-secondary)",
-                      background: y === i.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "transparent",
+                      fontWeight: y === o.id ? 600 : 500,
+                      color: y === o.id ? "white" : "var(--text-secondary)",
+                      background: y === o.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "transparent",
                       border: "none"
                     },
                     children: [
-                      i.icon,
-                      i.label
+                      o.icon,
+                      o.label
                     ]
                   },
-                  i.id
+                  o.id
                 ))
               }
             ),
@@ -10227,14 +10246,14 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 "button",
                 {
                   onClick: () => {
-                    Ue((i) => !i), ra("search");
+                    Ue((o) => !o), ra("search");
                   },
                   className: "flex items-center gap-1.5 px-3 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
                   style: {
                     height: 32,
                     fontSize: 11,
-                    color: at ? "white" : "var(--text-secondary)",
-                    background: at ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
+                    color: rt ? "white" : "var(--text-secondary)",
+                    background: rt ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-window)",
                     border: "1px solid var(--border-subtle)"
                   },
                   title: "Search free music",
@@ -10244,12 +10263,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   ]
                 }
               ),
-              /* @__PURE__ */ t(zd, { endpoint: J, endpoints: La, onSwitch: xn }),
+              /* @__PURE__ */ t(zd, { endpoint: G, endpoints: La, onSwitch: xn }),
               /* @__PURE__ */ n(
                 "button",
                 {
                   onClick: y === "player" ? Dn : xr,
-                  disabled: V,
+                  disabled: Y,
                   className: "flex items-center gap-1.5 px-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
                   style: {
                     height: 32,
@@ -10301,7 +10320,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
           ]
         }
       ),
-      y === "player" && (at ? /* @__PURE__ */ t(
+      y === "player" && (rt ? /* @__PURE__ */ t(
         Yd,
         {
           tab: Zi,
@@ -10333,11 +10352,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
           previewBusyId: un,
           addBusyId: pn,
           savedYoutubeIds: Xn,
-          player: X,
+          player: O,
           onPreview: ts,
           onAdd: as,
-          onOpenTrack: (i) => {
-            E(i.id), Ue(!1), v("player");
+          onOpenTrack: (o) => {
+            E(o.id), Ue(!1), v("player");
           },
           onToggleFavorite: kr,
           onRemoveLibraryTrack: Sr,
@@ -10355,17 +10374,17 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         Vd,
         {
           track: (() => {
-            const i = S ?? X.state.trackId ?? gt[0]?.id ?? be[0]?.id ?? null;
-            return i ? nt.find((l) => l.id === i) ?? null : null;
+            const o = S ?? O.state.trackId ?? gt[0]?.id ?? be[0]?.id ?? null;
+            return o ? Oe.find((l) => l.id === o) ?? null : null;
           })(),
-          player: X,
+          player: O,
           restyleOriginal: Gi,
           onSwitchToCreator: () => v("creator"),
           onSearchMusic: () => {
             v("player"), Ue(!0), ra("search");
           },
-          onEditInCreator: (i) => {
-            Ot(i), v("creator");
+          onEditInCreator: (o) => {
+            Ot(o), v("creator");
           }
         }
       )),
@@ -10383,29 +10402,29 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 { id: "compose", icon: /* @__PURE__ */ t(va, { size: 13 }), label: "Song", tip: "Theme → lyrics → music" },
                 { id: "restyle", icon: /* @__PURE__ */ t(zt, { size: 13 }), label: "Restyle", tip: "Re-sing your song in the style of a reference track" },
                 { id: "lyricsOnly", icon: /* @__PURE__ */ t(Va, { size: 13 }), label: "Lyrics", tip: "Words only, no audio" }
-              ].map((i) => /* @__PURE__ */ n(
+              ].map((o) => /* @__PURE__ */ n(
                 "button",
                 {
-                  onClick: () => h(i.id),
-                  disabled: V,
-                  title: i.tip,
+                  onClick: () => h(o.id),
+                  disabled: Y,
+                  title: o.tip,
                   className: "flex items-center gap-1.5 px-4 rounded-lg transition-all disabled:opacity-50",
                   style: {
                     height: 32,
                     fontSize: 12,
-                    fontWeight: m === i.id ? 600 : 500,
-                    color: m === i.id ? "white" : "var(--text-secondary)",
-                    background: m === i.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-titlebar)",
-                    border: m === i.id ? "1px solid transparent" : "1px solid var(--border-subtle)"
+                    fontWeight: m === o.id ? 600 : 500,
+                    color: m === o.id ? "white" : "var(--text-secondary)",
+                    background: m === o.id ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-titlebar)",
+                    border: m === o.id ? "1px solid transparent" : "1px solid var(--border-subtle)"
                   },
                   children: [
-                    i.icon,
-                    i.label
+                    o.icon,
+                    o.label
                   ]
                 },
-                i.id
+                o.id
               )),
-              /* @__PURE__ */ t("div", { className: "ml-auto flex items-center gap-2", children: V ? /* @__PURE__ */ n(
+              /* @__PURE__ */ t("div", { className: "ml-auto flex items-center gap-2", children: Y ? /* @__PURE__ */ n(
                 "button",
                 {
                   onClick: Ln,
@@ -10424,12 +10443,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   ]
                 }
               ) : (() => {
-                const i = m === "restyle" && (we || !He);
+                const o = m === "restyle" && (we || !$e);
                 return /* @__PURE__ */ n(
                   "button",
                   {
                     onClick: wn,
-                    disabled: i,
+                    disabled: o,
                     className: "flex items-center gap-1.5 px-4 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
                     style: {
                       height: 32,
@@ -10439,9 +10458,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
                       boxShadow: "var(--shadow-md)"
                     },
-                    title: i ? we ? "Analyzing reference audio — hold on…" : "Drop a reference audio file in the Restyle panel below" : void 0,
+                    title: o ? we ? "Analyzing reference audio — hold on…" : "Drop a reference audio file in the Restyle panel below" : void 0,
                     children: [
-                      i && we ? /* @__PURE__ */ t(te, { size: 13, className: "animate-spin" }) : /* @__PURE__ */ t(zt, { size: 13 }),
+                      o && we ? /* @__PURE__ */ t(te, { size: 13, className: "animate-spin" }) : /* @__PURE__ */ t(zt, { size: 13 }),
                       m === "restyle" ? we ? "Analyzing audio…" : "Restyle Song" : m === "lyricsOnly" ? "Write Lyrics" : a("musiccreator.button.create")
                     ]
                   }
@@ -10479,12 +10498,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 "input",
                 {
                   id: "juli3ta-song-name",
-                  value: H,
-                  onChange: (i) => q(i.target.value),
+                  value: $,
+                  onChange: (o) => J(o.target.value),
                   onDragOver: ja,
                   onDrop: Jn,
                   placeholder: a("musiccreator.songName.placeholder"),
-                  disabled: V,
+                  disabled: Y,
                   className: "flex-1 px-2.5 py-1 rounded-md focus:outline-none focus:ring-1 disabled:opacity-50",
                   style: {
                     fontSize: 12,
@@ -10507,9 +10526,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       ni,
                       {
                         id: "juli3ta-instrumental",
-                        checked: K,
+                        checked: X,
                         onChange: se,
-                        disabled: V
+                        disabled: Y
                       }
                     )
                   ]
@@ -10518,7 +10537,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             ]
           }
         ),
-        (V || ta || Dt) && /* @__PURE__ */ n(
+        (Y || ta || Dt) && /* @__PURE__ */ n(
           "div",
           {
             className: "flex-shrink-0",
@@ -10527,7 +10546,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               background: ta ? "rgba(255, 82, 82, 0.06)" : Dt ? "rgba(251, 191, 36, 0.06)" : "var(--bg-titlebar)"
             },
             children: [
-              V && /* @__PURE__ */ t("div", { className: "overflow-hidden", style: { height: 2, background: "var(--bg-hover)" }, children: /* @__PURE__ */ t(
+              Y && /* @__PURE__ */ t("div", { className: "overflow-hidden", style: { height: 2, background: "var(--bg-hover)" }, children: /* @__PURE__ */ t(
                 "div",
                 {
                   style: {
@@ -10544,14 +10563,14 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 /* @__PURE__ */ t(
                   "button",
                   {
-                    onClick: () => G(null),
+                    onClick: () => V(null),
                     className: "rounded-md transition-all hover:bg-[var(--bg-hover)] flex-shrink-0 flex items-center justify-center",
                     style: { width: 18, height: 18, color: "var(--text-secondary)" },
                     title: a("musiccreator.error.dismiss"),
                     children: /* @__PURE__ */ t(fe, { size: 11 })
                   }
                 )
-              ] }) : V ? /* @__PURE__ */ n(ue, { children: [
+              ] }) : Y ? /* @__PURE__ */ n(ue, { children: [
                 /* @__PURE__ */ t(te, { size: 11, className: "animate-spin", style: { color: "var(--accent-primary)", flexShrink: 0 } }),
                 /* @__PURE__ */ t("span", { className: "flex-1 truncate", style: { color: "var(--text-secondary)" }, children: jt === "lyrics" ? oi[ao % oi.length] : ii[ao % ii.length] }),
                 /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)", flexShrink: 0 }, children: jt === "lyrics" ? "Step 1 / 2 · Lyrics" : "Step 2 / 2 · Music" })
@@ -10577,15 +10596,15 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             "div",
             {
               className: "mb-5",
-              onDragOver: (i) => {
-                i.dataTransfer.types.includes(ya) && (i.preventDefault(), i.dataTransfer.dropEffect = "copy");
+              onDragOver: (o) => {
+                o.dataTransfer.types.includes(ya) && (o.preventDefault(), o.dataTransfer.dropEffect = "copy");
               },
-              onDrop: (i) => {
-                const l = it(i);
-                l && l.hasAudio && (i.preventDefault(), (async () => {
+              onDrop: (o) => {
+                const l = nt(o);
+                l && l.hasAudio && (o.preventDefault(), (async () => {
                   const p = await ql(l.id);
                   if (!p?.audioDataUrl) {
-                    G("Could not load that track’s audio. Try dragging again.");
+                    V("Could not load that track’s audio. Try dragging again.");
                     return;
                   }
                   mt(p.audioDataUrl, `${l.title}.mp3`);
@@ -10593,7 +10612,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               },
               children: [
                 /* @__PURE__ */ t("label", { style: { fontSize: 11, fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: 0.5 }, children: "Reference audio" }),
-                Qe ? /* @__PURE__ */ n(
+                Ze ? /* @__PURE__ */ n(
                   "div",
                   {
                     className: "mt-1 px-3 py-2 rounded-lg",
@@ -10604,12 +10623,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     children: [
                       /* @__PURE__ */ n("div", { className: "flex items-center gap-2", children: [
                         we ? /* @__PURE__ */ t(te, { size: 14, className: "animate-spin", style: { color: "var(--accent-primary)", flexShrink: 0 } }) : /* @__PURE__ */ t(Et, { size: 16, style: { color: "var(--accent-primary)", flexShrink: 0 } }),
-                        /* @__PURE__ */ t("div", { className: "flex-1 truncate", style: { fontSize: 12, color: "var(--text-primary)" }, children: Qe }),
+                        /* @__PURE__ */ t("div", { className: "flex-1 truncate", style: { fontSize: 12, color: "var(--text-primary)" }, children: Ze }),
                         /* @__PURE__ */ t(
                           "button",
                           {
                             onClick: zn,
-                            disabled: V || we,
+                            disabled: Y || we,
                             className: "p-1 rounded-md transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
                             style: { color: "var(--text-secondary)" },
                             title: "Remove reference",
@@ -10625,7 +10644,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     "button",
                     {
                       onClick: () => ka(!0),
-                      disabled: V,
+                      disabled: Y,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
                       style: {
                         fontSize: 11,
@@ -10635,7 +10654,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       },
                       title: "Record new audio (mic or tab)",
                       children: [
-                        /* @__PURE__ */ t(Ve, { size: 16, style: { color: "var(--accent-primary)" } }),
+                        /* @__PURE__ */ t(Ye, { size: 16, style: { color: "var(--accent-primary)" } }),
                         /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600 }, children: "Record now" }),
                         /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "mic or tab audio" })
                       ]
@@ -10645,7 +10664,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     "button",
                     {
                       onClick: kn,
-                      disabled: V,
+                      disabled: Y,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
                       style: {
                         fontSize: 11,
@@ -10664,7 +10683,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     "button",
                     {
                       onClick: En,
-                      disabled: V || vt.filter((i) => i.audioDataUrl).length === 0,
+                      disabled: Y || vt.filter((o) => o.audioDataUrl).length === 0,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
                       style: {
                         fontSize: 11,
@@ -10676,7 +10695,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       children: [
                         /* @__PURE__ */ t(Ct, { size: 16, style: { color: "var(--accent-primary)" } }),
                         /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600 }, children: a("musiccreator.restyle.button.mySongs") }),
-                        /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: a("musiccreator.restyle.button.mySongs.count", { count: vt.filter((i) => i.audioDataUrl).length }) })
+                        /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: a("musiccreator.restyle.button.mySongs.count", { count: vt.filter((o) => o.audioDataUrl).length }) })
                       ]
                     }
                   ),
@@ -10684,7 +10703,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     "button",
                     {
                       onClick: Cn,
-                      disabled: V,
+                      disabled: Y,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50 relative",
                       style: {
                         fontSize: 11,
@@ -10694,14 +10713,14 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       },
                       title: "Pick a Voice Recorder clip",
                       children: [
-                        /* @__PURE__ */ t(Ve, { size: 16 }),
+                        /* @__PURE__ */ t(Ye, { size: 16 }),
                         /* @__PURE__ */ t("span", { style: { fontSize: 11, fontWeight: 600 }, children: a("musiccreator.restyle.button.voiceClips") }),
                         /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: a("musiccreator.restyle.button.voiceClips.count", { count: Qt.length }) })
                       ]
                     }
                   )
                 ] }),
-                !Qe && /* @__PURE__ */ n("div", { className: "mt-3", children: [
+                !Ze && /* @__PURE__ */ n("div", { className: "mt-3", children: [
                   /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 600, marginBottom: 4 }, children: "Sample strategy" }),
                   /* @__PURE__ */ n("div", { className: "grid grid-cols-2 gap-2", children: [
                     /* @__PURE__ */ n(
@@ -10715,7 +10734,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                           color: Me === "best" ? "var(--text-primary)" : "var(--text-secondary)"
                         },
                         children: [
-                          /* @__PURE__ */ t(Oe, { size: 13, style: { color: Me === "best" ? "var(--accent-primary)" : "var(--text-secondary)" } }),
+                          /* @__PURE__ */ t(He, { size: 13, style: { color: Me === "best" ? "var(--accent-primary)" : "var(--text-secondary)" } }),
                           /* @__PURE__ */ n("div", { className: "text-left flex-1", children: [
                             /* @__PURE__ */ t("div", { style: { fontSize: 11, fontWeight: 600 }, children: "Best 30 s" }),
                             /* @__PURE__ */ t("div", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "single chorus-like window" })
@@ -10749,11 +10768,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   {
                     className: "absolute inset-0 z-30 flex items-center justify-center",
                     style: { background: "rgba(0,0,0,0.6)" },
-                    onClick: () => !$e && ka(!1),
+                    onClick: () => !Fe && ka(!1),
                     children: /* @__PURE__ */ n(
                       "div",
                       {
-                        onClick: (i) => i.stopPropagation(),
+                        onClick: (o) => o.stopPropagation(),
                         className: "rounded-xl flex flex-col",
                         style: {
                           width: 380,
@@ -10771,16 +10790,16 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                               /* @__PURE__ */ n(
                                 "button",
                                 {
-                                  onClick: () => !$e && Xr("mic"),
-                                  disabled: $e,
+                                  onClick: () => !Fe && Xr("mic"),
+                                  disabled: Fe,
                                   className: "flex items-center gap-2 px-3 py-2 rounded-lg transition-all",
                                   style: {
-                                    background: Ze === "mic" ? "var(--bg-selected)" : "var(--bg-titlebar)",
-                                    border: `1px solid ${Ze === "mic" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
+                                    background: et === "mic" ? "var(--bg-selected)" : "var(--bg-titlebar)",
+                                    border: `1px solid ${et === "mic" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
                                     color: "var(--text-primary)"
                                   },
                                   children: [
-                                    /* @__PURE__ */ t(Ve, { size: 14 }),
+                                    /* @__PURE__ */ t(Ye, { size: 14 }),
                                     /* @__PURE__ */ n("div", { className: "text-left flex-1", children: [
                                       /* @__PURE__ */ t("div", { style: { fontSize: 11, fontWeight: 600 }, children: "Microphone" }),
                                       /* @__PURE__ */ t("div", { style: { fontSize: 9, color: "var(--text-disabled)" }, children: "laptop or USB mic" })
@@ -10791,12 +10810,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                               /* @__PURE__ */ n(
                                 "button",
                                 {
-                                  onClick: () => !$e && Xr("tab"),
-                                  disabled: $e,
+                                  onClick: () => !Fe && Xr("tab"),
+                                  disabled: Fe,
                                   className: "flex items-center gap-2 px-3 py-2 rounded-lg transition-all",
                                   style: {
-                                    background: Ze === "tab" ? "var(--bg-selected)" : "var(--bg-titlebar)",
-                                    border: `1px solid ${Ze === "tab" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
+                                    background: et === "tab" ? "var(--bg-selected)" : "var(--bg-titlebar)",
+                                    border: `1px solid ${et === "tab" ? "var(--accent-primary)" : "var(--border-subtle)"}`,
                                     color: "var(--text-primary)"
                                   },
                                   children: [
@@ -10809,7 +10828,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                                 }
                               )
                             ] }),
-                            Ze === "tab" && /* @__PURE__ */ n("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 6, lineHeight: 1.4 }, children: [
+                            et === "tab" && /* @__PURE__ */ n("div", { style: { fontSize: 10, color: "var(--text-disabled)", marginTop: 6, lineHeight: 1.4 }, children: [
                               "💡 In the share dialog, pick a tab playing music and tick ",
                               /* @__PURE__ */ t("strong", { children: '"Share tab audio"' }),
                               "."
@@ -10833,7 +10852,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                                 ]
                               }
                             ),
-                            $e ? /* @__PURE__ */ t(
+                            Fe ? /* @__PURE__ */ t(
                               "button",
                               {
                                 onClick: Tn,
@@ -10861,10 +10880,10 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                                   boxShadow: "0 0 24px rgba(239,68,68,0.4)"
                                 },
                                 title: "Start recording",
-                                children: Ze === "tab" ? /* @__PURE__ */ t(Bo, { size: 28 }) : /* @__PURE__ */ t(Ve, { size: 28 })
+                                children: et === "tab" ? /* @__PURE__ */ t(Bo, { size: 28 }) : /* @__PURE__ */ t(Ye, { size: 28 })
                               }
                             ),
-                            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 12 }, children: $e ? Ze === "tab" ? "🔊 Capturing tab audio…" : "🎙️  Recording…" : "Tap to start" }),
+                            /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-secondary)", marginTop: 12 }, children: Fe ? et === "tab" ? "🔊 Capturing tab audio…" : "🎙️  Recording…" : "Tap to start" }),
                             eo && /* @__PURE__ */ t(
                               "div",
                               {
@@ -10880,12 +10899,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                               className: "px-5 py-3 flex items-center justify-between",
                               style: { borderTop: "1px solid var(--border-subtle)", background: "var(--bg-titlebar)" },
                               children: [
-                                /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: $e ? "Stop to auto-analyze" : "Saves to your library + uses as cover" }),
+                                /* @__PURE__ */ t("div", { style: { fontSize: 10, color: "var(--text-disabled)" }, children: Fe ? "Stop to auto-analyze" : "Saves to your library + uses as cover" }),
                                 /* @__PURE__ */ t(
                                   "button",
                                   {
-                                    onClick: () => !$e && ka(!1),
-                                    disabled: $e,
+                                    onClick: () => !Fe && ka(!1),
+                                    disabled: Fe,
                                     className: "px-3 py-1 rounded-md transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
                                     style: { fontSize: 11, color: "var(--text-secondary)" },
                                     children: "Close"
@@ -10923,7 +10942,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     children: /* @__PURE__ */ n(
                       "div",
                       {
-                        onClick: (i) => i.stopPropagation(),
+                        onClick: (o) => o.stopPropagation(),
                         className: "rounded-xl overflow-hidden flex flex-col",
                         style: {
                           width: 380,
@@ -10940,7 +10959,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                               style: { borderBottom: "1px solid var(--border-subtle)" },
                               children: [
                                 /* @__PURE__ */ n("div", { className: "flex items-center gap-2", children: [
-                                  /* @__PURE__ */ t(Ve, { size: 14, style: { color: "var(--accent-primary)" } }),
+                                  /* @__PURE__ */ t(Ye, { size: 14, style: { color: "var(--accent-primary)" } }),
                                   /* @__PURE__ */ t("span", { style: { fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }, children: "Pick a recording" })
                                 ] }),
                                 /* @__PURE__ */ n(
@@ -10959,19 +10978,19 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                             }
                           ),
                           /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: Qt.length === 0 ? /* @__PURE__ */ n("div", { className: "flex flex-col items-center justify-center py-10 px-6 text-center gap-2", children: [
-                            /* @__PURE__ */ t(Ve, { size: 28, style: { color: "var(--text-disabled)" } }),
+                            /* @__PURE__ */ t(Ye, { size: 28, style: { color: "var(--text-disabled)" } }),
                             /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)" }, children: "No recordings yet" }),
                             /* @__PURE__ */ n("div", { style: { fontSize: 11, color: "var(--text-disabled)", maxWidth: 280 }, children: [
                               "Open ",
                               /* @__PURE__ */ t("strong", { children: "Voice Recorder" }),
                               ", capture some audio (a melody, a hum, music playing in the room), then come back here."
                             ] })
-                          ] }) : Qt.map((i) => {
-                            const l = i.durationMs / 1e3, p = l < 6;
+                          ] }) : Qt.map((o) => {
+                            const l = o.durationMs / 1e3, p = l < 6;
                             return /* @__PURE__ */ n(
                               "button",
                               {
-                                onClick: () => !p && Nn(i),
+                                onClick: () => !p && Nn(o),
                                 disabled: p,
                                 className: "w-full flex items-center gap-3 px-4 py-3 transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40 disabled:cursor-not-allowed text-left",
                                 style: { borderBottom: "1px solid var(--border-subtle)" },
@@ -10985,11 +11004,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                                         height: 36,
                                         background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
                                       },
-                                      children: /* @__PURE__ */ t(Ve, { size: 16, style: { color: "white" } })
+                                      children: /* @__PURE__ */ t(Ye, { size: 16, style: { color: "white" } })
                                     }
                                   ),
                                   /* @__PURE__ */ n("div", { className: "flex-1 min-w-0", children: [
-                                    /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, color: "var(--text-primary)" }, children: i.name }),
+                                    /* @__PURE__ */ t("div", { className: "truncate", style: { fontSize: 13, color: "var(--text-primary)" }, children: o.name }),
                                     /* @__PURE__ */ n("div", { style: { fontSize: 11, color: "var(--text-disabled)" }, children: [
                                       Math.floor(l / 60),
                                       ":",
@@ -10999,15 +11018,15 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                                   ] })
                                 ]
                               },
-                              i.id
+                              o.id
                             );
                           }) }),
                           /* @__PURE__ */ t(
                             "a",
                             {
                               href: "#",
-                              onClick: (i) => {
-                                i.preventDefault(), dt(!1);
+                              onClick: (o) => {
+                                o.preventDefault(), dt(!1);
                               },
                               className: "px-4 py-2 text-center",
                               style: {
@@ -11033,7 +11052,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     children: /* @__PURE__ */ n(
                       "div",
                       {
-                        onClick: (i) => i.stopPropagation(),
+                        onClick: (o) => o.stopPropagation(),
                         className: "rounded-xl overflow-hidden flex flex-col",
                         style: {
                           width: 420,
@@ -11067,12 +11086,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                             }
                           ),
                           /* @__PURE__ */ t("div", { className: "flex-1 overflow-y-auto invisible-scrollbar", children: (() => {
-                            const i = vt.filter((l) => l.audioDataUrl);
-                            return i.length === 0 ? /* @__PURE__ */ n("div", { className: "flex flex-col items-center justify-center py-10 px-6 text-center gap-2", children: [
+                            const o = vt.filter((l) => l.audioDataUrl);
+                            return o.length === 0 ? /* @__PURE__ */ n("div", { className: "flex flex-col items-center justify-center py-10 px-6 text-center gap-2", children: [
                               /* @__PURE__ */ t(Ct, { size: 28, style: { color: "var(--text-disabled)" } }),
                               /* @__PURE__ */ t("div", { style: { fontSize: 12, color: "var(--text-secondary)" }, children: a("musiccreator.restyle.songsPicker.empty.title") }),
                               /* @__PURE__ */ t("div", { style: { fontSize: 11, color: "var(--text-disabled)", maxWidth: 320 }, children: a("musiccreator.restyle.songsPicker.empty.body") })
-                            ] }) : i.map((l) => {
+                            ] }) : o.map((l) => {
                               const p = l.durationMs / 1e3, x = p > 0 && p < 6, _ = l.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "") || "Untitled";
                               return /* @__PURE__ */ n(
                                 "button",
@@ -11135,18 +11154,18 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                         tooltip: "Use AI to write a theme based on your Style",
                         onClick: Mn,
                         busy: Pe === "theme",
-                        disabled: V || Pe !== null
+                        disabled: Y || Pe !== null
                       }
                     ),
                     children: /* @__PURE__ */ t(
                       "textarea",
                       {
                         value: b,
-                        onChange: (i) => P(i.target.value),
+                        onChange: (o) => P(o.target.value),
                         onDragOver: ja,
                         onDrop: qn,
                         placeholder: a("musiccreator.theme.placeholder"),
-                        disabled: V,
+                        disabled: Y,
                         rows: 4,
                         className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none focus:ring-2 disabled:opacity-50",
                         style: {
@@ -11172,18 +11191,18 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                         tooltip: "Use AI to suggest a Style from your Theme",
                         onClick: Rn,
                         busy: Pe === "style",
-                        disabled: V || Pe !== null
+                        disabled: Y || Pe !== null
                       }
                     ),
                     children: /* @__PURE__ */ t(
                       "textarea",
                       {
                         value: A,
-                        onChange: (i) => z(i.target.value),
+                        onChange: (o) => z(o.target.value),
                         onDragOver: ja,
                         onDrop: Wn,
                         placeholder: a("musiccreator.style.placeholder"),
-                        disabled: V,
+                        disabled: Y,
                         rows: 4,
                         className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
                         style: {
@@ -11200,13 +11219,13 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             }
           ),
           m !== "lyricsOnly" && /* @__PURE__ */ n("div", { className: "flex flex-col gap-4 mb-5", children: [
-            /* @__PURE__ */ t(Td, { onPick: Pn, disabled: V }),
+            /* @__PURE__ */ t(Td, { onPick: Pn, disabled: Y }),
             /* @__PURE__ */ t(
               _d,
               {
-                specs: Y,
+                specs: K,
                 onChange: Le,
-                disabled: V,
+                disabled: Y,
                 onOptimize: In,
                 optimizing: wa
               }
@@ -11216,7 +11235,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             ha,
             {
               label: "Cover Art",
-              hint: J?.models.image ? "Auto-generated when you create the song. Override the prompt or upload your own image." : "No image model on this endpoint — pick one in Settings → Cover art, or upload your own image below.",
+              hint: G?.models.image ? "Auto-generated when you create the song. Override the prompt or upload your own image." : "No image model on this endpoint — pick one in Settings → Cover art, or upload your own image below.",
               className: "mb-5",
               headerExtra: /* @__PURE__ */ n("label", { className: "flex items-center gap-2 cursor-pointer select-none", style: { fontSize: 11, color: "var(--text-secondary)" }, children: [
                 "Auto-generate",
@@ -11225,7 +11244,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   {
                     checked: ze,
                     onChange: rr,
-                    disabled: V || !J?.models.image
+                    disabled: Y || !G?.models.image
                   }
                 )
               ] }),
@@ -11236,19 +11255,19 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     {
                       type: "button",
                       onClick: () => Do(!0),
-                      disabled: V,
+                      disabled: Y,
                       className: "relative flex-shrink-0 rounded-lg overflow-hidden transition-all hover:opacity-90 disabled:opacity-50",
                       style: {
                         width: 88,
                         height: 88,
                         background: U ? `url(${U}) center/cover no-repeat` : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
                         border: "1px solid var(--border-subtle)",
-                        cursor: V ? "not-allowed" : "pointer"
+                        cursor: Y ? "not-allowed" : "pointer"
                       },
                       title: "Open song card — big cover preview + metadata",
                       children: [
                         !U && /* @__PURE__ */ t("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ t(ba, { size: 28, style: { color: "white", opacity: 0.85 } }) }),
-                        Xe && /* @__PURE__ */ t(
+                        Qe && /* @__PURE__ */ t(
                           "div",
                           {
                             className: "absolute inset-0 flex items-center justify-center",
@@ -11266,7 +11285,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                         {
                           type: "button",
                           onClick: Eo,
-                          disabled: V || Xe || !J?.models.image,
+                          disabled: Y || Qe || !G?.models.image,
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40",
                           style: {
                             fontSize: 11,
@@ -11274,11 +11293,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                             color: "white",
                             background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
                             border: "1px solid transparent",
-                            cursor: V || Xe || !J?.models.image ? "not-allowed" : "pointer"
+                            cursor: Y || Qe || !G?.models.image ? "not-allowed" : "pointer"
                           },
-                          title: J?.models.image ? "Generate cover art from the prompt below" : "No image model available",
+                          title: G?.models.image ? "Generate cover art from the prompt below" : "No image model available",
                           children: [
-                            Xe ? /* @__PURE__ */ t(te, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(Oe, { size: 11 }),
+                            Qe ? /* @__PURE__ */ t(te, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(He, { size: 11 }),
                             U ? "Regenerate" : "Generate"
                           ]
                         }
@@ -11287,8 +11306,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                         "button",
                         {
                           type: "button",
-                          onClick: () => $.current?.click(),
-                          disabled: V,
+                          onClick: () => F.current?.click(),
+                          disabled: Y,
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40 hover:bg-[var(--bg-hover)]",
                           style: {
                             fontSize: 11,
@@ -11310,7 +11329,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                           onClick: () => {
                             R(""), xe && sa.current?.(xe, "");
                           },
-                          disabled: V,
+                          disabled: Y,
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40 hover:bg-[var(--bg-hover)]",
                           style: {
                             fontSize: 11,
@@ -11329,7 +11348,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                         "button",
                         {
                           type: "button",
-                          onClick: () => pt((i) => !i),
+                          onClick: () => pt((o) => !o),
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:bg-[var(--bg-hover)] ml-auto",
                           style: {
                             fontSize: 10,
@@ -11349,9 +11368,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       "textarea",
                       {
                         value: ie,
-                        onChange: (i) => Ke(i.target.value),
-                        placeholder: Ja(H, b, A),
-                        disabled: V,
+                        onChange: (o) => Xe(o.target.value),
+                        placeholder: Ja($, b, A),
+                        disabled: Y,
                         rows: 3,
                         className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
                         style: {
@@ -11367,33 +11386,33 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 /* @__PURE__ */ t(
                   "input",
                   {
-                    ref: $,
+                    ref: F,
                     type: "file",
                     accept: "image/png,image/jpeg,image/webp,image/gif",
                     style: { display: "none" },
-                    onChange: (i) => {
-                      const l = i.target.files?.[0];
-                      l && Ao(l), i.target.value = "";
+                    onChange: (o) => {
+                      const l = o.target.files?.[0];
+                      l && Ao(l), o.target.value = "";
                     }
                   }
                 )
               ]
             }
           ),
-          m !== "restyle" && !K && /* @__PURE__ */ t(
+          m !== "restyle" && !X && /* @__PURE__ */ t(
             ha,
             {
               label: "Lyrics Direction",
               hint: "Free-form direction for the lyrics — perspective, language, taboo lines, references. Sent to the AI alongside Theme and the song form below.",
               className: "mb-5",
-              counter: (Y.intent ?? "").length > 0 ? `${(Y.intent ?? "").length} chars` : void 0,
+              counter: (K.intent ?? "").length > 0 ? `${(K.intent ?? "").length} chars` : void 0,
               children: /* @__PURE__ */ t(
                 "textarea",
                 {
-                  value: Y.intent ?? "",
-                  onChange: (i) => Le((l) => ({ ...l, intent: i.target.value })),
+                  value: K.intent ?? "",
+                  onChange: (o) => Le((l) => ({ ...l, intent: o.target.value })),
                   placeholder: 'e.g. "first-person, mostly Spanish with one English chorus, mention rain, no clichés"',
-                  disabled: V,
+                  disabled: Y,
                   rows: 2,
                   className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
                   style: {
@@ -11410,17 +11429,17 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             ha,
             {
               label: a("musiccreator.lyrics.label"),
-              counter: K ? "instrumental — no vocals" : `${Oo} / ${Ft}`,
-              counterDanger: !K && Oo > Ft,
+              counter: X ? "instrumental — no vocals" : `${Oo} / ${Ft}`,
+              counterDanger: !X && Oo > Ft,
               className: "mb-5",
-              headerExtra: K ? void 0 : /* @__PURE__ */ t(
+              headerExtra: X ? void 0 : /* @__PURE__ */ t(
                 jr,
                 {
                   label: "Polish",
                   tooltip: "Use AI to refine flow, rhyme, and structure",
                   onClick: jn,
                   busy: Pe === "lyrics",
-                  disabled: V || Pe !== null || !M.trim()
+                  disabled: Y || Pe !== null || !M.trim()
                 }
               ),
               children: [
@@ -11428,11 +11447,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   "textarea",
                   {
                     value: M,
-                    onChange: (i) => C(i.target.value),
+                    onChange: (o) => C(o.target.value),
                     onDragOver: ja,
                     onDrop: Bn,
-                    placeholder: K ? "🎻 Instrumental mode — turn off the toggle above to write lyrics" : a("musiccreator.lyrics.placeholder"),
-                    disabled: V || K,
+                    placeholder: X ? "🎻 Instrumental mode — turn off the toggle above to write lyrics" : a("musiccreator.lyrics.placeholder"),
+                    disabled: Y || X,
                     rows: 8,
                     className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50 font-mono",
                     style: {
@@ -11458,15 +11477,15 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       children: "Song form"
                     }
                   ),
-                  sd.map((i) => {
-                    const l = k?.id === i.id;
+                  sd.map((o) => {
+                    const l = k?.id === o.id;
                     return /* @__PURE__ */ n(
                       "button",
                       {
                         onClick: () => {
-                          l ? N(null) : (N(i), M.trim() || C(i.skeleton));
+                          l ? N(null) : (N(o), M.trim() || C(o.skeleton));
                         },
-                        disabled: V,
+                        disabled: Y,
                         className: "px-2 py-0.5 rounded-full transition-all disabled:opacity-40",
                         style: {
                           fontSize: 10,
@@ -11475,13 +11494,13 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                           background: l ? "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" : "var(--bg-titlebar)",
                           border: "1px solid var(--border-subtle)"
                         },
-                        title: i.description + (l ? " · click to clear" : " · click to use this form"),
+                        title: o.description + (l ? " · click to clear" : " · click to use this form"),
                         children: [
                           l ? "✓ " : "",
-                          i.label
+                          o.label
                         ]
                       },
-                      i.id
+                      o.id
                     );
                   }),
                   k && /* @__PURE__ */ t("span", { style: { fontSize: 9, color: "var(--accent-primary)", marginLeft: 4 }, children: "AI will use this structure" })
@@ -11491,7 +11510,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
           )
         ] }) })
       ] }),
-      /* @__PURE__ */ t(wd, { player: X, allTracks: nt }),
+      /* @__PURE__ */ t(wd, { player: O, allTracks: Oe }),
       /* @__PURE__ */ t("audio", { ref: Ho, preload: "none", style: { display: "none" } })
     ] }),
     /* @__PURE__ */ t(
@@ -11499,8 +11518,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       {
         open: w,
         onClose: () => u(!1),
-        onUseRecipe: (i, l) => {
-          h("compose"), P(i), z(l);
+        onUseRecipe: (o, l) => {
+          h("compose"), P(o), z(l);
         }
       }
     ),
@@ -11517,7 +11536,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       Pd,
       {
         track: jo,
-        endpoint: J,
+        endpoint: G,
         onSave: wr,
         onClose: () => Po(null)
       }
@@ -11525,16 +11544,16 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     On && /* @__PURE__ */ t(
       Dd,
       {
-        songName: H,
+        songName: $,
         mode: m,
         theme: b,
         style: A,
-        intent: Y.intent ?? "",
+        intent: K.intent ?? "",
         lyrics: M,
-        specs: Y,
+        specs: K,
         coverDataUrl: U,
-        endpoint: J,
-        busy: Xe,
+        endpoint: G,
+        busy: Qe,
         onRegenerate: Eo,
         onUpload: Ao,
         onClear: () => {
@@ -11545,7 +11564,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     )
   ] }) : /* @__PURE__ */ t(Sd, { retrying: vn, onRetry: vr });
 }
-function Xd({ settings: e, endpoints: a, onChange: r, onClose: o }) {
+function Xd({ settings: e, endpoints: a, onChange: r, onClose: i }) {
   const s = (c, d, f) => {
     const m = f.trim(), w = { ...e.overridesByEndpoint[c] ?? {} };
     m ? w[d] = m : delete w[d];
@@ -11563,7 +11582,7 @@ function Xd({ settings: e, endpoints: a, onChange: r, onClose: o }) {
     {
       className: "absolute inset-0 z-40 flex items-center justify-center",
       style: { background: "rgba(0,0,0,0.55)" },
-      onClick: o,
+      onClick: i,
       children: /* @__PURE__ */ n(
         "div",
         {
@@ -11593,7 +11612,7 @@ function Xd({ settings: e, endpoints: a, onChange: r, onClose: o }) {
                   /* @__PURE__ */ t(
                     "button",
                     {
-                      onClick: o,
+                      onClick: i,
                       className: "ml-auto flex items-center justify-center rounded-md transition-all hover:bg-[var(--bg-hover)]",
                       style: { width: 24, height: 24, color: "var(--text-secondary)" },
                       title: "Close",
@@ -11752,7 +11771,7 @@ function Xd({ settings: e, endpoints: a, onChange: r, onClose: o }) {
                 children: /* @__PURE__ */ t(
                   "button",
                   {
-                    onClick: o,
+                    onClick: i,
                     className: "px-4 rounded-lg transition-all hover:bg-[var(--bg-hover)]",
                     style: {
                       height: 30,
