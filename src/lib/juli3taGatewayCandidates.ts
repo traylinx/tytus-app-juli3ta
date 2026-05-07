@@ -14,6 +14,13 @@ export const LOCAL_AIL_KEY = 'sk-test-123';
 
 const hasV1Suffix = (url: string): boolean => /\/v1\/?$/i.test(url);
 
+const revealDaemonUserKey = (value: IncludedPod['user_key'] | string): string => {
+  if (typeof value === 'string') return value;
+  const raw = (value as unknown as { _value?: unknown })._value;
+  if (typeof raw === 'string') return revealSecret(value, 'user_gesture');
+  return '';
+};
+
 export const normalizeAilGatewayUrl = (raw: string | null | undefined): string | null => {
   const trimmed = raw?.trim();
   if (!trimmed) return null;
@@ -38,7 +45,8 @@ export const buildJuli3taGatewayCandidates = (
   const seenUrls = new Set<string>();
 
   for (const p of included) {
-    const apiKey = revealSecret(p.user_key, 'user_gesture');
+    const apiKey = revealDaemonUserKey(p.user_key);
+    if (!apiKey) continue;
     const podLabel = p.pod_id || 'included';
 
     // Browser-installed JULI3TA must not require local switchAILocal.
