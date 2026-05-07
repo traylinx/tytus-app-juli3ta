@@ -19,10 +19,12 @@ type RawIncludedPod = IncludedPod & {
   apiKey?: unknown;
   endpoint?: string | null;
   id?: string | null;
+  meta?: unknown;
   podId?: string | null;
   pod_id?: string | null;
   private_url?: string | null;
   privateUrl?: string | null;
+  gatewayUrl?: string | null;
   public_url?: string | null;
   publicUrl?: string | null;
   user_key?: unknown;
@@ -74,8 +76,16 @@ export const buildJuli3taGatewayCandidates = (
 
   for (const p of included) {
     const rawPod = p as RawIncludedPod;
+    const meta = isRecord(rawPod.meta) ? rawPod.meta : {};
     const apiKey = revealDaemonUserKey(
-      rawPod.user_key ?? rawPod.userKey ?? rawPod.api_key ?? rawPod.apiKey,
+      rawPod.user_key ??
+        rawPod.userKey ??
+        rawPod.api_key ??
+        rawPod.apiKey ??
+        meta.userKey ??
+        meta.gatewayKey ??
+        meta.apiKey ??
+        meta.api_key,
     );
     if (!apiKey) continue;
     const podLabel = firstString(rawPod.pod_id, rawPod.podId, rawPod.id) || 'included';
@@ -83,7 +93,9 @@ export const buildJuli3taGatewayCandidates = (
     // Browser-installed JULI3TA must not require local switchAILocal.
     // Try the account AIL pod first via its public mirror, then via the
     // WireGuard/private endpoint, then fall back to local development AIL.
-    const publicUrl = normalizeAilGatewayUrl(firstString(rawPod.public_url, rawPod.publicUrl));
+    const publicUrl = normalizeAilGatewayUrl(
+      firstString(rawPod.public_url, rawPod.publicUrl, rawPod.gatewayUrl, meta.gatewayUrl, meta.publicUrl),
+    );
     if (publicUrl) {
       pushUnique(out, seenUrls, {
         url: publicUrl,
@@ -95,7 +107,7 @@ export const buildJuli3taGatewayCandidates = (
     }
 
     const tunnelUrl = normalizeAilGatewayUrl(
-      firstString(rawPod.endpoint, rawPod.private_url, rawPod.privateUrl),
+      firstString(rawPod.endpoint, rawPod.private_url, rawPod.privateUrl, meta.endpoint, meta.privateUrl),
     );
     if (tunnelUrl) {
       pushUnique(out, seenUrls, {
