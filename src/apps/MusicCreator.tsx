@@ -64,6 +64,7 @@ import {
   createPlaylist,
   deleteLibraryTrack,
   deletePlaylist,
+  importMusicLibrarySnapshot,
   listFavoriteEntities,
   listLibraryTracks,
   listPlaylists,
@@ -72,7 +73,15 @@ import {
   toggleFavorite as toggleLibraryFavorite,
   upsertLibraryTrack,
   type MusicPlaylist,
+  type MusicLibrarySnapshot,
 } from '@/lib/repo/musicLibrary';
+import {
+  buildMusicLibrarySnapshot,
+  loadBrowserMusicLibrarySnapshot,
+  loadHostMusicLibrarySnapshot,
+  mergeMusicLibrarySnapshots,
+  saveHostMusicLibrarySnapshot,
+} from '@/lib/musicLibraryPersistence';
 import {
   listRecordings,
   insertRecording,
@@ -112,7 +121,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.2';
+const APP_VERSION = '0.3.7';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -7388,6 +7397,7 @@ export default function MusicCreator() {
   const [libraryTracks, setLibraryTracks] = useState<SavedTrack[]>([]);
   const [favoriteMusicIds, setFavoriteMusicIds] = useState<Set<string>>(() => new Set());
   const [musicPlaylists, setMusicPlaylists] = useState<MusicPlaylist[]>([]);
+  const [musicLibraryHydrated, setMusicLibraryHydrated] = useState(false);
   const [playlistNameDraft, setPlaylistNameDraft] = useState('');
   const [playlistBusy, setPlaylistBusy] = useState(false);
   const musicSearchCacheRef = useRef(new Map<string, MusicSearchResult[]>());
@@ -7421,7 +7431,7 @@ export default function MusicCreator() {
       await migrateCreatorYoutubeRowsToLibrary().catch((e) => {
         console.warn('[Juli3ta] music library bridge migration failed (non-fatal):', e);
       });
-      const [loadedRes, hostFilesRes, prefsRes, recsRes, libraryRes, favoritesRes, playlistsRes] = await Promise.allSettled([
+      const [loadedRes, hostFilesRes, prefsRes, recsRes, libraryRes, favoritesRes, playlistsRes, hostMusicStateRes] = await Promise.allSettled([
         listTracks(),
         listGeneratedTracksFromFiles(),
         loadCreatorSettings(),
@@ -7429,6 +7439,7 @@ export default function MusicCreator() {
         listLibraryTracks(),
         listFavoriteEntities('track'),
         listPlaylists(),
+        loadHostMusicLibrarySnapshot(),
       ]);
       if (cancelled) return;
 
@@ -7489,12 +7500,50 @@ export default function MusicCreator() {
 
       if (prefsRes.status === 'fulfilled') setCreatorSettings(prefsRes.value);
       if (recsRes.status === 'fulfilled') setVoiceRecordings(recsRes.value);
-      if (libraryRes.status === 'fulfilled') setLibraryTracks(libraryRes.value);
-      if (favoritesRes.status === 'fulfilled') setFavoriteMusicIds(new Set(favoritesRes.value.map((f) => f.entityId)));
-      if (playlistsRes.status === 'fulfilled') setMusicPlaylists(playlistsRes.value);
+
+      // Library/Favorites are user intent, not a disposable browser cache.
+      // Browser OPFS can be wiped by profile changes and previously failed
+      // under strict CSP. Merge three sources, then write the union back into
+      // the local AppDb and the tray's host-file snapshot under
+      // ~/Music/JULI3TA/.music-state.json.
+      const localMusicState: MusicLibrarySnapshot = {
+        version: 1,
+        updatedAt: Date.now(),
+        tracks: libraryRes.status === 'fulfilled' ? libraryRes.value : [],
+        favorites: favoritesRes.status === 'fulfilled' ? favoritesRes.value : [],
+        playlists: playlistsRes.status === 'fulfilled' ? playlistsRes.value : [],
+      };
+      const hostMusicState = hostMusicStateRes.status === 'fulfilled' ? hostMusicStateRes.value : null;
+      const browserMusicState = loadBrowserMusicLibrarySnapshot();
+      const mergedMusicState = mergeMusicLibrarySnapshots(
+        mergeMusicLibrarySnapshots(localMusicState, browserMusicState),
+        hostMusicState,
+      );
+      await importMusicLibrarySnapshot(mergedMusicState).catch((e) => {
+        console.warn('[Juli3ta] music library durable import failed:', e);
+      });
+      if (cancelled) return;
+      setLibraryTracks(mergedMusicState.tracks);
+      setFavoriteMusicIds(new Set(mergedMusicState.favorites.filter((f) => f.kind === 'track').map((f) => f.entityId)));
+      setMusicPlaylists(mergedMusicState.playlists);
+      setMusicLibraryHydrated(true);
+      void saveHostMusicLibrarySnapshot(mergedMusicState).catch((e) => {
+        console.warn('[Juli3ta] music library durable save failed:', e);
+      });
     })();
     return () => { cancelled = true; };
   }, []);
+
+  useEffect(() => {
+    if (!musicLibraryHydrated) return;
+    const snapshot = buildMusicLibrarySnapshot(libraryTracks, favoriteMusicIds, musicPlaylists);
+    const timer = window.setTimeout(() => {
+      void saveHostMusicLibrarySnapshot(snapshot).catch((e) => {
+        console.warn('[Juli3ta] music library durable save failed:', e);
+      });
+    }, 450);
+    return () => window.clearTimeout(timer);
+  }, [musicLibraryHydrated, libraryTracks, favoriteMusicIds, musicPlaylists]);
 
   // If the tray restarts while JULI3TA is already open, the first real-file
   // library request can fail and leave a banner behind. Treat that as a
