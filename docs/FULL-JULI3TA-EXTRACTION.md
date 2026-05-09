@@ -75,3 +75,18 @@ Status: PASS — verified standalone JULI3TA is now public in the Tytus App Cata
   - `npm run test --workspaces --if-present` → 104 files, 1024 tests passed.
 
 Still pending outside this extraction: real Finder-visible `~/Music/JULI3TA/*.mp3`, real `~/Documents/Tytus/Memo/*.md`, Linux/Windows port, and native Trash/clipboard/shortcuts.
+
+## 2026-05-09 G6 remote streaming speedup
+
+Status: PASS for code gates; published as `juli3ta-0.3.8`.
+
+- Root cause: JULI3TA was already streaming remote music through the tray proxy, not downloading the full song first. The slow first-play path came from duplicate stream URL resolves, treating cached proxy URLs like durable `audioDataUrl` values, and tray-side `yt-dlp --dump-json` metadata extraction before audio could start.
+- App fix: remote stream URLs now live in a refreshable runtime cache with one in-flight promise per YouTube id. Search prewarm, hover/focus warmup, and Play all join the same resolver instead of stampeding `/api/music/stream`.
+- Player fix: remote tracks use `preload="metadata"` while generated/local tracks keep `preload="auto"`.
+- Tray fix: `/api/music/stream` now uses fast `yt-dlp --get-url` first and falls back to the old metadata path.
+- Stable manifest: `https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@juli3ta-0.3.8/tytus-app.json`
+- Stable entry: `https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@juli3ta-0.3.8/dist/index.js`
+- Gates:
+  - `npm run typecheck`
+  - `npm run build`
+  - `cargo test -p tytus-tray music_ -- --nocapture`

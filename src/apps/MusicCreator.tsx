@@ -121,7 +121,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.7';
+const APP_VERSION = '0.3.8';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -1732,6 +1732,9 @@ interface PlayerControls {
 
 type ResolveTrackSrc = (track: SavedTrack, opts?: { force?: boolean }) => Promise<string | null>;
 
+const audioPreloadMode = (track: SavedTrack): HTMLMediaElement['preload'] =>
+  isRemoteTrack(track) ? 'metadata' : 'auto';
+
 // usePlayer takes the queue + the audio ref as parameters so the
 // consumer owns the ref (React rules disallow surfacing refs from
 // hook return values through render). The hook only exposes plain
@@ -1840,7 +1843,7 @@ function usePlayer(
       }
       if (state.trackId !== track.id || a.src !== src) {
         a.src = src;
-        a.preload = 'auto';
+        a.preload = audioPreloadMode(track);
         a.load();
         a.pause();
         setState((s) => ({
@@ -1891,7 +1894,7 @@ function usePlayer(
       }
       if (state.trackId !== track.id || a.src !== src) {
         a.src = src;
-        a.preload = 'auto';
+        a.preload = audioPreloadMode(track);
         setState((s) => ({ ...s, trackId: track.id, positionMs: 0, durationMs: track.durationMs || 0 }));
       }
       void a.play()
@@ -2065,7 +2068,7 @@ function usePlayer(
         .then((src) => {
           if (!src) throw new Error('No refreshed stream URL');
           a.src = src;
-          a.preload = 'auto';
+          a.preload = audioPreloadMode(current);
           return a.play();
         })
         .then(() => setState((s) => ({ ...s, playing: true, loadingTrackId: null })))
@@ -6261,6 +6264,7 @@ interface MusicSearchPaneProps {
   addBusyId: string | null;
   savedYoutubeIds: Set<string>;
   player: PlayerControls;
+  onWarmResult: (result: MusicSearchResult) => void;
   onPreview: (result: MusicSearchResult) => void;
   onAdd: (result: MusicSearchResult) => void;
   onOpenTrack: (track: SavedTrack) => void;
@@ -6302,6 +6306,7 @@ function MusicSearchPane({
   addBusyId,
   savedYoutubeIds,
   player,
+  onWarmResult,
   onPreview,
   onAdd,
   onOpenTrack,
@@ -6682,6 +6687,8 @@ function MusicSearchPane({
               return (
                 <div
                   key={r.id}
+                  onMouseEnter={() => onWarmResult(r)}
+                  onFocus={() => onWarmResult(r)}
                   className="flex items-center gap-3 rounded-xl px-3 py-2 transition-all hover:bg-[var(--bg-hover)]"
                   style={{ background: 'var(--bg-titlebar)', border: '1px solid var(--border-subtle)' }}
                 >
@@ -7402,13 +7409,18 @@ export default function MusicCreator() {
   const [playlistBusy, setPlaylistBusy] = useState(false);
   const musicSearchCacheRef = useRef(new Map<string, MusicSearchResult[]>());
   const musicSearchInFlightRef = useRef(new Map<string, Promise<MusicSearchResult[]>>());
-  const prefetchingStreamsRef = useRef(new Set<string>());
+  const runtimeStreamsRef = useRef(runtimeStreams);
+  const musicStreamInFlightRef = useRef(new Map<string, Promise<string>>());
   const [hostLibraryRoot, setHostLibraryRoot] = useState<string | null>(null);
   const [hostLibraryBusy, setHostLibraryBusy] = useState(false);
 
   // Persisted user prefs — model overrides, preferred pod, etc.
   const [creatorSettings, setCreatorSettings] = useState<MusicCreatorSettings>(DEFAULT_CREATOR_SETTINGS);
   const [settingsOpen, setSettingsOpen] = useState(false);
+
+  useEffect(() => {
+    runtimeStreamsRef.current = runtimeStreams;
+  }, [runtimeStreams]);
 
 
   useEffect(() => {
@@ -9176,32 +9188,41 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       || (t.album || '').toLowerCase().includes(q));
   }, [libraryTracks, libraryChip, gallerySearch, favoriteMusicIds]);
 
-  const warmMusicResults = useCallback((rows: MusicSearchResult[]) => {
-    rows.slice(0, 4).forEach((row) => {
-      const key = musicStreamKey(row.id);
-      const cached = runtimeStreams[key];
-      if (cached && Date.now() - cached.resolvedAt < 90 * 60 * 1000) return;
-      if (prefetchingStreamsRef.current.has(row.id)) return;
-      prefetchingStreamsRef.current.add(row.id);
-      setStreamWarmupIds((prev) => new Set(prev).add(row.id));
-      void getMusicStream(row.id)
-        .then((info) => {
-          setRuntimeStreams((m) => ({
-            ...m,
-            [key]: { src: info.proxyUrl, resolvedAt: Date.now() },
-          }));
-        })
-        .catch(() => { /* best-effort prewarm */ })
-        .finally(() => {
-          prefetchingStreamsRef.current.delete(row.id);
-          setStreamWarmupIds((prev) => {
-            const next = new Set(prev);
-            next.delete(row.id);
-            return next;
-          });
+  const resolveMusicStreamUrl = useCallback((videoId: string, opts?: { force?: boolean }): Promise<string> => {
+    const key = musicStreamKey(videoId);
+    const cached = runtimeStreamsRef.current[key];
+    if (!opts?.force && cached && Date.now() - cached.resolvedAt < 90 * 60 * 1000) {
+      return Promise.resolve(cached.src);
+    }
+
+    const inFlight = musicStreamInFlightRef.current.get(videoId);
+    if (!opts?.force && inFlight) return inFlight;
+
+    setStreamWarmupIds((prev) => new Set(prev).add(videoId));
+    const request = getMusicStream(videoId)
+      .then((info) => {
+        const entry = { src: info.proxyUrl, resolvedAt: Date.now() };
+        runtimeStreamsRef.current = { ...runtimeStreamsRef.current, [key]: entry };
+        setRuntimeStreams((current) => ({ ...current, [key]: entry }));
+        return info.proxyUrl;
+      })
+      .finally(() => {
+        musicStreamInFlightRef.current.delete(videoId);
+        setStreamWarmupIds((prev) => {
+          const next = new Set(prev);
+          next.delete(videoId);
+          return next;
         });
+      });
+    musicStreamInFlightRef.current.set(videoId, request);
+    return request;
+  }, []);
+
+  const warmMusicResults = useCallback((rows: MusicSearchResult[]) => {
+    rows.slice(0, 3).forEach((row) => {
+      void resolveMusicStreamUrl(row.id).catch(() => { /* best-effort prewarm */ });
     });
-  }, [runtimeStreams]);
+  }, [resolveMusicStreamUrl]);
 
   useEffect(() => {
     if (!musicSearchOpen) return;
@@ -9353,12 +9374,10 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     if (track.audioDataUrl && !opts?.force) return track.audioDataUrl;
     if (!isRemoteTrack(track) || !track.externalId) return track.audioDataUrl || null;
     const key = musicStreamKey(track.externalId);
-    const cached = runtimeStreams[key] ?? runtimeStreams[track.id];
+    const cached = runtimeStreamsRef.current[key] ?? runtimeStreamsRef.current[track.id];
     if (!opts?.force && cached && Date.now() - cached.resolvedAt < 90 * 60 * 1000) return cached.src;
-    const info = await getMusicStream(track.externalId);
-    setRuntimeStreams((m) => ({ ...m, [key]: { src: info.proxyUrl, resolvedAt: Date.now() } }));
-    return info.proxyUrl;
-  }, [runtimeStreams]);
+    return resolveMusicStreamUrl(track.externalId, opts);
+  }, [resolveMusicStreamUrl]);
 
   const allPlayerTracks = useMemo(
     () => [...previewTracks, ...libraryTracks, ...visibleGallery],
@@ -9577,14 +9596,12 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     // player.state.loadingTrackId === track.id) instead of staring at
     // a tiny row spinner for 2-3s while YouTube's URL resolves. The
     // stream URL resolves lazily inside player.play() →
-    // resolveTrackAudioSrc → getMusicStream, so there's no need to
-    // await it here.
+    // resolveTrackAudioSrc. If search prewarm is still in flight,
+    // player.play joins that exact promise instead of launching a
+    // duplicate yt-dlp resolve. Do not stuff the proxy URL into
+    // audioDataUrl: remote URLs expire and must stay refreshable.
     const key = musicStreamKey(result.id);
-    const cached = runtimeStreams[key];
-    const stub = resultToTrack(
-      result,
-      cached ? { id: key, audioDataUrl: cached.src } : undefined,
-    );
+    const stub = resultToTrack(result, { id: key });
     setPreviewTracks((rows) => [stub, ...rows.filter((t) => t.id !== stub.id)]);
     setSelectedPlayerTrackId(stub.id);
     setView('player');
@@ -9593,7 +9610,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     // but clear it so the row's button isn't permanently disabled if the
     // user navigates back to the search pane.
     setPreviewBusyId(null);
-  }, [player, resultToTrack, runtimeStreams]);
+  }, [player, resultToTrack]);
+
+  const warmMusicResult = useCallback((result: MusicSearchResult) => {
+    void resolveMusicStreamUrl(result.id).catch(() => { /* best-effort interactive warmup */ });
+  }, [resolveMusicStreamUrl]);
 
   const addMusicResult = useCallback(async (result: MusicSearchResult) => {
     setAddBusyId(result.id);
@@ -10479,6 +10500,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               addBusyId={addBusyId}
               savedYoutubeIds={savedYoutubeIds}
               player={player}
+              onWarmResult={warmMusicResult}
               onPreview={previewMusicResult}
               onAdd={addMusicResult}
               onOpenTrack={(track) => {
