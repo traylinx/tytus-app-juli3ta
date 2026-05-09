@@ -18,10 +18,12 @@
 // we hit `/v1/models` and pick the first id that matches a music regex.
 // If no match, music generation is disabled for that endpoint.
 //
-// Talks directly to the pod's public Tytus URL — CORS is
-// `Access-Control-Allow-Origin: *` so the browser can call it
-// without a daemon proxy hop. If the user has no pod allocated,
-// we surface an empty-state pointing them at PodInspector.
+// Browser code must never call public pod origins directly: those
+// endpoints intentionally do not advertise permissive CORS. Account
+// AIL calls route through the tray's same-origin pod proxy, which
+// injects auth server-side and keeps the console clean. If the user
+// has no pod allocated, we surface an empty-state pointing them at
+// PodInspector.
 
 import { useState, useEffect, useRef, useCallback, useMemo, Fragment } from 'react';
 import {
@@ -121,7 +123,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.8';
+const APP_VERSION = '0.3.9';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -221,6 +223,9 @@ interface PodEndpoint {
   source: 'agent' | 'included' | 'local';
   // Display label for the connection badge.
   label: string;
+  // Same-origin tray proxy pod id. Present for account AIL pods so
+  // browser code never calls pod origins directly.
+  proxyPodId?: string;
   // Resolved model ids for this endpoint. Different deployments expose
   // different aliases — the local switchAILocal might register
   // `minimax:music-2.6`, while a remote pod might expose `ail-music`.
@@ -987,6 +992,22 @@ const pickModels = (ids: readonly string[]): DiscoveredModels => {
 const CORS_BLOCK_TTL_MS = 60_000;
 const corsBlocked = new Map<string, number>(); // url → expires-at (ms)
 
+const gatewayFetch = (
+  endpoint: Pick<PodEndpoint, 'url' | 'apiKey' | 'proxyPodId'>,
+  path: string,
+  init: RequestInit,
+): Promise<Response> => {
+  const headers = new Headers(init.headers ?? {});
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  if (endpoint.proxyPodId) {
+    headers.delete('Authorization');
+    const proxyUrl = `/api/pods/${encodeURIComponent(endpoint.proxyPodId)}/proxy/v1${normalizedPath}`;
+    return fetch(proxyUrl, { ...init, headers });
+  }
+  if (endpoint.apiKey) headers.set('Authorization', `Bearer ${endpoint.apiKey}`);
+  return fetch(`${endpoint.url}${normalizedPath}`, { ...init, headers });
+};
+
 const probeAndDiscover = async (
   cand: PodEndpoint,
   signal: AbortSignal,
@@ -1004,10 +1025,10 @@ const probeAndDiscover = async (
   // would sit forever and the user couldn't switch endpoints.
   const probeTimeout = withTimeout(signal, PROBE_TIMEOUT_MS);
   try {
-    const r = await fetch(`${cand.url}/models`, {
+    const r = await gatewayFetch(cand, '/models', {
       method: 'GET',
       signal: probeTimeout.signal,
-      headers: { Authorization: `Bearer ${cand.apiKey}` },
+      headers: { Accept: 'application/json' },
     });
     if (r.status >= 500) return { ok: false, models: NO_MODELS };
     if (!r.ok) return { ok: true, models: NO_MODELS };
@@ -1238,10 +1259,9 @@ const callLyrics = async (
   try {
     const body: Record<string, unknown> = { prompt, mode: 'write_full_song' };
     if (endpoint.models.lyrics) body.model = endpoint.models.lyrics;
-    const r = await fetch(`${endpoint.url}/music/lyrics`, {
+    const r = await gatewayFetch(endpoint, '/music/lyrics', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${endpoint.apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
@@ -1327,10 +1347,9 @@ Respond with VALID JSON ONLY in exactly this shape, nothing else:
       const fallbackTimeout = withTimeout(signal, LYRICS_TIMEOUT_MS);
       let resp: Response;
       try {
-        resp = await fetch(`${endpoint.url}/chat/completions`, {
+        resp = await gatewayFetch(endpoint, '/chat/completions', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${endpoint.apiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(
@@ -1450,10 +1469,9 @@ const callMusic = async (
     const musicTimeout = withTimeout(signal, MUSIC_TIMEOUT_MS);
     let r: Response;
     try {
-      r = await fetch(`${endpoint.url}/music/generations`, {
+      r = await gatewayFetch(endpoint, '/music/generations', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${endpoint.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
@@ -1562,10 +1580,9 @@ const callImageGen = async (
         };
     let resp: Response;
     try {
-      resp = await fetch(`${endpoint.url}/images/generations`, {
+      resp = await gatewayFetch(endpoint, '/images/generations', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${endpoint.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
@@ -8354,10 +8371,9 @@ export default function MusicCreator() {
       const t = withTimeout(opts?.signal, ASSIST_TIMEOUT_MS);
       let r: Response;
       try {
-        r = await fetch(`${endpoint.url}/chat/completions`, {
+        r = await gatewayFetch(endpoint, '/chat/completions', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${endpoint.apiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
