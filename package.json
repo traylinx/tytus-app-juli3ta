@@ -1,8 +1,8 @@
 {
   "name": "tytus-app-juli3ta",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "type": "module",
-  "description": "JULI3TA — AI-native music creator for Tytus OS",
+  "description": "JULI3TA \u2014 AI-native music creator for Tytus OS",
   "license": "MIT",
   "files": [
     "dist",
