@@ -123,7 +123,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.9';
+const APP_VERSION = '0.3.10';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -8362,12 +8362,36 @@ export default function MusicCreator() {
     const userMsg = typeof userPayload === 'string' ? userPayload : JSON.stringify(userPayload);
     const baseTemp = opts?.temperature ?? 0.5;
     const maxTokens = Math.max(opts?.maxTokens ?? 800, 400);
+
+    // Chat-assist buttons need a cheap general text model, not the
+    // gateway's broad compound/search aliases. The remote AIL /models
+    // order is not stable and some provider-prefixed compound aliases
+    // (`minimax/ail-compound`) currently fail hard with
+    // `web_search is not support (2013)`. Rank deterministic text
+    // aliases first and keep reasoning/compound fallbacks last.
+    const chatAssistRank = (id: string): number => {
+      const x = id.toLowerCase();
+      if (/^(deepseek\/)?ail-fast$/.test(x)) return 10;
+      if (/^(deepseek\/)?ail-balanced$/.test(x)) return 20;
+      if (/^(ail-compound-minimax|minimax\/ail-compound-minimax)$/.test(x)) return 30;
+      if (/^minimax\/ail-balanced$/.test(x)) return 40;
+      if (/^minimax\/ail-kimi$/.test(x)) return 50;
+      if (/^moonshot\/ail-balanced$/.test(x)) return 60;
+      if (/^moonshot\/ail-compound$/.test(x)) return 70;
+      if (/^(ail-compound|moonshot\/ail-kimi|ail-kimi|ail-kimi-strict|moonshot\/ail-kimi-strict)$/.test(x)) return 90;
+      if (/search/.test(x)) return 100;
+      return 80;
+    };
+    const isKnownBrokenChatAlias = (id: string): boolean =>
+      /^minimax\/ail-compound$/i.test(id);
+    tryOrder.sort((a, b) => chatAssistRank(a) - chatAssistRank(b));
+    const orderedModels = tryOrder.filter((id) => !isKnownBrokenChatAlias(id));
     // Per-call wall-clock cap. Lyrics path uses 60s; chat assists are
     // shorter prompts so 45s is comfortable but doesn't let a stuck
     // gateway lock the AI button forever (the original bug).
     const ASSIST_TIMEOUT_MS = 45_000;
 
-    return tryWithModelFallback(tryOrder, async (modelId) => {
+    return tryWithModelFallback(orderedModels, async (modelId) => {
       const t = withTimeout(opts?.signal, ASSIST_TIMEOUT_MS);
       let r: Response;
       try {
@@ -8397,6 +8421,13 @@ export default function MusicCreator() {
       }
       if (!r.ok) {
         const errBody = await r.text().catch(() => '');
+        // Provider-specific 400s are not user/config fatal for these small
+        // text helpers. Example observed on pod 04: `minimax/ail-compound`
+        // returns `invalid params, web_search is not support (2013)`. Treat
+        // that as model-incompatible and continue to the next ranked alias.
+        if (r.status === 400 && /web_search|not support|unsupported|invalid params/i.test(errBody)) {
+          throw new GatewayError(502, errBody, `AI assist model ${modelId} rejected provider params: ${errBody.slice(0, 200)}`);
+        }
         throw new GatewayError(r.status, errBody, `AI assist HTTP ${r.status}: ${errBody.slice(0, 200)}`);
       }
       const rawJson = await r.json();
