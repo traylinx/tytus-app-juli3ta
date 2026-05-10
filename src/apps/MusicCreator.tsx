@@ -123,7 +123,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.10';
+const APP_VERSION = '0.3.11';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -7172,6 +7172,25 @@ function MusicSearchPane({
 // art — Restyle takes a reference audio clip and re-sings the song in
 // that style. The album-art panel is a separate first-class feature.
 type Mode = 'compose' | 'restyle' | 'lyricsOnly';
+type AiAssistTask = 'theme' | 'style' | 'lyrics' | 'specs' | 'cover';
+
+const EMPTY_AI_BUSY: Record<AiAssistTask, boolean> = {
+  theme: false,
+  style: false,
+  lyrics: false,
+  specs: false,
+  cover: false,
+};
+
+const EMPTY_AI_ABORTS: Record<AiAssistTask, AbortController | null> = {
+  theme: null,
+  style: null,
+  lyrics: null,
+  specs: null,
+  cover: null,
+};
+
+const isAbortError = (e: unknown): boolean => (e as Error | undefined)?.name === 'AbortError';
 
 export default function MusicCreator() {
   const daemon = useDaemonStateContext();
@@ -7249,6 +7268,43 @@ export default function MusicCreator() {
   // the button + show a spinner; cleared in finally so a failed call
   // doesn't leave the button stuck.
   const [optimizingSpecs, setOptimizingSpecs] = useState(false);
+
+  // Operation-scoped helper state. Each AI helper owns its AbortController so
+  // Suggest/Optimize/Cover can run together without accidentally aborting each
+  // other. Generation still cancels all helpers to freeze the submitted form.
+  const [aiBusy, setAiBusy] = useState<Record<AiAssistTask, boolean>>(() => ({ ...EMPTY_AI_BUSY }));
+  const aiBusyRef = useRef<Record<AiAssistTask, boolean>>({ ...EMPTY_AI_BUSY });
+  const aiAbortRefs = useRef<Record<AiAssistTask, AbortController | null>>({ ...EMPTY_AI_ABORTS });
+
+  const setAiTaskBusy = useCallback((task: AiAssistTask, value: boolean) => {
+    aiBusyRef.current = { ...aiBusyRef.current, [task]: value };
+    setAiBusy((prev) => (prev[task] === value ? prev : { ...prev, [task]: value }));
+  }, []);
+
+  const beginAiTask = useCallback((task: AiAssistTask): AbortController | null => {
+    if (aiBusyRef.current[task]) return null;
+    aiAbortRefs.current[task]?.abort();
+    const controller = new AbortController();
+    aiAbortRefs.current[task] = controller;
+    setAiTaskBusy(task, true);
+    return controller;
+  }, [setAiTaskBusy]);
+
+  const finishAiTask = useCallback((task: AiAssistTask, controller: AbortController) => {
+    if (aiAbortRefs.current[task] === controller) aiAbortRefs.current[task] = null;
+    setAiTaskBusy(task, false);
+  }, [setAiTaskBusy]);
+
+  const abortAllAiTasks = useCallback(() => {
+    (Object.keys(aiAbortRefs.current) as AiAssistTask[]).forEach((task) => {
+      aiAbortRefs.current[task]?.abort();
+      aiAbortRefs.current[task] = null;
+    });
+    aiBusyRef.current = { ...EMPTY_AI_BUSY };
+    setAiBusy({ ...EMPTY_AI_BUSY });
+    setCoverBusy(false);
+    setOptimizingSpecs(false);
+  }, []);
 
   // Cover-mode state
   const [refAudioName, setRefAudioName] = useState<string | null>(null);
@@ -7667,11 +7723,8 @@ export default function MusicCreator() {
   }, []);
 
   const abortRef = useRef<AbortController | null>(null);
-  // AI-assist controller — separate from `abortRef` because Cancel
-  // (Generate) shouldn't kill an Inspire/Suggest/Polish/Optimize that
-  // happens to be running, and vice versa. Each AI assist call grabs
-  // its signal off this ref; the unmount cleanup aborts both refs.
-  const aiAbortRef = useRef<AbortController | null>(null);
+  // Generation owns abortRef. Helper buttons use aiAbortRefs above, one
+  // controller per operation, so independent helpers do not cross-abort.
   // Forward-ref handles for callbacks declared later in the component
   // body. Lets earlier callbacks (regenerateCover, etc.) call
   // setTrackCover without TDZ-on-render from a deps array. The ref
@@ -7685,7 +7738,9 @@ export default function MusicCreator() {
 
   useEffect(() => () => {
     abortRef.current?.abort();
-    aiAbortRef.current?.abort();
+    (Object.keys(aiAbortRefs.current) as AiAssistTask[]).forEach((task) => {
+      aiAbortRefs.current[task]?.abort();
+    });
   }, []);
 
   // Fake progress + rotating tip while a real call is in flight.
@@ -7772,6 +7827,9 @@ export default function MusicCreator() {
     if (generatingRef.current) return;
     generatingRef.current = true;
     setError(null);
+    // Submit wins over draft helpers. Freeze the form snapshot and stop any
+    // Inspire/Suggest/Polish/Optimize/Cover work that could mutate it mid-run.
+    abortAllAiTasks();
 
     abortRef.current?.abort();
     const controller = new AbortController();
@@ -8069,7 +8127,7 @@ export default function MusicCreator() {
     }
   }, [
     endpoint, theme, lyrics, songName, style, specs, activeTemplate, instrumental, mode, refAudioBase64, refAudioName, t,
-    saveTrack, creatorSettings, mirrorAudioToVfs, mirrorLyricsToVfs, addNotification,
+    saveTrack, creatorSettings, mirrorAudioToVfs, mirrorLyricsToVfs, addNotification, abortAllAiTasks,
     coverAuto, coverDataUrl, coverPrompt,
   ]);
 
@@ -8291,6 +8349,8 @@ export default function MusicCreator() {
   };
 
   const clearRefAudio = () => {
+    ingestSeqRef.current += 1;
+    setExtracting(false);
     setRefAudioBase64(null);
     setRefAudioName(null);
     setRefSampleInfo(null);
@@ -8314,7 +8374,7 @@ export default function MusicCreator() {
   //  - Tries multiple response shapes (some MiniMax/legacy chat-
   //    compat APIs expose `text` or `delta.content` instead of
   //    `message.content`).
-  //  - Single in-flight request per button (callers gate on aiBusy).
+  //  - Single in-flight request per operation (callers gate by task).
   const callAIAssist = useCallback(async (
     systemPrompt: string,
     userPayload: unknown,
@@ -8449,6 +8509,8 @@ export default function MusicCreator() {
   // edit any field after, and Clear All resets to empty.
   const optimizeSpecs = useCallback(async () => {
     if (!endpoint) return;
+    const controller = beginAiTask('specs');
+    if (!controller) return;
     setOptimizingSpecs(true);
     setError(null);
     try {
@@ -8493,8 +8555,6 @@ Output schema (every field optional, OMIT fields you can't infer confidently):
 }
 
 Return ONLY the JSON. No markdown, no explanation, no code fences.`;
-      aiAbortRef.current?.abort();
-      aiAbortRef.current = new AbortController();
       const raw = await callAIAssist(sys, {
         theme: theme || null,
         style: style || null,
@@ -8506,7 +8566,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         // truncates roughly half the response and leaves the JSON
         // unparseable mid-string. 2000 fits a complete fill comfortably.
         maxTokens: 2000,
-        signal: aiAbortRef.current.signal,
+        signal: controller.signal,
       });
       // Pull the first balanced JSON object out of the response — the
       // model sometimes prefixes "Here's the JSON:\n" or trails extra
@@ -8521,18 +8581,19 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       // Preserve the user's free-form lyrics intent — the optimizer's
       // schema doesn't include it, so a naive overwrite would wipe
       // whatever the user typed in the Lyrics Direction field.
+      if (controller.signal.aborted) return;
       setSpecs((prev) => ({ ...parsed, intent: prev.intent }));
     } catch (e) {
+      if (isAbortError(e)) return;
       setError((e as Error).message || 'Optimize failed.');
     } finally {
+      finishAiTask('specs', controller);
       setOptimizingSpecs(false);
     }
-  }, [endpoint, theme, style, lyrics, specs, callAIAssist]);
+  }, [endpoint, theme, style, lyrics, specs, callAIAssist, beginAiTask, finishAiTask]);
 
-  // Three text-driven AI assists. Each shares the same in-flight ref
-  // so a single button at a time is active and we can show a spinner
-  // on whichever is running. callAIAssist normalizes the chat call.
-  const [aiBusy, setAiBusy] = useState<null | 'theme' | 'style' | 'lyrics'>(null);
+  // Text-driven AI assists. Each helper has its own in-flight state and
+  // controller; fields can improve in parallel without killing each other.
 
   // Cover-art regenerate. Uses coverPrompt if set, otherwise derives
   // one from title/theme/style. Same multi-model fallback discipline
@@ -8548,12 +8609,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     // Concurrency guard — rapid double-clicks would otherwise fire
     // parallel image calls and last-writer-wins clobbers coverDataUrl.
     if (coverBusy) return;
-    // Reuse aiAbortRef so the unmount cleanup also kills any in-flight
-    // image gen, and a second click cancels the previous request
-    // instead of layering a new one on top.
-    aiAbortRef.current?.abort();
-    aiAbortRef.current = new AbortController();
-    const signal = aiAbortRef.current.signal;
+    const controller = beginAiTask('cover');
+    if (!controller) return;
+    const signal = controller.signal;
     setCoverBusy(true);
     setError(null);
     try {
@@ -8570,12 +8628,13 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         setTrackCoverRef.current?.(loadedTrackId, out);
       }
     } catch (e) {
-      if ((e as Error).name === 'AbortError') return;
+      if (isAbortError(e)) return;
       setError((e as Error).message || 'Cover-art generation failed.');
     } finally {
+      finishAiTask('cover', controller);
       setCoverBusy(false);
     }
-  }, [endpoint, coverPrompt, songName, theme, style, coverBusy, loadedTrackId]);
+  }, [endpoint, coverPrompt, songName, theme, style, coverBusy, loadedTrackId, beginAiTask, finishAiTask]);
 
   // Upload-from-disk handler. Reads the file as a base64 data URL and
   // shoves it straight into coverDataUrl so the user can ship a custom
@@ -8608,72 +8667,72 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
   }, [loadedTrackId]);
 
   const inspireTheme = useCallback(async () => {
-    if (aiBusy) return;
-    setAiBusy('theme');
+    const controller = beginAiTask('theme');
+    if (!controller) return;
     setError(null);
     try {
       const sys = `You are a creative songwriter. Given a Style description (genre, mood, instrumentation hints), write a vivid one-paragraph THEME for the song — a setting, a story arc, an emotional core. Keep it 2-4 sentences, evocative but specific. Plain prose only, no headers, no markdown, no quotes.`;
-      aiAbortRef.current?.abort();
-      aiAbortRef.current = new AbortController();
       const out = await callAIAssist(sys, {
         style: style || 'pop',
         existing_theme: theme || null,
-      }, { temperature: 0.85, maxTokens: 200, signal: aiAbortRef.current.signal });
+      }, { temperature: 0.85, maxTokens: 200, signal: controller.signal });
+      if (controller.signal.aborted) return;
       setTheme(out);
     } catch (e) {
+      if (isAbortError(e)) return;
       setError((e as Error).message || 'Theme inspiration failed.');
     } finally {
-      setAiBusy(null);
+      finishAiTask('theme', controller);
     }
-  }, [aiBusy, callAIAssist, style, theme]);
+  }, [beginAiTask, finishAiTask, callAIAssist, style, theme]);
 
   const suggestStyle = useCallback(async () => {
-    if (aiBusy) return;
-    setAiBusy('style');
+    const controller = beginAiTask('style');
+    if (!controller) return;
     setError(null);
     try {
       const sys = `You are a music-production assistant. Given a song THEME, propose a Style description: a comma-separated list of genre + mood + tempo + instrument cues (8-12 tags). Plain text, lowercase, comma-separated, no headers, no markdown, no surrounding prose. Example: "indie folk, acoustic, melancholic, 80 bpm, fingerpicked guitar, soft female vocals, reverb-heavy".`;
-      aiAbortRef.current?.abort();
-      aiAbortRef.current = new AbortController();
       const out = await callAIAssist(sys, {
         theme: theme || 'a quiet evening',
         existing_style: style || null,
-      }, { temperature: 0.7, maxTokens: 120, signal: aiAbortRef.current.signal });
+      }, { temperature: 0.7, maxTokens: 120, signal: controller.signal });
+      if (controller.signal.aborted) return;
       setStyle(out.replace(/^["']|["']$/g, ''));
     } catch (e) {
+      if (isAbortError(e)) return;
       setError((e as Error).message || 'Style suggestion failed.');
     } finally {
-      setAiBusy(null);
+      finishAiTask('style', controller);
     }
-  }, [aiBusy, callAIAssist, theme, style]);
+  }, [beginAiTask, finishAiTask, callAIAssist, theme, style]);
 
   const polishLyrics = useCallback(async () => {
-    if (aiBusy) return;
     if (!lyrics.trim()) {
       setError('Nothing to polish — write some lyrics first.');
       return;
     }
-    setAiBusy('lyrics');
+    const controller = beginAiTask('lyrics');
+    if (!controller) return;
     setError(null);
     try {
       const sys = `You are a senior songwriter. Polish the user's lyrics for flow, rhyme, imagery, and structural balance. Preserve the user's intent and language. Keep [Verse], [Chorus], [Bridge], [Intro], [Outro], [Inst] section markers if present (or add appropriate ones). Return ONLY the polished lyrics — no commentary, no markdown, no quotes.`;
-      aiAbortRef.current?.abort();
-      aiAbortRef.current = new AbortController();
       const out = await callAIAssist(sys, {
         style: style || null,
         lyrics,
-      }, { temperature: 0.6, maxTokens: 1200, signal: aiAbortRef.current.signal });
+      }, { temperature: 0.6, maxTokens: 1200, signal: controller.signal });
+      if (controller.signal.aborted) return;
       if (out.length > MAX_LYRICS) {
         setError(`Polished lyrics exceeded ${MAX_LYRICS} chars (${out.length}). Trimming the original first might help.`);
         return;
       }
       setLyrics(out);
     } catch (e) {
+      if (isAbortError(e)) return;
       setError((e as Error).message || 'Lyrics polish failed.');
     } finally {
-      setAiBusy(null);
+      finishAiTask('lyrics', controller);
     }
-  }, [aiBusy, callAIAssist, style, lyrics]);
+  }, [beginAiTask, finishAiTask, callAIAssist, style, lyrics]);
 
   // (insertTemplate retired — LYRIC_TEMPLATES are now structured
   // {skeleton, prompt} objects and the click handler lives in the
@@ -9125,7 +9184,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             // a track for an abandoned form. Both refs cover music+chat
             // and AI-assist paths.
             abortRef.current?.abort();
-            aiAbortRef.current?.abort();
+            abortAllAiTasks();
+            ingestSeqRef.current += 1;
             generatingRef.current = false;
             setMode('compose');
             setTheme('');
@@ -9145,7 +9205,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             setGalleryError(null);
             setPhase('idle');
             setProgress(0);
-            setAiBusy(null);
+            setAiBusy({ ...EMPTY_AI_BUSY });
             setCoverBusy(false);
             setOptimizingSpecs(false);
             setLoadedTrackId(null);
@@ -9183,7 +9243,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         ],
       },
     ],
-  }), [currentWindow]);
+  }), [currentWindow, abortAllAiTasks]);
   useShellMenuRegistration(currentWindow?.id ?? null, shellMenuModel);
 
   // Single source of truth for the gallery filter. Previously the
@@ -11389,8 +11449,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 label="Inspire"
                 tooltip="Use AI to write a theme based on your Style"
                 onClick={inspireTheme}
-                busy={aiBusy === 'theme'}
-                disabled={busy || aiBusy !== null}
+                busy={aiBusy.theme}
+                disabled={busy || aiBusy.theme}
               />
             }
           >
@@ -11425,8 +11485,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 label="Suggest"
                 tooltip="Use AI to suggest a Style from your Theme"
                 onClick={suggestStyle}
-                busy={aiBusy === 'style'}
-                disabled={busy || aiBusy !== null}
+                busy={aiBusy.style}
+                disabled={busy || aiBusy.style}
               />
             }
           >
@@ -11690,8 +11750,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 label="Polish"
                 tooltip="Use AI to refine flow, rhyme, and structure"
                 onClick={polishLyrics}
-                busy={aiBusy === 'lyrics'}
-                disabled={busy || aiBusy !== null || !lyrics.trim()}
+                busy={aiBusy.lyrics}
+                disabled={busy || aiBusy.lyrics || !lyrics.trim()}
               />
             ) : undefined
           }
