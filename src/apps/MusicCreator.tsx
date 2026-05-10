@@ -123,7 +123,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.11';
+const APP_VERSION = '0.3.12';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -1487,6 +1487,13 @@ const callMusic = async (
     }
     if (!r.ok) {
       const errBody = await r.text().catch(() => '');
+      if (isCover && r.status === 413) {
+        throw new GatewayError(
+          r.status,
+          errBody,
+          'Reference audio was too large for the gateway. JULI3TA now makes compact 16 kHz reference samples; clear and re-pick the reference audio, then retry Restyle.',
+        );
+      }
       throw new GatewayError(r.status, errBody, `Music HTTP ${r.status}: ${errBody.slice(0, 300)}`);
     }
     const json = await r.json() as MusicResponse;
@@ -8181,7 +8188,7 @@ export default function MusicCreator() {
         setRefSampleInfo(
           result.sourceDurationSec <= result.durationSec + 0.5
             ? `Using whole clip (${result.durationSec.toFixed(0)} s)`
-            : `Auto-picked best ${result.durationSec.toFixed(0)} s starting at ${startStr} of ${sourceMin.toFixed(1)} min`,
+            : `Auto-picked compact ${result.durationSec.toFixed(0)} s starting at ${startStr} of ${sourceMin.toFixed(1)} min`,
         );
       }
     } catch (err) {
@@ -11049,8 +11056,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   >
                     <Sparkles size={13} style={{ color: sampleStrategy === 'best' ? 'var(--accent-primary)' : 'var(--text-secondary)' }} />
                     <div className="text-left flex-1">
-                      <div style={{ fontSize: 11, fontWeight: 600 }}>Best 30 s</div>
-                      <div style={{ fontSize: 9, color: 'var(--text-disabled)' }}>single chorus-like window</div>
+                      <div style={{ fontSize: 11, fontWeight: 600 }}>Best compact</div>
+                      <div style={{ fontSize: 9, color: 'var(--text-disabled)' }}>gateway-safe chorus-like window</div>
                     </div>
                   </button>
                   <button
@@ -11065,7 +11072,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     <Layers size={13} style={{ color: sampleStrategy === 'mix' ? 'var(--accent-primary)' : 'var(--text-secondary)' }} />
                     <div className="text-left flex-1">
                       <div style={{ fontSize: 11, fontWeight: 600 }}>Iconic mix</div>
-                      <div style={{ fontSize: 9, color: 'var(--text-disabled)' }}>3 best parts crossfaded</div>
+                      <div style={{ fontSize: 9, color: 'var(--text-disabled)' }}>3 compact parts crossfaded</div>
                     </div>
                   </button>
                 </div>
@@ -11224,9 +11231,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               style={{ display: 'none' }}
             />
             <div style={{ fontSize: 10, color: 'var(--text-disabled)', marginTop: 6, lineHeight: 1.4 }}>
-              💡 JULI3TA will <strong>auto-pick the best 30&nbsp;s</strong> of the clip
-              by analyzing energy + steadiness. Long recordings get trimmed to
-              the most musical chunk.
+              💡 JULI3TA will <strong>auto-pick a compact gateway-safe sample</strong> of the clip
+              by analyzing energy + steadiness. Long recordings get trimmed and
+              downsampled before Restyle so the request stays small.
             </div>
 
             {/* Voice recordings picker modal */}
