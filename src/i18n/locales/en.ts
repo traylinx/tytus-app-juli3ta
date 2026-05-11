@@ -508,7 +508,7 @@ export const en: TranslationMap = {
   'musiccreator.restyle.songsPicker.title': 'Pick a song from your library',
   'musiccreator.restyle.songsPicker.empty.title': 'No songs in your library yet',
   'musiccreator.restyle.songsPicker.empty.body': 'Switch to the Song tab and create a track first — it’ll show up here for restyling.',
-  'musiccreator.restyle.songsPicker.tooShort': 'too short for cover (need ≥6 s)',
+  'musiccreator.restyle.songsPicker.tooShort': 'too short for Restyle (need ≥30 s)',
   'musiccreator.restyle.button.mySongs': 'My songs',
   'musiccreator.restyle.button.mySongs.count': '{count} in library',
   'musiccreator.restyle.button.voiceClips': 'Voice clips',

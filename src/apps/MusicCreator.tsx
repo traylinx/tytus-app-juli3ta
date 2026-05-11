@@ -123,7 +123,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.17';
+const APP_VERSION = '0.3.18';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -767,6 +767,8 @@ const LEGACY_IDB_STORE = 'gallery';
 const MAX_LYRICS = 3500;
 const MAX_COVER_LYRICS = 1000;
 const MAX_STYLE = 2000;
+const MIN_RESTYLE_REFERENCE_SECONDS = 30;
+const MIN_LONG_SOURCE_REFERENCE_SECONDS = 45;
 
 // ──────────────────────────────────────────────────────────
 // Helpers
@@ -779,15 +781,26 @@ const formatTime = (ms: number): string => {
   return `${m}:${s.toString().padStart(2, '0')}`;
 };
 
+const normaliseAudioBase64 = (value?: string | null): string => {
+  if (!value) return '';
+  const marker = 'base64,';
+  const idx = value.indexOf(marker);
+  const payload = idx >= 0 ? value.slice(idx + marker.length) : value;
+  return payload.replace(/\s+/g, '');
+};
+
 const extractBase64Payload = (src?: string | null): string | null => {
   if (!src) return null;
   const marker = 'base64,';
   const idx = src.indexOf(marker);
-  return idx >= 0 ? src.slice(idx + marker.length) : null;
+  if (idx >= 0) return normaliseAudioBase64(src.slice(idx + marker.length)) || null;
+  const clean = normaliseAudioBase64(src);
+  // Plain base64 is accepted, but do not mistake a URL/path for base64.
+  return /^[A-Za-z0-9+/=]+$/.test(clean) ? clean : null;
 };
 
 const audioBlobFromBase64 = (base64: string, mime = 'audio/wav'): Blob => {
-  const clean = base64.replace(/\s+/g, '');
+  const clean = normaliseAudioBase64(base64);
   const bin = atob(clean);
   const bytes = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
@@ -796,7 +809,9 @@ const audioBlobFromBase64 = (base64: string, mime = 'audio/wav'): Blob => {
 
 const wavDurationMsFromBase64 = (base64: string): number | null => {
   try {
-    const clean = base64.replace(/\s+/g, '');
+    const clean = normaliseAudioBase64(base64);
+    const padding = clean.endsWith('==') ? 2 : clean.endsWith('=') ? 1 : 0;
+    const totalBytes = Math.max(0, Math.floor(clean.length * 3 / 4) - padding);
     // Header + first chunks are enough; our encoder writes fmt/data first,
     // but this parser still walks chunks so it survives harmless metadata.
     const bin = atob(clean.slice(0, Math.min(clean.length, 4096)));
@@ -816,7 +831,9 @@ const wavDurationMsFromBase64 = (base64: string): number | null => {
         sampleRate = view.getUint32(payload + 4, true);
         blockAlign = view.getUint16(payload + 12, true);
       } else if (id === 'data') {
-        dataSize = size;
+        dataSize = size === 0xffffffff || payload + size > totalBytes
+          ? Math.max(0, totalBytes - payload)
+          : size;
         break;
       }
       off = payload + size + (size % 2);
@@ -1156,7 +1173,7 @@ const LYRICS_TIMEOUT_MS = 60_000;   // /music/lyrics is text — fast.
 // covers the slow case without leaving the user with a runaway
 // request that never resolves. Set per smoke pass 2026-05-01 where
 // remote `ail-music` exceeded the previous 3-min ceiling.
-const MUSIC_TIMEOUT_MS = 300_000;
+const MUSIC_TIMEOUT_MS = 420_000;
 const PROBE_TIMEOUT_MS = 8_000;     // /v1/models reachability probe — must be quick.
 
 // Combine an optional user-driven AbortSignal with a wall-clock timeout.
@@ -1197,6 +1214,10 @@ const withTimeout = (
 // errors. Hard 4xx (400/401/403/404) are NOT here — those are config
 // bugs that retrying won't fix.
 const RETRYABLE_GATEWAY_STATUSES = new Set([402, 408, 425, 429, 500, 502, 503, 504]);
+// Music generation can be billed once the upstream accepts the request. Do not
+// auto-advance on 5xx/timeout-looking gateway statuses; surface the first
+// failure so one user click maps to one music POST.
+const MUSIC_RETRYABLE_GATEWAY_STATUSES = new Set([402, 425, 429]);
 
 // Error subclass that carries the HTTP status. Lets the multi-model
 // fallback loop tell "retryable" (try next model) from "fatal" (throw
@@ -1257,6 +1278,7 @@ const tryWithModelFallback = async <T,>(
   modelIds: readonly string[],
   attempt: (modelId: string) => Promise<T>,
   kind: string,
+  retryableStatuses: ReadonlySet<number> = RETRYABLE_GATEWAY_STATUSES,
 ): Promise<T> => {
   if (modelIds.length === 0) {
     throw new Error(`No ${kind}-capable models available on this endpoint.`);
@@ -1273,7 +1295,7 @@ const tryWithModelFallback = async <T,>(
       // Network errors (TypeError on fetch) → try next.
       if (e instanceof TypeError) { lastErr = e; continue; }
       // Gateway errors with a retryable status → try next.
-      if (e instanceof GatewayError && RETRYABLE_GATEWAY_STATUSES.has(e.status)) {
+      if (e instanceof GatewayError && retryableStatuses.has(e.status)) {
         lastErr = e;
         continue;
       }
@@ -1283,7 +1305,18 @@ const tryWithModelFallback = async <T,>(
     }
   }
   const lastMsg = (lastErr as Error)?.message ?? 'unknown';
-  throw new Error(`All ${kind} models exhausted. Last error: ${lastMsg}. Wait for the rate limit to reset, or pick a different endpoint in Settings.`);
+  const advice = lastErr instanceof GatewayError
+    ? lastErr.status === 429
+      ? 'Wait for the rate limit to reset, or pick a different endpoint in Settings.'
+      : [408, 500, 502, 503, 504].includes(lastErr.status)
+        ? 'Remote AIL/provider timed out or returned an empty gateway response. Retry once, then switch endpoint in Settings if it repeats.'
+        : lastErr.status === 402
+          ? 'That provider/model is out of credits; pick a different endpoint in Settings.'
+          : 'Pick a different endpoint in Settings or check the provider configuration.'
+    : lastErr instanceof TypeError
+      ? 'Network/CORS failed before the gateway answered; check the selected endpoint in Settings.'
+      : 'Pick a different endpoint in Settings.';
+  throw new Error(`All ${kind} models exhausted. Last error: ${lastMsg}. ${advice}`);
 };
 
 interface LyricsResponse {
@@ -1496,6 +1529,7 @@ const callMusic = async (
     // ail-music-cover and the upstream uses the reference audio for
     // style transfer.
     refAudioBase64?: string;
+    refAudioDurationSec?: number | null;
   },
   signal?: AbortSignal,
 ): Promise<MusicResponse> => {
@@ -1507,7 +1541,7 @@ const callMusic = async (
   // since it ignores audio_base64. Without a list at all, the call fails
   // with a friendly "no music model" error.
   const isMusicy = (id: string) =>
-    /music/i.test(id) && !/cover/i.test(id);
+    /music/i.test(id) && !/cover|lyric/i.test(id);
   const isCoverModel = (id: string) => /cover/i.test(id);
   const seen = new Set<string>();
   const pushUniq = (acc: string[], id: string | null | undefined) => {
@@ -1517,7 +1551,6 @@ const callMusic = async (
   if (isCover) {
     pushUniq(modelIds, endpoint.models.cover);
     endpoint.models.allIds.filter(isCoverModel).forEach((id) => pushUniq(modelIds, id));
-    pushUniq(modelIds, endpoint.models.music);
   } else {
     pushUniq(modelIds, endpoint.models.music);
     endpoint.models.allIds.filter(isMusicy).forEach((id) => pushUniq(modelIds, id));
@@ -1540,7 +1573,24 @@ const callMusic = async (
     if (!isCover || cleanedLyrics) body.lyrics = cleanedLyrics;
     if (args.prompt) body.prompt = args.prompt;
     if (args.instrumental) body.instrumental = true;
-    if (isCover) body.audio_base64 = args.refAudioBase64;
+    if (isCover) {
+      const cleanRef = normaliseAudioBase64(args.refAudioBase64 ?? '');
+      body.audio_base64 = cleanRef;
+      const parsedDurationMs = wavDurationMsFromBase64(cleanRef);
+      const refDurationSec = parsedDurationMs !== null
+        ? parsedDurationMs / 1000
+        : args.refAudioDurationSec ?? null;
+      if (refDurationSec !== null && refDurationSec < MIN_RESTYLE_REFERENCE_SECONDS) {
+        throw new Error(`Reference sample is only ${refDurationSec.toFixed(1)} s. MiniMax cover rejects short song references; pick a longer song or re-load a full ~60 s source sample before Restyle.`);
+      }
+      console.info('[Juli3ta] Sending music-cover reference:', {
+        modelId,
+        refDurationSec: refDurationSec !== null ? Number(refDurationSec.toFixed(2)) : null,
+        refBytesApprox: Math.max(0, Math.floor(cleanRef.length * 3 / 4)),
+        prompt: args.prompt ?? '',
+        lyricsProvided: Boolean(cleanedLyrics),
+      });
+    }
     const musicTimeout = withTimeout(signal, MUSIC_TIMEOUT_MS);
     let r: Response;
     try {
@@ -1554,7 +1604,7 @@ const callMusic = async (
       });
     } catch (e) {
       if ((e as Error).name === 'TimeoutError') {
-        throw new Error(`Music generation timed out after ${MUSIC_TIMEOUT_MS / 1000}s. Try a shorter lyric or a different endpoint.`);
+        throw new Error(`Music generation timed out after ${MUSIC_TIMEOUT_MS / 1000}s. Remote music can take several minutes; retry once or switch endpoint in Settings.`);
       }
       throw e;
     } finally {
@@ -1566,7 +1616,7 @@ const callMusic = async (
         throw new GatewayError(
           r.status,
           errBody,
-          'Reference audio was too large for the gateway. JULI3TA now makes compact gateway-safe reference samples; clear and re-pick the reference audio, then retry Restyle.',
+          'Reference audio was too large for the gateway. JULI3TA now makes compact cover-ready reference samples; clear and re-pick the reference audio, then retry Restyle.',
         );
       }
       throw new GatewayError(r.status, errBody, `Music HTTP ${r.status}: ${errBody.slice(0, 300)}`);
@@ -1579,7 +1629,7 @@ const callMusic = async (
       throw new GatewayError(502, '', 'Music gen returned no audio data — gateway accepted the call but upstream returned nothing.');
     }
     return json;
-  }, isCover ? 'music-cover' : 'music');
+  }, isCover ? 'music-cover' : 'music', MUSIC_RETRYABLE_GATEWAY_STATUSES);
 };
 
 // ──────────────────────────────────────────────────────────
@@ -7462,6 +7512,8 @@ export default function MusicCreator() {
   // Cover-mode state
   const [refAudioName, setRefAudioName] = useState<string | null>(null);
   const [refAudioBase64, setRefAudioBase64] = useState<string | null>(null);
+  const [refAudioDurationSec, setRefAudioDurationSec] = useState<number | null>(null);
+  const [refSourceDurationSec, setRefSourceDurationSec] = useState<number | null>(null);
   const [refSampleInfo, setRefSampleInfo] = useState<string | null>(null);
   const [extracting, setExtracting] = useState(false);
   const [refExtractProgress, setRefExtractProgress] = useState<CoverSampleProgress | null>(null);
@@ -7983,6 +8035,19 @@ export default function MusicCreator() {
         : 'Restyle needs a reference audio file. Drop one in below.');
       return;
     }
+    if (mode === 'restyle' && refAudioBase64) {
+      const inferredMs = wavDurationMsFromBase64(refAudioBase64);
+      const durationSec = refAudioDurationSec ?? (inferredMs !== null ? inferredMs / 1000 : null);
+      const sourceDurationSec = refSourceDurationSec ?? durationSec;
+      if (durationSec !== null && durationSec < MIN_RESTYLE_REFERENCE_SECONDS) {
+        setError(`Reference sample is only ${durationSec.toFixed(1)} s. MiniMax Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real source audio; choose a longer song or a full YouTube/library source.`);
+        return;
+      }
+      if (durationSec !== null && sourceDurationSec !== null && sourceDurationSec > 60 && durationSec < MIN_LONG_SOURCE_REFERENCE_SECONDS) {
+        setError(`Reference sample is only ${durationSec.toFixed(1)} s from a ${Math.round(sourceDurationSec)} s source. Clear it and re-pick; Restyle needs a representative ~60 s window to preserve the song.`);
+        return;
+      }
+    }
     // In-flight guard: drop duplicate clicks before phase flips.
     // The button swaps to Cancel via `busy = phase !== 'idle'`, but
     // there's a render-frame gap between this handler firing and the
@@ -8152,13 +8217,28 @@ export default function MusicCreator() {
         return;
       }
 
-      // Restyle mode requires a reference-audio upload.
+      // Restyle mode requires a validated reference-audio upload.
       if (mode === 'restyle' && !refAudioBase64) {
         setError(extracting
           ? 'Still analyzing the reference audio — try again in a moment.'
           : 'Restyle needs a reference audio file. Drop one in below.');
         setPhase('idle');
         return;
+      }
+      if (mode === 'restyle' && refAudioBase64) {
+        const inferredMs = wavDurationMsFromBase64(refAudioBase64);
+        const durationSec = refAudioDurationSec ?? (inferredMs !== null ? inferredMs / 1000 : null);
+        const sourceDurationSec = refSourceDurationSec ?? durationSec;
+        if (durationSec !== null && durationSec < MIN_RESTYLE_REFERENCE_SECONDS) {
+          setError(`Reference sample is only ${durationSec.toFixed(1)} s. MiniMax Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real source audio; choose a longer song or a full YouTube/library source.`);
+          setPhase('idle');
+          return;
+        }
+        if (durationSec !== null && sourceDurationSec !== null && sourceDurationSec > 60 && durationSec < MIN_LONG_SOURCE_REFERENCE_SECONDS) {
+          setError(`Reference sample is only ${durationSec.toFixed(1)} s from a ${Math.round(sourceDurationSec)} s source. Clear it and re-pick; Restyle needs a representative ~60 s window to preserve the song.`);
+          setPhase('idle');
+          return;
+        }
       }
 
       // Step 2: music (or restyle) + cover art in parallel. Cover art
@@ -8181,6 +8261,7 @@ export default function MusicCreator() {
           prompt: musicPrompt || undefined,
           instrumental,
           refAudioBase64: mode === 'restyle' ? refAudioBase64 ?? undefined : undefined,
+          refAudioDurationSec: mode === 'restyle' ? refAudioDurationSec : null,
         },
         controller.signal,
       );
@@ -8313,7 +8394,7 @@ export default function MusicCreator() {
       generatingRef.current = false;
     }
   }, [
-    endpoint, theme, lyrics, songName, style, specs, activeTemplate, instrumental, mode, refAudioBase64, refAudioName, extracting, t,
+    endpoint, theme, lyrics, songName, style, specs, activeTemplate, instrumental, mode, refAudioBase64, refAudioName, refAudioDurationSec, refSourceDurationSec, extracting, t,
     saveTrack, creatorSettings, mirrorAudioToVfs, mirrorLyricsToVfs, addNotification, abortAllAiTasks,
     coverAuto, coverDataUrl, coverPrompt, coverBusy, optimizingSpecs,
   ]);
@@ -8341,9 +8422,11 @@ export default function MusicCreator() {
     setRefExtractProgress({
       stage: 'loading',
       progress: 0.04,
-      message: 'Preparing compact reference sample…',
+      message: 'Preparing cover reference from the song…',
     });
     setRefAudioBase64(null);
+    setRefAudioDurationSec(null);
+    setRefSourceDurationSec(null);
     setRefAudioName(displayName);
     setRefSampleInfo(null);
     const fastRemote = typeof source === 'string' && /^https?:\/\//i.test(source);
@@ -8355,6 +8438,8 @@ export default function MusicCreator() {
         const result = await buildIconicMix(source, { onProgress });
         if (!isCurrent()) return;
         setRefAudioBase64(result.base64);
+        setRefAudioDurationSec(result.durationSec);
+        setRefSourceDurationSec(result.sourceDurationSec);
         const sourceMin = result.sourceDurationSec / 60;
         if (result.segments.length > 1) {
           const segDesc = result.segments
@@ -8375,7 +8460,7 @@ export default function MusicCreator() {
               message: 'Creating fast server-side reference cut…',
             });
             const r = await fetch(
-              `/api/music/reference-sample?videoId=${encodeURIComponent(options.videoId)}&durationSec=14`,
+              `/api/music/reference-sample?videoId=${encodeURIComponent(options.videoId)}&durationSec=60`,
             );
             if (!r.ok) throw new Error(`reference sample HTTP ${r.status}`);
             const sample = await r.json() as {
@@ -8391,9 +8476,11 @@ export default function MusicCreator() {
               progress: 1,
               message: 'Reference sample ready.',
             });
-            setRefAudioBase64(sample.base64);
-            const durationSec = sample.durationSec ?? 14;
+            const durationSec = sample.durationSec ?? 60;
             const sourceDurationSec = sample.sourceDurationSec ?? durationSec;
+            setRefAudioBase64(sample.base64);
+            setRefAudioDurationSec(durationSec);
+            setRefSourceDurationSec(sourceDurationSec);
             const startSec = sample.startSec ?? 0;
             const sourceMin = sourceDurationSec / 60;
             const startMin = startSec / 60;
@@ -8403,7 +8490,7 @@ export default function MusicCreator() {
             setRefSampleInfo(
               sourceDurationSec <= durationSec + 0.5
                 ? `Using whole clip (${durationSec.toFixed(0)} s)`
-                : `Fast-cut compact ${durationSec.toFixed(0)} s starting at ${startStr} of ${sourceMin.toFixed(1)} min`,
+                : `Fast-cut cover reference ${durationSec.toFixed(0)} s starting at ${startStr} of ${sourceMin.toFixed(1)} min`,
             );
             return;
           } catch {
@@ -8420,6 +8507,8 @@ export default function MusicCreator() {
         });
         if (!isCurrent()) return;
         setRefAudioBase64(result.base64);
+        setRefAudioDurationSec(result.durationSec);
+        setRefSourceDurationSec(result.sourceDurationSec);
         const sourceMin = result.sourceDurationSec / 60;
         const startMin = result.startSec / 60;
         const startStr = result.startSec < 60
@@ -8428,12 +8517,15 @@ export default function MusicCreator() {
         setRefSampleInfo(
           result.sourceDurationSec <= result.durationSec + 0.5
             ? `Using whole clip (${result.durationSec.toFixed(0)} s)`
-            : `Auto-picked compact ${result.durationSec.toFixed(0)} s starting at ${startStr} of ${sourceMin.toFixed(1)} min`,
+            : `Auto-picked cover reference ${result.durationSec.toFixed(0)} s starting at ${startStr} of ${sourceMin.toFixed(1)} min`,
         );
       }
     } catch (err) {
       if (!isCurrent()) return;
       setError((err as Error).message || 'Could not analyze that audio.');
+      setRefAudioBase64(null);
+      setRefAudioDurationSec(null);
+      setRefSourceDurationSec(null);
       setRefAudioName(null);
     } finally {
       if (isCurrent()) {
@@ -8595,6 +8687,10 @@ export default function MusicCreator() {
     setShowSongsPicker(false);
     if (!t.audioDataUrl) return;
     const cleanTitle = t.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, '') || 'Untitled';
+    if (t.durationMs > 0 && t.durationMs / 1000 < MIN_RESTYLE_REFERENCE_SECONDS) {
+      setError(`"${cleanTitle}" is only ${(t.durationMs / 1000).toFixed(1)} s. MiniMax Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real song audio; choose a longer track or a YouTube/library source.`);
+      return;
+    }
     void ingestSourceAudio(t.audioDataUrl, `${cleanTitle}.mp3`);
   };
 
@@ -8602,6 +8698,8 @@ export default function MusicCreator() {
     ingestSeqRef.current += 1;
     setExtracting(false);
     setRefAudioBase64(null);
+    setRefAudioDurationSec(null);
+    setRefSourceDurationSec(null);
     setRefAudioName(null);
     setRefSampleInfo(null);
     setRefExtractProgress(null);
@@ -9221,6 +9319,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     if (!hasPlayableAudio(track)) {
       // No audio → can only edit the lyric sheet.
       setRefAudioBase64(null);
+      setRefAudioDurationSec(null);
+      setRefSourceDurationSec(null);
       setRefAudioName(null);
       setRefSampleInfo(null);
       setMode('lyricsOnly');
@@ -9238,6 +9338,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       // the form looks ready to submit.
       setMode('restyle');
       setRefAudioBase64(null);
+      setRefAudioDurationSec(null);
+      setRefSourceDurationSec(null);
       setRefAudioName(`${cleanTitle}.mp3`);
       setRefSampleInfo('Resolving streamed audio…');
       setExtracting(true);
@@ -9254,6 +9356,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         } catch (e) {
           setExtracting(false);
           setRefAudioBase64(null);
+          setRefAudioDurationSec(null);
+          setRefSourceDurationSec(null);
           setRefAudioName(null);
           setRefSampleInfo(null);
           setError(`Could not load streamed track for restyle: ${(e as Error).message || 'unknown error'}`);
@@ -9451,6 +9555,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             setCoverPrompt('');
             setCoverPromptOpen(false);
             setRefAudioBase64(null);
+            setRefAudioDurationSec(null);
+            setRefSourceDurationSec(null);
             setRefAudioName(null);
             setRefSampleInfo(null);
             setError(null);
@@ -11221,7 +11327,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 </div>
                 {(extracting || refSampleInfo) && (
                   <div style={{ fontSize: 10, color: 'var(--text-disabled)', marginTop: 4 }}>
-                    {extracting ? `🔍  ${refExtractProgress?.message ?? 'Preparing compact reference sample…'}` : `✨  ${refSampleInfo}`}
+                    {extracting ? `🔍  ${refExtractProgress?.message ?? 'Preparing cover reference from the song…'}` : `✨  ${refSampleInfo}`}
                   </div>
                 )}
                 {extracting && (
@@ -11339,7 +11445,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     <Sparkles size={13} style={{ color: sampleStrategy === 'best' ? 'var(--accent-primary)' : 'var(--text-secondary)' }} />
                     <div className="text-left flex-1">
                       <div style={{ fontSize: 11, fontWeight: 600 }}>Best compact</div>
-                      <div style={{ fontSize: 9, color: 'var(--text-disabled)' }}>gateway-safe chorus-like window</div>
+                      <div style={{ fontSize: 9, color: 'var(--text-disabled)' }}>cover-ready song window</div>
                     </div>
                   </button>
                   <button
@@ -11513,7 +11619,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               style={{ display: 'none' }}
             />
             <div style={{ fontSize: 10, color: 'var(--text-disabled)', marginTop: 6, lineHeight: 1.4 }}>
-              💡 JULI3TA will <strong>auto-pick a compact gateway-safe sample</strong> of the clip
+              💡 JULI3TA will <strong>auto-pick a cover-ready ~60 s sample</strong> of the clip
               by analyzing energy + steadiness. Long recordings get trimmed and
               downsampled before Restyle so the request stays small.
             </div>
@@ -11571,7 +11677,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                     ) : (
                       voiceRecordings.map((rec) => {
                         const sec = rec.durationMs / 1000;
-                        const tooShort = sec < 6;
+                        const tooShort = sec > 0 && sec < MIN_RESTYLE_REFERENCE_SECONDS;
                         return (
                           <button
                             key={rec.id}
@@ -11595,7 +11701,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                               </div>
                               <div style={{ fontSize: 11, color: 'var(--text-disabled)' }}>
                                 {Math.floor(sec / 60)}:{Math.floor(sec % 60).toString().padStart(2, '0')}
-                                {tooShort && ' · too short for cover (need ≥6 s)'}
+                                {tooShort && ' · too short for Restyle (need ≥30 s)'}
                               </div>
                             </div>
                           </button>
@@ -11678,7 +11784,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       }
                       return songs.map((s) => {
                         const sec = s.durationMs / 1000;
-                        const tooShort = sec > 0 && sec < 6;
+                        const tooShort = sec > 0 && sec < MIN_RESTYLE_REFERENCE_SECONDS;
                         const cleanTitle = s.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, '') || 'Untitled';
                         return (
                           <button
@@ -11707,7 +11813,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                               <div className="truncate" style={{ fontSize: 11, color: 'var(--text-disabled)' }}>
                                 {sec > 0 ? `${Math.floor(sec / 60)}:${Math.floor(sec % 60).toString().padStart(2, '0')}` : '—'}
                                 {s.styleTags && s.styleTags !== '—' && ` · ${s.styleTags}`}
-                                {tooShort && ' · too short for cover (need ≥6 s)'}
+                                {tooShort && ' · too short for Restyle (need ≥30 s)'}
                               </div>
                             </div>
                           </button>
