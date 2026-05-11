@@ -91,7 +91,7 @@ import {
   type VoiceRecordingRow,
 } from '@/lib/repo/voiceRecordings';
 import { buildJuli3taGatewayCandidates } from '@/lib/juli3taGatewayCandidates';
-import { buildCoverSample, buildIconicMix } from '@/lib/coverSample';
+import { buildCoverSample, buildIconicMix, type CoverSampleProgress } from '@/lib/coverSample';
 import {
   getMusicStatus,
   getMusicProviders,
@@ -123,7 +123,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.15';
+const APP_VERSION = '0.3.16';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -7464,6 +7464,7 @@ export default function MusicCreator() {
   const [refAudioBase64, setRefAudioBase64] = useState<string | null>(null);
   const [refSampleInfo, setRefSampleInfo] = useState<string | null>(null);
   const [extracting, setExtracting] = useState(false);
+  const [refExtractProgress, setRefExtractProgress] = useState<CoverSampleProgress | null>(null);
   const [showRecordingsPicker, setShowRecordingsPicker] = useState(false);
   // Juli3ta-track picker. Lets the user grab a saved song from the
   // gallery as the reference audio for Restyle — without re-uploading
@@ -8331,17 +8332,27 @@ export default function MusicCreator() {
   const ingestSourceAudio = useCallback(async (
     source: Blob | string,
     displayName: string,
+    options: { videoId?: string } = {},
   ) => {
     const seq = ++ingestSeqRef.current;
     const isCurrent = () => ingestSeqRef.current === seq;
     setError(null);
     setExtracting(true);
+    setRefExtractProgress({
+      stage: 'loading',
+      progress: 0.04,
+      message: 'Preparing compact reference sample…',
+    });
     setRefAudioBase64(null);
     setRefAudioName(displayName);
     setRefSampleInfo(null);
+    const fastRemote = typeof source === 'string' && /^https?:\/\//i.test(source);
+    const onProgress = (progress: CoverSampleProgress) => {
+      if (isCurrent()) setRefExtractProgress(progress);
+    };
     try {
       if (sampleStrategy === 'mix') {
-        const result = await buildIconicMix(source);
+        const result = await buildIconicMix(source, { onProgress });
         if (!isCurrent()) return;
         setRefAudioBase64(result.base64);
         const sourceMin = result.sourceDurationSec / 60;
@@ -8356,7 +8367,57 @@ export default function MusicCreator() {
           setRefSampleInfo(`Using whole clip (${result.durationSec.toFixed(0)} s)`);
         }
       } else {
-        const result = await buildCoverSample(source);
+        if (options.videoId) {
+          try {
+            onProgress({
+              stage: 'loading',
+              progress: 0.12,
+              message: 'Creating fast server-side reference cut…',
+            });
+            const r = await fetch(
+              `/api/music/reference-sample?videoId=${encodeURIComponent(options.videoId)}&durationSec=14`,
+            );
+            if (!r.ok) throw new Error(`reference sample HTTP ${r.status}`);
+            const sample = await r.json() as {
+              base64?: string;
+              durationSec?: number;
+              startSec?: number;
+              sourceDurationSec?: number | null;
+            };
+            if (!sample.base64) throw new Error('reference sample response missing audio');
+            if (!isCurrent()) return;
+            onProgress({
+              stage: 'done',
+              progress: 1,
+              message: 'Reference sample ready.',
+            });
+            setRefAudioBase64(sample.base64);
+            const durationSec = sample.durationSec ?? 14;
+            const sourceDurationSec = sample.sourceDurationSec ?? durationSec;
+            const startSec = sample.startSec ?? 0;
+            const sourceMin = sourceDurationSec / 60;
+            const startMin = startSec / 60;
+            const startStr = startSec < 60
+              ? `${startSec.toFixed(1)} s`
+              : `${Math.floor(startMin)}:${Math.floor(startSec % 60).toString().padStart(2, '0')}`;
+            setRefSampleInfo(
+              sourceDurationSec <= durationSec + 0.5
+                ? `Using whole clip (${durationSec.toFixed(0)} s)`
+                : `Fast-cut compact ${durationSec.toFixed(0)} s starting at ${startStr} of ${sourceMin.toFixed(1)} min`,
+            );
+            return;
+          } catch {
+            onProgress({
+              stage: 'loading',
+              progress: 0.08,
+              message: 'Fast server cut unavailable — using browser fallback…',
+            });
+          }
+        }
+        const result = await buildCoverSample(source, {
+          fastRemote,
+          onProgress,
+        });
         if (!isCurrent()) return;
         setRefAudioBase64(result.base64);
         const sourceMin = result.sourceDurationSec / 60;
@@ -8375,7 +8436,10 @@ export default function MusicCreator() {
       setError((err as Error).message || 'Could not analyze that audio.');
       setRefAudioName(null);
     } finally {
-      if (isCurrent()) setExtracting(false);
+      if (isCurrent()) {
+        setExtracting(false);
+        setRefExtractProgress(null);
+      }
     }
   }, [sampleStrategy]);
 
@@ -8540,6 +8604,7 @@ export default function MusicCreator() {
     setRefAudioBase64(null);
     setRefAudioName(null);
     setRefSampleInfo(null);
+    setRefExtractProgress(null);
   };
 
   const cancel = () => {
@@ -9185,7 +9250,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
           const src = cached && Date.now() - cached.resolvedAt < 90 * 60 * 1000
             ? cached.src
             : (await getMusicStream(externalId)).proxyUrl;
-          await ingestSourceAudio(src, `${cleanTitle}.mp3`);
+          await ingestSourceAudio(src, `${cleanTitle}.mp3`, { videoId: externalId });
         } catch (e) {
           setExtracting(false);
           setRefAudioBase64(null);
@@ -11014,7 +11079,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             now?". Apple-Music-inspired layout, but uses the same
             bg-titlebar / accent gradient as the rest of Tytus OS so
             it visually disappears into the chrome when idle. */}
-        {(busy || error || galleryError) && (
+        {(busy || extracting || error || galleryError) && (
           <div
             className="flex-shrink-0"
             style={{
@@ -11026,11 +11091,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   : 'var(--bg-titlebar)',
             }}
           >
-            {busy && (
+            {(busy || extracting) && (
               <div className="overflow-hidden" style={{ height: 2, background: 'var(--bg-hover)' }}>
                 <div
                   style={{
-                    width: `${progress * 100}%`,
+                    width: `${(busy ? progress : (refExtractProgress?.progress ?? 0.08)) * 100}%`,
                     height: '100%',
                     background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))',
                     transition: 'width 0.25s ease',
@@ -11064,6 +11129,16 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   </span>
                   <span style={{ fontSize: 10, color: 'var(--text-disabled)', flexShrink: 0 }}>
                     {phase === 'lyrics' ? 'Step 1 / 2 · Lyrics' : 'Step 2 / 2 · Music'}
+                  </span>
+                </>
+              ) : extracting ? (
+                <>
+                  <Loader2 size={11} className="animate-spin" style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
+                  <span className="flex-1 truncate" style={{ color: 'var(--text-secondary)' }} title={refExtractProgress?.message ?? ''}>
+                    {refExtractProgress?.message ?? 'Preparing reference audio…'}
+                  </span>
+                  <span style={{ fontSize: 10, color: 'var(--text-disabled)', flexShrink: 0 }}>
+                    Reference · {Math.round((refExtractProgress?.progress ?? 0.08) * 100)}%
                   </span>
                 </>
               ) : (
@@ -11146,7 +11221,19 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                 </div>
                 {(extracting || refSampleInfo) && (
                   <div style={{ fontSize: 10, color: 'var(--text-disabled)', marginTop: 4 }}>
-                    {extracting ? '🔍  Listening for the best part…' : `✨  ${refSampleInfo}`}
+                    {extracting ? `🔍  ${refExtractProgress?.message ?? 'Preparing compact reference sample…'}` : `✨  ${refSampleInfo}`}
+                  </div>
+                )}
+                {extracting && (
+                  <div className="overflow-hidden rounded-full" style={{ height: 3, background: 'var(--bg-hover)', marginTop: 7 }}>
+                    <div
+                      style={{
+                        width: `${(refExtractProgress?.progress ?? 0.08) * 100}%`,
+                        height: '100%',
+                        background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))',
+                        transition: 'width 0.25s ease',
+                      }}
+                    />
                   </div>
                 )}
                 {refAudioBase64 && !extracting && (
