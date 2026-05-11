@@ -123,7 +123,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.16';
+const APP_VERSION = '0.3.17';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -8674,27 +8674,27 @@ export default function MusicCreator() {
     const baseTemp = opts?.temperature ?? 0.5;
     const maxTokens = Math.max(opts?.maxTokens ?? 800, 400);
 
-    // Chat-assist buttons need a cheap general text model, not the
-    // gateway's broad compound/search aliases. The remote AIL /models
-    // order is not stable and some provider-prefixed compound aliases
-    // (`minimax/ail-compound`) currently fail hard with
-    // `web_search is not support (2013)`. Rank deterministic text
-    // aliases first and keep reasoning/compound fallbacks last.
+    // Chat-assist buttons need a plain text model, not the gateway's
+    // broad compound/search aliases. The remote AIL /models order is
+    // not stable. In live pod 04 testing, DeepSeek/Kimi aliases often
+    // returned reasoning_content with empty content, wasting 20s+ before
+    // fallback; MiniMax provider-prefixed chat aliases returned usable
+    // content and did not inject unsupported web_search params.
     const chatAssistRank = (id: string): number => {
       const x = id.toLowerCase();
-      if (/^(deepseek\/)?ail-fast$/.test(x)) return 10;
-      if (/^(deepseek\/)?ail-balanced$/.test(x)) return 20;
-      if (/^(ail-compound-minimax|minimax\/ail-compound-minimax)$/.test(x)) return 30;
-      if (/^minimax\/ail-balanced$/.test(x)) return 40;
-      if (/^minimax\/ail-kimi$/.test(x)) return 50;
+      if (/^minimax\/ail-compound-minimax$/.test(x)) return 10;
+      if (/^minimax\/ail-balanced$/.test(x)) return 20;
+      if (/^minimax\/ail-kimi$/.test(x)) return 30;
       if (/^moonshot\/ail-balanced$/.test(x)) return 60;
       if (/^moonshot\/ail-compound$/.test(x)) return 70;
+      if (/^(deepseek\/)?ail-fast$/.test(x)) return 85;
+      if (/^(deepseek\/)?ail-balanced$/.test(x)) return 86;
       if (/^(ail-compound|moonshot\/ail-kimi|ail-kimi|ail-kimi-strict|moonshot\/ail-kimi-strict)$/.test(x)) return 90;
       if (/search/.test(x)) return 100;
       return 80;
     };
     const isKnownBrokenChatAlias = (id: string): boolean =>
-      /^minimax\/ail-compound$/i.test(id);
+      /^minimax\/ail-compound$/i.test(id) || /^ail-compound-minimax$/i.test(id);
     tryOrder.sort((a, b) => chatAssistRank(a) - chatAssistRank(b));
     const orderedModels = tryOrder.filter((id) => !isKnownBrokenChatAlias(id));
     // Per-call wall-clock cap. Lyrics path uses 60s; chat assists are

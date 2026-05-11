@@ -3604,7 +3604,7 @@ const ca = async (e, a) => {
   method: "POST",
   headers: { "Idempotency-Key": `juli3ta-open-folder-${Date.now()}` },
   body: "{}"
-})).path, go = "0.3.16", za = "application/x-juli3ta-track", nr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", Pn = (e) => e.source !== "youtube", _a = (...e) => {
+})).path, go = "0.3.17", za = "application/x-juli3ta-track", nr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", Pn = (e) => e.source !== "youtube", _a = (...e) => {
   const a = /* @__PURE__ */ new Map();
   for (const r of e)
     for (const o of r)
@@ -9340,14 +9340,14 @@ function xp() {
         !i && (J.length > 0 || Ge.length > 0) && (We((ce) => _a(J, Ge, ce)), eo().then((ce) => ba(ce.rootPath)).catch(() => {
         }));
       })(), x.status === "fulfilled" && ri(x.value), E.status === "fulfilled" && Sr(E.value);
-      const Q = {
+      const X = {
         version: 1,
         updatedAt: Date.now(),
         tracks: I.status === "fulfilled" ? I.value : [],
         favorites: D.status === "fulfilled" ? D.value : [],
         playlists: U.status === "fulfilled" ? U.value : []
       }, ie = ue.status === "fulfilled" ? ue.value : null, xe = hd(), se = Ei(
-        Ei(Q, xe),
+        Ei(X, xe),
         ie
       );
       await cd(se).catch((J) => {
@@ -9405,7 +9405,7 @@ function xp() {
     } catch {
       return null;
     }
-  }), [ms, oi] = S(!0), X = Va.find((i) => i.podId === us) ?? Va[0] ?? null, Or = M(async () => {
+  }), [ms, oi] = S(!0), Q = Va.find((i) => i.podId === us) ?? Va[0] ?? null, Or = M(async () => {
     oi(!0);
     const i = new AbortController(), c = await Ru(Ga, i.signal);
     ds(c), oi(!1);
@@ -9459,7 +9459,7 @@ function xp() {
       refTrackId: i.id
     });
   }, [o]), gs = M(async () => {
-    if (!X) {
+    if (!Q) {
       K(a("musiccreator.error.noPod"));
       return;
     }
@@ -9476,15 +9476,15 @@ function xp() {
     const i = new AbortController();
     va.current = i;
     try {
-      const c = Dr.overridesByEndpoint[X.url] ?? {}, p = {
-        ...X,
+      const c = Dr.overridesByEndpoint[Q.url] ?? {}, p = {
+        ...Q,
         models: {
-          music: c.music || X.models.music,
-          cover: c.cover || X.models.cover,
-          lyrics: c.lyrics || X.models.lyrics,
-          lyricsBackup: c.lyricsBackup || X.models.lyricsBackup,
-          image: c.image || X.models.image,
-          allIds: X.models.allIds
+          music: c.music || Q.models.music,
+          cover: c.cover || Q.models.cover,
+          lyrics: c.lyrics || Q.models.lyrics,
+          lyricsBackup: c.lyricsBackup || Q.models.lyricsBackup,
+          image: c.image || Q.models.image,
+          allIds: Q.models.allIds
         }
       }, x = _o(le);
       let E = _.trim(), I = L.trim(), D = k.trim(), U = null;
@@ -9564,7 +9564,7 @@ function xp() {
       ).catch((pe) => {
         if (pe.name === "AbortError") throw pe;
         return console.warn("[Juli3ta] Cover-art generation failed:", pe), ne(`Cover-art skipped: ${pe.message}`), De;
-      }) : Promise.resolve(De), Q = await Promise.allSettled([Je, Ge]), ie = Q[0], xe = Q[1];
+      }) : Promise.resolve(De), X = await Promise.allSettled([Je, Ge]), ie = X[0], xe = X[1];
       if (ie.status === "rejected")
         throw i.abort(), ie.reason;
       const se = ie.value, J = xe.status === "fulfilled" ? xe.value : De;
@@ -9610,7 +9610,7 @@ function xp() {
       Ka.current = !1;
     }
   }, [
-    X,
+    Q,
     T,
     _,
     L,
@@ -9677,7 +9677,7 @@ function xp() {
               progress: 1,
               message: "Reference sample ready."
             }), Ie(Ye.base64);
-            const De = Ye.durationSec ?? 14, Ge = Ye.sourceDurationSec ?? De, Q = Ye.startSec ?? 0, ie = Ge / 60, xe = Q / 60, se = Q < 60 ? `${Q.toFixed(1)} s` : `${Math.floor(xe)}:${Math.floor(Q % 60).toString().padStart(2, "0")}`;
+            const De = Ye.durationSec ?? 14, Ge = Ye.sourceDurationSec ?? De, X = Ye.startSec ?? 0, ie = Ge / 60, xe = X / 60, se = X < 60 ? `${X.toFixed(1)} s` : `${Math.floor(xe)}:${Math.floor(X % 60).toString().padStart(2, "0")}`;
             Be(
               Ge <= De + 0.5 ? `Using whole clip (${De.toFixed(0)} s)` : `Fast-cut compact ${De.toFixed(0)} s starting at ${se} of ${ie.toFixed(1)} min`
             );
@@ -9796,9 +9796,9 @@ function xp() {
   }, _s = () => {
     va.current?.abort(), Ke("idle");
   }, kt = M(async (i, c, p) => {
-    if (!X) throw new Error("No endpoint connected");
-    const x = (Q) => {
-      const ie = Q, xe = ie.choices?.[0], se = [
+    if (!Q) throw new Error("No endpoint connected");
+    const x = (X) => {
+      const ie = X, xe = ie.choices?.[0], se = [
         xe?.message?.content,
         xe?.delta?.content,
         xe?.text,
@@ -9807,28 +9807,28 @@ function xp() {
       for (const J of se)
         if (typeof J == "string" && J.trim().length > 0) return J.trim();
       return "";
-    }, E = (Q) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(Q), I = /* @__PURE__ */ new Set(), D = [], U = (Q) => {
-      Q && !I.has(Q) && (I.add(Q), D.push(Q));
+    }, E = (X) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(X), I = /* @__PURE__ */ new Set(), D = [], U = (X) => {
+      X && !I.has(X) && (I.add(X), D.push(X));
     };
-    if (U(X.models.lyricsBackup), X.models.allIds.filter(E).forEach(U), D.length === 0)
+    if (U(Q.models.lyricsBackup), Q.models.allIds.filter(E).forEach(U), D.length === 0)
       throw new Error("No chat model available on this endpoint. Pick a different connection in Settings.");
-    const ue = typeof c == "string" ? c : JSON.stringify(c), ze = p?.temperature ?? 0.5, Ce = Math.max(p?.maxTokens ?? 800, 400), Je = (Q) => {
-      const ie = Q.toLowerCase();
-      return /^(deepseek\/)?ail-fast$/.test(ie) ? 10 : /^(deepseek\/)?ail-balanced$/.test(ie) ? 20 : /^(ail-compound-minimax|minimax\/ail-compound-minimax)$/.test(ie) ? 30 : /^minimax\/ail-balanced$/.test(ie) ? 40 : /^minimax\/ail-kimi$/.test(ie) ? 50 : /^moonshot\/ail-balanced$/.test(ie) ? 60 : /^moonshot\/ail-compound$/.test(ie) ? 70 : /^(ail-compound|moonshot\/ail-kimi|ail-kimi|ail-kimi-strict|moonshot\/ail-kimi-strict)$/.test(ie) ? 90 : /search/.test(ie) ? 100 : 80;
-    }, Ye = (Q) => /^minimax\/ail-compound$/i.test(Q);
-    D.sort((Q, ie) => Je(Q) - Je(ie));
-    const De = D.filter((Q) => !Ye(Q)), Ge = 45e3;
-    return xr(De, async (Q) => {
+    const ue = typeof c == "string" ? c : JSON.stringify(c), ze = p?.temperature ?? 0.5, Ce = Math.max(p?.maxTokens ?? 800, 400), Je = (X) => {
+      const ie = X.toLowerCase();
+      return /^minimax\/ail-compound-minimax$/.test(ie) ? 10 : /^minimax\/ail-balanced$/.test(ie) ? 20 : /^minimax\/ail-kimi$/.test(ie) ? 30 : /^moonshot\/ail-balanced$/.test(ie) ? 60 : /^moonshot\/ail-compound$/.test(ie) ? 70 : /^(deepseek\/)?ail-fast$/.test(ie) ? 85 : /^(deepseek\/)?ail-balanced$/.test(ie) ? 86 : /^(ail-compound|moonshot\/ail-kimi|ail-kimi|ail-kimi-strict|moonshot\/ail-kimi-strict)$/.test(ie) ? 90 : /search/.test(ie) ? 100 : 80;
+    }, Ye = (X) => /^minimax\/ail-compound$/i.test(X) || /^ail-compound-minimax$/i.test(X);
+    D.sort((X, ie) => Je(X) - Je(ie));
+    const De = D.filter((X) => !Ye(X)), Ge = 45e3;
+    return xr(De, async (X) => {
       const ie = sa(p?.signal, Ge);
       let xe;
       try {
-        xe = await na(X, "/chat/completions", {
+        xe = await na(Q, "/chat/completions", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: Q,
+            model: X,
             messages: [
               { role: "system", content: i },
               { role: "user", content: ue }
@@ -9845,15 +9845,15 @@ function xp() {
       }
       if (!xe.ok) {
         const ce = await xe.text().catch(() => "");
-        throw xe.status === 400 && /web_search|not support|unsupported|invalid params/i.test(ce) ? new Te(502, ce, `AI assist model ${Q} rejected provider params: ${ce.slice(0, 200)}`) : new Te(xe.status, ce, `AI assist HTTP ${xe.status}: ${ce.slice(0, 200)}`);
+        throw xe.status === 400 && /web_search|not support|unsupported|invalid params/i.test(ce) ? new Te(502, ce, `AI assist model ${X} rejected provider params: ${ce.slice(0, 200)}`) : new Te(xe.status, ce, `AI assist HTTP ${xe.status}: ${ce.slice(0, 200)}`);
       }
       const se = await xe.json(), J = x(se);
       if (!J)
-        throw console.warn("[Juli3ta] empty AI assist content from", Q, se), new Te(502, "", `Model "${Q}" returned empty content`);
+        throw console.warn("[Juli3ta] empty AI assist content from", X, se), new Te(502, "", `Model "${X}" returned empty content`);
       return J.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
     }, "chat-assist");
-  }, [X]), Ns = M(async () => {
-    if (!X) return;
+  }, [Q]), Ns = M(async () => {
+    if (!Q) return;
     const i = Le("specs");
     if (i) {
       _t(!0), K(null);
@@ -9926,10 +9926,10 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
         Me("specs", i), _t(!1);
       }
     }
-  }, [X, T, k, _, le, kt, Le, Me]), ni = M(async () => {
-    if (!X) return;
-    if (!X.models.image) {
-      K(`This endpoint (${X.label}) doesn't expose an image model. Pick one in Settings → Cover art, or upload your own image.`);
+  }, [Q, T, k, _, le, kt, Le, Me]), ni = M(async () => {
+    if (!Q) return;
+    if (!Q.models.image) {
+      K(`This endpoint (${Q.label}) doesn't expose an image model. Pick one in Settings → Cover art, or upload your own image.`);
       return;
     }
     if (He) return;
@@ -9938,7 +9938,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
     const c = i.signal;
     $t(!0), K(null);
     try {
-      const p = (O.trim() || dr(L, T, k)).slice(0, 1500), x = await yo(X, p, c);
+      const p = (O.trim() || dr(L, T, k)).slice(0, 1500), x = await yo(Q, p, c);
       if (c.aborted) return;
       F(x), Ne && xa.current?.(Ne, x);
     } catch (p) {
@@ -9947,7 +9947,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
     } finally {
       Me("cover", i), $t(!1);
     }
-  }, [X, O, L, T, k, He, Ne, Le, Me]), si = M((i) => {
+  }, [Q, O, L, T, k, He, Ne, Le, Me]), si = M((i) => {
     if (!i.type.startsWith("image/")) {
       K("That file is not an image. Pick a PNG/JPG/WebP.");
       return;
@@ -10588,7 +10588,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
   }, []), al = M((i) => {
     Yt(i), Pe(!1), v("creator");
   }, [Yt]);
-  return X ? /* @__PURE__ */ s("div", { className: "flex h-full overflow-hidden", style: { background: "var(--bg-window)" }, children: [
+  return Q ? /* @__PURE__ */ s("div", { className: "flex h-full overflow-hidden", style: { background: "var(--bg-window)" }, children: [
     /* @__PURE__ */ s(
       "aside",
       {
@@ -11185,7 +11185,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                   ]
                 }
               ),
-              /* @__PURE__ */ t(Zu, { endpoint: X, endpoints: Va, onSwitch: hs }),
+              /* @__PURE__ */ t(Zu, { endpoint: Q, endpoints: Va, onSwitch: hs }),
               /* @__PURE__ */ s(
                 "button",
                 {
@@ -12189,7 +12189,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
             Ca,
             {
               label: "Cover Art",
-              hint: X?.models.image ? "Auto-generated when you create the song. Override the prompt or upload your own image." : "No image model on this endpoint — pick one in Settings → Cover art, or upload your own image below.",
+              hint: Q?.models.image ? "Auto-generated when you create the song. Override the prompt or upload your own image." : "No image model on this endpoint — pick one in Settings → Cover art, or upload your own image below.",
               className: "mb-5",
               headerExtra: /* @__PURE__ */ s("label", { className: "flex items-center gap-2 cursor-pointer select-none", style: { fontSize: 11, color: "var(--text-secondary)" }, children: [
                 "Auto-generate",
@@ -12198,7 +12198,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                   {
                     checked: Ae,
                     onChange: wr,
-                    disabled: Y || !X?.models.image
+                    disabled: Y || !Q?.models.image
                   }
                 )
               ] }),
@@ -12239,7 +12239,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         {
                           type: "button",
                           onClick: ni,
-                          disabled: Y || He || !X?.models.image,
+                          disabled: Y || He || !Q?.models.image,
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40",
                           style: {
                             fontSize: 11,
@@ -12247,9 +12247,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                             color: "white",
                             background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
                             border: "1px solid transparent",
-                            cursor: Y || He || !X?.models.image ? "not-allowed" : "pointer"
+                            cursor: Y || He || !Q?.models.image ? "not-allowed" : "pointer"
                           },
-                          title: X?.models.image ? "Generate cover art from the prompt below" : "No image model available",
+                          title: Q?.models.image ? "Generate cover art from the prompt below" : "No image model available",
                           children: [
                             He ? /* @__PURE__ */ t(re, { size: 11, className: "animate-spin" }) : /* @__PURE__ */ t(lt, { size: 11 }),
                             fe ? "Regenerate" : "Generate"
@@ -12491,7 +12491,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
       ip,
       {
         track: mi,
-        endpoint: X,
+        endpoint: Q,
         onSave: $r,
         onClose: () => hi(null)
       }
@@ -12507,7 +12507,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
         lyrics: _,
         specs: le,
         coverDataUrl: fe,
-        endpoint: X,
+        endpoint: Q,
         busy: He,
         onRegenerate: ni,
         onUpload: si,
