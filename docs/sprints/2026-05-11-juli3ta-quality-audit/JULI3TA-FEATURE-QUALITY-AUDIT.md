@@ -352,3 +352,23 @@ Local Tytus app was rebuilt and restarted for this audit.
 | Public CDN `0.3.16` | `404` for manifest and bundle until tag is committed/pushed/published |
 
 Implication: local app is ready for feature-by-feature QA. Public online release is intentionally not ready until QA passes and `juli3ta-0.3.16` is tagged/pushed plus catalog pin updated.
+
+---
+
+## Final Sprint Execution Notes — 2026-05-11
+
+- Released standalone JULI3TA `0.3.17` after live model probing showed `deepseek/ail-fast`, `ail-fast`, and `ail-balanced` returned `reasoning_content` with empty `content` for chat-assist prompts.
+- Chat helpers now rank `minimax/ail-compound-minimax` and `minimax/ail-balanced` first and skip known-bad `minimax/ail-compound` / bare `ail-compound-minimax` aliases.
+- Tray reference sample endpoint verified on `http://127.0.0.1:4242/api/music/reference-sample?videoId=iYYRH4apXDo&durationSec=14`:
+  - returns HTTP 200
+  - emits RIFF/WAVE
+  - `durationSec=14.0`
+  - `startSec=160.75`
+  - `sourceDurationSec=305.0`
+  - payload bytes after base64 decode: `672078`
+  - wall-clock after final rebuild: about `4.0s`
+- Local TytusOS served rebuilt bundle `assets/index-DFKY7psf.js`.
+- CDN verification passed for:
+  - `https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@juli3ta-0.3.17/tytus-app.json`
+  - `https://cdn.jsdelivr.net/gh/traylinx/tytus-app-juli3ta@juli3ta-0.3.17/dist/index.js`
+
