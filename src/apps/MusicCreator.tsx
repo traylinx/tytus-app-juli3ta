@@ -44,6 +44,7 @@ import { useFileSystem, getIconForFileName } from '@/hooks/useFileSystem';
 import { useOS, useNotifications } from '@/hooks/useOSStore';
 import { useI18n } from '@/i18n';
 import { BrandIcon } from '@/components/BrandIcon';
+import { useHostEnv } from '@/compat';
 import {
   listTracks,
   getTrackById,
@@ -123,7 +124,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.19';
+const APP_VERSION = '0.3.20';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -142,6 +143,23 @@ const MIME_TRACK = 'application/x-juli3ta-track';
 // MB-scale and chunking that into `dataTransfer` blocks the main thread
 // and silently fails cross-app paste on most browsers. Drop targets that
 // need the audio bytes resolve them by id from SQLite via getTrackById().
+
+interface AppUpdateStatus {
+  appId: string;
+  currentVersion: string | null;
+  latestVersion: string | null;
+  updateAvailable: boolean;
+  manifestUrl: string | null;
+  checkedAt: number;
+  source: 'featured-catalog' | 'installed-row' | 'none';
+  error?: string;
+}
+
+interface AppUpdateApi {
+  checkUpdate?: () => Promise<AppUpdateStatus>;
+  updateSelf?: () => Promise<AppUpdateStatus>;
+}
+
 interface DraggedTrackPayload {
   id: string;
   title: string;
@@ -7436,6 +7454,7 @@ const EMPTY_AI_ABORTS: Record<AiAssistTask, AbortController | null> = {
 const isAbortError = (e: unknown): boolean => (e as Error | undefined)?.name === 'AbortError';
 
 export default function MusicCreator() {
+  const { host } = useHostEnv();
   const daemon = useDaemonStateContext();
   const { t } = useI18n();
   const currentWindow = useCurrentWindow();
@@ -9929,6 +9948,43 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     });
   }, [player.state.trackId]);
 
+
+  // Keep the left sidebar selection synced with player-driven track changes
+  // (MiniPlayer next/prev, MediaSession keys, auto-advance). A click in the
+  // sidebar still does not interrupt audio; this only mirrors the active audio
+  // track back into the row highlight so users always see what is playing.
+  useEffect(() => {
+    const id = player.state.trackId;
+    if (!id || view !== 'player') return;
+    if (selectedPlayerTrackId !== id) setSelectedPlayerTrackId(id);
+    const track = allPlayerTracks.find((t) => t.id === id);
+    if (!track) return;
+    if (isGeneratedWorkTrack(track)) {
+      if (sidebarTab !== 'mywork') setSidebarTab('mywork');
+      if (!visibleGallery.some((t) => t.id === id)) {
+        if (myWorkChip !== 'all') setMyWorkChip('all');
+        if (gallerySearch.trim()) setGallerySearch('');
+      }
+      return;
+    }
+    if (sidebarTab !== 'library') setSidebarTab('library');
+    if (!visibleLibrary.some((t) => t.id === id)) {
+      if (libraryChip !== 'all') setLibraryChip('all');
+      if (gallerySearch.trim()) setGallerySearch('');
+    }
+  }, [
+    player.state.trackId,
+    view,
+    selectedPlayerTrackId,
+    allPlayerTracks,
+    sidebarTab,
+    visibleGallery,
+    visibleLibrary,
+    myWorkChip,
+    libraryChip,
+    gallerySearch,
+  ]);
+
   // MediaSession API integration — wires hardware media keys (laptop
   // function row, headphone button-clicks, AirPods double-tap) and
   // the OS-level Now Playing widget (macOS Control Center, Windows
@@ -12313,6 +12369,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
           endpoint. Same shell-styled pattern as other apps' settings. */}
       {settingsOpen && (
         <SettingsDialog
+          host={host}
           settings={creatorSettings}
           endpoints={endpoints}
           onChange={persistSettings}
@@ -12372,13 +12429,110 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
 // auto-discovered id. Saved through the SQLite settings repo.
 
 interface SettingsDialogProps {
+  host: { apps?: AppUpdateApi };
   settings: MusicCreatorSettings;
   endpoints: readonly PodEndpoint[];
   onChange: (next: MusicCreatorSettings) => void | Promise<void>;
   onClose: () => void;
 }
 
-function SettingsDialog({ settings, endpoints, onChange, onClose }: SettingsDialogProps) {
+
+function AppUpdatePanel({ host, appName, currentVersion }: { host: { apps?: AppUpdateApi }; appName: string; currentVersion: string }) {
+  const apps = host.apps;
+  const [status, setStatus] = useState<AppUpdateStatus | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const check = useCallback(async () => {
+    if (!apps?.checkUpdate) {
+      setMessage('Update checks need a newer Tytus OS build.');
+      return;
+    }
+    setBusy(true);
+    setMessage(null);
+    try {
+      const next = await apps.checkUpdate();
+      setStatus(next);
+      if (next.error) setMessage(next.error);
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  }, [apps]);
+
+  useEffect(() => {
+    void check();
+  }, [check]);
+
+  const runUpdate = useCallback(async () => {
+    if (!apps?.updateSelf) {
+      setMessage('Update needs a newer Tytus OS build.');
+      return;
+    }
+    setBusy(true);
+    setMessage(null);
+    try {
+      const next = await apps.updateSelf();
+      setStatus(next);
+      setMessage(next.error ?? `${appName} updated. Close and reopen the app to load the new bundle.`);
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  }, [apps, appName]);
+
+  const latest = status?.latestVersion ?? currentVersion;
+  const updateAvailable = Boolean(status?.updateAvailable);
+
+  return (
+    <div
+      className="mb-4 rounded-lg"
+      style={{
+        border: '1px solid var(--border-subtle)',
+        background: 'var(--bg-panel)',
+        padding: 12,
+      }}
+    >
+      <div className="flex items-center gap-2" style={{ marginBottom: 8 }}>
+        <RefreshCw size={14} style={{ color: 'var(--accent-primary)' }} />
+        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>App version</div>
+        <button
+          type="button"
+          onClick={() => void check()}
+          disabled={busy}
+          className="ml-auto rounded-md transition-all hover:bg-[var(--bg-hover)]"
+          style={{ fontSize: 10, color: 'var(--text-secondary)', padding: '4px 8px', opacity: busy ? 0.6 : 1 }}
+        >
+          {busy ? 'Checking…' : 'Check'}
+        </button>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 10 }}>
+        <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>Installed<br /><strong style={{ color: 'var(--text-primary)' }}>v{status?.currentVersion ?? currentVersion}</strong></div>
+        <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>Latest<br /><strong style={{ color: updateAvailable ? 'var(--accent-primary)' : 'var(--text-primary)' }}>v{latest}</strong></div>
+      </div>
+      {updateAvailable ? (
+        <button
+          type="button"
+          onClick={() => void runUpdate()}
+          disabled={busy}
+          className="w-full rounded-md"
+          style={{ height: 30, background: 'var(--accent-primary)', color: '#080808', fontSize: 11, fontWeight: 800, opacity: busy ? 0.7 : 1 }}
+        >
+          {busy ? 'Updating…' : `Update ${appName}`}
+        </button>
+      ) : (
+        <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
+          {status ? 'You are running the latest available version.' : 'Checking latest version…'}
+        </div>
+      )}
+      {message && <div style={{ marginTop: 8, fontSize: 11, color: updateAvailable ? 'var(--text-secondary)' : 'var(--text-tertiary)' }}>{message}</div>}
+    </div>
+  );
+}
+
+function SettingsDialog({ host, settings, endpoints, onChange, onClose }: SettingsDialogProps) {
   const setOverride = (epUrl: string, slot: keyof ModelOverrides, value: string) => {
     const trimmed = value.trim();
     const prev = settings.overridesByEndpoint[epUrl] ?? {};
@@ -12455,6 +12609,7 @@ function SettingsDialog({ settings, endpoints, onChange, onClose }: SettingsDial
         {/* Body */}
         <div className="flex-1 overflow-y-auto invisible-scrollbar">
           <div className="px-5 py-4">
+            <AppUpdatePanel host={host as { apps?: AppUpdateApi }} appName="JULI3TA" currentVersion={APP_VERSION} />
             <div className="mb-4">
               <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>
                 Model mapping
