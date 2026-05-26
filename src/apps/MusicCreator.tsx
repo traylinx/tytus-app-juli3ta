@@ -124,7 +124,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.21';
+const APP_VERSION = '0.3.22';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types

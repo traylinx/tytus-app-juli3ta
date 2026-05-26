@@ -3604,7 +3604,7 @@ const ua = async (e, r) => {
   method: "POST",
   headers: { "Idempotency-Key": `juli3ta-open-folder-${Date.now()}` },
   body: "{}"
-})).path, wr = "0.3.21", Ua = "application/x-juli3ta-track", fr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", Co = (e) => e.source !== "youtube", La = (...e) => {
+})).path, wr = "0.3.22", Ua = "application/x-juli3ta-track", fr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", Co = (e) => e.source !== "youtube", La = (...e) => {
   const r = /* @__PURE__ */ new Map();
   for (const a of e)
     for (const o of a)
