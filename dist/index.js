@@ -3604,7 +3604,7 @@ const ua = async (e, r) => {
   method: "POST",
   headers: { "Idempotency-Key": `juli3ta-open-folder-${Date.now()}` },
   body: "{}"
-})).path, wr = "0.3.22", Ua = "application/x-juli3ta-track", fr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", Co = (e) => e.source !== "youtube", La = (...e) => {
+})).path, wr = "0.3.23", Ua = "application/x-juli3ta-track", fr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", Co = (e) => e.source !== "youtube", La = (...e) => {
   const r = /* @__PURE__ */ new Map();
   for (const a of e)
     for (const o of a)
@@ -4289,11 +4289,11 @@ const ua = async (e, r) => {
   ...a,
   models: Da
 })), $u = (e) => {
-  const r = (m, f) => {
-    const v = m.map((x) => x.toLowerCase());
-    for (const x of f) {
-      const N = v.findIndex((_) => x.test(_));
-      if (N >= 0) return m[N];
+  const r = (f, v) => {
+    const x = f.map((N) => N.toLowerCase());
+    for (const N of v) {
+      const _ = x.findIndex((E) => N.test(E));
+      if (_ >= 0) return f[_];
     }
     return null;
   }, a = r(e, [
@@ -4311,13 +4311,13 @@ const ua = async (e, r) => {
     /(^|[/:])lyrics$/,
     /lyric/i
     // last-resort: anything containing "lyric"
-  ]), i = new Set([a, o].filter((m) => !!m)), l = e.filter((m) => !i.has(m)), d = r(l, [
+  ]), i = new Set([a, o].filter((f) => !!f)), l = e.filter((f) => !i.has(f)), d = r(l, [
     /(^|[/:])minimax:music-2\.6$/,
     /(^|[/:])ail-music$/,
     /(^|[/:])music-2\.6$/,
     /music/
     // last-resort: any remaining music-tagged id
-  ]), h = (m) => /music|cover|tts|stt|transcribe|whisper|embed|image/i.test(m), g = e.filter((m) => !h(m)), p = r(g, [
+  ]), g = (f) => /music|cover|tts|speech|audio|stt|transcribe|whisper|embed|image|vision|diffusion|dall-?e|flux|sdxl|rerank/i.test(f), p = e.filter((f) => !g(f)), b = r(p, [
     /(^|[/:])ail-compound$/,
     /(^|[/:])ail-fast$/,
     /(^|[/:])ail-search$/,
@@ -4328,7 +4328,7 @@ const ua = async (e, r) => {
     /chat/i,
     /./
     // last-resort: any non-music id at all
-  ]), b = r(e, [
+  ]), m = r(e, [
     /(^|[/:])minimax:image-01$/,
     // local switchAILocal canonical
     /(^|[/:])image-01$/,
@@ -4344,7 +4344,7 @@ const ua = async (e, r) => {
     /image/i,
     /diffusion/i
   ]);
-  return { music: d, cover: a, lyrics: o, lyricsBackup: p, image: b, allIds: e };
+  return { music: d, cover: a, lyrics: o, lyricsBackup: b, image: m, allIds: e };
 }, Hu = 6e4, go = /* @__PURE__ */ new Map(), ca = (e, r, a) => {
   const o = new Headers(a.headers ?? {}), i = r.startsWith("/") ? r : `/${r}`;
   if (e.proxyPodId) {
@@ -4486,8 +4486,8 @@ const zr = async (e, r, a, o = qu) => {
     throw new Error(`Lyrics HTTP ${o}: ${f || "no body"}`);
   }
   o !== 0 && console.warn(`Lyrics primary HTTP ${o} (retryable), falling back to chat:`, i);
-  const d = (f) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(f), h = /* @__PURE__ */ new Set(), g = [], p = (f) => {
-    f && !h.has(f) && (h.add(f), g.push(f));
+  const d = (f) => !/music|cover|tts|speech|audio|stt|transcribe|whisper|embed|image|vision|diffusion|dall-?e|flux|sdxl|rerank/i.test(f), h = /* @__PURE__ */ new Set(), g = [], p = (f) => {
+    f && d(f) && !h.has(f) && (h.add(f), g.push(f));
   };
   if (p(e.models.lyricsBackup), e.models.allIds.filter(d).forEach(p), g.length === 0)
     throw new Error(
@@ -4920,18 +4920,18 @@ function Ku(e, r, a) {
       ...U,
       durationMs: Number.isFinite(T.duration) ? T.duration * 1e3 : U.durationMs
     })), L = () => i((U) => ({ ...U, playing: !0, loadingTrackId: null })), Y = () => i((U) => ({ ...U, playing: !1, loadingTrackId: null })), G = () => i((U) => ({ ...U, loadingTrackId: null })), qe = () => {
-      const U = o.trackId ? C.find((X) => X.id === o.trackId) : null;
+      const U = o.trackId ? C.find((Q) => Q.id === o.trackId) : null;
       if (!U || U.audioDataUrl || !a || l.current === U.id) {
-        i((X) => ({ ...X, playing: !1, loadingTrackId: null }));
+        i((Q) => ({ ...Q, playing: !1, loadingTrackId: null }));
         return;
       }
-      l.current = U.id, i((X) => ({ ...X, loadingTrackId: U.id, playing: !1 })), a(U, { force: !0 }).then((X) => {
-        if (!X) throw new Error("No refreshed stream URL");
-        return T.src = X, T.preload = yo(U), T.play();
-      }).then(() => i((X) => ({ ...X, playing: !0, loadingTrackId: null }))).catch(() => i((X) => ({ ...X, playing: !1, loadingTrackId: null })));
+      l.current = U.id, i((Q) => ({ ...Q, loadingTrackId: U.id, playing: !1 })), a(U, { force: !0 }).then((Q) => {
+        if (!Q) throw new Error("No refreshed stream URL");
+        return T.src = Q, T.preload = yo(U), T.play();
+      }).then(() => i((Q) => ({ ...Q, playing: !0, loadingTrackId: null }))).catch(() => i((Q) => ({ ...Q, playing: !1, loadingTrackId: null })));
     }, H = () => {
       if (o.repeatMode === "one" && o.trackId) {
-        const U = C.find((X) => X.id === o.trackId);
+        const U = C.find((Q) => Q.id === o.trackId);
         if (U) {
           v(U);
           return;
@@ -4944,14 +4944,14 @@ function Ku(e, r, a) {
             return;
           }
         } else {
-          const U = C.filter((Ie) => Ie.id !== o.trackId), X = U[Math.floor(Math.random() * U.length)];
-          if (X) {
-            v(X);
+          const U = C.filter((Ie) => Ie.id !== o.trackId), Q = U[Math.floor(Math.random() * U.length)];
+          if (Q) {
+            v(Q);
             return;
           }
         }
       if (C.length >= 2) {
-        const U = C.findIndex((X) => X.id === o.trackId);
+        const U = C.findIndex((Q) => Q.id === o.trackId);
         if (U >= 0 && U + 1 < C.length) {
           v(C[U + 1]);
           return;
@@ -6721,8 +6721,8 @@ function pp({
   }, P = m.state.trackId === e.id, T = P && m.state.playing, A = P && m.state.durationMs > 0 ? m.state.positionMs / m.state.durationMs : 0;
   W(() => {
     if (!_) return;
-    const H = (X) => {
-      const Ie = X.target;
+    const H = (Q) => {
+      const Ie = Q.target;
       v.current && Ie && v.current.contains(Ie) || Ie && Ie.closest?.("[data-track-menu]") || E(null);
     }, U = () => E(null);
     return setTimeout(() => window.addEventListener("mousedown", H), 0), window.addEventListener("scroll", U, !0), window.addEventListener("resize", U), () => {
@@ -6732,8 +6732,8 @@ function pp({
   const I = () => {
     const H = v.current?.getBoundingClientRect();
     if (!H) return;
-    const U = 220, X = Math.min(H.right - U, window.innerWidth - U - 8), Ie = H.bottom + 4;
-    E({ x: Math.max(8, X), y: Ie });
+    const U = 220, Q = Math.min(H.right - U, window.innerWidth - U - 8), Ie = H.bottom + 4;
+    E({ x: Math.max(8, Q), y: Ie });
   }, L = (H) => () => {
     E(null), H();
   }, Y = () => m.toggle(e), G = () => {
@@ -8459,7 +8459,7 @@ function Ep({
   onToggleFavorite: qe,
   onRemoveLibraryTrack: H,
   onPlaylistNameDraftChange: U,
-  onCreatePlaylist: X,
+  onCreatePlaylist: Q,
   onAddTrackToPlaylist: Ie,
   onRemoveTrackFromPlaylist: pa,
   onPlayPlaylist: Ir,
@@ -9016,7 +9016,7 @@ function Ep({
               value: _,
               onChange: (y) => U(y.target.value),
               onKeyDown: (y) => {
-                y.key === "Enter" && X();
+                y.key === "Enter" && Q();
               },
               placeholder: "New playlist name…",
               className: "rounded-lg bg-transparent outline-none px-3",
@@ -9027,7 +9027,7 @@ function Ep({
             "button",
             {
               type: "button",
-              onClick: X,
+              onClick: Q,
               disabled: E,
               className: "flex items-center gap-1.5 rounded-lg px-3 disabled:opacity-50",
               style: { height: 34, fontSize: 12, fontWeight: 800, color: "white", background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))" },
@@ -9259,7 +9259,7 @@ function Mp() {
     } catch {
     }
   }, [N]);
-  const [E, C] = k(""), [S, q] = k(""), [P, T] = k(null), [A, I] = k(""), [L, Y] = k(""), [G, qe] = k(!1), [H, U] = k(""), [X, Ie] = k(""), [pa, Ir] = k(!0), [Je, Wt] = k(!1), [Ee, qa] = k(null), [te, Ge] = k({}), [Mt, xt] = k(!1), [Ke, wt] = k(() => ({ ...Pa })), kt = ae({ ...Pa }), Ae = ae({ ...Ap }), St = z((n, c) => {
+  const [E, C] = k(""), [S, q] = k(""), [P, T] = k(null), [A, I] = k(""), [L, Y] = k(""), [G, qe] = k(!1), [H, U] = k(""), [Q, Ie] = k(""), [pa, Ir] = k(!0), [Je, Wt] = k(!1), [Ee, qa] = k(null), [te, Ge] = k({}), [Mt, xt] = k(!1), [Ke, wt] = k(() => ({ ...Pa })), kt = ae({ ...Pa }), Ae = ae({ ...Ap }), St = z((n, c) => {
     kt.current = { ...kt.current, [n]: c }, wt((u) => u[n] === c ? u : { ...u, [n]: c });
   }, []), Re = z((n) => {
     if (kt.current[n]) return null;
@@ -9388,14 +9388,14 @@ function Mp() {
         !n && (J.length > 0 || Fe.length > 0) && (Ve((ue) => La(J, Fe, ue)), mo().then((ue) => Sa(ue.rootPath)).catch(() => {
         }));
       })(), w.status === "fulfilled" && gn(w.value), M.status === "fulfilled" && Pr(M.value);
-      const Z = {
+      const X = {
         version: 1,
         updatedAt: Date.now(),
         tracks: R.status === "fulfilled" ? R.value : [],
         favorites: O.status === "fulfilled" ? O.value : [],
         playlists: D.status === "fulfilled" ? D.value : []
       }, ie = me.status === "fulfilled" ? me.value : null, ve = Sd(), le = $n(
-        $n(Z, ve),
+        $n(X, ve),
         ie
       );
       await bd(le).catch((J) => {
@@ -9630,12 +9630,12 @@ function Mp() {
         n.signal
       ), Qe = pa && !H && !!u.models.image, Oe = H, Fe = Qe ? Eo(
         u,
-        (X.trim() || kr(R, E, O || A)).slice(0, 1500),
+        (Q.trim() || kr(R, E, O || A)).slice(0, 1500),
         n.signal
       ).catch((ce) => {
         if (ce.name === "AbortError") throw ce;
         return console.warn("[Juli3ta] Cover-art generation failed:", ce), se(`Cover-art skipped: ${ce.message}`), Oe;
-      }) : Promise.resolve(Oe), Z = await Promise.allSettled([Ye, Fe]), ie = Z[0], ve = Z[1];
+      }) : Promise.resolve(Oe), X = await Promise.allSettled([Ye, Fe]), ie = X[0], ve = X[1];
       if (ie.status === "rejected")
         throw n.abort(), ie.reason;
       const le = ie.value, J = ve.status === "fulfilled" ? ve.value : Oe;
@@ -9704,7 +9704,7 @@ function Mp() {
     Tt,
     pa,
     H,
-    X,
+    Q,
     Je,
     Mt
   ]), Cs = () => $o.current?.click(), sr = ae(0), Nt = z(async (n, c, u = {}) => {
@@ -9752,7 +9752,7 @@ function Mp() {
             });
             const Oe = Qe.durationSec ?? 60, Fe = Qe.sourceDurationSec ?? Oe;
             je(Qe.base64), y(Oe), B(Fe);
-            const Z = Qe.startSec ?? 0, ie = Fe / 60, ve = Z / 60, le = Z < 60 ? `${Z.toFixed(1)} s` : `${Math.floor(ve)}:${Math.floor(Z % 60).toString().padStart(2, "0")}`;
+            const X = Qe.startSec ?? 0, ie = Fe / 60, ve = X / 60, le = X < 60 ? `${X.toFixed(1)} s` : `${Math.floor(ve)}:${Math.floor(X % 60).toString().padStart(2, "0")}`;
             _e(
               Fe <= Oe + 0.5 ? `Using whole clip (${Oe.toFixed(0)} s)` : `Fast-cut cover reference ${Oe.toFixed(0)} s starting at ${le} of ${ie.toFixed(1)} min`
             );
@@ -9876,8 +9876,8 @@ function Mp() {
     Ta.current?.abort(), $e("idle");
   }, Ct = z(async (n, c, u) => {
     if (!ee) throw new Error("No endpoint connected");
-    const w = (Z) => {
-      const ie = Z, ve = ie.choices?.[0], le = [
+    const w = (X) => {
+      const ie = X, ve = ie.choices?.[0], le = [
         ve?.message?.content,
         ve?.delta?.content,
         ve?.text,
@@ -9886,18 +9886,18 @@ function Mp() {
       for (const J of le)
         if (typeof J == "string" && J.trim().length > 0) return J.trim();
       return "";
-    }, M = (Z) => !/music|cover|tts|stt|transcribe|whisper|embed|image|diffusion|dall-?e|flux|sdxl|rerank/i.test(Z), R = /* @__PURE__ */ new Set(), O = [], D = (Z) => {
-      Z && !R.has(Z) && (R.add(Z), O.push(Z));
+    }, M = (X) => !/music|cover|tts|speech|audio|stt|transcribe|whisper|embed|image|vision|diffusion|dall-?e|flux|sdxl|rerank/i.test(X), R = /* @__PURE__ */ new Set(), O = [], D = (X) => {
+      X && M(X) && !R.has(X) && (R.add(X), O.push(X));
     };
     if (D(ee.models.lyricsBackup), ee.models.allIds.filter(M).forEach(D), O.length === 0)
       throw new Error("No chat model available on this endpoint. Pick a different connection in Settings.");
-    const me = typeof c == "string" ? c : JSON.stringify(c), Ue = u?.temperature ?? 0.5, Le = Math.max(u?.maxTokens ?? 800, 400), Ye = (Z) => {
-      const ie = Z.toLowerCase();
+    const me = typeof c == "string" ? c : JSON.stringify(c), Ue = u?.temperature ?? 0.5, Le = Math.max(u?.maxTokens ?? 800, 400), Ye = (X) => {
+      const ie = X.toLowerCase();
       return /^minimax\/ail-compound-minimax$/.test(ie) ? 10 : /^minimax\/ail-balanced$/.test(ie) ? 20 : /^minimax\/ail-kimi$/.test(ie) ? 30 : /^moonshot\/ail-balanced$/.test(ie) ? 60 : /^moonshot\/ail-compound$/.test(ie) ? 70 : /^(deepseek\/)?ail-fast$/.test(ie) ? 85 : /^(deepseek\/)?ail-balanced$/.test(ie) ? 86 : /^(ail-compound|moonshot\/ail-kimi|ail-kimi|ail-kimi-strict|moonshot\/ail-kimi-strict)$/.test(ie) ? 90 : /search/.test(ie) ? 100 : 80;
-    }, Qe = (Z) => /^minimax\/ail-compound$/i.test(Z) || /^ail-compound-minimax$/i.test(Z);
-    O.sort((Z, ie) => Ye(Z) - Ye(ie));
-    const Oe = O.filter((Z) => !Qe(Z)), Fe = 45e3;
-    return zr(Oe, async (Z) => {
+    }, Qe = (X) => /^minimax\/ail-compound$/i.test(X) || /^ail-compound-minimax$/i.test(X);
+    O.sort((X, ie) => Ye(X) - Ye(ie));
+    const Oe = O.filter((X) => !Qe(X)), Fe = 45e3;
+    return zr(Oe, async (X) => {
       const ie = da(u?.signal, Fe);
       let ve;
       try {
@@ -9907,7 +9907,7 @@ function Mp() {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: Z,
+            model: X,
             messages: [
               { role: "system", content: n },
               { role: "user", content: me }
@@ -9924,11 +9924,11 @@ function Mp() {
       }
       if (!ve.ok) {
         const ue = await ve.text().catch(() => "");
-        throw ve.status === 400 && /web_search|not support|unsupported|invalid params/i.test(ue) ? new we(502, ue, `AI assist model ${Z} rejected provider params: ${ue.slice(0, 200)}`) : new we(ve.status, ue, `AI assist HTTP ${ve.status}: ${ue.slice(0, 200)}`);
+        throw ve.status === 400 && /web_search|not support|unsupported|invalid params/i.test(ue) ? new we(502, ue, `AI assist model ${X} rejected provider params: ${ue.slice(0, 200)}`) : new we(ve.status, ue, `AI assist HTTP ${ve.status}: ${ue.slice(0, 200)}`);
       }
       const le = await ve.json(), J = w(le);
       if (!J)
-        throw console.warn("[Juli3ta] empty AI assist content from", Z, le), new we(502, "", `Model "${Z}" returned empty content`);
+        throw console.warn("[Juli3ta] empty AI assist content from", X, le), new we(502, "", `Model "${X}" returned empty content`);
       return J.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
     }, "chat-assist");
   }, [ee]), Ds = z(async () => {
@@ -10017,7 +10017,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
     const c = n.signal;
     Wt(!0), V(null);
     try {
-      const u = (X.trim() || kr(L, E, A)).slice(0, 1500), w = await Eo(ee, u, c);
+      const u = (Q.trim() || kr(L, E, A)).slice(0, 1500), w = await Eo(ee, u, c);
       if (c.aborted) return;
       U(w), Ee && _a.current?.(Ee, w);
     } catch (u) {
@@ -10026,7 +10026,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
     } finally {
       Pe("cover", n), Wt(!1);
     }
-  }, [ee, X, L, E, A, Je, Ee, Re, Pe]), vn = z((n) => {
+  }, [ee, Q, L, E, A, Je, Ee, Re, Pe]), vn = z((n) => {
     if (!n.type.startsWith("image/")) {
       V("That file is not an image. Pick a PNG/JPG/WebP.");
       return;
@@ -10312,7 +10312,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
     c && (n.preventDefault(), Y(c.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, "")));
   }, [ft]), dr = (n) => {
     n.dataTransfer.types.includes(Ua) && (n.preventDefault(), n.dataTransfer.dropEffect = "copy");
-  }, An = S.length, Qs = A.length, Q = Vt !== "idle", ur = Object.values(Ke).some(Boolean) || Je || Mt, Zs = ye(() => ({
+  }, An = S.length, Qs = A.length, Z = Vt !== "idle", ur = Object.values(Ke).some(Boolean) || Je || Mt, Zs = ye(() => ({
     appLabel: "JULI3TA",
     groups: [
       {
@@ -11292,7 +11292,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                 "button",
                 {
                   onClick: v === "player" ? Fs : Zr,
-                  disabled: Q,
+                  disabled: Z,
                   className: "flex items-center gap-1.5 px-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
                   style: {
                     height: 32,
@@ -11431,7 +11431,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                 "button",
                 {
                   onClick: () => b(n.id),
-                  disabled: Q,
+                  disabled: Z,
                   title: n.tip,
                   className: "flex items-center gap-1.5 px-4 rounded-lg transition-all disabled:opacity-50",
                   style: {
@@ -11449,7 +11449,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                 },
                 n.id
               )),
-              /* @__PURE__ */ t("div", { className: "ml-auto flex items-center gap-2", children: Q ? /* @__PURE__ */ s(
+              /* @__PURE__ */ t("div", { className: "ml-auto flex items-center gap-2", children: Z ? /* @__PURE__ */ s(
                 "button",
                 {
                   onClick: js,
@@ -11528,7 +11528,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                   onDragOver: dr,
                   onDrop: Xs,
                   placeholder: a("musiccreator.songName.placeholder"),
-                  disabled: Q,
+                  disabled: Z,
                   className: "flex-1 px-2.5 py-1 rounded-md focus:outline-none focus:ring-1 disabled:opacity-50",
                   style: {
                     fontSize: 12,
@@ -11553,7 +11553,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         id: "juli3ta-instrumental",
                         checked: G,
                         onChange: qe,
-                        disabled: Q
+                        disabled: Z
                       }
                     )
                   ]
@@ -11562,7 +11562,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
             ]
           }
         ),
-        (Q || pe || fa || Kt) && /* @__PURE__ */ s(
+        (Z || pe || fa || Kt) && /* @__PURE__ */ s(
           "div",
           {
             className: "flex-shrink-0",
@@ -11571,11 +11571,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
               background: fa ? "rgba(255, 82, 82, 0.06)" : Kt ? "rgba(251, 191, 36, 0.06)" : "var(--bg-titlebar)"
             },
             children: [
-              (Q || pe) && /* @__PURE__ */ t("div", { className: "overflow-hidden", style: { height: 2, background: "var(--bg-hover)" }, children: /* @__PURE__ */ t(
+              (Z || pe) && /* @__PURE__ */ t("div", { className: "overflow-hidden", style: { height: 2, background: "var(--bg-hover)" }, children: /* @__PURE__ */ t(
                 "div",
                 {
                   style: {
-                    width: `${(Q ? ts : Jt?.progress ?? 0.08) * 100}%`,
+                    width: `${(Z ? ts : Jt?.progress ?? 0.08) * 100}%`,
                     height: "100%",
                     background: "linear-gradient(to right, var(--accent-primary), var(--accent-secondary))",
                     transition: "width 0.25s ease"
@@ -11595,7 +11595,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     children: /* @__PURE__ */ t(xe, { size: 11 })
                   }
                 )
-              ] }) : Q ? /* @__PURE__ */ s(ge, { children: [
+              ] }) : Z ? /* @__PURE__ */ s(ge, { children: [
                 /* @__PURE__ */ t(oe, { size: 11, className: "animate-spin", style: { color: "var(--accent-primary)", flexShrink: 0 } }),
                 /* @__PURE__ */ t("span", { className: "flex-1 truncate", style: { color: "var(--text-secondary)" }, children: Vt === "lyrics" ? ai[Yo % ai.length] : ri[Yo % ri.length] }),
                 /* @__PURE__ */ t("span", { style: { fontSize: 10, color: "var(--text-disabled)", flexShrink: 0 }, children: Vt === "lyrics" ? "Step 1 / 2 · Lyrics" : "Step 2 / 2 · Music" })
@@ -11661,7 +11661,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                           "button",
                           {
                             onClick: Ps,
-                            disabled: Q || pe,
+                            disabled: Z || pe,
                             className: "p-1 rounded-md transition-all hover:bg-[var(--bg-hover)] disabled:opacity-40",
                             style: { color: "var(--text-secondary)" },
                             title: "Remove reference",
@@ -11700,7 +11700,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     "button",
                     {
                       onClick: () => Va(!0),
-                      disabled: Q,
+                      disabled: Z,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
                       style: {
                         fontSize: 11,
@@ -11720,7 +11720,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     "button",
                     {
                       onClick: Cs,
-                      disabled: Q,
+                      disabled: Z,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
                       style: {
                         fontSize: 11,
@@ -11739,7 +11739,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     "button",
                     {
                       onClick: Is,
-                      disabled: Q || Lt.filter((n) => n.audioDataUrl).length === 0,
+                      disabled: Z || Lt.filter((n) => n.audioDataUrl).length === 0,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50",
                       style: {
                         fontSize: 11,
@@ -11759,7 +11759,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     "button",
                     {
                       onClick: zs,
-                      disabled: Q,
+                      disabled: Z,
                       className: "flex flex-col items-center justify-center gap-1 py-3 rounded-lg transition-all hover:bg-[var(--bg-hover)] disabled:opacity-50 relative",
                       style: {
                         fontSize: 11,
@@ -12210,7 +12210,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         tooltip: "Use AI to write a theme based on your Style",
                         onClick: Us,
                         busy: Ke.theme,
-                        disabled: Q || Ke.theme
+                        disabled: Z || Ke.theme
                       }
                     ),
                     children: /* @__PURE__ */ t(
@@ -12221,7 +12221,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         onDragOver: dr,
                         onDrop: Ks,
                         placeholder: a("musiccreator.theme.placeholder"),
-                        disabled: Q,
+                        disabled: Z,
                         rows: 4,
                         className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none focus:ring-2 disabled:opacity-50",
                         style: {
@@ -12247,7 +12247,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         tooltip: "Use AI to suggest a Style from your Theme",
                         onClick: Os,
                         busy: Ke.style,
-                        disabled: Q || Ke.style
+                        disabled: Z || Ke.style
                       }
                     ),
                     children: /* @__PURE__ */ t(
@@ -12258,7 +12258,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         onDragOver: dr,
                         onDrop: Ys,
                         placeholder: a("musiccreator.style.placeholder"),
-                        disabled: Q,
+                        disabled: Z,
                         rows: 4,
                         className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
                         style: {
@@ -12275,13 +12275,13 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
             }
           ),
           p !== "lyricsOnly" && /* @__PURE__ */ s("div", { className: "flex flex-col gap-4 mb-5", children: [
-            /* @__PURE__ */ t(rp, { onPick: Hs, disabled: Q }),
+            /* @__PURE__ */ t(rp, { onPick: Hs, disabled: Z }),
             /* @__PURE__ */ t(
               op,
               {
                 specs: te,
                 onChange: Ge,
-                disabled: Q,
+                disabled: Z,
                 onOptimize: Ds,
                 optimizing: Mt
               }
@@ -12300,7 +12300,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                   {
                     checked: pa,
                     onChange: Ir,
-                    disabled: Q || !ee?.models.image
+                    disabled: Z || !ee?.models.image
                   }
                 )
               ] }),
@@ -12311,14 +12311,14 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     {
                       type: "button",
                       onClick: () => Cn(!0),
-                      disabled: Q,
+                      disabled: Z,
                       className: "relative flex-shrink-0 rounded-lg overflow-hidden transition-all hover:opacity-90 disabled:opacity-50",
                       style: {
                         width: 88,
                         height: 88,
                         background: H ? `url(${H}) center/cover no-repeat` : "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
                         border: "1px solid var(--border-subtle)",
-                        cursor: Q ? "not-allowed" : "pointer"
+                        cursor: Z ? "not-allowed" : "pointer"
                       },
                       title: "Open song card — big cover preview + metadata",
                       children: [
@@ -12341,7 +12341,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         {
                           type: "button",
                           onClick: bn,
-                          disabled: Q || Je || !ee?.models.image,
+                          disabled: Z || Je || !ee?.models.image,
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40",
                           style: {
                             fontSize: 11,
@@ -12349,7 +12349,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                             color: "white",
                             background: "linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))",
                             border: "1px solid transparent",
-                            cursor: Q || Je || !ee?.models.image ? "not-allowed" : "pointer"
+                            cursor: Z || Je || !ee?.models.image ? "not-allowed" : "pointer"
                           },
                           title: ee?.models.image ? "Generate cover art from the prompt below" : "No image model available",
                           children: [
@@ -12363,7 +12363,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         {
                           type: "button",
                           onClick: () => Ho.current?.click(),
-                          disabled: Q,
+                          disabled: Z,
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40 hover:bg-[var(--bg-hover)]",
                           style: {
                             fontSize: 11,
@@ -12385,7 +12385,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                           onClick: () => {
                             U(""), Ee && _a.current?.(Ee, "");
                           },
-                          disabled: Q,
+                          disabled: Z,
                           className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all disabled:opacity-40 hover:bg-[var(--bg-hover)]",
                           style: {
                             fontSize: 11,
@@ -12423,10 +12423,10 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     jr && /* @__PURE__ */ t(
                       "textarea",
                       {
-                        value: X,
+                        value: Q,
                         onChange: (n) => Ie(n.target.value),
                         placeholder: kr(L, E, A),
-                        disabled: Q,
+                        disabled: Z,
                         rows: 3,
                         className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
                         style: {
@@ -12468,7 +12468,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                   value: te.intent ?? "",
                   onChange: (n) => Ge((c) => ({ ...c, intent: n.target.value })),
                   placeholder: 'e.g. "first-person, mostly Spanish with one English chorus, mention rain, no clichés"',
-                  disabled: Q,
+                  disabled: Z,
                   rows: 2,
                   className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50",
                   style: {
@@ -12495,7 +12495,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                   tooltip: "Use AI to refine flow, rhyme, and structure",
                   onClick: $s,
                   busy: Ke.lyrics,
-                  disabled: Q || Ke.lyrics || !S.trim()
+                  disabled: Z || Ke.lyrics || !S.trim()
                 }
               ),
               children: [
@@ -12507,7 +12507,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                     onDragOver: dr,
                     onDrop: Vs,
                     placeholder: G ? "🎻 Instrumental mode — turn off the toggle above to write lyrics" : a("musiccreator.lyrics.placeholder"),
-                    disabled: Q || G,
+                    disabled: Z || G,
                     rows: 8,
                     className: "w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50 font-mono",
                     style: {
@@ -12541,7 +12541,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
                         onClick: () => {
                           c ? T(null) : (T(n), S.trim() || q(n.skeleton));
                         },
-                        disabled: Q,
+                        disabled: Z,
                         className: "px-2 py-0.5 rounded-full transition-all disabled:opacity-40",
                         style: {
                           fontSize: 10,
