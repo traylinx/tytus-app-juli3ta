@@ -124,7 +124,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.23';
+const APP_VERSION = '0.3.24';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -5775,7 +5775,7 @@ function ReferenceAudioControl({
   };
 
   const durationMs = nativeDurationMs ?? fallbackDurationMs;
-  const finalSrc = objectUrl || src || '';
+  const finalSrc = objectUrl || src || undefined;
 
   return (
     <div style={style}>
@@ -9115,6 +9115,59 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     }
   }, [beginAiTask, finishAiTask, callAIAssist, theme, style]);
 
+  const writeLyricsDraft = useCallback(async () => {
+    if (!endpoint) return;
+    if (instrumental) return;
+    const intent = (specs.intent ?? '').trim();
+    if (!theme.trim() && !intent) {
+      setError(t('musiccreator.error.noInput'));
+      return;
+    }
+    const controller = beginAiTask('lyrics');
+    if (!controller) return;
+    setError(null);
+    try {
+      const overrides = creatorSettings.overridesByEndpoint[endpoint.url] ?? {};
+      const effectiveEndpoint: PodEndpoint = {
+        ...endpoint,
+        models: {
+          music: overrides.music || endpoint.models.music,
+          cover: overrides.cover || endpoint.models.cover,
+          lyrics: overrides.lyrics || endpoint.models.lyrics,
+          lyricsBackup: overrides.lyricsBackup || endpoint.models.lyricsBackup,
+          image: overrides.image || endpoint.models.image,
+          allIds: endpoint.models.allIds,
+        },
+      };
+      const specsText = compileSpecsToText(specs);
+      const promptParts: string[] = [];
+      if (theme.trim()) promptParts.push(theme.trim());
+      if (intent) promptParts.push(`User intent (must respect): ${intent}`);
+      if (specsText) promptParts.push(`Musical context: ${specsText}`);
+      if (activeTemplate) promptParts.push(`Structure: ${activeTemplate.prompt}`);
+      const generated = await callLyrics(effectiveEndpoint, promptParts.join('\n\n'), controller.signal);
+      if (controller.signal.aborted) return;
+      if (generated.lyrics.length > MAX_LYRICS) {
+        setError(t('musiccreator.error.lyricsTooLong', { count: generated.lyrics.length, max: MAX_LYRICS }));
+        return;
+      }
+      setLyrics(generated.lyrics);
+      const generatedTitle = generated.song_title === 'Untitled' ? '' : generated.song_title;
+      if (generatedTitle && !songName.trim()) setSongName(generatedTitle);
+      if (generated.style_tags && !style.trim()) setStyle(generated.style_tags);
+      if (generated.usedFallback) {
+        setGalleryError(
+          `Primary lyrics model errored — used backup chat model "${effectiveEndpoint.models.lyricsBackup ?? 'unknown'}" instead.`,
+        );
+      }
+    } catch (e) {
+      if (isAbortError(e)) return;
+      setError((e as Error).message || 'Lyrics generation failed.');
+    } finally {
+      finishAiTask('lyrics', controller);
+    }
+  }, [endpoint, instrumental, specs, theme, activeTemplate, creatorSettings, beginAiTask, finishAiTask, t, songName, style]);
+
   const polishLyrics = useCallback(async () => {
     if (!lyrics.trim()) {
       setError('Nothing to polish — write some lyrics first.');
@@ -12206,15 +12259,24 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             because cover-of-existing-track flow doesn't write lyrics. */}
         {mode !== 'restyle' && !instrumental && (
           <FieldCard
-            label="Lyrics Direction"
-            hint="Free-form direction for the lyrics — perspective, language, taboo lines, references. Sent to the AI alongside Theme and the song form below."
+            label={t('musiccreator.lyricsDirection.label')}
+            hint={t('musiccreator.lyricsDirection.hint')}
             className="mb-5"
             counter={(specs.intent ?? '').length > 0 ? `${(specs.intent ?? '').length} chars` : undefined}
+            headerExtra={
+              <AIAssistButton
+                label={t('musiccreator.lyricsDirection.generate')}
+                tooltip={t('musiccreator.lyricsDirection.generateTooltip')}
+                onClick={writeLyricsDraft}
+                busy={aiBusy.lyrics}
+                disabled={busy || aiBusy.lyrics || (!theme.trim() && !(specs.intent ?? '').trim())}
+              />
+            }
           >
             <textarea
               value={specs.intent ?? ''}
               onChange={(e) => setSpecs((s) => ({ ...s, intent: e.target.value }))}
-              placeholder='e.g. "first-person, mostly Spanish with one English chorus, mention rain, no clichés"'
+              placeholder={t('musiccreator.lyricsDirection.placeholder')}
               disabled={busy}
               rows={2}
               className="w-full px-3 py-2 rounded-lg resize-none focus:outline-none disabled:opacity-50"
