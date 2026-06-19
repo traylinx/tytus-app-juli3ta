@@ -455,6 +455,7 @@ export const es: TranslationMap = {
   'musiccreator.error.noPod': 'No hay un pod Tytus disponible. Asigna uno desde Pod Inspector.',
   'musiccreator.error.noInput': 'Añade un tema/prompt o pega tu propia letra.',
   'musiccreator.error.lyricsTooLong': 'Letra demasiado larga: {count} > {max} caracteres.',
+  'musiccreator.error.restyleLyricsTooLong': 'La letra para Restyle es demasiado larga: {count} > {max} caracteres. Acórtala, vuelve a generarla o borra Letra para que JULI3TA use el audio de referencia.',
   'musiccreator.gallery.title': 'Mis creaciones',
   'musiccreator.gallery.count.one': '{n} canción',
   'musiccreator.gallery.count.other': '{n} canciones',

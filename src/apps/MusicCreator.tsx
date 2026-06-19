@@ -784,6 +784,7 @@ const LEGACY_IDB_NAME = 'tytus.music-creator';
 const LEGACY_IDB_STORE = 'gallery';
 const MAX_LYRICS = 3500;
 const MAX_COVER_LYRICS = 1000;
+const RESTYLE_LYRICS_DRAFT_TARGET = 900;
 const MAX_STYLE = 2000;
 const MIN_RESTYLE_REFERENCE_SECONDS = 30;
 const MIN_LONG_SOURCE_REFERENCE_SECONDS = 45;
@@ -893,6 +894,26 @@ const splitRemoteTitle = (title: string, channel?: string | null): { artist: str
   const dash = clean.match(/^(.{2,80}?)\s+[-–—]\s+(.{2,160})$/);
   if (dash) return { artist: dash[1].trim(), song: dash[2].trim() };
   return { artist: (channel || '').trim(), song: clean || 'Untitled' };
+};
+
+const fitLyricsToLimit = (raw: string, limit: number): string => {
+  const clean = raw.trim();
+  if (clean.length <= limit) return clean;
+  const lines = clean.split('\n');
+  const kept: string[] = [];
+  let size = 0;
+  for (const line of lines) {
+    const nextSize = size + (kept.length > 0 ? 1 : 0) + line.length;
+    if (nextSize > limit) break;
+    kept.push(line);
+    size = nextSize;
+  }
+  const joined = kept.join('\n').trimEnd();
+  if (joined.length >= Math.min(240, limit)) return joined;
+  return clean
+    .slice(0, limit)
+    .replace(/\s+\S*$/, '')
+    .trimEnd();
 };
 
 const STYLE_TAG_STOPWORDS = new Set([
@@ -1705,7 +1726,7 @@ const callMusic = async (
         ? parsedDurationMs / 1000
         : args.refAudioDurationSec ?? null;
       if (refDurationSec !== null && refDurationSec < MIN_RESTYLE_REFERENCE_SECONDS) {
-        throw new Error(`Reference sample is only ${refDurationSec.toFixed(1)} s. MiniMax cover rejects short song references; pick a longer song or re-load a full ~60 s source sample before Restyle.`);
+        throw new Error(`Reference sample is only ${refDurationSec.toFixed(1)} s. JULI3TA Restyle needs a longer song reference; pick a longer song or re-load a full ~60 s source sample.`);
       }
       console.info('[Juli3ta] Sending music-cover reference:', {
         modelId,
@@ -5956,7 +5977,7 @@ function ReferenceAudioCard({
       <ReferenceAudioControl
         src={audioSrc}
         onPlay={onUserPlay}
-        title="Preview the exact compact reference sample sent to MiniMax cover mode"
+        title="Preview the exact compact reference sample sent to JULI3TA Restyle"
         height={32}
       />
     </div>
@@ -8219,7 +8240,7 @@ export default function MusicCreator() {
       const durationSec = refAudioDurationSec ?? (inferredMs !== null ? inferredMs / 1000 : null);
       const sourceDurationSec = refSourceDurationSec ?? durationSec;
       if (durationSec !== null && durationSec < MIN_RESTYLE_REFERENCE_SECONDS) {
-        setError(`Reference sample is only ${durationSec.toFixed(1)} s. MiniMax Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real source audio; choose a longer song or a full YouTube/library source.`);
+        setError(`Reference sample is only ${durationSec.toFixed(1)} s. JULI3TA Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real source audio; choose a longer song or a full YouTube/library source.`);
         return;
       }
       if (durationSec !== null && sourceDurationSec !== null && sourceDurationSec > 60 && durationSec < MIN_LONG_SOURCE_REFERENCE_SECONDS) {
@@ -8336,7 +8357,7 @@ export default function MusicCreator() {
         return;
       }
       if (mode === 'restyle' && useLyrics.trim() && useLyrics.trim().length > MAX_COVER_LYRICS) {
-        setError(`Restyle lyrics must be ${MAX_COVER_LYRICS} characters or fewer for MiniMax cover mode. Shorten them or clear the Lyrics box to let MiniMax extract the original lyrics from the reference audio.`);
+        setError(t('musiccreator.error.restyleLyricsTooLong', { count: useLyrics.trim().length, max: MAX_COVER_LYRICS }));
         setPhase('idle');
         return;
       }
@@ -8409,7 +8430,7 @@ export default function MusicCreator() {
         const durationSec = refAudioDurationSec ?? (inferredMs !== null ? inferredMs / 1000 : null);
         const sourceDurationSec = refSourceDurationSec ?? durationSec;
         if (durationSec !== null && durationSec < MIN_RESTYLE_REFERENCE_SECONDS) {
-          setError(`Reference sample is only ${durationSec.toFixed(1)} s. MiniMax Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real source audio; choose a longer song or a full YouTube/library source.`);
+          setError(`Reference sample is only ${durationSec.toFixed(1)} s. JULI3TA Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real source audio; choose a longer song or a full YouTube/library source.`);
           setPhase('idle');
           return;
         }
@@ -8867,7 +8888,7 @@ export default function MusicCreator() {
     if (!t.audioDataUrl) return;
     const cleanTitle = t.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, '') || 'Untitled';
     if (t.durationMs > 0 && t.durationMs / 1000 < MIN_RESTYLE_REFERENCE_SECONDS) {
-      setError(`"${cleanTitle}" is only ${(t.durationMs / 1000).toFixed(1)} s. MiniMax Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real song audio; choose a longer track or a YouTube/library source.`);
+      setError(`"${cleanTitle}" is only ${(t.durationMs / 1000).toFixed(1)} s. JULI3TA Restyle needs at least ${MIN_RESTYLE_REFERENCE_SECONDS} s of real song audio; choose a longer track or a YouTube/library source.`);
       return;
     }
     void ingestSourceAudio(t.audioDataUrl, `${cleanTitle}.mp3`);
@@ -9263,6 +9284,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       const promptParts: string[] = [];
       if (mode === 'restyle') {
         promptParts.push('Write original replacement lyrics for a Restyle/Cover generation. The loaded reference audio provides the feel and melody/production context; do not copy existing song lyrics.');
+        promptParts.push(`Hard limit: return no more than ${RESTYLE_LYRICS_DRAFT_TARGET} characters total. Prefer one short verse, one short chorus, and an optional two-line bridge. Keep section tags compact.`);
       }
       if (theme.trim()) promptParts.push(theme.trim());
       if (mode === 'restyle' && style.trim()) promptParts.push(`Style/reference context: ${style.trim()}`);
@@ -9271,11 +9293,17 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       if (activeTemplate) promptParts.push(`Structure: ${activeTemplate.prompt}`);
       const generated = await callLyrics(effectiveEndpoint, promptParts.join('\n\n'), controller.signal);
       if (controller.signal.aborted) return;
-      if (generated.lyrics.length > MAX_LYRICS) {
-        setError(t('musiccreator.error.lyricsTooLong', { count: generated.lyrics.length, max: MAX_LYRICS }));
+      const lyricsLimit = mode === 'restyle' ? MAX_COVER_LYRICS : MAX_LYRICS;
+      const nextLyrics = mode === 'restyle'
+        ? fitLyricsToLimit(generated.lyrics, lyricsLimit)
+        : generated.lyrics;
+      if (nextLyrics.length > lyricsLimit) {
+        setError(mode === 'restyle'
+          ? t('musiccreator.error.restyleLyricsTooLong', { count: nextLyrics.length, max: lyricsLimit })
+          : t('musiccreator.error.lyricsTooLong', { count: nextLyrics.length, max: lyricsLimit }));
         return;
       }
-      setLyrics(generated.lyrics);
+      setLyrics(nextLyrics);
       const generatedTitle = generated.song_title === 'Untitled' ? '' : generated.song_title;
       if (generatedTitle && !songName.trim()) setSongName(generatedTitle);
       if (generated.style_tags && !style.trim()) setStyle(generated.style_tags);
@@ -9301,24 +9329,28 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     if (!controller) return;
     setError(null);
     try {
-      const sys = `You are a senior songwriter. Polish the user's lyrics for flow, rhyme, imagery, and structural balance. Preserve the user's intent and language. Keep [Verse], [Chorus], [Bridge], [Intro], [Outro], [Inst] section markers if present (or add appropriate ones). Return ONLY the polished lyrics — no commentary, no markdown, no quotes.`;
+      const lyricsLimit = mode === 'restyle' ? MAX_COVER_LYRICS : MAX_LYRICS;
+      const sys = `You are a senior songwriter. Polish the user's lyrics for flow, rhyme, imagery, and structural balance. Preserve the user's intent and language. Keep [Verse], [Chorus], [Bridge], [Intro], [Outro], [Inst] section markers if present (or add appropriate ones). Return ONLY the polished lyrics — no commentary, no markdown, no quotes.${mode === 'restyle' ? ` Hard limit: keep the full response under ${lyricsLimit} characters for JULI3TA Restyle mode.` : ''}`;
       const out = await callAIAssist(sys, {
         style: style || null,
         lyrics,
       }, { temperature: 0.6, maxTokens: 1200, signal: controller.signal });
       if (controller.signal.aborted) return;
-      if (out.length > MAX_LYRICS) {
-        setError(`Polished lyrics exceeded ${MAX_LYRICS} chars (${out.length}). Trimming the original first might help.`);
+      const nextLyrics = mode === 'restyle' ? fitLyricsToLimit(out, lyricsLimit) : out;
+      if (nextLyrics.length > lyricsLimit) {
+        setError(mode === 'restyle'
+          ? t('musiccreator.error.restyleLyricsTooLong', { count: nextLyrics.length, max: lyricsLimit })
+          : t('musiccreator.error.lyricsTooLong', { count: nextLyrics.length, max: lyricsLimit }));
         return;
       }
-      setLyrics(out);
+      setLyrics(nextLyrics);
     } catch (e) {
       if (isAbortError(e)) return;
       setError((e as Error).message || 'Lyrics polish failed.');
     } finally {
       finishAiTask('lyrics', controller);
     }
-  }, [beginAiTask, finishAiTask, callAIAssist, style, lyrics]);
+  }, [beginAiTask, finishAiTask, callAIAssist, style, lyrics, mode, t]);
 
   // (insertTemplate retired — LYRIC_TEMPLATES are now structured
   // {skeleton, prompt} objects and the click handler lives in the
@@ -9761,6 +9793,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
   };
 
   const lyricsCount = lyrics.length;
+  const activeLyricsLimit = mode === 'restyle' ? MAX_COVER_LYRICS : MAX_LYRICS;
   const styleCount = style.length;
   const busy = phase !== 'idle';
   const anyAiBusy = Object.values(aiBusy).some(Boolean) || coverBusy || optimizingSpecs;
@@ -11638,7 +11671,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                   <ReferenceAudioControl
                     base64={refAudioBase64}
                     onPlay={() => { if (player.state.playing) player.pause(); }}
-                    title="Preview the exact compact reference sample sent to MiniMax cover mode"
+                    title="Preview the exact compact reference sample sent to JULI3TA Restyle"
                     height={30}
                     style={{ marginTop: 8 }}
                   />
@@ -11781,7 +11814,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
                       Record audio for cover
                     </div>
                     <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 4, lineHeight: 1.4 }}>
-                      Capture 1–3 minutes of music for best results. JULI3TA extracts one clean compact reference for MiniMax cover mode.
+                      Capture 1–3 minutes of music for best results. JULI3TA extracts one clean compact reference for Restyle.
                     </div>
                   </div>
 
@@ -12441,8 +12474,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
             so Lyrics owns this zone uncluttered. */}
         <FieldCard
           label={t('musiccreator.lyrics.label')}
-          counter={instrumental ? 'instrumental — no vocals' : `${lyricsCount} / ${MAX_LYRICS}`}
-          counterDanger={!instrumental && lyricsCount > MAX_LYRICS}
+          counter={instrumental ? 'instrumental — no vocals' : `${lyricsCount} / ${activeLyricsLimit}`}
+          counterDanger={!instrumental && lyricsCount > activeLyricsLimit}
           className="mb-5"
           headerExtra={
             !instrumental ? (
