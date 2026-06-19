@@ -83,7 +83,7 @@ const now = () => Date.now();
 const toTrack = (r: TrackDbRow): MusicLibraryTrack => ({
   id: r.id,
   title: r.title,
-  styleTags: r.provider === 'youtube' ? 'YouTube' : r.provider,
+  styleTags: '',
   lyricsPreview: '',
   durationMs: r.duration_ms ?? 0,
   bitrate: 0,

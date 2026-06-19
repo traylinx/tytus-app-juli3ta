@@ -518,6 +518,10 @@ export const en: TranslationMap = {
   'musiccreator.restyle.button.mySongs.count': '{count} in library',
   'musiccreator.restyle.button.voiceClips': 'Voice clips',
   'musiccreator.restyle.button.voiceClips.count': '{count} saved',
+  'musiccreator.restyle.metadataTheme.withArtist': 'Inspired by "{title}" by {artist}. Use the loaded reference audio for feel, groove, instrumentation, and mood, but make a new original direction.',
+  'musiccreator.restyle.metadataTheme.noArtist': 'Inspired by "{title}". Use the loaded reference audio for feel, groove, instrumentation, and mood, but make a new original direction.',
+  'musiccreator.restyle.metadataStyle.withArtist': 'reference-inspired, {artist} influence, streamed reference',
+  'musiccreator.restyle.metadataStyle.noArtist': 'reference-inspired, streamed reference',
 
   // JULI3TA in-app help ─────────────────────────────────────
   'julietaHelp.title': 'JULI3TA — How it works',

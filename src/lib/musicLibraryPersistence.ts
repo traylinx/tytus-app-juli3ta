@@ -28,6 +28,30 @@ export const emptyMusicLibrarySnapshot = (): MusicLibrarySnapshot => ({
 const isObject = (value: unknown): value is Record<string, unknown> =>
   Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 
+const STYLE_TAG_STOPWORDS = new Set([
+  '',
+  '-',
+  '—',
+  'youtube',
+  'you tube',
+  'youtube music',
+  'streamed audio',
+  'streamed reference',
+  'remote stream',
+  'remote_stream',
+  'juli3ta',
+]);
+
+const normalizeStyleTags = (value: unknown): string => {
+  const raw = String(value ?? '').trim();
+  if (!raw) return '';
+  return raw
+    .split(/[,;\n]/)
+    .map((part) => part.trim())
+    .filter((part) => !STYLE_TAG_STOPWORDS.has(part.toLowerCase().replace(/\s+/g, ' ')))
+    .join(', ');
+};
+
 const normalizeTrack = (value: unknown): MusicLibraryTrack | null => {
   if (!isObject(value)) return null;
   const id = String(value.id ?? '').trim();
@@ -40,7 +64,7 @@ const normalizeTrack = (value: unknown): MusicLibraryTrack | null => {
   return {
     id,
     title: String(value.title ?? 'Untitled'),
-    styleTags: String(value.styleTags ?? (source === 'youtube' ? 'YouTube' : source)),
+    styleTags: normalizeStyleTags(value.styleTags),
     lyricsPreview: String(value.lyricsPreview ?? ''),
     durationMs: Number(value.durationMs ?? 0) || 0,
     bitrate: Number(value.bitrate ?? 0) || 0,

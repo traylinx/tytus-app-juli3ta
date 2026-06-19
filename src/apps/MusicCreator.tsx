@@ -895,6 +895,89 @@ const splitRemoteTitle = (title: string, channel?: string | null): { artist: str
   return { artist: (channel || '').trim(), song: clean || 'Untitled' };
 };
 
+const STYLE_TAG_STOPWORDS = new Set([
+  '',
+  '-',
+  '—',
+  'youtube',
+  'you tube',
+  'youtube music',
+  'streamed audio',
+  'streamed reference',
+  'remote stream',
+  'remote_stream',
+  'juli3ta',
+]);
+
+const cleanStyleTagsValue = (styleTags?: string | null): string => {
+  const raw = (styleTags ?? '').trim();
+  if (!raw) return '';
+  const parts = raw
+    .split(/[,;\n]/)
+    .map((part) => part.trim())
+    .filter((part) => !STYLE_TAG_STOPWORDS.has(part.toLowerCase().replace(/\s+/g, ' ')));
+  return parts.join(', ');
+};
+
+const cleanStyleTagsForForm = (track: Pick<SavedTrack, 'styleTags'>): string =>
+  cleanStyleTagsValue(track.styleTags);
+
+const cleanRemoteArtistName = (value?: string | null): string => {
+  const clean = (value ?? '')
+    .replace(/\s*-\s*Topic\s*$/i, '')
+    .replace(/\s+VEVO\s*$/i, '')
+    .replace(/\s+(official|music|records|recordings|channel)\s*$/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!clean) return '';
+  const lower = clean.toLowerCase();
+  if (
+    lower === 'unknown'
+    || lower === 'music'
+    || lower === 'youtube'
+    || lower.includes('playlist')
+    || lower.includes('collection')
+    || lower.includes('mixes')
+  ) return '';
+  return clean;
+};
+
+const inferReferenceArtist = (track: SavedTrack, cleanTitle: string): string => {
+  const dash = cleanTitle.match(/^(.{2,80}?)\s+[-–—]\s+(.{2,160})$/);
+  const compilation = cleanTitle.match(/^(.{2,80}?)\s+(?:greatest hits|best of|full album|playlist|discography|collection)\b/i);
+  const bestOf = cleanTitle.match(/^best of\s+(.{2,80}?)(?:\s+(?:greatest hits|full album|playlist|collection)\b|$)/i);
+  const candidates = [
+    dash?.[1],
+    compilation?.[1],
+    bestOf?.[1],
+    track.artist,
+    track.album,
+  ];
+  for (const candidate of candidates) {
+    const clean = cleanRemoteArtistName(candidate);
+    if (clean && clean.toLowerCase() !== cleanTitle.toLowerCase()) return clean;
+  }
+  return '';
+};
+
+const buildReferenceRemixDefaults = (
+  track: SavedTrack,
+  cleanTitle: string,
+  translate: (key: string, vars?: Record<string, string | number>) => string,
+): { theme: string; style: string } | null => {
+  if (track.source !== 'youtube') return null;
+  const title = cleanTitle.trim() || track.title.trim() || 'this song';
+  const artist = inferReferenceArtist(track, title);
+  return {
+    theme: artist
+      ? translate('musiccreator.restyle.metadataTheme.withArtist', { title, artist })
+      : translate('musiccreator.restyle.metadataTheme.noArtist', { title }),
+    style: artist
+      ? translate('musiccreator.restyle.metadataStyle.withArtist', { artist })
+      : translate('musiccreator.restyle.metadataStyle.noArtist'),
+  };
+};
+
 const musicStreamKey = (videoId: string): string => `youtube:${videoId}`;
 
 // One-shot migration of any pre-existing tracks (localStorage v1 OR
@@ -9438,9 +9521,10 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
   // creating from scratch by accident.
   const loadTrack = useCallback((track: SavedTrack) => {
     setLyrics(track.lyricsPreview ?? '');
-    setStyle(track.styleTags && track.styleTags !== '—' ? track.styleTags : '');
-    setTheme(track.theme ?? '');
     const cleanTitle = track.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, '');
+    const remixDefaults = buildReferenceRemixDefaults(track, cleanTitle, t);
+    setStyle(cleanStyleTagsForForm(track) || remixDefaults?.style || '');
+    setTheme((track.theme ?? '').trim() || remixDefaults?.theme || '');
     setSongName(cleanTitle);
     setInstrumental(false);
     // Round-trip the structured specs panel. Treat parse errors
@@ -9520,7 +9604,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       setMode('restyle');
       void ingestSourceAudio(track.audioDataUrl, `${cleanTitle}.mp3`);
     }
-  }, [ingestSourceAudio, runtimeStreams]);
+  }, [ingestSourceAudio, runtimeStreams, t]);
 
   const openLyricsInEditor = useCallback((track: SavedTrack) => {
     const nodeId = mirrorLyricsToVfs(track);
@@ -9624,8 +9708,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       e.preventDefault();
       setLyrics(payload.lyricsPreview);
       const cleanTitle = payload.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, '');
+      const cleanPayloadStyle = cleanStyleTagsValue(payload.styleTags);
       if (!songName.trim() && cleanTitle) setSongName(cleanTitle);
-      if (!style.trim() && payload.styleTags && payload.styleTags !== '—') setStyle(payload.styleTags);
+      if (!style.trim() && cleanPayloadStyle) setStyle(cleanPayloadStyle);
       return;
     }
     // Fall through to native text/plain drop on the textarea.
@@ -9633,9 +9718,10 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
 
   const handleStyleDrop = useCallback((e: React.DragEvent<HTMLTextAreaElement>) => {
     const payload = readTrackPayload(e);
-    if (payload && payload.styleTags && payload.styleTags !== '—') {
+    const cleanPayloadStyle = cleanStyleTagsValue(payload?.styleTags);
+    if (payload && cleanPayloadStyle) {
       e.preventDefault();
-      setStyle((cur) => cur ? `${cur}, ${payload.styleTags}` : payload.styleTags);
+      setStyle((cur) => cur ? `${cur}, ${cleanPayloadStyle}` : cleanPayloadStyle);
     }
   }, [readTrackPayload]);
 
@@ -9645,8 +9731,9 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       e.preventDefault();
       // Theme = creative brief. Use the title + style as a hint.
       const cleanTitle = payload.title.replace(/\s*\((lyrics|cover|restyle)\)\s*$/, '');
-      const text = payload.styleTags && payload.styleTags !== '—'
-        ? `Inspired by "${cleanTitle}" — ${payload.styleTags}`
+      const cleanPayloadStyle = cleanStyleTagsValue(payload.styleTags);
+      const text = cleanPayloadStyle
+        ? `Inspired by "${cleanTitle}" — ${cleanPayloadStyle}`
         : `Inspired by "${cleanTitle}"`;
       setTheme(text);
     }

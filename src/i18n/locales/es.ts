@@ -520,6 +520,10 @@ export const es: TranslationMap = {
   'musiccreator.restyle.button.mySongs.count': '{count} en biblioteca',
   'musiccreator.restyle.button.voiceClips': 'Notas de voz',
   'musiccreator.restyle.button.voiceClips.count': '{count} guardadas',
+  'musiccreator.restyle.metadataTheme.withArtist': 'Inspirada en "{title}" de {artist}. Usa el audio de referencia cargado para capturar sensación, groove, instrumentación y mood, pero crea una dirección original nueva.',
+  'musiccreator.restyle.metadataTheme.noArtist': 'Inspirada en "{title}". Usa el audio de referencia cargado para capturar sensación, groove, instrumentación y mood, pero crea una dirección original nueva.',
+  'musiccreator.restyle.metadataStyle.withArtist': 'inspirado en la referencia, influencia de {artist}, referencia en streaming',
+  'musiccreator.restyle.metadataStyle.noArtist': 'inspirado en la referencia, referencia en streaming',
 
   // JULI3TA in-app help ─────────────────────────────────────
   'julietaHelp.title': 'JULI3TA — Cómo funciona',
