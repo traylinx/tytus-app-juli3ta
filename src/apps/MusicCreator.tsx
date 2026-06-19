@@ -9238,7 +9238,8 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     if (!endpoint) return;
     if (instrumental) return;
     const intent = (specs.intent ?? '').trim();
-    if (!theme.trim() && !intent) {
+    const canDraftFromRestyleStyle = mode === 'restyle' && style.trim();
+    if (!theme.trim() && !intent && !canDraftFromRestyleStyle) {
       setError(t('musiccreator.error.noInput'));
       return;
     }
@@ -9260,7 +9261,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
       };
       const specsText = compileSpecsToText(specs);
       const promptParts: string[] = [];
+      if (mode === 'restyle') {
+        promptParts.push('Write original replacement lyrics for a Restyle/Cover generation. The loaded reference audio provides the feel and melody/production context; do not copy existing song lyrics.');
+      }
       if (theme.trim()) promptParts.push(theme.trim());
+      if (mode === 'restyle' && style.trim()) promptParts.push(`Style/reference context: ${style.trim()}`);
       if (intent) promptParts.push(`User intent (must respect): ${intent}`);
       if (specsText) promptParts.push(`Musical context: ${specsText}`);
       if (activeTemplate) promptParts.push(`Structure: ${activeTemplate.prompt}`);
@@ -9285,7 +9290,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     } finally {
       finishAiTask('lyrics', controller);
     }
-  }, [endpoint, instrumental, specs, theme, activeTemplate, creatorSettings, beginAiTask, finishAiTask, t, songName, style]);
+  }, [endpoint, instrumental, specs, theme, mode, activeTemplate, creatorSettings, beginAiTask, finishAiTask, t, songName, style]);
 
   const polishLyrics = useCallback(async () => {
     if (!lyrics.trim()) {
@@ -12390,23 +12395,27 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
         {/* Lyrics Direction — free-form intent prompt. Sits above the
             lyrics editor because it's about HOW the lyrics should read
             (perspective, language, taboo lines, cultural references)
-            whereas Theme is the WHAT. Persists per-track via the specs
-            blob (no schema bump needed) so reloading a track restores
-            the direction it was generated with. Hidden in cover mode
-            because cover-of-existing-track flow doesn't write lyrics. */}
-        {mode !== 'restyle' && !instrumental && (
+            whereas Theme is the WHAT. Also visible in Restyle so a user
+            can generate original replacement lyrics for the loaded
+            reference song before hitting Restyle Song. Persists per-track
+            via the specs blob (no schema bump needed). */}
+        {!instrumental && (
           <FieldCard
             label={t('musiccreator.lyricsDirection.label')}
-            hint={t('musiccreator.lyricsDirection.hint')}
+            hint={mode === 'restyle'
+              ? t('musiccreator.lyricsDirection.restyleHint')
+              : t('musiccreator.lyricsDirection.hint')}
             className="mb-5"
             counter={(specs.intent ?? '').length > 0 ? `${(specs.intent ?? '').length} chars` : undefined}
             headerExtra={
               <AIAssistButton
                 label={t('musiccreator.lyricsDirection.generate')}
-                tooltip={t('musiccreator.lyricsDirection.generateTooltip')}
+                tooltip={mode === 'restyle'
+                  ? t('musiccreator.lyricsDirection.generateRestyleTooltip')
+                  : t('musiccreator.lyricsDirection.generateTooltip')}
                 onClick={writeLyricsDraft}
                 busy={aiBusy.lyrics}
-                disabled={busy || aiBusy.lyrics || (!theme.trim() && !(specs.intent ?? '').trim())}
+                disabled={busy || aiBusy.lyrics || (!theme.trim() && !(specs.intent ?? '').trim() && !(mode === 'restyle' && style.trim()))}
               />
             }
           >
