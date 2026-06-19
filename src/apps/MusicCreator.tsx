@@ -787,6 +787,8 @@ const MAX_COVER_LYRICS = 1000;
 const MAX_STYLE = 2000;
 const MIN_RESTYLE_REFERENCE_SECONDS = 30;
 const MIN_LONG_SOURCE_REFERENCE_SECONDS = 45;
+const AUTO_STREAM_WARMUP_COUNT = 1;
+const BEST_EFFORT_STREAM_WARMUP_CONCURRENCY = 1;
 
 // ──────────────────────────────────────────────────────────
 // Helpers
@@ -1988,6 +1990,11 @@ function usePlayer(
     return { trackId: null, playing: false, loadingTrackId: null, positionMs: 0, durationMs: 0, volume, repeatMode, shuffle, playbackRate, sleepTimerEndsAt: null };
   });
   const errorRetryRef = useRef<string | null>(null);
+  // Monotonic token for async load/select operations. Remote streams
+  // resolve through yt-dlp and can take seconds; if the user clicks
+  // another track meanwhile, the older promise must not later clobber
+  // the audio element or clear the newer track's loading state.
+  const loadGenerationRef = useRef(0);
   // Play history stack — the trackIds the user has heard, oldest →
   // newest. Pushed by `play()` before changing the active track.
   // Used by `prev` under shuffle to walk back through actual history
@@ -2031,6 +2038,7 @@ function usePlayer(
   // button click is instantaneous (no decode delay).
   const select = useCallback((track: SavedTrack) => {
     void (async () => {
+      const generation = ++loadGenerationRef.current;
       setState((s) => ({
         ...s,
         trackId: track.id,
@@ -2040,11 +2048,13 @@ function usePlayer(
         durationMs: track.durationMs || 0,
       }));
       const src = track.audioDataUrl || await resolveTrackSrc?.(track);
+      if (generation !== loadGenerationRef.current) return;
       if (!src) {
         setState((s) => ({ ...s, loadingTrackId: null }));
         return;
       }
       const a = audioRef.current;
+      if (generation !== loadGenerationRef.current) return;
       if (!a) {
         setState((s) => ({ ...s, loadingTrackId: null }));
         return;
@@ -2070,6 +2080,7 @@ function usePlayer(
 
   const play = useCallback((track: SavedTrack) => {
     void (async () => {
+      const generation = ++loadGenerationRef.current;
       errorRetryRef.current = null;
       // Push the previously-active track onto the history stack
       // BEFORE we mutate state. Skip when there's no current track,
@@ -2091,11 +2102,13 @@ function usePlayer(
         durationMs: track.durationMs || s.durationMs,
       }));
       const src = track.audioDataUrl || await resolveTrackSrc?.(track);
+      if (generation !== loadGenerationRef.current) return;
       if (!src) {
         setState((s) => ({ ...s, loadingTrackId: null, playing: false }));
         return;
       }
       const a = audioRef.current;
+      if (generation !== loadGenerationRef.current) return;
       if (!a) {
         setState((s) => ({ ...s, loadingTrackId: null, playing: false }));
         return;
@@ -2106,27 +2119,37 @@ function usePlayer(
         setState((s) => ({ ...s, trackId: track.id, positionMs: 0, durationMs: track.durationMs || 0 }));
       }
       void a.play()
-        .then(() => setState((s) => ({ ...s, loadingTrackId: null, playing: true })))
-        .catch(() => setState((s) => ({ ...s, loadingTrackId: null, playing: false })));
+        .then(() => {
+          if (generation === loadGenerationRef.current) {
+            setState((s) => ({ ...s, loadingTrackId: null, playing: true }));
+          }
+        })
+        .catch(() => {
+          if (generation === loadGenerationRef.current) {
+            setState((s) => ({ ...s, loadingTrackId: null, playing: false }));
+          }
+        });
     })();
   }, [state.trackId, audioRef, resolveTrackSrc]);
 
   const pause = useCallback(() => {
+    loadGenerationRef.current += 1;
     audioRef.current?.pause();
     setState((s) => ({ ...s, playing: false, loadingTrackId: null }));
   }, [audioRef]);
 
   const toggle = useCallback((track?: SavedTrack) => {
-    if (state.loadingTrackId) return;
-
     // Explicit track button: make it a real Play/Pause toggle for that
     // exact track. This keeps the hero cover, hero CTA and MiniPlayer in
     // lock-step for remote streams.
     if (track) {
+      if (state.loadingTrackId === track.id) return;
       if (state.trackId === track.id && state.playing) pause();
       else play(track);
       return;
     }
+
+    if (state.loadingTrackId) return;
 
     if (state.playing) {
       pause();
@@ -6539,7 +6562,6 @@ interface MusicSearchPaneProps {
   playlistBusy: boolean;
   favoriteIds: Set<string>;
   warmupIds: Set<string>;
-  previewBusyId: string | null;
   addBusyId: string | null;
   savedYoutubeIds: Set<string>;
   player: PlayerControls;
@@ -6581,7 +6603,6 @@ function MusicSearchPane({
   playlistBusy,
   favoriteIds,
   warmupIds,
-  previewBusyId,
   addBusyId,
   savedYoutubeIds,
   player,
@@ -6960,9 +6981,12 @@ function MusicSearchPane({
             {results.map((r) => {
               const meta = splitRemoteTitle(r.title, r.channel);
               const saved = savedYoutubeIds.has(r.id);
-              const previewBusy = previewBusyId === r.id;
               const addBusy = addBusyId === r.id;
               const warming = warmupIds.has(r.id);
+              const streamTrackId = musicStreamKey(r.id);
+              const active = player.state.trackId === streamTrackId;
+              const loading = active && player.state.loadingTrackId === streamTrackId;
+              const playing = active && player.state.playing;
               return (
                 <div
                   key={r.id}
@@ -6987,20 +7011,27 @@ function MusicSearchPane({
                       {r.title}
                     </div>
                   </div>
-                  {warming && !previewBusy && (
+                  {warming && !active && (
                     <div className="hidden md:flex items-center gap-1" style={{ fontSize: 10, color: 'var(--text-disabled)' }}>
                       <Loader2 size={10} className="animate-spin" /> preloading
                     </div>
                   )}
                   <button
                     type="button"
-                    onClick={() => onPreview(r)}
-                    disabled={previewBusy}
+                    onClick={() => active ? player.toggle() : onPreview(r)}
+                    disabled={loading}
                     className="flex items-center gap-1 rounded-md px-3 disabled:opacity-60"
-                    style={{ height: 32, fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)', background: 'var(--bg-window)' }}
+                    style={{
+                      height: 32,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: active ? 'white' : 'var(--text-secondary)',
+                      border: `1px solid ${active ? 'rgba(255,255,255,0.28)' : 'var(--border-subtle)'}`,
+                      background: active ? 'linear-gradient(135deg, rgba(139,92,246,0.55), rgba(251,146,60,0.55))' : 'var(--bg-window)',
+                    }}
                   >
-                    {previewBusy ? <Loader2 size={12} className="animate-spin" /> : <Play size={12} />}
-                    {previewBusy ? 'Starting' : 'Play'}
+                    {loading ? <Loader2 size={12} className="animate-spin" /> : playing ? <Pause size={12} /> : <Play size={12} />}
+                    {loading ? 'Loading' : playing ? 'Pause' : 'Play'}
                   </button>
                   <button
                     type="button"
@@ -7652,6 +7683,11 @@ export default function MusicCreator() {
       return raw === 'library' ? 'library' : 'mywork';
     } catch { return 'mywork'; }
   });
+  const userSidebarTabOverrideRef = useRef(false);
+  const setSidebarTabFromUser = useCallback((tab: 'mywork' | 'library') => {
+    userSidebarTabOverrideRef.current = true;
+    setSidebarTab(tab);
+  }, []);
   const [myWorkChip, setMyWorkChip] = useState<'all' | 'songs' | 'restyles' | 'lyrics'>(() => {
     try {
       const raw = localStorage.getItem('juli3ta:myWorkChip');
@@ -7737,7 +7773,6 @@ export default function MusicCreator() {
   const [musicConnectors, setMusicConnectors] = useState<MusicConnectorStatus[]>([]);
   const [runtimeStreams, setRuntimeStreams] = useState<Record<string, { src: string; resolvedAt: number }>>({});
   const [streamWarmupIds, setStreamWarmupIds] = useState<Set<string>>(() => new Set());
-  const [previewBusyId, setPreviewBusyId] = useState<string | null>(null);
   const [addBusyId, setAddBusyId] = useState<string | null>(null);
   const [previewTracks, setPreviewTracks] = useState<SavedTrack[]>([]);
   const [libraryTracks, setLibraryTracks] = useState<SavedTrack[]>([]);
@@ -7750,6 +7785,7 @@ export default function MusicCreator() {
   const musicSearchInFlightRef = useRef(new Map<string, Promise<MusicSearchResult[]>>());
   const runtimeStreamsRef = useRef(runtimeStreams);
   const musicStreamInFlightRef = useRef(new Map<string, Promise<string>>());
+  const bestEffortStreamWarmupActiveRef = useRef(0);
   const [hostLibraryRoot, setHostLibraryRoot] = useState<string | null>(null);
   const [hostLibraryBusy, setHostLibraryBusy] = useState(false);
 
@@ -9796,11 +9832,25 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     return request;
   }, []);
 
-  const warmMusicResults = useCallback((rows: MusicSearchResult[]) => {
-    rows.slice(0, 3).forEach((row) => {
-      void resolveMusicStreamUrl(row.id).catch(() => { /* best-effort prewarm */ });
-    });
+  const warmMusicStreamBestEffort = useCallback((videoId: string) => {
+    const key = musicStreamKey(videoId);
+    const cached = runtimeStreamsRef.current[key];
+    if (cached && Date.now() - cached.resolvedAt < 90 * 60 * 1000) return;
+    if (musicStreamInFlightRef.current.has(videoId)) return;
+    if (bestEffortStreamWarmupActiveRef.current >= BEST_EFFORT_STREAM_WARMUP_CONCURRENCY) return;
+    bestEffortStreamWarmupActiveRef.current += 1;
+    void resolveMusicStreamUrl(videoId)
+      .catch(() => { /* best-effort prewarm */ })
+      .finally(() => {
+        bestEffortStreamWarmupActiveRef.current = Math.max(0, bestEffortStreamWarmupActiveRef.current - 1);
+      });
   }, [resolveMusicStreamUrl]);
+
+  const warmMusicResults = useCallback((rows: MusicSearchResult[]) => {
+    rows.slice(0, AUTO_STREAM_WARMUP_COUNT).forEach((row) => {
+      warmMusicStreamBestEffort(row.id);
+    });
+  }, [warmMusicStreamBestEffort]);
 
   useEffect(() => {
     if (!musicSearchOpen) return;
@@ -10003,40 +10053,46 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
   }, [player.state.trackId]);
 
 
+  const lastObservedPlayerTrackIdRef = useRef<string | null>(null);
+
   // Keep the left sidebar selection synced with player-driven track changes
-  // (MiniPlayer next/prev, MediaSession keys, auto-advance). A click in the
-  // sidebar still does not interrupt audio; this only mirrors the active audio
-  // track back into the row highlight so users always see what is playing.
+  // (MiniPlayer next/prev, MediaSession keys, auto-advance). Do not treat
+  // a user clicking the My Work / Library scope toggle as a player-driven
+  // change. Previously this effect depended on `sidebarTab` and re-forced
+  // the tab containing the currently selected track, so clicking Library
+  // while a My Work track was selected immediately snapped back to My Work.
   useEffect(() => {
     const id = player.state.trackId;
     if (!id || view !== 'player') return;
+    const playerTrackChanged = lastObservedPlayerTrackIdRef.current !== id;
+    if (playerTrackChanged) {
+      lastObservedPlayerTrackIdRef.current = id;
+      userSidebarTabOverrideRef.current = false;
+    }
     if (selectedPlayerTrackId !== id) setSelectedPlayerTrackId(id);
+    if (!playerTrackChanged || userSidebarTabOverrideRef.current) return;
     const track = allPlayerTracks.find((t) => t.id === id);
     if (!track) return;
     if (isGeneratedWorkTrack(track)) {
-      if (sidebarTab !== 'mywork') setSidebarTab('mywork');
+      setSidebarTab((current) => current === 'mywork' ? current : 'mywork');
       if (!visibleGallery.some((t) => t.id === id)) {
-        if (myWorkChip !== 'all') setMyWorkChip('all');
-        if (gallerySearch.trim()) setGallerySearch('');
+        setMyWorkChip((current) => current === 'all' ? current : 'all');
+        setGallerySearch((current) => current.trim() ? '' : current);
       }
       return;
     }
-    if (sidebarTab !== 'library') setSidebarTab('library');
+    setSidebarTab((current) => current === 'library' ? current : 'library');
     if (!visibleLibrary.some((t) => t.id === id)) {
-      if (libraryChip !== 'all') setLibraryChip('all');
-      if (gallerySearch.trim()) setGallerySearch('');
+      setLibraryChip((current) => current === 'all' ? current : 'all');
+      setGallerySearch((current) => current.trim() ? '' : current);
     }
   }, [
     player.state.trackId,
     view,
     selectedPlayerTrackId,
     allPlayerTracks,
-    sidebarTab,
     visibleGallery,
     visibleLibrary,
-    myWorkChip,
-    libraryChip,
-    gallerySearch,
   ]);
 
   // MediaSession API integration — wires hardware media keys (laptop
@@ -10205,7 +10261,6 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
 
   const previewMusicResult = useCallback((result: MusicSearchResult) => {
     setMusicSearchError(null);
-    setPreviewBusyId(result.id);
     // Switch to the Player view INSTANTLY so the user sees the big
     // primary "Loading…" pill (PlayerView already renders this when
     // player.state.loadingTrackId === track.id) instead of staring at
@@ -10221,15 +10276,11 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     setSelectedPlayerTrackId(stub.id);
     setView('player');
     player.play(stub);
-    // The search-row spinner is no longer the primary loading affordance,
-    // but clear it so the row's button isn't permanently disabled if the
-    // user navigates back to the search pane.
-    setPreviewBusyId(null);
   }, [player, resultToTrack]);
 
   const warmMusicResult = useCallback((result: MusicSearchResult) => {
-    void resolveMusicStreamUrl(result.id).catch(() => { /* best-effort interactive warmup */ });
-  }, [resolveMusicStreamUrl]);
+    warmMusicStreamBestEffort(result.id);
+  }, [warmMusicStreamBestEffort]);
 
   const addMusicResult = useCallback(async (result: MusicSearchResult) => {
     setAddBusyId(result.id);
@@ -10527,7 +10578,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
           ]).map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setSidebarTab(tab.id)}
+              onClick={() => setSidebarTabFromUser(tab.id)}
               className="flex-1 rounded-md transition-all"
               style={{
                 height: 26,
@@ -11111,7 +11162,6 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
               playlistBusy={playlistBusy}
               favoriteIds={favoriteMusicIds}
               warmupIds={streamWarmupIds}
-              previewBusyId={previewBusyId}
               addBusyId={addBusyId}
               savedYoutubeIds={savedYoutubeIds}
               player={player}
