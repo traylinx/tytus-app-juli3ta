@@ -3643,7 +3643,7 @@ const ha = async (e, r) => {
   method: "POST",
   headers: { "Idempotency-Key": `juli3ta-open-folder-${Date.now()}` },
   body: "{}"
-})).path, Cr = "0.3.24", $a = "application/x-juli3ta-track", kr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", zo = (e) => e.source !== "youtube", za = (...e) => {
+})).path, Cr = "0.3.25", $a = "application/x-juli3ta-track", kr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", zo = (e) => e.source !== "youtube", za = (...e) => {
   const r = /* @__PURE__ */ new Map();
   for (const a of e)
     for (const o of a)
