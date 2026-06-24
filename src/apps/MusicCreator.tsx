@@ -124,7 +124,7 @@ type VoiceRecording = VoiceRecordingRow;
 // vX.Y.Z") and the Settings dialog footer so users can see exactly
 // which release they're running. Bumped in lockstep with package.json
 // + tytus-app.json on every release.
-const APP_VERSION = '0.3.25';
+const APP_VERSION = '0.3.26';
 
 // ──────────────────────────────────────────────────────────
 // Cross-app drag MIME types
@@ -10193,8 +10193,16 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`;
     if (playerTrackChanged) {
       lastObservedPlayerTrackIdRef.current = id;
       userSidebarTabOverrideRef.current = false;
+      // Only a *player-driven* track change (MiniPlayer next/prev,
+      // MediaSession keys, auto-advance) should move the sidebar
+      // selection to match it. A manual card/library click changes
+      // selectedPlayerTrackId alone — player.state.trackId is unchanged
+      // — so syncing unconditionally here snapped the user's selection
+      // straight back to whatever was already playing, making clicks on
+      // a card look like they did nothing. Gate the sync on a real
+      // player-driven change.
+      if (selectedPlayerTrackId !== id) setSelectedPlayerTrackId(id);
     }
-    if (selectedPlayerTrackId !== id) setSelectedPlayerTrackId(id);
     if (!playerTrackChanged || userSidebarTabOverrideRef.current) return;
     const track = allPlayerTracks.find((t) => t.id === id);
     if (!track) return;

@@ -3643,7 +3643,7 @@ const ha = async (e, r) => {
   method: "POST",
   headers: { "Idempotency-Key": `juli3ta-open-folder-${Date.now()}` },
   body: "{}"
-})).path, Cr = "0.3.25", $a = "application/x-juli3ta-track", kr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", zo = (e) => e.source !== "youtube", za = (...e) => {
+})).path, Cr = "0.3.26", $a = "application/x-juli3ta-track", kr = (e) => (e || "untitled").trim().replace(/[\\/:*?"<>|]/g, "").slice(0, 80) || "untitled", zo = (e) => e.source !== "youtube", za = (...e) => {
   const r = /* @__PURE__ */ new Map();
   for (const a of e)
     for (const o of a)
@@ -10678,7 +10678,7 @@ Return ONLY the JSON. No markdown, no explanation, no code fences.`, {
     const i = $.state.trackId;
     if (!i || w !== "player") return;
     const d = Pi.current !== i;
-    if (d && (Pi.current = i, Gr.current = !1), N !== i && E(i), !d || Gr.current) return;
+    if (d && (Pi.current = i, Gr.current = !1, N !== i && E(i)), !d || Gr.current) return;
     const u = ze.find((b) => b.id === i);
     if (u) {
       if (zo(u)) {
